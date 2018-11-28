@@ -5,8 +5,9 @@ import SideBar from "./SideBar.js"
 import DuelField from "./DuelField.js"
 import CardStore from "./CardStore.js"
 import DecksList from "./DecksList.js"
-let collectionId = 0
-var deckKey = 0
+let collectionId = 1
+let deckCardId = 1
+let deckKey = 0
 
 export default class Home extends React.Component {
   state = {
@@ -48,6 +49,10 @@ export default class Home extends React.Component {
     event.preventDefault()
     this.setState({
       currentPlayer: this.state.allPlayers.find(playerObj => playerObj.name === this.state.name)
+    }, () => {
+      this.setState({
+        currentPlayerCollection: this.state.currentPlayer.cards
+      })
     })
     this.log()
 
@@ -111,9 +116,14 @@ export default class Home extends React.Component {
 
   getDeck = (deck) => {
     this.setState({
-      currentDeck: deck,
-      currentDeckCards: deck.cards
-    })
+      currentDeck: deck
+    }, () => {
+      this.setState({
+        currentDeckCards: this.state.currentDeck.cards
+      })
+    }
+  )
+
 
   }
 
@@ -133,7 +143,7 @@ export default class Home extends React.Component {
               card_id: card.id
             }
       )}).then(res => this.setState({
-            currentDeckCards: [...this.state.currentDeckCards, card]
+            currentDeckCards: [...this.state.currentDeckCards, Object.assign(card, {id: deckCardId++})]
           }))
     }
   }
@@ -143,6 +153,8 @@ export default class Home extends React.Component {
     const removeIndex = this.state.currentDeckCards.findIndex(
       cardObj => cardObj.name === card.name
     )
+
+
     newDeckCards.splice(removeIndex, 1)
     this.setState({
       currentDeckCards: newDeckCards

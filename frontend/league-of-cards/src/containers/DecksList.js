@@ -1,6 +1,7 @@
 import React from "react";
 import Deck from "../components/Deck.js"
 let deckKey = 0
+let deckId = 1
 
 export default class CardStore extends React.Component {
   state = {
@@ -44,7 +45,7 @@ export default class CardStore extends React.Component {
       )})
 
       this.setState({
-        decks: [...this.state.decks, {name: this.state.deckName, player_id: this.props.currentPlayer.id}]
+        decks: [...this.state.decks, {id: deckId++, name: this.state.deckName, player_id: this.props.currentPlayer.id}]
       })
   }
 
