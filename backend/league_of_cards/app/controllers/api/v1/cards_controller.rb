@@ -89,7 +89,7 @@ class Api::V1::CardsController < ApplicationController
   private
 
   def card_params
-    params.require(:card).permit(:name, :title, :role, :rarity,
+    params.require(:card).permit(:id, :name, :title, :role, :rarity,
     :attack, :magic, :defense, :description, :quantity, :key, :image)
   end
 

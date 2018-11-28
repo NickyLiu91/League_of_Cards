@@ -5,7 +5,7 @@ import SideBar from "./SideBar.js"
 import DuelField from "./DuelField.js"
 import CardStore from "./CardStore.js"
 import DecksList from "./DecksList.js"
-var collectionId = 0
+let collectionId = 0
 var deckKey = 0
 
 export default class Home extends React.Component {
@@ -120,7 +120,7 @@ export default class Home extends React.Component {
   addToDeck = (card) => {
     if (this.state.currentDeckCards.filter(
       cardObj => cardObj.name === card.name
-    ).length < 1 && this.state.currentDeckCards.length < 40 ) {
+    ).length < 1 && this.state.currentDeckCards.length < 40 && card.quantity > 0 ) {
       fetch(`http://localhost:3000/api/v1/deckcards`, {
         method: 'POST',
         headers: {
@@ -235,16 +235,11 @@ export default class Home extends React.Component {
           },
           body: JSON.stringify(
               {
-                player_id: this.state.currentPlayer.id,
+                player_id: this.state.allPlayers.find(playerObj => playerObj.name === this.state.name).id,
                 card_id: cardObj.id
               }
           )})
       )
-
-      this.setState({
-        currentPlayerCollection: this.state.currentPlayer.cards
-      })
-
   }
 
   createPlayer = (event) => {
@@ -260,7 +255,7 @@ export default class Home extends React.Component {
             name: this.state.name
           }
     )}).then(res => this.setState({
-        allPlayers: [...this.state.allPlayers, {id: this.state.name.length, name: this.state.name, decks: [], cards: []}],
+        allPlayers: [...this.state.allPlayers, {id: this.state.allPlayers.length + 1, name: this.state.name, decks: [], cards: []}],
         render: 'home'
     }, () => {
       this.createPlayerCollection()
