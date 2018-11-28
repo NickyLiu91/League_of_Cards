@@ -1,23 +1,22 @@
 import React from "react";
 import DuelCard from "../components/DuelCard.js"
+let handKey = 0
 
 export default class Hand extends React.Component {
 
   generateHandCards = () => {
-    return this.props.player1Hand.map(
-      cardObj => <DuelCard key={cardObj.key} duelCard={cardObj}
-      getCardInfo={this.props.getCardInfo}/>
+    return this.props.hand.map(
+      cardObj => <DuelCard key={handKey++} duelCard={cardObj} playMonster={this.props.playMonster}/>
     )
   }
 
   render() {
     return(
       <div>
-      <h1>Card List</h1>
+      <h1>Hand List</h1>
         <div id="hand-list">
         {this.generateHandCards()}
         </div>
-        <button>Home</button>
       </div>
     )
   }

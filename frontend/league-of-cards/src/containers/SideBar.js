@@ -4,7 +4,7 @@ import SideBarCard from "../components/SideBarCard.js"
 export default class SideBar extends React.Component {
 
   generateCards = () => {
-    return this.props.deck.map(
+    return this.props.currentDeckCards.map(
       cardObj => <SideBarCard key={cardObj.key} sideBarCard={cardObj}
       removeFromDeck={this.props.removeFromDeck}/>
     )

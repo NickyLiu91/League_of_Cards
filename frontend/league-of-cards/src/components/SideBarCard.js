@@ -5,7 +5,7 @@ const SideBarCard = (props) => {
   return(
     <li className="side-bar-card" onClick={event => props.removeFromDeck(props.sideBarCard)}>
       <div>Name: {props.sideBarCard.name}</div>
-      <div>{props.sideBarCard.info.attack}/{props.sideBarCard.info.magic}/{props.sideBarCard.info.defense}</div>
+      <div>{props.sideBarCard.attack}/{props.sideBarCard.magic}/{props.sideBarCard.defense}</div>
     </li>
   )
 

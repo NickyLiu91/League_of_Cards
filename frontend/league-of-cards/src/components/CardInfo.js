@@ -5,18 +5,18 @@ const CardInfo = (props) => {
     <div className="card-info">
       <div>Name: {props.selectedCard.name}, {props.selectedCard.title}</div>
       <br/>
-      <img src={'image/' + props.selectedCard.image.full} />
+      <img src={'image/' + props.selectedCard.image} />
       <br/>
-      <div>Attack: {props.selectedCard.info.attack}</div>
+      <div>Attack: {props.selectedCard.attack}</div>
       <br/>
-      <div>Magic: {props.selectedCard.info.magic}</div>
+      <div>Magic: {props.selectedCard.magic}</div>
       <br/>
-      <div>Defense: {props.selectedCard.info.defense}</div>
+      <div>Defense: {props.selectedCard.defense}</div>
       <br/>
       <div>Description: {props.selectedCard.blurb}</div>
       <br/>
       <button onClick={event => props.addToDeck(props.selectedCard)}>Add To Deck</button>
-      <button onClick={props.renderCardList}>Back to Card List</button>
+      <button onClick={props.renderCollection}>Collection</button>
     </div>
   )
 
