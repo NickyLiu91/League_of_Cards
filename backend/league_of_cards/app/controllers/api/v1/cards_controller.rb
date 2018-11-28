@@ -3,20 +3,97 @@ class Api::V1::CardsController < ApplicationController
 
   def index
     @cards = Card.all
-    render json: @cards.to_json
+    render json: @cards.to_json(only: [:id, :name, :title, :role, :rarity,
+      :attack, :magic, :defense, :description, :quantity, :key, :image],
+        include: [players: {only: [:id, :name]},
+        decks: {only: [:id, :name],
+          include: [player: {only: [:id, :name]}]
+          }]
+      )
   end
 
   def show
-    render json: @card.to_json
+    render json: @card.to_json(only: [:id, :name, :title, :role, :rarity,
+      :attack, :magic, :defense, :description, :quantity, :key, :image],
+        include: [players: {only: [:id, :name]},
+        decks: {only: [:id, :name],
+          include: [player: {only: [:id, :name]}]
+          }]
+      )
+  end
+
+  def new
+    @card = Card.new
+  end
+
+  def create
+    @card = Card.create(card_params)
+  end
+
+  def edit
+    @card = Card.find_by(id: params[:id])
+  end
+
+  def update
+    @card = Card.find_by(id: params[:id])
+    @card.update(card_params)
+  end
+
+  def player_cards
+    @player = Player.find(params[:player_id])
+    @cards = @player.cards
+    render json: @cards.to_json(only: [:id, :name, :title, :role, :rarity,
+      :attack, :magic, :defense, :description, :quantity, :key],
+        include: [players: {only: [:id, :name]},
+        decks: {only: [:id, :name],
+          include: [player: {only: [:id, :name]}]
+          }]
+      )
+  end
+
+  # def player_cards_card_show
+  #   @player = Player.find(params[:player_id])
+  #   @card = @player.cards.find(params[:card_id])
+  #   render json: @card.to_json(only: [:id, :name, :title, :role, :rarity,
+  #     :attack, :magic, :defense, :description, :quantity],
+  #       include: [players: {only: [:id, :name]},
+  #       decks: {only: [:id, :name],
+  #         include: [player: {only: [:id, :name]}]
+  #         }]
+  #     )
+  # end
+
+  # def player_cards_card_edit
+  #   @player = Player.find(params[:player_id])
+  #   @card = @player.cards.find(params[:card_id])
+  # end
+  #
+  # def player_cards_card_update
+  #   @player = Player.find(params[:player_id])
+  #   @card = @player.cards.find(params[:card_id])
+  #   @card.update(card_params)
+  # end
+
+  def deck_cards
+    @deck = Deck.find(params[:deck_id])
+    @cards = @deck.cards
+    render json: @cards.to_json(only: [:id, :name, :title, :role, :rarity,
+      :attack, :magic, :defense, :description, :quantity, :key],
+        include: [players: {only: [:id, :name]},
+        decks: {only: [:id, :name],
+          include: [player: {only: [:id, :name]}]
+          }]
+      )
   end
 
   private
 
-  def cards_params
-    params.require(:card).permit(:name)
+  def card_params
+    params.require(:card).permit(:name, :title, :role, :rarity,
+    :attack, :magic, :defense, :description, :quantity, :key, :image)
   end
 
   def find_card
-    @card = Cards.find(params[:id])
+    @card = Card.find(params[:id])
   end
 end

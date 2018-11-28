@@ -19,12 +19,46 @@ body {
   margin: 10px;
   color: gold;
   background-color: black;
+  position: relative;
+}
+
+#copies {
+  font-size: 10px;
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
+
+.greyed-card {
+  width: 200px;
+  height: 300px;
+  border-style: solid;
+  border-width: 5px;
+  border-color: gray;
+  padding: 20px;
+  margin: 10px;
+  color: white;
+  background-color: gray;
+  position: relative;
+}
+
+img {
+  height: 160px;
+  width: 160px;
+  border-style: solid;
+  border-color: gold;
+}
+
+.greyed-img {
+  height: 160px;
+  width: 160px;
+  border-style: solid;
+  border-color: white;
 }
 
 .card-list-container {
   display: flex;
   flex-direction: row;
-
 }
 
 #sidebar {
@@ -46,13 +80,6 @@ body {
   border-top-color: black;
 }
 
-img {
-  height: 160px;
-  width: 160px;
-  border-style: solid;
-  border-color: gold;
-}
-
 .card-info {
   height: 600px;
   width: 600px;
@@ -67,7 +94,7 @@ img {
   flex-direction: column;
 }
 
-#player2-hand, #player2-spells, #player2-monsters, #player1-hand, #player1-monsters, #player1-spells, #hand-list {
+#hand-list, #spell-list, #monster-list {
   display: flex;
   flex-direction: row;
 }
@@ -85,3 +112,53 @@ img {
   height: 50px;
   width: 50px;
 }
+
+#store {
+  display: flex;
+  justify-content: center;
+}
+
+#pack {
+  height: 420px;
+  width: 300px;
+}
+
+#pack-image {
+  height: 100%;
+  width: 100%;
+}
+
+#pack-results {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: space-around;
+  border-color: black;
+  border-radius: 5px;
+  background-color: black;
+  height: 1150px;
+  width: 850px;
+}
+
+/*.pack-card {
+  width: 100px;
+  height: 150px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: gold;
+  padding: 10px;
+  margin: 5px;
+  color: gold;
+  background-color: black;
+  position: relative;
+}
+
+.pack-card-img {
+  height: 80px;
+  width: 80px;
+  border-style: solid;
+  border-color: gold;
+}*/
