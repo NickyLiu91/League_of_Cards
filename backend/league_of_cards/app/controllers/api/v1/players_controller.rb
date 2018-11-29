@@ -3,7 +3,7 @@ class Api::V1::PlayersController < ApplicationController
 
   def index
     @players = Player.all
-    render json: @players.to_json(only: [:id, :name],
+    render json: @players.to_json(only: [:id, :name, :image],
         include: [decks: {only: [:id, :name]},
                   cards: {only: [:id, :name, :title, :role, :rarity,
                   :attack, :magic, :defense, :description, :quantity, :key, :image]}]
@@ -11,7 +11,7 @@ class Api::V1::PlayersController < ApplicationController
   end
 
   def show
-    render json: @player.to_json(only: [:id, :name],
+    render json: @player.to_json(only: [:id, :name, :image],
       include: [decks: {only: [:id, :name]},
                 cards: {only: [:id, :name, :title, :role, :rarity,
                 :attack, :magic, :defense, :description, :quantity, :key, :image]}]
@@ -58,7 +58,7 @@ class Api::V1::PlayersController < ApplicationController
   private
 
   def player_params
-    params.require(:player).permit(:name)
+    params.require(:player).permit(:name, :image)
   end
 
   def find_player

@@ -94,7 +94,7 @@ img {
   flex-direction: column;
 }
 
-#hand-list, #spell-list, #monster-list {
+#hand-list, #spell-list, #monster-list, .extra-field {
   display: flex;
   flex-direction: row;
 }

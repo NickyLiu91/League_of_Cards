@@ -6,8 +6,16 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# atem = Player.create(name: "Atem")
-# kaiba = Player.create(name: "Kaiba")
+azir = Player.create(name: "Azir", image: "image/AzirPortrait.png")
+zed = Player.create(name: "Zed", image: "image/ZedPortrait.png")
+swain = Player.create(name: "Swain", image: "image/SwainPortrait.png")
+masterYi = Player.create(name: "MasterYi", image: "image/MasterYiPortrait.png")
+garen = Player.create(name: "Garen", image: "image/GarenPortrait.png")
+darius = Player.create(name: "Darius", image: "image/DariusPortrait.png")
+leBlanc = Player.create(name: "LeBlanc", image: "image/LeblancPortrait.png")
+caitlyn = Player.create(name: "Caitlyn", image: "image/CaitlynPortrait.png")
+heimerdinger = Player.create(name: "Heimerdinger", image: "image/HeimerdingerPortrait.png")
+malzahar = Player.create(name: "Malzahar", image: "image/MalzaharPortrait.png")
 #
 # zed_card = Card.create(name: "Zed", title: "The Master of Shadows", role: "Assassin", rarity: 10, attack: 8, magic: 3, defense: 2, description: "Badass as hell.", image: "Zed.png")
 # orianna_card = Card.create(name: "Orianna", title: "The Lady of Clockwork", role: "Mage", rarity: 9, attack: 2, magic: 7, defense: 5, description: "Robot girl.", image: "Orianna.png")
@@ -37,8 +45,16 @@
 # kaiba_collection8 = Collection.create(player_id: kaiba.id, card_id: yasuo_card.id)
 #
 # #
-# atem_deck = Deck.create(name: "Atem Deck 1", player_id: atem.id)
-# kaiba_deck = Deck.create(name: "Kaiba Deck 1", player_id: kaiba.id)
+azir_deck = Deck.create(name: "Azir Deck 1", player_id: azir.id)
+zed_deck = Deck.create(name: "Zed Deck 1", player_id: zed.id)
+swain_deck = Deck.create(name: "Swain Deck 1", player_id: swain.id)
+masterYi_deck = Deck.create(name: "MasterYi Deck 1", player_id: masterYi.id)
+garen_deck = Deck.create(name: "Garen Deck 1", player_id: garen.id)
+darius_deck = Deck.create(name: "Darius Deck 1", player_id: darius.id)
+leBlanc_deck = Deck.create(name: "LeBlanc Deck 1", player_id: leBlanc.id)
+caitlyn_deck = Deck.create(name: "Caitlyn Deck 1", player_id: caitlyn.id)
+heimerdinger_deck = Deck.create(name: "Heimerdinger Deck 1", player_id: heimerdinger.id)
+malzahar_deck = Deck.create(name: "Malzahar Deck 1", player_id: malzahar.id)
 #
 # atem_deckcard1 = Deckcard.create(deck_id: atem_deck.id, card_id: zed_card.id)
 # atem_deckcard2 = Deckcard.create(deck_id: atem_deck.id, card_id: orianna_card.id)

@@ -5,15 +5,15 @@ import SideBar from "./SideBar.js"
 import DuelField from "./DuelField.js"
 import CardStore from "./CardStore.js"
 import DecksList from "./DecksList.js"
-let collectionId = 1
-let deckCardId = 1
-let deckKey = 0
+import DuelistsList from "./DuelistsList.js"
 
 export default class Home extends React.Component {
   state = {
     render: 'home',
     loggedIn: false,
     name: '',
+    deckCardId: 1,
+    collectionId: 1,
     database: [],
     collection: [],
     allPlayers: [],
@@ -55,7 +55,6 @@ export default class Home extends React.Component {
       })
     })
     this.log()
-
   }
 
   fetchCards = () => {
@@ -70,7 +69,7 @@ export default class Home extends React.Component {
   generateCards = () => {
     this.state.database.map(champion => this.setState({
       collection: [...this.state.collection, {
-        id: collectionId++,
+        id: this.state.collectionId,
         key: champion.key,
         name: champion.name,
         title: champion.title,
@@ -83,7 +82,12 @@ export default class Home extends React.Component {
         image: champion.image.full,
         quantity: 0
       }]
-    }))
+    }), () => {
+      this.setState({
+        collectionId: this.state.collectionId++
+      })
+    })
+
       this.state.collection.map(
         cardObj => fetch(`http://localhost:3000/api/v1/cards`, {
           method: 'POST',
@@ -115,22 +119,17 @@ export default class Home extends React.Component {
   }
 
   getDeck = (deck) => {
+    console.log(deck)
     this.setState({
-      currentDeck: deck
-    }, () => {
-      this.setState({
-        currentDeckCards: this.state.currentDeck.cards
-      })
-    }
-  )
-
-
+      currentDeck: deck,
+      currentDeckCards: deck.cards
+    }, () => this.renderHome())
   }
 
   addToDeck = (card) => {
     if (this.state.currentDeckCards.filter(
       cardObj => cardObj.name === card.name
-    ).length < 1 && this.state.currentDeckCards.length < 40 && card.quantity > 0 ) {
+    ).length < 3 && this.state.currentDeckCards.length < 40 && card.quantity > 0 ) {
       fetch(`http://localhost:3000/api/v1/deckcards`, {
         method: 'POST',
         headers: {
@@ -142,43 +141,34 @@ export default class Home extends React.Component {
               deck_id: this.state.currentDeck.id,
               card_id: card.id
             }
-      )}).then(res => this.setState({
-            currentDeckCards: [...this.state.currentDeckCards, Object.assign(card, {id: deckCardId++})]
-          }))
+      )})
+        let newCard = Object.assign({}, card, {deckId: this.state.deckCardId})
+        this.setState({
+          currentDeckCards: [...this.state.currentDeckCards, newCard],
+          deckCardId: this.state.deckCardId + 1
+        })
     }
   }
 
   removeFromDeck = (card) => {
-    const newDeckCards = this.state.currentDeckCards
-    const removeIndex = this.state.currentDeckCards.findIndex(
-      cardObj => cardObj.name === card.name
+    let newDeckCards = this.state.currentDeckCards
+    let removeIndex = newDeckCards.findIndex(
+      cardObj => cardObj.deckId === card.deckId
     )
-
 
     newDeckCards.splice(removeIndex, 1)
     this.setState({
       currentDeckCards: newDeckCards
     })
 
-    fetch(`http://localhost:3000/api/v1/deckcards/${card.id}`, {
-      method: 'DELETE'})
+    fetch(`http://localhost:3000/api/v1/deckcards/${card.deckId}`, {
+      method: 'DELETE'}
+    )
   }
 
   componentDidMount() {
     this.fetchCards()
     this.getAllPlayers()
-
-    // fetch("http://localhost:3000/api/v1/players/1")
-    // .then(res => res.json())
-    // .then(json => this.setState({
-    //   currentPlayer: json
-    // })).then(res => console.log(this.state.currentPlayer))
-    //
-    // fetch("http://localhost:3000/api/v1/players/2")
-    // .then(res => res.json())
-    // .then(json => this.setState({
-    //   player2: json
-    // })).then(res => console.log(this.state.player2))
   }
 
   renderCollection = () => {
@@ -236,6 +226,19 @@ export default class Home extends React.Component {
     })
   }
 
+  renderDuelists = () => {
+    this.setState({
+      render: 'duelistsList'
+    })
+  }
+
+  getDuelist = (player) => {
+    this.setState({
+      player2: player
+    })
+    this.renderDuel()
+  }
+
   createPlayerCollection = () => {
 
       this.state.collection.map(
@@ -252,6 +255,11 @@ export default class Home extends React.Component {
               }
           )})
       )
+      let createdPlayer = this.state.allPlayers.find(
+        playerObj => playerObj.name === this.state.name
+      )
+
+      createdPlayer.cards = this.state.collection
   }
 
   createPlayer = (event) => {
@@ -267,7 +275,7 @@ export default class Home extends React.Component {
             name: this.state.name
           }
     )}).then(res => this.setState({
-        allPlayers: [...this.state.allPlayers, {id: this.state.allPlayers.length + 1, name: this.state.name, decks: [], cards: []}],
+        allPlayers: [...this.state.allPlayers, {id: this.state.allPlayers.length + 1, name: this.state.name, decks: [], cards: [], collection: []}],
         render: 'home'
     }, () => {
       this.createPlayerCollection()
@@ -286,14 +294,6 @@ export default class Home extends React.Component {
           </form>
           <br/>
           <button onClick={this.renderCreate}>Create Account</button>
-          <br/>
-          <button onClick={this.renderCollection}>Collection</button>
-          <br/>
-          <button onClick={this.renderCardStore}>Card Store</button>
-          <br/>
-          <button onClick={this.renderDecks}>Decks</button>
-          <br/>
-          <button onClick={this.renderDuel}>DUEL!!!</button>
         </div>
       )
     } else if (this.state.render === 'home' && this.state.loggedIn === true){
@@ -309,7 +309,7 @@ export default class Home extends React.Component {
           <br/>
           <button onClick={this.renderDecks}>Decks</button>
           <br/>
-          <button onClick={this.renderDuel}>DUEL!!!</button>
+          <button onClick={this.renderDuelists}>DUEL!!!</button>
           <br/>
           <button onClick={this.log}>Log-Out</button>
 
@@ -371,13 +371,26 @@ export default class Home extends React.Component {
       )
     } else if (this.state.render === 'cardinfo') {
       return(
-        <div className="card-list-container">
-          <CardInfo selectedCard={this.state.selectedCard}
-            addToDeck={this.addToDeck}
-            renderCollection={this.renderCollection}
+        <div>
+          <div className="card-list-container">
+            <CardInfo selectedCard={this.state.selectedCard}
+              addToDeck={this.addToDeck}
+              renderCollection={this.renderCollection}
+            />
+            <SideBar currentDeckCards={this.state.currentDeckCards}
+            removeFromDeck={this.removeFromDeck}/>
+          </div>
+          <button onClick={this.renderHome}>Home</button>
+        </div>
+      )
+    } else if (this.state.render === 'duelistsList') {
+      return(
+        <div className="duelist-list-container">
+          <DuelistsList
+            allPlayers={this.state.allPlayers}
+            getDuelist={this.getDuelist}
+            renderDuel={this.renderDuel}
           />
-          <SideBar currentDeckCards={this.state.currentDeckCards}
-          removeFromDeck={this.removeFromDeck}/>
         </div>
       )
     } else if (this.state.render === 'duel') {
@@ -386,6 +399,7 @@ export default class Home extends React.Component {
           <DuelField
             player1={this.state.currentPlayer}
             player2={this.state.player2}
+            renderLose={this.renderLose}
             renderHome={this.renderHome}
           />
         </div>

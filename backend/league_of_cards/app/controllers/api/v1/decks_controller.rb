@@ -56,7 +56,7 @@ class Api::V1::DecksController < ApplicationController
   end
 
   def destroy
-    @deck = DeckCard.find_by(id: params[:id])
+    @deck = Deck.find_by(id: params[:id])
     @deck.destroy
   end
 
