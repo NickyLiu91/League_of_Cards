@@ -10,7 +10,7 @@ export default class MonsterField extends React.Component {
     )
   }
 
-  render() {
+  render(){
     return(
       <div>
       <h1>Monster List</h1>

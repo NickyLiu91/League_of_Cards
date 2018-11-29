@@ -22,7 +22,7 @@ export default class DuelField extends React.Component {
   playMonster = (monster) => {
     let newMonsterField = this.state.player1Monsters
     let newHand = this.state.player1Hand.filter(
-      cardObj => cardObj.name !== monster.name
+      cardObj => cardObj.id !== monster.id
     )
 
     let emptySlot = this.state.player1Monsters.findIndex(
@@ -64,7 +64,7 @@ export default class DuelField extends React.Component {
         player2Hand: [...this.state.player2Hand, newCard]
       })
     } else {
-      this.renderLose()
+      this.props.renderLose()
     }
   }
 
@@ -77,7 +77,7 @@ export default class DuelField extends React.Component {
         player1Hand: [...this.state.player1Hand, newCard]
       })
     } else {
-      this.renderLose()
+      this.props.renderLose()
     }
   }
 
@@ -144,7 +144,7 @@ export default class DuelField extends React.Component {
       }, () => this.playAppropriateMonster()
     )
     } else {
-      this.renderLose()
+      this.props.renderLose()
     }
       // this.computerPlayMonster(strongestHandMonster)
 
@@ -155,14 +155,22 @@ export default class DuelField extends React.Component {
     return(
       <div id="duel-field">
       <button onClick={this.showState}>STATE</button>
+        <div>{this.props.player2.name}</div>
+        <img src={this.props.player2.image}/>
         <div id="player2-hand">
           <Hand hand={this.state.player2Hand} playMonster={this.computerPlayMonster}/>
         </div>
         <br/>
-        <div id="player2-spells">
-          <div id="player2-deck" className="duel-card player2-deck" onClick={this.computerDrawCard}>
+        <div className="extra-field">
+          <div id="player2-deck" className="duel-card" onClick={this.drawCard}>
             p2 Deck
           </div>
+          <div id="player2-graveyard" className="duel-card" onClick={this.showGraveyardList}>
+            Graveyard
+          </div>
+        </div>
+        <br/>
+        <div id="player2-spells">
           <SpellField spells={this.state.player2Spells} />
         </div>
         <div id="player2-monsters">
@@ -177,15 +185,26 @@ export default class DuelField extends React.Component {
           <MonsterField monsters={this.state.player1Monsters} />
         </div>
         <div id="player1-spells">
-          <div id="player1-deck" className="duel-card player1-deck" onClick={this.drawCard}>
+          <SpellField spells={this.state.player1Spells} playMonster={this.playMonster}/>
+        </div>
+        <br/>
+        <div className="extra-field">
+          <div id="player1-deck" className="duel-card" onClick={this.drawCard}>
             p1 Deck
           </div>
-          <SpellField spells={this.state.player1Spells} playMonster={this.playMonster}/>
+          <div id="player1-graveyard" className="duel-card" onClick={this.showGraveyardList}>
+            Graveyard
+          </div>
         </div>
         <div id="player1-hand">
           <Hand hand={this.state.player1Hand} playMonster={this.playMonster}/>
         </div>
+        <div id="player2-hand">
+          <Hand hand={this.state.player2Hand} playMonster={this.computerPlayMonster}/>
+        </div>
         <button onClick={this.props.renderHome}>Home</button>
+        <img src={this.props.player1.image}/>
+        <div>{this.props.player1.name}</div>
       </div>
     )
   }

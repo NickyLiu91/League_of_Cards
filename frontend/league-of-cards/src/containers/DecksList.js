@@ -10,7 +10,7 @@ export default class CardStore extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3000/api/v1/decks')
+    fetch(`http://localhost:3000/api/v1/players/${this.props.currentPlayer.id}/decks`)
     .then(response => response.json())
     .then(json => this.setState({
       decks: json
@@ -25,7 +25,7 @@ export default class CardStore extends React.Component {
 
   generateDecks = () => {
     return this.state.decks.map(
-      deckObj => <Deck key={deckKey++} deck={deckObj} getDeck={this.props.getDeck}/>
+      deckObj => <Deck key={deckKey++} deck={deckObj} getDeck={this.props.getDeck} deleteDeck={this.deleteDeck}/>
     )
   }
 
@@ -45,7 +45,21 @@ export default class CardStore extends React.Component {
       )})
 
       this.setState({
-        decks: [...this.state.decks, {id: deckId++, name: this.state.deckName, player_id: this.props.currentPlayer.id}]
+        decks: [...this.state.decks, {id: deckId++, name: this.state.deckName, player_id: this.props.currentPlayer.id, cards: []}]
+      })
+  }
+
+  deleteDeck = (deck) => {
+    const newDecks = this.state.decks
+    const removeIndex = this.state.decks.findIndex(
+      deckObj => deckObj.name === deck.name
+    )
+    fetch(`http://localhost:3000/api/v1/decks/${deck.id}`, {
+      method: 'DELETE'})
+
+      newDecks.splice(removeIndex, 1)
+      this.setState({
+        decks: newDecks
       })
   }
 
@@ -61,7 +75,6 @@ export default class CardStore extends React.Component {
           {this.generateDecks()}
         </div>
         <button onClick={this.props.renderCollection}>Card Collection</button>
-        <button onClick={this.props.renderHome}>Home</button>
       </div>
     )
   }

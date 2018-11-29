@@ -27,13 +27,14 @@ export default class CardStore extends React.Component {
 
   addCardToCollection = () => {
     let number = Math.floor(Math.random() * 100) + 1
-    let newCard = ''
+    let newCard
 
     const legendary = this.props.currentPlayerCollection.filter(obj => obj.rarity === 10)
     const ultraRare = this.props.currentPlayerCollection.filter(obj => obj.rarity === 9)
     const superRare = this.props.currentPlayerCollection.filter(obj => obj.rarity === 8)
     const rare = this.props.currentPlayerCollection.filter(obj => obj.rarity === 7)
     const common = this.props.currentPlayerCollection.filter(obj => obj.rarity > 0 && obj.rarity < 7)
+
 
     if (number > 98) {
       newCard = legendary[Math.floor(Math.random() * legendary.length)]
@@ -46,8 +47,6 @@ export default class CardStore extends React.Component {
     } else {
       newCard = common[Math.floor(Math.random() * common.length)]
     }
-
-// console.log(newCard)
     // this.setState({
     //   results: [...this.state.results, newCard]
     // })
