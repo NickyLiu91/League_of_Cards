@@ -1,5 +1,7 @@
 body {
-  text-align: center
+  text-align: center;
+  background-color: black;
+  color: gold;
 }
 
 #card-list {
@@ -56,16 +58,19 @@ img {
   border-color: white;
 }
 
-.card-list-container {
+.container-with-decklist  {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  background: black;
+  color: gold;
 }
 
 #sidebar {
   list-style-type:none;
   width: 200px;
   border-style: solid;
-  border-color: black;
+  border-color: gold;
   margin: 0;
   padding: 0;
   position: relative;
@@ -80,9 +85,8 @@ img {
   border-top-color: black;
 }
 
-.card-info {
-  height: 600px;
-  width: 600px;
+.big-container {
+  background-color: black;
 }
 
 #sidebar-title {
@@ -92,6 +96,7 @@ img {
 #duel-field {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 #hand-list, #spell-list, #monster-list, .extra-field {

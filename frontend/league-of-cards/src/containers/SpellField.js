@@ -13,7 +13,7 @@ export default class SpellField extends React.Component {
   render() {
     return(
       <div>
-      <h1>Spell List</h1>
+      <h1>Spells</h1>
         <div id="spell-list">
         {this.generateSpellCards()}
         </div>

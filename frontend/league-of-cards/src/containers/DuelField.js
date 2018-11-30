@@ -199,10 +199,6 @@ export default class DuelField extends React.Component {
         <div id="player1-hand">
           <Hand hand={this.state.player1Hand} playMonster={this.playMonster}/>
         </div>
-        <div id="player2-hand">
-          <Hand hand={this.state.player2Hand} playMonster={this.computerPlayMonster}/>
-        </div>
-        <button onClick={this.props.renderHome}>Home</button>
         <img src={this.props.player1.image}/>
         <div>{this.props.player1.name}</div>
       </div>

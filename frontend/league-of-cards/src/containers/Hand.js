@@ -13,7 +13,7 @@ export default class Hand extends React.Component {
   render() {
     return(
       <div>
-      <h1>Hand List</h1>
+      <h1>Hand</h1>
         <div id="hand-list">
         {this.generateHandCards()}
         </div>

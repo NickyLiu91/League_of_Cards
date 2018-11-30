@@ -13,7 +13,7 @@ export default class MonsterField extends React.Component {
   render(){
     return(
       <div>
-      <h1>Monster List</h1>
+      <h1>Monsters</h1>
         <div id="monster-list">
         {this.generateMonsterCards()}
         </div>

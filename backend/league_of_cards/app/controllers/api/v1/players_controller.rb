@@ -1,5 +1,7 @@
 class Api::V1::PlayersController < ApplicationController
   before_action :find_player, only: [:show]
+  has_secure_password
+  validates :username, uniqueness: { case_sensitive: false }
 
   def index
     @players = Player.all
@@ -24,6 +26,11 @@ class Api::V1::PlayersController < ApplicationController
 
   def create
     @player = Player.create(player_params)
+    if @player.valid?
+      render json: { player: Player.new(@player) }, status: :created
+    else
+      render json: { error: 'failed to create user' }, status: :not_acceptable
+    end
   end
 
   def edit
@@ -58,7 +65,7 @@ class Api::V1::PlayersController < ApplicationController
   private
 
   def player_params
-    params.require(:player).permit(:name, :image)
+    params.require(:player).permit(:name, :image, :password)
   end
 
   def find_player

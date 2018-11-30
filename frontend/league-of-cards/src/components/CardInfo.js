@@ -13,10 +13,9 @@ const CardInfo = (props) => {
       <br/>
       <div>Defense: {props.selectedCard.defense}</div>
       <br/>
-      <div>Description: {props.selectedCard.blurb}</div>
+      <div>Description: {props.selectedCard.description}</div>
       <br/>
       <button onClick={event => props.addToDeck(props.selectedCard)}>Add To Deck</button>
-      <button onClick={props.renderCollection}>Collection</button>
     </div>
   )
 

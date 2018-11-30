@@ -15,9 +15,8 @@ export default class Collection extends React.Component {
       <div>
       <h1>Card List</h1>
         <div id="card-list">
-        {this.generateCards()}
+          {this.generateCards()}
         </div>
-        <button onClick={this.props.renderHome}>Home</button>
       </div>
     )
   }

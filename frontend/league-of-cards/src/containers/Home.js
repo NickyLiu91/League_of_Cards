@@ -272,10 +272,12 @@ export default class Home extends React.Component {
       },
       body: JSON.stringify(
           {
-            name: this.state.name
+            name: this.state.name,
+            image: 'image/TwistedFatePortrait.png',
+            computer: false
           }
     )}).then(res => this.setState({
-        allPlayers: [...this.state.allPlayers, {id: this.state.allPlayers.length + 1, name: this.state.name, decks: [], cards: [], collection: []}],
+        allPlayers: [...this.state.allPlayers, {id: this.state.allPlayers.length + 1, name: this.state.name, decks: [], cards: [], collection: [], image: 'image/TwistedFatePortrait.png', computer: false}],
         render: 'home'
     }, () => {
       this.createPlayerCollection()
@@ -357,29 +359,34 @@ export default class Home extends React.Component {
       )
     } else if (this.state.render === 'collection') {
       return(
-        <div className="card-list-container">
-          <Collection
-            currentPlayerCollection={this.state.currentPlayerCollection}
-            getCardInfo={this.getCardInfo}
-            renderHome={this.renderHome}
-          />
-          <SideBar
-          currentDeckCards={this.state.currentDeckCards}
-          removeFromDeck={this.removeFromDeck}
-          />
+        <div className="big-container">
+          <div className="container-with-decklist">
+            <Collection
+              currentPlayerCollection={this.state.currentPlayerCollection}
+              getCardInfo={this.getCardInfo}
+              renderHome={this.renderHome}
+            />
+            <SideBar
+            currentDeckCards={this.state.currentDeckCards}
+            removeFromDeck={this.removeFromDeck}
+            />
+          </div>
+          <button onClick={this.renderHome}>Home</button>
         </div>
       )
     } else if (this.state.render === 'cardinfo') {
       return(
-        <div>
-          <div className="card-list-container">
+        <div className="big-container">
+          <div className="container-with-decklist">
             <CardInfo selectedCard={this.state.selectedCard}
               addToDeck={this.addToDeck}
               renderCollection={this.renderCollection}
+              renderHome={this.renderHome}
             />
             <SideBar currentDeckCards={this.state.currentDeckCards}
             removeFromDeck={this.removeFromDeck}/>
           </div>
+          <button onClick={this.renderCollection}>Collection</button>
           <button onClick={this.renderHome}>Home</button>
         </div>
       )
