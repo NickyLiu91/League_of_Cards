@@ -5,7 +5,7 @@ class Api::V1::CardsController < ApplicationController
     @cards = Card.all
     render json: @cards.to_json(only: [:id, :name, :title, :role, :rarity,
       :attack, :magic, :defense, :description, :quantity, :key, :image],
-        include: [players: {only: [:id, :name]},
+        include: [players: {only: [:id, :name, :computer]},
         decks: {only: [:id, :name],
           include: [player: {only: [:id, :name]}]
           }]
@@ -15,7 +15,7 @@ class Api::V1::CardsController < ApplicationController
   def show
     render json: @card.to_json(only: [:id, :name, :title, :role, :rarity,
       :attack, :magic, :defense, :description, :quantity, :key, :image],
-        include: [players: {only: [:id, :name]},
+        include: [players: {only: [:id, :name, :computer]},
         decks: {only: [:id, :name],
           include: [player: {only: [:id, :name]}]
           }]
@@ -44,7 +44,7 @@ class Api::V1::CardsController < ApplicationController
     @cards = @player.cards
     render json: @cards.to_json(only: [:id, :name, :title, :role, :rarity,
       :attack, :magic, :defense, :description, :quantity, :key],
-        include: [players: {only: [:id, :name]},
+        include: [players: {only: [:id, :name, :computer]},
         decks: {only: [:id, :name],
           include: [player: {only: [:id, :name]}]
           }]
@@ -79,7 +79,7 @@ class Api::V1::CardsController < ApplicationController
     @cards = @deck.cards
     render json: @cards.to_json(only: [:id, :name, :title, :role, :rarity,
       :attack, :magic, :defense, :description, :quantity, :key],
-        include: [players: {only: [:id, :name]},
+        include: [players: {only: [:id, :name, :computer]},
         decks: {only: [:id, :name],
           include: [player: {only: [:id, :name]}]
           }]

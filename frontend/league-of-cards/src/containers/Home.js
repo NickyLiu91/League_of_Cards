@@ -37,12 +37,52 @@ export default class Home extends React.Component {
     })
   }
 
+  generateDeckCard = (player, number) => {
+
+    let randomCard = this.state.collection[Math.floor(Math.random() * this.state.collection.length)]
+
+    randomCard.enemydeckCardId = number
+
+    player.decks[0].cards = [...player.decks[0].cards, randomCard]
+
+    fetch(`http://localhost:3000/api/v1/deckcards`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(
+          {
+            deck_id: player.id,
+            card_id: randomCard.key
+          }
+    )})
+
+  }
+
+  generateDeck = (playerObj) => {
+    let i = 1
+    while (i < 11) {
+      this.generateDeckCard(playerObj, i)
+      i ++
+    }
+  }
+
   getAllPlayers = () => {
+    let newPlayersArray = []
     fetch("http://localhost:3000/api/v1/players")
     .then(response => response.json())
     .then(json => this.setState({
-      allPlayers: json
+      allPlayers: json.filter(
+        obj => obj.computer === true
+      )
     }))
+    .then(res => this.state.allPlayers.map(
+      playerObj => {
+        playerObj.decks[0].cards = []
+        this.generateDeck(playerObj)
+      }
+    ))
   }
 
   getPlayer = (event) => {
@@ -62,7 +102,7 @@ export default class Home extends React.Component {
     .then(response => response.json())
     .then(json => this.setState({
       database: Object.values(json.data)
-    }))
+    }, () => console.log(this.state)))
     .then(res => this.generateCards())
   }
 
@@ -88,30 +128,33 @@ export default class Home extends React.Component {
       })
     })
 
-      this.state.collection.map(
-        cardObj => fetch(`http://localhost:3000/api/v1/cards`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          body: JSON.stringify(
-              {
-                key: cardObj.key,
-                name: cardObj.name,
-                title: cardObj.title,
-                role: cardObj.role,
-                rarity: cardObj.rarity,
-                attack: cardObj.attack,
-                magic: cardObj.magic,
-                defense: cardObj.defense,
-                description: cardObj.description,
-                image: cardObj.image,
-                quantity: cardObj.quantity,
-                players: [this.state.currentPlayer]
-              }
-          )})
-      )
+    this.state.collection.map(
+      cardObj => {fetch(`http://localhost:3000/api/v1/cards`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(
+            {
+              key: cardObj.key,
+              name: cardObj.name,
+              title: cardObj.title,
+              role: cardObj.role,
+              rarity: cardObj.rarity,
+              attack: cardObj.attack,
+              magic: cardObj.magic,
+              defense: cardObj.defense,
+              description: cardObj.description,
+              image: cardObj.image,
+              quantity: cardObj.quantity,
+              players: [this.state.currentPlayer]
+            }
+          )
+        })
+      })
+
+    this.getAllPlayers()
   }
 
   printState = () => {
@@ -168,7 +211,6 @@ export default class Home extends React.Component {
 
   componentDidMount() {
     this.fetchCards()
-    this.getAllPlayers()
   }
 
   renderCollection = () => {
@@ -280,7 +322,7 @@ export default class Home extends React.Component {
         allPlayers: [...this.state.allPlayers, {id: this.state.allPlayers.length + 1, name: this.state.name, decks: [], cards: [], collection: [], image: 'image/TwistedFatePortrait.png', computer: false}],
         render: 'home'
     }, () => {
-      this.createPlayerCollection()
+        this.createPlayerCollection()
     }
   ))
   }
