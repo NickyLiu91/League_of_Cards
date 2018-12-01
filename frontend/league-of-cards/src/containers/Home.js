@@ -73,14 +73,14 @@ export default class Home extends React.Component {
     fetch("http://localhost:3000/api/v1/players")
     .then(response => response.json())
     .then(json => this.setState({
-      allPlayers: json.filter(
-        obj => obj.computer === true
-      )
+      allPlayers: json
     }))
     .then(res => this.state.allPlayers.map(
       playerObj => {
-        playerObj.decks[0].cards = []
-        this.generateDeck(playerObj)
+        if (playerObj.computer === true) {
+          playerObj.decks[0].cards = []
+          this.generateDeck(playerObj)
+        }
       }
     ))
   }
@@ -125,9 +125,10 @@ export default class Home extends React.Component {
     }), () => {
       this.setState({
         collectionId: this.state.collectionId++
-      })
-    })
-
+      }
+    ))
+    
+    {
     this.state.collection.map(
       cardObj => {fetch(`http://localhost:3000/api/v1/cards`, {
         method: 'POST',
@@ -153,6 +154,7 @@ export default class Home extends React.Component {
           )
         })
       })
+    }
 
     this.getAllPlayers()
   }
@@ -344,7 +346,7 @@ export default class Home extends React.Component {
       return(
         <div>
         <h1>FORBIDDEN MEMORIES</h1>
-        <button onClick={this.printState}>STATE</button>
+        <button onClick={this.printState}>STAT E</button>
           <h1>Welcome, {this.state.currentPlayer.name}!</h1>
           <br/>
           <button onClick={this.renderCollection}>Collection</button>
