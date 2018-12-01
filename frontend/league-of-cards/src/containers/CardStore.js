@@ -1,6 +1,7 @@
 import React from "react";
 import StoreCard from "../components/StoreCard.js"
 let packKey = 0
+let collectionId = 1
 let cardResults = []
 
 export default class CardStore extends React.Component {
@@ -50,6 +51,8 @@ export default class CardStore extends React.Component {
     // this.setState({
     //   results: [...this.state.results, newCard]
     // })
+
+    newCard.id = collectionId++
 
     cardResults = [...cardResults, newCard]
 

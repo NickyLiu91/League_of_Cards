@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       # patch 'players/:player_id/cards/:card_id', to: 'cards#player_cards_card_patch'
 
       get 'players/:player_id/decks', to: 'decks#player_decks'
+      get 'players/:player_id/decks/:deck_id', to: 'decks#player_decks_show'
 
       resources :cards do
         resources :players, only: [:show, :new, :create, :edit, :update]
