@@ -13,7 +13,6 @@ export default class Home extends React.Component {
     loggedIn: false,
     name: '',
     deckCardId: 1,
-    collectionId: 1,
     database: [],
     collection: [],
     allPlayers: [],
@@ -107,29 +106,30 @@ export default class Home extends React.Component {
   }
 
   generateCards = () => {
-    this.state.database.map(champion => this.setState({
-      collection: [...this.state.collection, {
-        id: this.state.collectionId,
-        key: champion.key,
-        name: champion.name,
-        title: champion.title,
-        role: champion.tags[0],
-        rarity: champion.info.difficulty,
-        attack: champion.info.attack,
-        magic: champion.info.magic,
-        defense: champion.info.defense,
-        description: champion.blurb,
-        image: champion.image.full,
-        quantity: 0
-      }]
-    }), () => {
-      this.setState({
-        collectionId: this.state.collectionId++
+    let collectionId = 1
+    let cardCollection = []
+
+    this.state.database.map(
+      champion => {
+        cardCollection = [...cardCollection, {
+          id: collectionId,
+          key: champion.key,
+          name: champion.name,
+          title: champion.title,
+          role: champion.tags[0],
+          rarity: champion.info.difficulty,
+          attack: champion.info.attack,
+          magic: champion.info.magic,
+          defense: champion.info.defense,
+          description: champion.blurb,
+          image: champion.image.full,
+          quantity: 0
+        }]
+        collectionId ++
       }
-    ))
-    
-    {
-    this.state.collection.map(
+    )
+
+    cardCollection.map(
       cardObj => {fetch(`http://localhost:3000/api/v1/cards`, {
         method: 'POST',
         headers: {
@@ -154,9 +154,12 @@ export default class Home extends React.Component {
           )
         })
       })
-    }
 
-    this.getAllPlayers()
+      this.setState({
+        collection: cardCollection
+      }, () => {
+        this.getAllPlayers()
+      })
   }
 
   printState = () => {
@@ -187,6 +190,7 @@ export default class Home extends React.Component {
               card_id: card.id
             }
       )})
+      card.quantity --
         let newCard = Object.assign({}, card, {deckId: this.state.deckCardId})
         this.setState({
           currentDeckCards: [...this.state.currentDeckCards, newCard],
