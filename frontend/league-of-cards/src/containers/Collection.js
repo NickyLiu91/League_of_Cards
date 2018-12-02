@@ -4,7 +4,6 @@ import Card from "../components/Card.js"
 export default class Collection extends React.Component {
 
   generateCards = () => {
-    console.log(this.props)
     return this.props.currentPlayerCollection.map(
       cardObj => <Card key={cardObj.id} card={cardObj}
       getCardInfo={this.props.getCardInfo}/>
