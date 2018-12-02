@@ -200,6 +200,7 @@ export default class Home extends React.Component {
   }
 
   removeFromDeck = (card) => {
+    console.log(card)
     let newDeckCards = this.state.currentDeckCards
     let removeIndex = newDeckCards.findIndex(
       cardObj => cardObj.deckId === card.deckId
@@ -225,7 +226,7 @@ export default class Home extends React.Component {
     })
   }
 
-  getCardInfo = (card) =>{
+  getCardInfo = (card) => {
     this.setState({
       selectedCard: card
     })
