@@ -26,11 +26,11 @@ class Api::V1::PlayersController < ApplicationController
 
   def create
     @player = Player.create(player_params)
-    # if @player.valid?
-    #   render json: { player: Player.new(@player) }, status: :created
-    # else
-    #   render json: { error: 'failed to create user' }, status: :not_acceptable
-    # end
+    if @player.valid?
+      render json: { player: Player.new(@player) }, status: :created
+    else
+      render json: { error: 'failed to create user' }, status: :not_acceptable
+    end
   end
 
   def edit
@@ -44,22 +44,12 @@ class Api::V1::PlayersController < ApplicationController
 
   def card_players
     @card = Card.find(params[:card_id])
-    @players = @card.players
-    render json: @players.to_json(only: [:id, :name, :computer],
-        include: [decks: {only: [:id, :name]},
-                  cards: {only: [:id, :name, :title, :role, :rarity,
-                  :attack, :magic, :defense, :description, :quantity, :key, :image]}]
-      )
+    @players = @card
   end
 
   def deck_player
     @deck = Deck.find(params[:deck_id])
-    @player = @deck.player
-    render json: @player.to_json(only: [:id, :name, :computer],
-        include: [decks: {only: [:id, :name]},
-                  cards: {only: [:id, :name, :title, :role, :rarity,
-                  :attack, :magic, :defense, :description, :quantity, :key, :image]}]
-      )
+    @player = @deck
   end
 
   private

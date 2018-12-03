@@ -3,19 +3,11 @@ class Api::V1::DecksController < ApplicationController
 
   def index
     @decks = Deck.all
-    render json: @decks.to_json(only: [:id, :name],
-        include: [player: {only: [:id, :name, :computer]},
-                  cards: {only: [:id, :name, :title, :role, :rarity,
-                  :attack, :magic, :defense, :description, :quantity, :key, :image]}]
-      )
+    render json: @decks
   end
 
   def show
-    render json: @deck.to_json(only: [:id, :name],
-        include: [player: {only: [:id, :name, :computer]},
-                  cards: {only: [:id, :name, :title, :role, :rarity,
-                  :attack, :magic, :defense, :description, :quantity, :key, :image]}]
-      )
+    render json: @deck
   end
 
   def new
