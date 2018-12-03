@@ -11,12 +11,12 @@ export default class DuelField extends React.Component {
     player1Monsters: [{}, {}, {}, {}, {}],
     player1Spells: [{}, {}, {}, {}, {}],
     player1Hand: [],
-    player1Deck: this.props.player1.cards,
+    player1Deck: this.props.player1Deck,
     player2Life: 8000,
     player2Monsters: [{}, {}, {}, {}, {}],
     player2Spells: [{}, {}, {}, {}, {}],
     player2Hand: [],
-    player2Deck: this.props.player2.cards
+    player2Deck: this.props.player2Deck
   }
 
   playMonster = (monster) => {
@@ -57,8 +57,9 @@ export default class DuelField extends React.Component {
 
   computerDrawCard = () => {
     const newDeck = this.state.player2Deck
-    const newCard = newDeck.pop()
+    let newCard
     if (this.state.player2Deck.length > 0) {
+      newCard = newDeck.pop()
       this.setState({
         player2Deck: newDeck,
         player2Hand: [...this.state.player2Hand, newCard]
@@ -70,8 +71,9 @@ export default class DuelField extends React.Component {
 
   drawCard = () => {
     const newDeck = this.state.player1Deck
-    const newCard = newDeck.pop()
+    let newCard
     if (this.state.player1Deck.length > 0) {
+      newCard = newDeck.pop()
       this.setState({
         player1Deck: newDeck,
         player1Hand: [...this.state.player1Hand, newCard]
