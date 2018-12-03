@@ -189,7 +189,7 @@ export default class Home extends React.Component {
   }
 
   addToDeck = (card) => {
-    console.log(card)
+
     let cardToAdd
 
     fetch("http://localhost:3000/api/v1/cards")
@@ -489,7 +489,9 @@ export default class Home extends React.Component {
         <div>
           <DuelField
             player1={this.state.currentPlayer}
+            player1Deck={this.state.currentDeckCards}
             player2={this.state.player2}
+            player2Deck={this.state.player2.decks[0].cards}
             renderLose={this.renderLose}
             renderHome={this.renderHome}
           />
