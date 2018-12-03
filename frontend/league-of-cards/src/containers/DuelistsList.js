@@ -11,7 +11,9 @@ export default class DuelistsList extends React.Component {
     fetch('http://localhost:3000/api/v1/players')
     .then(response => response.json())
     .then(json => this.setState({
-      duelists: json
+      duelists: json.filter(
+        duelistObj => duelistObj.computer === true
+      )
     }))
   }
 

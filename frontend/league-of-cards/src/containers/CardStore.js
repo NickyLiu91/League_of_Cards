@@ -54,6 +54,8 @@ export default class CardStore extends React.Component {
 
     newCard.id = collectionId++
 
+    console.log(newCard)
+
     cardResults = [...cardResults, newCard]
 
     fetch(`http://localhost:3000/api/v1/players/${this.props.currentPlayer.id}/cards/${newCard.id}`, {

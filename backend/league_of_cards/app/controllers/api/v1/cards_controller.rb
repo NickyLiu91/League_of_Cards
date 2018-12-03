@@ -43,7 +43,7 @@ class Api::V1::CardsController < ApplicationController
     @player = Player.find(params[:player_id])
     @cards = @player.cards
     render json: @cards.to_json(only: [:id, :name, :title, :role, :rarity,
-      :attack, :magic, :defense, :description, :quantity, :key],
+      :attack, :magic, :defense, :description, :quantity, :key, :image],
         include: [players: {only: [:id, :name, :computer]},
         decks: {only: [:id, :name],
           include: [player: {only: [:id, :name]}]
@@ -78,7 +78,7 @@ class Api::V1::CardsController < ApplicationController
     @deck = Deck.find(params[:deck_id])
     @cards = @deck.cards
     render json: @cards.to_json(only: [:id, :name, :title, :role, :rarity,
-      :attack, :magic, :defense, :description, :quantity, :key],
+      :attack, :magic, :defense, :description, :quantity, :key, :image],
         include: [players: {only: [:id, :name, :computer]},
         decks: {only: [:id, :name],
           include: [player: {only: [:id, :name]}]
