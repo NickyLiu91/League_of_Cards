@@ -24,7 +24,19 @@ const ActionBox = (props) => {
       <div className="action-box-text" >
         <button onClick={event => {props.changePosition(props.selectedCard)}}>Change Position</button>
         <br/>
-        <button onClick={props.cancel}>Attack</button>
+        <button onClick={props.getEnemyTargetMode}>Attack</button>
+        <br/>
+        <button onClick={props.cancel}>Cancel</button>
+      </div>
+    )
+  } else if (props.actionType === 'selectTarget') {
+    return(
+      <div className="action-box-text" >
+        Select a monster to Attack!
+        <br/>
+        currentTarget: {props.selectedTarget.name}
+        <br/>
+        <button onClick={props.cancel}>Cancel</button>
       </div>
     )
   }

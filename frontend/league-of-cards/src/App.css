@@ -217,6 +217,23 @@ li{
   font-size: 50px;
 }
 
+#enemy-field {
+  background-color: darkred;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#player-field {
+  background-color: darkblue;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .defense {
   transform: rotate(90deg)
 }
