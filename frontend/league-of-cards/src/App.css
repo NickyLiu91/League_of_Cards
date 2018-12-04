@@ -20,9 +20,41 @@ body {
   padding: 20px;
   margin: 10px;
   color: gold;
-  background-color: black;
   position: relative;
 }
+
+.common {
+  width: 200px;
+  height: 300px;
+  border-style: solid;
+  border-width: 5px;
+  border-color: gold;
+  padding: 20px;
+  margin: 10px;
+  color: gold;
+  position: relative;
+  background-color: brown;
+}
+
+.uncommon {
+  background-color: green;
+}
+
+.rare {
+  background-color: blue;
+}
+
+.super-rare {
+  background-color: purple;
+}
+
+.ultra-rare {
+  background-color: orange;
+  color: blue;
+  border-color: blue;
+}
+
+
 
 #copies {
   font-size: 10px;
@@ -146,6 +178,47 @@ img {
   background-color: black;
   height: 1150px;
   width: 850px;
+}
+
+#duel-field-container {
+  display: flex;
+  flex-direction: row;
+}
+
+nav{
+  display: flex;
+  align-items: center;
+  background-color: black;
+  border-style: solid;
+  border-color: gold;
+  border-radius: 5px;
+}
+
+nav ul{
+  padding: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+li{
+  list-style: none;
+}
+
+#duel-field {
+  width: 70%;
+}
+
+#action-box {
+  background-color: white;
+  color: black;
+  width: 30%;
+  font-size: 50px;
+}
+
+.defense {
+  transform: rotate(90deg)
 }
 
 /*.pack-card {

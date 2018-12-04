@@ -5,19 +5,11 @@ class Api::V1::PlayersController < ApplicationController
 
   def index
     @players = Player.all
-    render json: @players.to_json(only: [:id, :name, :image, :computer],
-        include: [decks: {only: [:id, :name]},
-                  cards: {only: [:id, :name, :title, :role, :rarity,
-                  :attack, :magic, :defense, :description, :quantity, :key, :image, :computer]}]
-      )
+    render json: @players
   end
 
   def show
-    render json: @player.to_json(only: [:id, :name, :image, :computer],
-      include: [decks: {only: [:id, :name]},
-                cards: {only: [:id, :name, :title, :role, :rarity,
-                :attack, :magic, :defense, :description, :quantity, :key, :image, :computer]}]
-      )
+    render json: @player
   end
 
   def new
@@ -26,11 +18,11 @@ class Api::V1::PlayersController < ApplicationController
 
   def create
     @player = Player.create(player_params)
-    if @player.valid?
-      render json: { player: Player.new(@player) }, status: :created
-    else
-      render json: { error: 'failed to create user' }, status: :not_acceptable
-    end
+    # if @player.valid?
+    #   render json: { player: Player.new(@player) }, status: :created
+    # else
+    #   render json: { error: 'failed to create user' }, status: :not_acceptable
+    # end
   end
 
   def edit
@@ -55,7 +47,7 @@ class Api::V1::PlayersController < ApplicationController
   private
 
   def player_params
-    params.require(:player).permit(:name, :image, :computer)
+    params.require(:player).permit(:name, :image, :computer, :image, :password_digest)
   end
 
   def find_player

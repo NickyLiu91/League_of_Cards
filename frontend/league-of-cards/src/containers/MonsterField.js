@@ -6,7 +6,7 @@ export default class MonsterField extends React.Component {
 
   generateMonsterCards = () => {
     return this.props.monsters.map(
-      cardObj => <DuelCard key={monsterKey++} duelCard={cardObj} />
+      cardObj => <DuelCard key={monsterKey++} duelCard={cardObj} clickAction={this.props.clickFieldMonster}/>
     )
   }
 

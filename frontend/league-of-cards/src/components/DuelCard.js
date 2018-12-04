@@ -6,14 +6,26 @@ const DuelCard = (props) => {
       <div className="duel-card" >
       </div>
     )
-  } else {
+  } else if(props.duelCard.position != undefined){
+
     return(
-      <div className="duel-card" onClick={event => props.playMonster(props.duelCard)}>
+      <div className={`duel-card ${props.duelCard.position}`} onClick={event => props.clickAction(props.duelCard)}>
         <div>Name: {props.duelCard.name}, {props.duelCard.title}</div>
         <img className="duel-card-image" src={'image/' + props.duelCard.image}/>
         <br/>
         <div>Role: {props.duelCard.role}</div>
-        <div>Role: {props.duelCard.id}</div>
+        <div>Attack: {props.duelCard.attack}</div>
+        <div>Magic: {props.duelCard.magic}</div>
+        <div>Defense: {props.duelCard.defense}</div>
+      </div>
+    )
+  } else {
+    return(
+      <div className="duel-card" onClick={event => props.clickAction(props.duelCard)}>
+        <div>Name: {props.duelCard.name}, {props.duelCard.title}</div>
+        <img className="duel-card-image" src={'image/' + props.duelCard.image}/>
+        <br/>
+        <div>Role: {props.duelCard.role}</div>
         <div>Attack: {props.duelCard.attack}</div>
         <div>Magic: {props.duelCard.magic}</div>
         <div>Defense: {props.duelCard.defense}</div>

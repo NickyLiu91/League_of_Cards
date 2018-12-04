@@ -30,21 +30,21 @@ export default class CardStore extends React.Component {
     let number = Math.floor(Math.random() * 100) + 1
     let newCard
 
-    const legendary = this.props.currentPlayerCollection.filter(obj => obj.rarity === 10)
-    const ultraRare = this.props.currentPlayerCollection.filter(obj => obj.rarity === 9)
-    const superRare = this.props.currentPlayerCollection.filter(obj => obj.rarity === 8)
-    const rare = this.props.currentPlayerCollection.filter(obj => obj.rarity === 7)
+    const ultraRare = this.props.currentPlayerCollection.filter(obj => obj.rarity === 10)
+    const superRare = this.props.currentPlayerCollection.filter(obj => obj.rarity === 9)
+    const rare = this.props.currentPlayerCollection.filter(obj => obj.rarity === 8)
+    const uncommon = this.props.currentPlayerCollection.filter(obj => obj.rarity === 7)
     const common = this.props.currentPlayerCollection.filter(obj => obj.rarity > 0 && obj.rarity < 7)
 
 
     if (number > 98) {
-      newCard = legendary[Math.floor(Math.random() * legendary.length)]
-    } else if ( number > 93) {
       newCard = ultraRare[Math.floor(Math.random() * ultraRare.length)]
-    } else if ( number > 85) {
+    } else if ( number > 93) {
       newCard = superRare[Math.floor(Math.random() * superRare.length)]
-    } else if ( number > 50) {
+    } else if ( number > 85) {
       newCard = rare[Math.floor(Math.random() * rare.length)]
+    } else if ( number > 50) {
+      newCard = uncommon[Math.floor(Math.random() * uncommon.length)]
     } else {
       newCard = common[Math.floor(Math.random() * common.length)]
     }
@@ -53,8 +53,6 @@ export default class CardStore extends React.Component {
     // })
 
     newCard.id = collectionId++
-
-    console.log(newCard)
 
     cardResults = [...cardResults, newCard]
 
@@ -96,7 +94,6 @@ export default class CardStore extends React.Component {
         {this.generateCards()}
       </div>
       <button onClick={this.props.renderCollection}>Card Collection</button>
-      <button onClick={this.clearResults}>Clear</button>
       </div>
     )
   }
