@@ -162,8 +162,6 @@ export default class DuelField extends React.Component {
   }
 
   clickFieldMonster = (monster) => {
-    console.log(monster)
-    console.log(this.state.currentPlayer.id === this.state.player1.id)
     if (this.state.currentPlayer === this.state.player1) {
       this.setState({
         selectedCard: monster,
@@ -195,14 +193,36 @@ export default class DuelField extends React.Component {
     })
   }
 
-  monsterAttack = () => {
+  getEnemyTargetMode = (monster) => {
     this.setState({
-      actionType: 'getAttackTarget'
+      actionType: 'selectTarget'
     })
   }
 
-  getAttackTarget = (monster) => {
+  highestAttack = (monster) => {
+    if (monster.attack > monster.magic) {
+      return monster.attack
+    } else {
+      return monster.magic
+    }
+  }
 
+  fight = () => {
+    if (this.state.selectedTarget.mode === 'defense') {
+      if (this.highestAttack(this.state.selectedCard) > this.state.selectedTarget.defense) {
+        console.log(`${this.state.selectedTarget.name} has died!`)
+      } else {
+        this.setState({
+          player1Life: this.state.player1Life - (this.state.selectedTarget.defense - this.highestAttack(this.state.selectedCard))
+        })
+      }
+    }
+  }
+
+  selectTarget = (monster) => {
+    this.setState({
+      selectedTarget: monster
+    }, () => {console.log(this.state)})
   }
 
   computerPlayMonster = (monster) => {
@@ -326,50 +346,63 @@ export default class DuelField extends React.Component {
           <button onClick={event => console.log(this.state)}>STATE</button>
           <div>{this.props.player2.name}</div>
           <img src={this.props.player2.image}/>
-          <div id="player2-hand">
-          <Hand hand={this.state.player2Hand} playMonster={this.computerPlayMonster}/>
-          </div>
-          <br/>
-          <div className="extra-field">
-          <div id="player2-deck" className="duel-card" onClick={this.drawCard}>
-          p2 Deck
-          </div>
-          <div id="player2-graveyard" className="duel-card" onClick={this.showGraveyardList}>
-          Graveyard
-          </div>
-          </div>
-          <br/>
-          <div id="player2-spells">
-          <SpellField spells={this.state.player2Spells} />
-          </div>
-          <div id="player2-monsters">
-          <MonsterField monsters={this.state.player2Monsters}/>
+          <div id="enemy-field">
+            <div id="player2-hand">
+            <Hand hand={this.state.player2Hand} playMonster={this.computerPlayMonster}/>
+            </div>
+            <br/>
+            <div className="extra-field">
+            <div id="player2-deck" className="duel-card" onClick={this.drawCard}>
+            p2 Deck
+            </div>
+            <div id="player2-graveyard" className="duel-card" onClick={this.showGraveyardList}>
+            Graveyard
+            </div>
+            </div>
+            <br/>
+            <div id="player2-spells">
+            <SpellField spells={this.state.player2Spells} />
+            </div>
+            <div id="player2-monsters">
+              <MonsterField
+              player={"player2"}
+                monsters={this.state.player2Monsters}
+                selectTarget={this.selectTarget}
+              />
+            </div>
           </div>
           <br/>
           <br/>
           <button onClick={this.computerTurn}>End Turn</button>
           <br/>
           <br/>
-          <div id="player1-monsters">
-          <MonsterField monsters={this.state.player1Monsters} clickFieldMonster={this.clickFieldMonster}/>
-          </div>
-          <div id="player1-spells">
-          <SpellField spells={this.state.player1Spells} playMonster={this.playMonster}/>
-          </div>
-          <br/>
-          <div className="extra-field">
-          <div id="player1-deck" className="duel-card" onClick={this.drawCard}>
-          p1 Deck
-          </div>
-          <div id="player1-graveyard" className="duel-card" onClick={this.showGraveyardList}>
-          Graveyard
-          </div>
-          </div>
-          <div id="player1-hand">
-            <Hand
-              hand={this.state.player1Hand}
-              clickHandMonster={this.clickHandMonster}
-            />
+          <div id="player-field">
+            <div id="player1-monsters">
+              <MonsterField
+                monsters={this.state.player1Monsters}
+                clickFieldMonster={this.clickFieldMonster}
+                selectTarget={this.selectTarget}
+                player={"player1"}
+              />
+            </div>
+            <div id="player1-spells">
+            <SpellField spells={this.state.player1Spells} playMonster={this.playMonster}/>
+            </div>
+            <br/>
+            <div className="extra-field">
+            <div id="player1-deck" className="duel-card" onClick={this.drawCard}>
+            p1 Deck
+            </div>
+            <div id="player1-graveyard" className="duel-card" onClick={this.showGraveyardList}>
+            Graveyard
+            </div>
+            </div>
+            <div id="player1-hand">
+              <Hand
+                hand={this.state.player1Hand}
+                clickHandMonster={this.clickHandMonster}
+              />
+            </div>
           </div>
           <img src={this.props.player1.image}/>
           <div>{this.props.player1.name}</div>
@@ -381,8 +414,10 @@ export default class DuelField extends React.Component {
             selectMonsterPosition={this.selectMonsterPosition}
             playMonsterAttack={this.playMonsterAttack}
             playMonsterDefense={this.playMonsterDefense}
+            getEnemyTargetMode={this.getEnemyTargetMode}
             cancel={this.cancel}
             changePosition={this.changePosition}
+            selectedTarget={this.state.selectedTarget}
           />
         </div>
       </div>
