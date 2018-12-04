@@ -74,7 +74,6 @@ export default class CardStore extends React.Component {
         <div>
           {this.generateDecks()}
         </div>
-        <button onClick={this.props.renderCollection}>Card Collection</button>
       </div>
     )
   }

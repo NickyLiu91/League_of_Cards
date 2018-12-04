@@ -26,11 +26,8 @@ export default class DuelistsList extends React.Component {
 
   render() {
     return(
-      <div>
-        <div className="duelist-list">
-          {this.generateDuelists()}
-        </div>
-        <button onClick={this.props.renderHome}>Home</button>
+      <div className="duelist-list">
+        {this.generateDuelists()}
       </div>
     )
   }
