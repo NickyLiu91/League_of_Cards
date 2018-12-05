@@ -37,9 +37,9 @@ const ActionBox = (props) => {
       <div className="action-box-text" >
         Select a monster to Attack!
         <br/>
-        currentTarget: {props.selectedTarget.name}
+        {(props.selectedCard.name)} will attack {props.selectedTarget.name}!
         <br/>
-        <button onClick={props.fight}>OBLITERATE</button>
+        <button onClick={event => {props.fight(props.selectedCard, props.selectedTarget)}}>OBLITERATE</button>
         <br/>
         <button onClick={props.cancel}>Cancel</button>
       </div>
