@@ -54,8 +54,6 @@ body {
   border-color: blue;
 }
 
-
-
 #copies {
   font-size: 10px;
   position: absolute;
@@ -74,6 +72,10 @@ body {
   color: white;
   background-color: gray;
   position: relative;
+}
+
+.greyed-card img {
+   filter: grayscale(100%)
 }
 
 img {
