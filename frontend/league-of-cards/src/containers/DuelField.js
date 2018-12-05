@@ -4,13 +4,14 @@ import Hand from "./Hand.js"
 import SpellField from "./SpellField.js"
 import MonsterField from "./MonsterField.js"
 import ActionBox from "../components/ActionBox.js"
+import Graveyard from "./Graveyard.js"
 
 export default class DuelField extends React.Component {
 
   state = {
     turn: 1,
     currentPlayer: this.props.player1,
-    summon: 1,
+    summoned: false,
     player1: this.props.player1,
     player1Life: 4000,
     player1Monsters: [{}, {}, {}, {}, {}],
@@ -27,7 +28,7 @@ export default class DuelField extends React.Component {
     player2Graveyard: [],
     actionType: '',
     selectedCard: '',
-    selectedTarget: ''
+    selectedTarget: '',
   }
 
   start5CardsPlayer = () => {
@@ -66,6 +67,18 @@ export default class DuelField extends React.Component {
     this.setState({
       player2Deck: newDeck,
       player2Hand: newHand
+    })
+  }
+
+  displayGraveyard1 = () => {
+    this.setState({
+      actionType: 'displayPlayer1Graveyard'
+    })
+  }
+
+  displayGraveyard2 = () => {
+    this.setState({
+      actionType: 'displayPlayer2Graveyard'
     })
   }
 
@@ -111,7 +124,10 @@ export default class DuelField extends React.Component {
 
   clickHandMonster = (monster) => {
     console.log(monster)
-    if (this.state.player1.id === this.state.currentPlayer.id && this.state.summon === 1) {
+    console.log(this.state.player1.id === this.state.currentPlayer.id)
+    console.log(this.state.summoned === false)
+    if (this.state.summoned === false && this.state.player1.id === this.state.currentPlayer.id) {
+
       this.setState({
         selectedCard: monster,
         actionType: "summon-position"
@@ -137,7 +153,8 @@ export default class DuelField extends React.Component {
     this.setState({
       player1Monsters: newMonsterField,
       player1Hand: newHand,
-      actionType: ''
+      actionType: '',
+      summoned: true,
     })
   }
 
@@ -159,12 +176,13 @@ export default class DuelField extends React.Component {
     this.setState({
       player1Monsters: newMonsterField,
       player1Hand: newHand,
-      actionType: ''
+      actionType: '',
+      summoned: true,
     })
   }
 
   clickFieldMonster = (monster) => {
-    if (this.state.currentPlayer === this.state.player1) {
+    if (this.state.selectedCard.attacked === false && this.state.currentPlayer === this.state.player1) {
       this.setState({
         selectedCard: monster,
         actionType: 'fieldMonster'
@@ -189,6 +207,21 @@ export default class DuelField extends React.Component {
 
       newMonsterField.splice(monsterIndex, 1, newMonster)
     }
+
+    this.setState({
+      player1Monsters: newMonsterField
+    })
+  }
+
+  changeToAttacked = () => {
+    let newMonsterField = this.state.player1Monsters
+    let monsterIndex = newMonsterField.findIndex(
+      obj => obj.name === this.state.selectedCard.name
+    )
+
+    let newMonster = this.state.selectedCard
+    newMonster.attacked = true
+    newMonsterField.splice(monsterIndex, 1, newMonster)
 
     this.setState({
       player1Monsters: newMonsterField
@@ -269,11 +302,14 @@ export default class DuelField extends React.Component {
           player2Life: this.state.player2Life - (this.highestAttack(this.state.selectedCard) - this.state.selectedTarget.defense)
         })
 
+        this.changeToAttacked()
         this.sendTargetedCardFromFieldToGraveyard()
       } else if (this.highestAttack(this.state.selectedCard) < this.state.selectedTarget.defense) {
         this.setState({
           player1Life: this.state.player1Life - (this.state.selectedTarget.defense - this.highestAttack(this.state.selectedCard))
         })
+
+        this.changeToAttacked()
       }
     } else {
       if (this.highestAttack(this.state.selectedCard) > this.highestAttack(this.state.selectedTarget)) {
@@ -281,6 +317,7 @@ export default class DuelField extends React.Component {
           player2Life: this.state.player2Life - (this.highestAttack(this.state.selectedCard) - this.highestAttack(this.state.selectedTarget))
         })
 
+        this.changeToAttacked()
         this.sendTargetedCardFromFieldToGraveyard()
       } else if (this.highestAttack(this.state.selectedCard) < this.highestAttack(this.state.selectedTarget)){
         this.setState({
@@ -374,21 +411,28 @@ export default class DuelField extends React.Component {
 
   playAppropriateMonster = () => {
     let strongestHandMonster = this.getStrongestMonsterInOwnHand()
-    console.log("strongest")
-    console.log(strongestHandMonster)
+    // console.log("strongest")
+    // console.log(strongestHandMonster)
     let weakestHandMonster = this.getWeakestMonsterInOwnHand()
-    console.log("weakest")
-    console.log(weakestHandMonster)
+    // console.log("weakest")
+    // console.log(weakestHandMonster)
 
     // this.computerPlayMonster(strongestHandMonster)
 
     let killableEnemyMonster = this.state.player1Monsters.some(
-      monster => Object.keys(monster).length !== 0 && this.highestAttack(monster) < this.highestAttack(strongestHandMonster)
+      monster => 
+        ( Object.keys(monster).length !== 0 && monster.position === 'attack' && this.highestAttack(monster) <= this.highestAttack(strongestHandMonster)) ||
+        ( Object.keys(monster).length !== 0 && monster.position === 'defense' && monster.defense <= this.highestAttack(strongestHandMonster))
+
     )
 
     if (killableEnemyMonster === false) {
+      weakestHandMonster.position = 'defense'
+      console.log(weakestHandMonster)
       this.computerPlayMonster(weakestHandMonster)
     } else if (killableEnemyMonster === true ) {
+      strongestHandMonster.position = 'attack'
+      console.log(strongestHandMonster)
       this.computerPlayMonster(strongestHandMonster)
     }
   }
@@ -436,7 +480,7 @@ export default class DuelField extends React.Component {
             <div id="player2-deck" className="duel-card" onClick={this.drawCard}>
             p2 Deck
             </div>
-            <div id="player2-graveyard" className="duel-card" onClick={this.showGraveyardList}>
+            <div id="player2-graveyard" className="duel-card" onClick={this.displayGraveyard2}>
             Graveyard
             </div>
             </div>
@@ -478,7 +522,7 @@ export default class DuelField extends React.Component {
             <div id="player1-deck" className="duel-card" onClick={this.drawCard}>
             p1 Deck
             </div>
-            <div id="player1-graveyard" className="duel-card" onClick={this.showGraveyardList}>
+            <div id="player1-graveyard" className="duel-card" onClick={this.displayGraveyard1}>
             Graveyard
             </div>
             </div>
@@ -504,6 +548,8 @@ export default class DuelField extends React.Component {
             changePosition={this.changePosition}
             selectedTarget={this.state.selectedTarget}
             fight={this.fight}
+            player1Graveyard={this.state.player1Graveyard}
+            player2Graveyard={this.state.player2Graveyard}
           />
         </div>
       </div>
