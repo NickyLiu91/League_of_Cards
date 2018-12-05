@@ -105,16 +105,19 @@ img {
   border-color: gold;
   margin: 0;
   padding: 0;
-  position: relative;
+  position: sticky;
   right: 0;
+  top: 0;
+  /*top: 53px;*/
+  height: 100%;
   display: inline-block;
 }
 
-.side-bar-card {
+.sidebar-card {
   width: 200px;
   border-top-style: solid;
   /*border-radius: 1px;*/
-  border-top-color: black;
+  border-top-color: gold;
 }
 
 .big-container {
@@ -215,6 +218,10 @@ li{
   color: black;
   width: 30%;
   font-size: 50px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100%;
 }
 
 #enemy-field {
@@ -237,6 +244,18 @@ li{
 .defense {
   transform: rotate(90deg)
 }
+
+#middle-bar {
+  display: flex;
+  flex-direction: row;
+  width: 60%;
+  justify-content: space-between;
+  /*border-style: solid;*/
+  /*border-color: white;*/
+  color: white;
+  font-size: 50px;
+}
+
 
 /*.pack-card {
   width: 100px;

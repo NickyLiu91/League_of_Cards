@@ -36,6 +36,8 @@ const ActionBox = (props) => {
         <br/>
         currentTarget: {props.selectedTarget.name}
         <br/>
+        <button onClick={props.fight}>OBLITERATE</button>
+        <br/>
         <button onClick={props.cancel}>Cancel</button>
       </div>
     )
