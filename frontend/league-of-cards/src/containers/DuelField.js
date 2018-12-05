@@ -12,13 +12,13 @@ export default class DuelField extends React.Component {
     currentPlayer: this.props.player1,
     summon: 1,
     player1: this.props.player1,
-    player1Life: 8000,
+    player1Life: 4000,
     player1Monsters: [{}, {}, {}, {}, {}],
     player1Spells: [{}, {}, {}, {}, {}],
     player1Hand: [],
     player1Deck: this.props.player1Deck,
     player2: this.props.player2,
-    player2Life: 8000,
+    player2Life: 4000,
     player2Monsters: [{}, {}, {}, {}, {}],
     player2Spells: [{}, {}, {}, {}, {}],
     player2Hand: [],
@@ -210,10 +210,22 @@ export default class DuelField extends React.Component {
   fight = () => {
     if (this.state.selectedTarget.mode === 'defense') {
       if (this.highestAttack(this.state.selectedCard) > this.state.selectedTarget.defense) {
-        console.log(`${this.state.selectedTarget.name} has died!`)
+        this.setState({
+          player2Life: this.state.player2Life - (this.highestAttack(this.state.selectedCard) - this.state.selectedTarget.defense)
+        })
       } else {
         this.setState({
           player1Life: this.state.player1Life - (this.state.selectedTarget.defense - this.highestAttack(this.state.selectedCard))
+        })
+      }
+    } else {
+      if (this.highestAttack(this.state.selectedCard) > this.highestAttack(this.state.selectedTarget)) {
+        this.setState({
+          player2Life: this.state.player2Life - (this.highestAttack(this.state.selectedCard) - this.highestAttack(this.state.selectedTarget))
+        })
+      } else {
+        this.setState({
+          player1Life: this.state.player1Life - (this.highestAttack(this.state.selectedTarget) - this.highestAttack(this.state.selectedCard))
         })
       }
     }
@@ -270,22 +282,28 @@ export default class DuelField extends React.Component {
   }
 
   showState = () => {
-    console.log("hi")
+    console.log(this.state)
+  }
+
+  test = (object) => {
+    return object.attack
   }
 
   getStrongestMonsterInOwnHand = () => {
-    return this.state.player2Hand.sort( function(a, b) {
-    	if(a.attack > b.attack) {
+
+    return this.state.player2Hand.sort( (a, b) => {
+    	if(this.highestAttack(a) > this.highestAttack(b)) {
     		return -1
       } else {
       	return 1
       }
+      return 0
     })[0]
   }
 
   getWeakestMonsterInOwnHand = () => {
-    return this.state.player2Hand.sort( function(a, b) {
-    	if(a.attack > b.attack) {
+    return this.state.player2Hand.sort( (a, b) => {
+    	if(this.highestAttack(a) > this.highestAttack(b)) {
     		return 1
       } else {
       	return -1
@@ -295,14 +313,16 @@ export default class DuelField extends React.Component {
 
   playAppropriateMonster = () => {
     let strongestHandMonster = this.getStrongestMonsterInOwnHand()
+    console.log("strongest")
     console.log(strongestHandMonster)
     let weakestHandMonster = this.getWeakestMonsterInOwnHand()
+    console.log("weakest")
     console.log(weakestHandMonster)
 
     // this.computerPlayMonster(strongestHandMonster)
 
     let killableEnemyMonster = this.state.player1Monsters.some(
-      monster => Object.keys(monster).length !== 0 && monster.attack < strongestHandMonster.attack
+      monster => Object.keys(monster).length !== 0 && this.highestAttack(monster) < this.highestAttack(strongestHandMonster)
     )
 
     if (killableEnemyMonster === false) {
@@ -373,7 +393,11 @@ export default class DuelField extends React.Component {
           </div>
           <br/>
           <br/>
+          <div id="middle-bar">
+          <div className="life-points">{this.state.player2Life}</div>
           <button onClick={this.computerTurn}>End Turn</button>
+          <div className="life-points">{this.state.player1Life}</div>
+          </div>
           <br/>
           <br/>
           <div id="player-field">
@@ -418,6 +442,7 @@ export default class DuelField extends React.Component {
             cancel={this.cancel}
             changePosition={this.changePosition}
             selectedTarget={this.state.selectedTarget}
+            fight={this.fight}
           />
         </div>
       </div>

@@ -166,9 +166,9 @@ export default class Home extends React.Component {
           title: champion.title,
           role: champion.tags[0],
           rarity: champion.info.difficulty,
-          attack: champion.info.attack,
-          magic: champion.info.magic,
-          defense: champion.info.defense,
+          attack: champion.info.attack * 100,
+          magic: champion.info.magic * 100,
+          defense: champion.info.defense * 100,
           description: champion.blurb,
           image: champion.image.full,
           quantity: 0
