@@ -116,10 +116,32 @@ img {
 }
 
 .sidebar-card {
-  width: 200px;
   border-top-style: solid;
   /*border-radius: 1px;*/
   border-top-color: gold;
+}
+
+#graveyard-bar, .action-box-text {
+  list-style-type:none;
+  width: 100%;
+  border-style: solid;
+  border-color: blue;
+  color: blue;
+  margin: 0;
+  padding: 0;
+  position: sticky;
+  right: 0;
+  top: 0;
+  /*top: 53px;*/
+  height: 100%;
+  display: inline-block;
+}
+
+.graveyard-card {
+
+  border-top-style: solid;
+  /*border-radius: 1px;*/
+  border-top-color: blue;
 }
 
 .big-container {
@@ -222,8 +244,7 @@ li{
   font-size: 50px;
   position: fixed;
   right: 0;
-  top: 0;
-  height: 100%;
+
 }
 
 #enemy-field {
