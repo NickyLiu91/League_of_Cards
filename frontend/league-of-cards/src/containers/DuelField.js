@@ -17,12 +17,14 @@ export default class DuelField extends React.Component {
     player1Spells: [{}, {}, {}, {}, {}],
     player1Hand: [],
     player1Deck: this.props.player1Deck,
+    player1Graveyard: [],
     player2: this.props.player2,
     player2Life: 4000,
     player2Monsters: [{}, {}, {}, {}, {}],
     player2Spells: [{}, {}, {}, {}, {}],
     player2Hand: [],
     player2Deck: this.props.player2Deck,
+    player2Graveyard: [],
     actionType: '',
     selectedCard: '',
     selectedTarget: ''
@@ -207,13 +209,68 @@ export default class DuelField extends React.Component {
     }
   }
 
+  sendSelectedCardFromPlayer1HandToGraveyard = () => {
+    let newGraveyard = this.state.player1Graveyard
+    let newHand = this.state.player1Hand.filter(
+      cardObj => cardObj.id !== this.state.selectedCard.id
+    )
+
+    newGraveyard = [...this.state.player1Graveyard, this.state.selectedCard]
+
+    this.setState({
+      player1Hand: newHand,
+      player1Graveyard: newGraveyard,
+      actionType: ''
+    })
+  }
+
+  sendSelectedCardFromFieldToGraveyard = () => {
+    let newGraveyard = this.state.player1Graveyard
+    let newMonsterField = this.state.player1Monsters
+
+    let emptySlot = this.state.player1Monsters.findIndex(
+      obj => obj.name === this.state.selectedCard.name
+    )
+
+    newGraveyard = [...this.state.player1Graveyard, this.state.selectedCard]
+
+    newMonsterField.splice(emptySlot, 1, {})
+
+    this.setState({
+      player1Monsters: newMonsterField,
+      player1Graveyard: newGraveyard,
+      actionType: ''
+    })
+  }
+
+  sendTargetedCardFromFieldToGraveyard = () => {
+    let newGraveyard = this.state.player2Graveyard
+    let newMonsterField = this.state.player2Monsters
+
+    let emptySlot = this.state.player2Monsters.findIndex(
+      obj => obj.deckId === this.state.selectedTarget.deckId
+    )
+
+    newGraveyard = [...this.state.player2Graveyard, this.state.selectedTarget]
+
+    newMonsterField.splice(emptySlot, 1, {})
+
+    this.setState({
+      player2Monsters: newMonsterField,
+      player2Graveyard: newGraveyard,
+      actionType: ''
+    })
+  }
+
   fight = () => {
     if (this.state.selectedTarget.mode === 'defense') {
       if (this.highestAttack(this.state.selectedCard) > this.state.selectedTarget.defense) {
         this.setState({
           player2Life: this.state.player2Life - (this.highestAttack(this.state.selectedCard) - this.state.selectedTarget.defense)
         })
-      } else {
+
+        this.sendTargetedCardFromFieldToGraveyard()
+      } else if (this.highestAttack(this.state.selectedCard) < this.state.selectedTarget.defense) {
         this.setState({
           player1Life: this.state.player1Life - (this.state.selectedTarget.defense - this.highestAttack(this.state.selectedCard))
         })
@@ -223,10 +280,14 @@ export default class DuelField extends React.Component {
         this.setState({
           player2Life: this.state.player2Life - (this.highestAttack(this.state.selectedCard) - this.highestAttack(this.state.selectedTarget))
         })
-      } else {
+
+        this.sendTargetedCardFromFieldToGraveyard()
+      } else if (this.highestAttack(this.state.selectedCard) < this.highestAttack(this.state.selectedTarget)){
         this.setState({
           player1Life: this.state.player1Life - (this.highestAttack(this.state.selectedTarget) - this.highestAttack(this.state.selectedCard))
         })
+
+        this.sendSelectedCardFromFieldToGraveyard()
       }
     }
   }
