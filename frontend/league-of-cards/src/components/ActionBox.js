@@ -22,7 +22,17 @@ const ActionBox = (props) => {
         <button onClick={props.cancel}>Cancel</button>
       </div>
     )
-  } else if (props.actionType === 'fieldMonster') {
+  } else if (props.actionType === 'fieldMonster' && props.turn === 1) {
+    return(
+      <div className="action-box-text" >
+        You cannot declare an attack on the first turn!
+        <br/>
+        <button onClick={event => {props.changePosition(props.selectedCard)}}>Change Position</button>
+        <br/>
+        <button onClick={props.cancel}>Cancel</button>
+      </div>
+    )
+  } else if (props.actionType === 'fieldMonster' && props.selectedCard.attacked === false) {
     return(
       <div className="action-box-text" >
         <button onClick={event => {props.changePosition(props.selectedCard)}}>Change Position</button>
@@ -30,6 +40,12 @@ const ActionBox = (props) => {
         <button onClick={props.getEnemyTargetMode}>Attack</button>
         <br/>
         <button onClick={props.cancel}>Cancel</button>
+      </div>
+    )
+  } else if (props.actionType === 'fieldMonster' && props.selectedCard.attacked === true) {
+    return(
+      <div className="action-box-text" >
+        {props.selectedCard.name} has already attack this turn!
       </div>
     )
   } else if (props.actionType === 'selectTarget') {
