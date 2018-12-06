@@ -21,6 +21,15 @@ body {
   margin: 10px;
   color: gold;
   position: relative;
+  box-shadow: 3px 3px 5px gold;
+}
+
+.container-with-decklist  {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background: black;
+  color: gold;
 }
 
 .common {
@@ -92,12 +101,19 @@ img {
   border-color: white;
 }
 
-.container-with-decklist  {
+.decks-container  {
   display: flex;
   flex-direction: row;
   justify-content: center;
   background: black;
   color: gold;
+}
+
+#decks-list {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  justify-content: space-between;
 }
 
 #sidebar {
@@ -179,10 +195,14 @@ img {
 
 #store {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  width: 50%;
+  justify-content: space-around;
 }
 
 #pack {
+  position: relative;
+  top: 30%;
   height: 420px;
   width: 300px;
 }
@@ -202,7 +222,7 @@ img {
   align-content: space-around;
   border-color: black;
   border-radius: 5px;
-  background-color: black;
+  /*background-color: black;*/
   height: 1150px;
   width: 850px;
 }
@@ -248,7 +268,7 @@ li{
 }
 
 #enemy-field {
-  background-color: darkred;
+  /*background-color: darkred;*/
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -256,7 +276,7 @@ li{
 }
 
 #player-field {
-  background-color: darkblue;
+  /*background-color: darkblue;*/
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -279,23 +299,103 @@ li{
   font-size: 50px;
 }
 
-
-/*.pack-card {
-  width: 100px;
-  height: 150px;
-  border-style: solid;
-  border-width: 2px;
-  border-color: gold;
-  padding: 10px;
-  margin: 5px;
-  color: gold;
-  background-color: black;
-  position: relative;
+#store-container {
+  display: flex;
+  flex-direction: row;
 }
 
-.pack-card-img {
-  height: 80px;
-  width: 80px;
+#duelist-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.deck-button-div {
+  position: relative;
+  top: 250px;
+}
+
+.deck{
+	display: inline-block;
+	background-color: brown;
+	position: relative;
+}
+
+.circle{
+	background-color: black;
+	border-radius: 50%;
+	height: 200px;
+	width: 90px;
+	display: flex;
+	position: absolute;
+	top: 70px;
+	left: 77px;
+}
+
+#shurima, #demacia, #ionia, #shadow-isles, #targon, #noxus-arena {
+  position: absolute;
+  left: 0;
+  opacity: .75;
+  height: 100%;
+  width: 100%;
+  border: none;
+  z-index: -1
+}
+
+#summoners-rift {
+  position: absolute;
+  left: 0;
+  opacity: .75;
+  height: 1300px;
+  width: 100%;
+  border: none;
+  z-index: -1
+}
+
+#noxus-shurima {
+ position: absolute;
+ left: 0;
+ opacity: 75;
+ height: 100%;
+ width: 100%;
+ border: none;
+ z-index: -1
+}
+
+#bilgewater{
+  position: absolute;
+  left: 0;
+  opacity: .75;
+  height: 100%;
+  width: 100%;
+  border: none;
+  z-index: -1
+}
+
+#home, #logged-in {
+  position: relative;
+  top: 200px;
+}
+
+.store-card {
+  width: 200px;
+  height: 300px;
   border-style: solid;
-  border-color: gold;
-}*/
+  border-width: 5px;
+  border-color: black;
+  padding: 20px;
+  margin: 10px;
+  color: gold;
+  position: relative;
+  box-shadow: 3px 3px 5px black;
+}
+
+#create-deck {
+  padding: 50px
+}
+
+#post-match-message {
+  position: relative;
+  top: 200px;
+}

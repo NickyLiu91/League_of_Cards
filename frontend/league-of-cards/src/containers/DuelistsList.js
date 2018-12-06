@@ -26,8 +26,11 @@ export default class DuelistsList extends React.Component {
 
   render() {
     return(
-      <div className="duelist-list">
-        {this.generateDuelists()}
+      <div>
+      <img id="ionia" src="image/ionia.jpeg"/>
+        <div id="duelist-list">
+          {this.generateDuelists()}
+        </div>
       </div>
     )
   }

@@ -66,13 +66,16 @@ export default class CardStore extends React.Component {
   render() {
     return(
       <div>
-        <div>
-          <form onSubmit={this.createDeck}>
-            Deck Name: <input type="text" value={this.state.deckName} onChange={event => this.handleDeckName(event)}/>
-          </form>
-        </div>
-        <div>
-          {this.generateDecks()}
+        <img id="ionia" src="image/ionia.jpeg"/>
+        <div id='decks-container'>
+          <div id="create-deck">
+            <form onSubmit={this.createDeck}>
+              Deck Name: <input type="text" value={this.state.deckName} onChange={event => this.handleDeckName(event)}/>
+            </form>
+          </div>
+          <div id="decks-list">
+            {this.generateDecks()}
+          </div>
         </div>
       </div>
     )

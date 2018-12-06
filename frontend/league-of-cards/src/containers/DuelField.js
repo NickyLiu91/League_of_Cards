@@ -576,8 +576,6 @@ export default class DuelField extends React.Component {
       }
     )
 
-
-
     sortedField.map(
       monster => {
         // console.log(monster)
@@ -744,110 +742,126 @@ export default class DuelField extends React.Component {
   render() {
     if (this.state.player1Life <= 0) {
       return(
-        <div>
-          <h1>YOU HAVE RUN OUT OF STAMINA</h1>
-          <h1>YOU ARE NO LONGER ABLE TO FIGHT</h1>
-          <h1>YOU CAN ONLY WATCH ON AS YOUR ENEMY COMES TO DELIVER THE FINISHING BLOW</h1>
+        <div id="post-match">
+        <img id="shadow-isles" src="image/shadow-isles.jpeg" />
+          <div id="post-match-message">
+            <h1>YOU HAVE RUN OUT OF STAMINA</h1>
+            <h1>YOU ARE NO LONGER ABLE TO FIGHT</h1>
+            <h1>YOU CAN ONLY WATCH ON AS YOUR ENEMY COMES TO DELIVER THE FINISHING BLOW</h1>
+          </div>
         </div>
       )
     } else if (this.state.player2Life <= 0) {
       return(
-        <div>
-          <h1>CONGRATULATIONS!</h1>
-          <h1>YOU HAVE DEFEATED YOUR OPPONENT!</h1>
+        <div id="post-match">
+          <img id="targon" src="image/targon.jpeg" />
+          <div id="post-match-message">
+            <h1>CONGRATULATIONS!</h1>
+            <h1>YOU HAVE DEFEATED YOUR OPPONENT!</h1>
+          </div>
         </div>
       )
     } else {
       return(
-        <div id="duel-field-container">
-          <div id="duel-field">
-            <button onClick={event => console.log(this.state)}>STATE</button>
-            <div>{this.props.player2.name}</div>
-            <img src={this.props.player2.image}/>
-            <div id="enemy-field">
-              <div id="player2-hand">
-              <Hand hand={this.state.player2Hand} playMonster={this.computerPlayMonster}/>
+        <div>
+          <img id="noxus-arena" src="image/noxus-arena.jpeg" />
+          <div id="duel-field-container">
+            <div id="duel-field">
+
+              <div>{this.props.player2.name}</div>
+              <img src={this.props.player2.image}/>
+              <div>
+                <img id="summoners-rift" src="image/summoners-rift.jpg"/>
+                <div id="enemy-field">
+                  <div id="player2-hand">
+                  <Hand hand={this.state.player2Hand} playMonster={this.computerPlayMonster}/>
+                  </div>
+                  <br/>
+                  <div className="extra-field">
+                  <div id="player2-deck" className="duel-card" >
+                  p2 Deck
+                  </div>
+                  <div id="player2-graveyard" className="duel-card" onClick={this.displayGraveyard2}>
+                  Graveyard
+                  </div>
+                  </div>
+                  <br/>
+                  <div id="player2-spells">
+                  <SpellField spells={this.state.player2Spells} />
+                  </div>
+                  <div id="player2-monsters">
+                    <MonsterField
+                    player={"player2"}
+                      monsters={this.state.player2Monsters}
+                      selectTarget={this.selectTarget}
+                    />
+                  </div>
+                </div>
               </div>
               <br/>
-              <div className="extra-field">
-              <div id="player2-deck" className="duel-card" onClick={this.drawCard}>
-              p2 Deck
-              </div>
-              <div id="player2-graveyard" className="duel-card" onClick={this.displayGraveyard2}>
-              Graveyard
-              </div>
+              <br/>
+              <div id="middle-bar">
+              <div className="life-points">{this.state.player2Life}</div>
+              <button onClick={this.computerTurn}>End Turn</button>
+              <div className="life-points">{this.state.player1Life}</div>
               </div>
               <br/>
-              <div id="player2-spells">
-              <SpellField spells={this.state.player2Spells} />
-              </div>
-              <div id="player2-monsters">
-                <MonsterField
-                player={"player2"}
-                  monsters={this.state.player2Monsters}
-                  selectTarget={this.selectTarget}
-                />
-              </div>
-            </div>
-            <br/>
-            <br/>
-            <div id="middle-bar">
-            <div className="life-points">{this.state.player2Life}</div>
-            <button onClick={this.computerTurn}>End Turn</button>
-            <div className="life-points">{this.state.player1Life}</div>
-            </div>
-            <br/>
-            <br/>
-            <div id="player-field">
-              <div id="player1-monsters">
-                <MonsterField
-                  monsters={this.state.player1Monsters}
-                  clickFieldMonster={this.clickFieldMonster}
-                  selectTarget={this.selectTarget}
-                  player={"player1"}
-                />
-              </div>
-              <div id="player1-spells">
-              <SpellField spells={this.state.player1Spells} playMonster={this.playMonster}/>
-              </div>
               <br/>
-              <div className="extra-field">
-              <div id="player1-deck" className="duel-card" onClick={this.drawCard}>
-              p1 Deck
+              <div>
+                <img id="summoners-rift" src="image/summoners-rift.jpg"/>
+                <div id="player-field">
+
+                  <div id="player1-monsters">
+                    <MonsterField
+                      monsters={this.state.player1Monsters}
+                      clickFieldMonster={this.clickFieldMonster}
+                      selectTarget={this.selectTarget}
+                      player={"player1"}
+                    />
+                  </div>
+                  <div id="player1-spells">
+                  <SpellField spells={this.state.player1Spells} playMonster={this.playMonster}/>
+                  </div>
+                  <br/>
+                  <div className="extra-field">
+                  <div id="player1-deck" className="duel-card" onClick={this.drawCard}>
+                  p1 Deck
+                  </div>
+                  <div id="player1-graveyard" className="duel-card" onClick={this.displayGraveyard1}>
+                </div>
+                Graveyard
+                </div>
+                </div>
+                <div id="player1-hand">
+                  <Hand
+                    hand={this.state.player1Hand}
+                    clickHandMonster={this.clickHandMonster}
+                  />
+                </div>
               </div>
-              <div id="player1-graveyard" className="duel-card" onClick={this.displayGraveyard1}>
-              Graveyard
-              </div>
-              </div>
-              <div id="player1-hand">
-                <Hand
-                  hand={this.state.player1Hand}
-                  clickHandMonster={this.clickHandMonster}
-                />
-              </div>
+              <img src={this.props.player1.image}/>
+              <div>{this.props.player1.name}</div>
             </div>
-            <img src={this.props.player1.image}/>
-            <div>{this.props.player1.name}</div>
-          </div>
-          <div id="action-box">
-            <ActionBox
-              actionType={this.state.actionType}
-              selectedCard={this.state.selectedCard}
-              selectedTarget={this.state.selectedTarget}
-              playMonsterAttack={this.playMonsterAttack}
-              playMonsterDefense={this.playMonsterDefense}
-              getEnemyTargetMode={this.getEnemyTargetMode}
-              cancel={this.cancel}
-              changePosition={this.changePosition}
-              selectedTarget={this.state.selectedTarget}
-              fight={this.fight}
-              player1Graveyard={this.state.player1Graveyard}
-              player2Graveyard={this.state.player2Graveyard}
-              emptyField={this.emptyField}
-              player2Monsters={this.state.player2Monsters}
-              player1Monsters={this.state.player1Monsters}
-              turn={this.state.turn}
-            />
+            <div id="action-box">
+              <ActionBox
+                actionType={this.state.actionType}
+                selectedCard={this.state.selectedCard}
+                selectedTarget={this.state.selectedTarget}
+                playMonsterAttack={this.playMonsterAttack}
+                playMonsterDefense={this.playMonsterDefense}
+                getEnemyTargetMode={this.getEnemyTargetMode}
+                cancel={this.cancel}
+                changePosition={this.changePosition}
+                selectedTarget={this.state.selectedTarget}
+                fight={this.fight}
+                player1Graveyard={this.state.player1Graveyard}
+                player2Graveyard={this.state.player2Graveyard}
+                emptyField={this.emptyField}
+                player2Monsters={this.state.player2Monsters}
+                player1Monsters={this.state.player1Monsters}
+                turn={this.state.turn}
+              />
+            </div>
           </div>
         </div>
       )
