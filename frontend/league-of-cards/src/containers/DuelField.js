@@ -7,6 +7,7 @@ import ActionBox from "../components/ActionBox.js"
 import Graveyard from "./Graveyard.js"
 
 let deckId = 1
+let totalDamage = 4000
 
 export default class DuelField extends React.Component {
 
@@ -49,7 +50,9 @@ export default class DuelField extends React.Component {
         newCard = newDeck.pop()
         newHand = [...newHand, newCard]
       } else {
-        this.props.renderLose()
+        this.setState({
+          player1Life: -9999
+        })
       }
     }
     this.setState({
@@ -69,7 +72,9 @@ export default class DuelField extends React.Component {
         console.log(newCard)
         newHand = [...newHand, newCard]
       } else {
-        this.props.renderLose()
+        this.setState({
+          player2Life: -9999
+        })
       }
     }
     this.setState({
@@ -238,7 +243,6 @@ export default class DuelField extends React.Component {
     })
   }
 
-
   getEnemyTargetMode = (monster) => {
     this.setState({
       actionType: 'selectTarget'
@@ -354,7 +358,8 @@ export default class DuelField extends React.Component {
       this.setState({
         player2Life: this.state.player2Life - this.highestAttack(monster1)
       })
-    } else if (monster2.position === 'defense') {
+    }
+    if (monster2.position === 'defense') {
       if (this.highestAttack(monster1) > monster2.defense) {
 
         this.changeToAttacked(monster1, field)
@@ -371,7 +376,6 @@ export default class DuelField extends React.Component {
         this.setState({
           player2Life: this.state.player2Life - (this.highestAttack(monster1) - this.highestAttack(monster2))
         })
-
         this.changeToAttacked(monster1, field)
         this.sendEnemyFromFieldToGraveyard(monster2)
       } else if (this.highestAttack(monster1) < this.highestAttack(monster2)){
@@ -379,6 +383,10 @@ export default class DuelField extends React.Component {
           player1Life: this.state.player1Life - (this.highestAttack(monster2) - this.highestAttack(monster1))
         })
 
+        this.sendOwnFromFieldToGraveyard(monster1)
+      } else if (this.highestAttack(monster1) === this.highestAttack(monster2)){
+
+        this.sendEnemyFromFieldToGraveyard(monster2)
         this.sendOwnFromFieldToGraveyard(monster1)
       }
     }
@@ -399,22 +407,26 @@ export default class DuelField extends React.Component {
       } else if (this.highestAttack(monster1) < monster2.defense) {
         // this.changeToAttacked(monster1, field)
         this.setState({
-          player2Life: this.state.player1Life - (monster2.defense - this.highestAttack(monster1))
+          player2Life: this.state.player2Life - (monster2.defense - this.highestAttack(monster1))
         })
       }
     } else if (monster2.position === 'attack'){
       if (this.highestAttack(monster1) > this.highestAttack(monster2)) {
-        this.setState({
-          player1Life: this.state.player2Life - (this.highestAttack(monster1) - this.highestAttack(monster2))
-        })
+
+          totalDamage = totalDamage - (this.highestAttack(monster1) - this.highestAttack(monster2))
+
 
         // this.changeToAttacked(monster1, field)
         this.computerSendEnemyFromFieldToGraveyard(monster2)
       } else if (this.highestAttack(monster1) < this.highestAttack(monster2)){
         this.setState({
-          player2Life: this.state.player1Life - (this.highestAttack(monster2) - this.highestAttack(monster1))
+          player2Life: this.state.player2Life - (this.highestAttack(monster2) - this.highestAttack(monster1))
         })
 
+        this.computerSendOwnFromFieldToGraveyard(monster1)
+      } else if (this.highestAttack(monster1) === this.highestAttack(monster2)){
+
+        this.computerSendEnemyFromFieldToGraveyard(monster2)
         this.computerSendOwnFromFieldToGraveyard(monster1)
       }
     }
@@ -463,7 +475,9 @@ export default class DuelField extends React.Component {
         player2Hand: [...this.state.player2Hand, newCard]
       })
     } else {
-      this.props.renderLose()
+      this.setState({
+        player2Life: -9999
+      })
     }
   }
 
@@ -562,7 +576,7 @@ export default class DuelField extends React.Component {
       }
     )
 
-    let totalDamage = 0
+
 
     sortedField.map(
       monster => {
@@ -570,9 +584,23 @@ export default class DuelField extends React.Component {
         // console.log(Object.keys(monster).length)
         if (Object.keys(monster).length !== 0) {
           if (this.emptyField(sortedPlayerField)) {
-              totalDamage = totalDamage + this.highestAttack(monster)
+              totalDamage = totalDamage - this.highestAttack(monster)
           } else if (monster.position === 'attack' && this.findStrongestKillablePlayerMonster(monster) == undefined) {
-            this.changePosition(monster)
+            console.log(monster)
+            console.log(this.findStrongestKillablePlayerMonster(monster))
+            let newMonsterField = this.state.player2Monsters
+            let monsterIndex = newMonsterField.findIndex(
+              obj => obj.deckId === monster.deckId
+            )
+
+            let newMonster = monster
+            newMonster.position = 'defense'
+
+            newMonsterField.splice(monsterIndex, 1, newMonster)
+
+            this.setState({
+              player2Monsters: newMonsterField
+            })
           } else if (this.findStrongestKillablePlayerMonster(monster)) {
             let attackTarget = this.findStrongestKillablePlayerMonster(monster)
             this.computerFight(monster, attackTarget, this.state.player2Monsters)
@@ -581,7 +609,7 @@ export default class DuelField extends React.Component {
       }
     )
     this.setState({
-      player1Life: this.state.player1Life - totalDamage
+      player1Life: totalDamage
     })
   }
 
@@ -598,8 +626,8 @@ export default class DuelField extends React.Component {
 
     let strongestKillableMonster = sortedPlayerField.find(
       monsterObj =>
-        (monsterObj.position === 'attack' && this.highestAttack(monster) > this.highestAttack(monsterObj)) ||
-        (monsterObj.position === 'defense' && this.highestAttack > monsterObj.defesse)
+        (monsterObj.position === 'attack' && this.highestAttack(monster) >= this.highestAttack(monsterObj)) ||
+        (monsterObj.position === 'defense' && this.highestAttack(monster) >= monsterObj.defense)
     )
 
     return strongestKillableMonster
@@ -615,7 +643,13 @@ export default class DuelField extends React.Component {
     this.setState({
       summoned: false
     })
-    this.drawCard()
+    if (this.state.player1Deck.length > 0) {
+      this.drawCard()
+    } else {
+      this.setState({
+        player1Life: -9999
+      })
+    }
   }
 
   renewAllFields = () => {
@@ -700,105 +734,124 @@ export default class DuelField extends React.Component {
       )
       this.computerEndTurn()
       } else {
-        this.props.renderLose()
+        this.setState({
+          player2Life: -9999
+        })
       }
     })
   }
 
   render() {
-    return(
-      <div id="duel-field-container">
-        <div id="duel-field">
-          <button onClick={event => console.log(this.state)}>STATE</button>
-          <div>{this.props.player2.name}</div>
-          <img src={this.props.player2.image}/>
-          <div id="enemy-field">
-            <div id="player2-hand">
-            <Hand hand={this.state.player2Hand} playMonster={this.computerPlayMonster}/>
-            </div>
-            <br/>
-            <div className="extra-field">
-            <div id="player2-deck" className="duel-card" onClick={this.drawCard}>
-            p2 Deck
-            </div>
-            <div id="player2-graveyard" className="duel-card" onClick={this.displayGraveyard2}>
-            Graveyard
-            </div>
-            </div>
-            <br/>
-            <div id="player2-spells">
-            <SpellField spells={this.state.player2Spells} />
-            </div>
-            <div id="player2-monsters">
-              <MonsterField
-              player={"player2"}
-                monsters={this.state.player2Monsters}
-                selectTarget={this.selectTarget}
-              />
-            </div>
-          </div>
-          <br/>
-          <br/>
-          <div id="middle-bar">
-          <div className="life-points">{this.state.player2Life}</div>
-          <button onClick={this.computerTurn}>End Turn</button>
-          <div className="life-points">{this.state.player1Life}</div>
-          </div>
-          <br/>
-          <br/>
-          <div id="player-field">
-            <div id="player1-monsters">
-              <MonsterField
-                monsters={this.state.player1Monsters}
-                clickFieldMonster={this.clickFieldMonster}
-                selectTarget={this.selectTarget}
-                player={"player1"}
-              />
-            </div>
-            <div id="player1-spells">
-            <SpellField spells={this.state.player1Spells} playMonster={this.playMonster}/>
-            </div>
-            <br/>
-            <div className="extra-field">
-            <div id="player1-deck" className="duel-card" onClick={this.drawCard}>
-            p1 Deck
-            </div>
-            <div id="player1-graveyard" className="duel-card" onClick={this.displayGraveyard1}>
-            Graveyard
-            </div>
-            </div>
-            <div id="player1-hand">
-              <Hand
-                hand={this.state.player1Hand}
-                clickHandMonster={this.clickHandMonster}
-              />
-            </div>
-          </div>
-          <img src={this.props.player1.image}/>
-          <div>{this.props.player1.name}</div>
+    if (this.state.player1Life <= 0) {
+      return(
+        <div>
+          <h1>YOU HAVE RUN OUT OF STAMINA</h1>
+          <h1>YOU ARE NO LONGER ABLE TO FIGHT</h1>
+          <h1>YOU CAN ONLY WATCH ON AS YOUR ENEMY COMES TO DELIVER THE FINISHING BLOW</h1>
         </div>
-        <div id="action-box">
-          <ActionBox
-            actionType={this.state.actionType}
-            selectedCard={this.state.selectedCard}
-            selectedTarget={this.state.selectedTarget}
-            playMonsterAttack={this.playMonsterAttack}
-            playMonsterDefense={this.playMonsterDefense}
-            getEnemyTargetMode={this.getEnemyTargetMode}
-            cancel={this.cancel}
-            changePosition={this.changePosition}
-            selectedTarget={this.state.selectedTarget}
-            fight={this.fight}
-            player1Graveyard={this.state.player1Graveyard}
-            player2Graveyard={this.state.player2Graveyard}
-            emptyField={this.emptyField}
-            player2Monsters={this.state.player2Monsters}
-            player1Monsters={this.state.player1Monsters}
-            turn={this.state.turn}
-          />
+      )
+    } else if (this.state.player2Life <= 0) {
+      return(
+        <div>
+          <h1>CONGRATULATIONS!</h1>
+          <h1>YOU HAVE DEFEATED YOUR OPPONENT!</h1>
         </div>
-      </div>
-    )
+      )
+    } else {
+      return(
+        <div id="duel-field-container">
+          <div id="duel-field">
+            <button onClick={event => console.log(this.state)}>STATE</button>
+            <div>{this.props.player2.name}</div>
+            <img src={this.props.player2.image}/>
+            <div id="enemy-field">
+              <div id="player2-hand">
+              <Hand hand={this.state.player2Hand} playMonster={this.computerPlayMonster}/>
+              </div>
+              <br/>
+              <div className="extra-field">
+              <div id="player2-deck" className="duel-card" onClick={this.drawCard}>
+              p2 Deck
+              </div>
+              <div id="player2-graveyard" className="duel-card" onClick={this.displayGraveyard2}>
+              Graveyard
+              </div>
+              </div>
+              <br/>
+              <div id="player2-spells">
+              <SpellField spells={this.state.player2Spells} />
+              </div>
+              <div id="player2-monsters">
+                <MonsterField
+                player={"player2"}
+                  monsters={this.state.player2Monsters}
+                  selectTarget={this.selectTarget}
+                />
+              </div>
+            </div>
+            <br/>
+            <br/>
+            <div id="middle-bar">
+            <div className="life-points">{this.state.player2Life}</div>
+            <button onClick={this.computerTurn}>End Turn</button>
+            <div className="life-points">{this.state.player1Life}</div>
+            </div>
+            <br/>
+            <br/>
+            <div id="player-field">
+              <div id="player1-monsters">
+                <MonsterField
+                  monsters={this.state.player1Monsters}
+                  clickFieldMonster={this.clickFieldMonster}
+                  selectTarget={this.selectTarget}
+                  player={"player1"}
+                />
+              </div>
+              <div id="player1-spells">
+              <SpellField spells={this.state.player1Spells} playMonster={this.playMonster}/>
+              </div>
+              <br/>
+              <div className="extra-field">
+              <div id="player1-deck" className="duel-card" onClick={this.drawCard}>
+              p1 Deck
+              </div>
+              <div id="player1-graveyard" className="duel-card" onClick={this.displayGraveyard1}>
+              Graveyard
+              </div>
+              </div>
+              <div id="player1-hand">
+                <Hand
+                  hand={this.state.player1Hand}
+                  clickHandMonster={this.clickHandMonster}
+                />
+              </div>
+            </div>
+            <img src={this.props.player1.image}/>
+            <div>{this.props.player1.name}</div>
+          </div>
+          <div id="action-box">
+            <ActionBox
+              actionType={this.state.actionType}
+              selectedCard={this.state.selectedCard}
+              selectedTarget={this.state.selectedTarget}
+              playMonsterAttack={this.playMonsterAttack}
+              playMonsterDefense={this.playMonsterDefense}
+              getEnemyTargetMode={this.getEnemyTargetMode}
+              cancel={this.cancel}
+              changePosition={this.changePosition}
+              selectedTarget={this.state.selectedTarget}
+              fight={this.fight}
+              player1Graveyard={this.state.player1Graveyard}
+              player2Graveyard={this.state.player2Graveyard}
+              emptyField={this.emptyField}
+              player2Monsters={this.state.player2Monsters}
+              player1Monsters={this.state.player1Monsters}
+              turn={this.state.turn}
+            />
+          </div>
+        </div>
+      )
+    }
   }
 
 }
