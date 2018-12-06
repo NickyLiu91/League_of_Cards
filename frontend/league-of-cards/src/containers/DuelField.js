@@ -774,7 +774,7 @@ export default class DuelField extends React.Component {
                 <img id="summoners-rift" src="image/summoners-rift.jpg"/>
                 <div id="enemy-field">
                   <div id="player2-hand">
-                  <Hand hand={this.state.player2Hand} playMonster={this.computerPlayMonster}/>
+                  <Hand hand={this.state.player2Hand}/>
                   </div>
                   <br/>
                   <div className="extra-field">
@@ -828,8 +828,8 @@ export default class DuelField extends React.Component {
                   p1 Deck
                   </div>
                   <div id="player1-graveyard" className="duel-card" onClick={this.displayGraveyard1}>
-                </div>
-                Graveyard
+                  Graveyard
+                  </div>
                 </div>
                 </div>
                 <div id="player1-hand">
