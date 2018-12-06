@@ -323,12 +323,6 @@ export default class Home extends React.Component {
     })
   }
 
-  renderLose = () => {
-    this.setState({
-      render: 'lose'
-    })
-  }
-
   getDuelist = (player) => {
     this.setState({
       player2Deck: this.state.decksList.find(
@@ -469,15 +463,6 @@ export default class Home extends React.Component {
           />
         </div>
       )
-    } else if (this.state.render === 'lose') {
-      return(
-        <div>
-          <Header renderStuff={this.renderStuff} />
-          <h1>YOU HAVE RUN OUT OF STAMINA</h1>
-          <h1>YOU ARE NO LONGER ABLE TO FIGHT</h1>
-          <h1>YOU CAN ONLY WATCH ON AS YOUR ENEMY COMES TO DELIVER THE FINISHING BLOW</h1>
-        </div>
-      )
     } else if (this.state.render === 'collection') {
       return(
         <div>
@@ -533,8 +518,8 @@ export default class Home extends React.Component {
             player1Deck={this.state.currentDeckCards}
             player2={this.state.player2}
             player2Deck={this.state.player2Deck}
-            renderLose={this.renderLose}
             renderHome={this.renderHome}
+            renderWin={this.renderWin}
           />
         </div>
       )

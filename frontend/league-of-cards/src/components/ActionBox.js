@@ -71,8 +71,8 @@ const ActionBox = (props) => {
     )
   } else if (props.actionType === 'displayPlayer2Graveyard') {
     return(
-      <ul id="graveyardbar">
-      <div id="graveyardbar-title">Graveyard</div>
+      <ul id="graveyard-bar">
+      <div id="graveyard-bar-title">Graveyard</div>
         {props.player2Graveyard.map(
           graveyardCardObj => <GraveyardCard key={cardKey++} graveyardCard={graveyardCardObj}/>
         )}
