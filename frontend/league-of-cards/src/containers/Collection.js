@@ -13,9 +13,12 @@ export default class Collection extends React.Component {
   render() {
     return(
       <div>
-      <h1>Card List</h1>
-        <div id="card-list">
-          {this.generateCards()}
+        <img id="bilgewater" src="image/bilgewater.jpeg"/>
+        <div>
+        <h1>Card List</h1>
+          <div id="card-list">
+            {this.generateCards()}
+          </div>
         </div>
       </div>
     )

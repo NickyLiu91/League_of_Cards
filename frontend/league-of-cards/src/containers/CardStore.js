@@ -80,20 +80,17 @@ export default class CardStore extends React.Component {
   render() {
     return(
       <div>
-      <div id="store">
-        <div id="pack">
-          <img id="pack-image" onClick={this.getFullPack} src="image/LeaguePack.jpg"/>
+        <img id="noxus-shurima" src="image/noxus-shurima.jpeg"/>
+        <div id="store-container">
+          <div id="pack-results">
+            {this.generateCards()}
+          </div>
+          <div id="store">
+            <div id="pack">
+              <img id="pack-image" onClick={this.getFullPack} src="image/LeaguePack.jpg"/>
+            </div>
+          </div>
         </div>
-      </div>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <br/>
-      <div id="pack-results">
-        {this.generateCards()}
-      </div>
-      <button onClick={this.props.renderCollection}>Card Collection</button>
       </div>
     )
   }

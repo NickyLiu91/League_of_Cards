@@ -111,7 +111,7 @@ export default class Home extends React.Component {
         if (playerObj.computer === true) {
           playerObj.decks[0].cards = []
           this.generateDeck(playerObj)
-        }
+        } 
       }
     )))
     .then(res => {
@@ -392,50 +392,66 @@ export default class Home extends React.Component {
     if (this.state.render === 'home' && this.state.loggedIn === false) {
       return(
         <div>
-        <h1>FORBIDDEN MEMORIES</h1>
-        <button onClick={this.printState}>STATE</button>
-          <form>
-          <h1>Log-In</h1>
-            Account: <input type="text" value={this.state.name} onChange={event => this.handleName(event)}/>
-            <br/>
-            Password: <input type="password" value={this.state.password} onChange={event => this.handlePassword(event)}/>
-            <br/>
-            <button type="button" onClick={this.getPlayer}>Submit</button>
-          </form>
-          <br/>
-          <button className="create" onClick={event => {this.renderStuff(event)}}>Create Account</button>
+        <img id="shurima" src="image/shurima_sun_01.jpg" />
+          <div id="home">
+          <h1>FORBIDDEN MEMORIES</h1>
+            <form>
+              <h1>Log-In</h1>
+                Account: <input type="text" value={this.state.name} onChange={event => this.handleName(event)}/>
+                <br/>
+                <br/>
+                Password: <input type="password" value={this.state.password} onChange={event => this.handlePassword(event)}/>
+                <br/>
+                <br/>
+                <button type="button" onClick={this.getPlayer}>Submit</button>
+            </form>
+              <br/>
+            <button className="create" onClick={event => {this.renderStuff(event)}}>Create Account</button>
+          </div>
         </div>
       )
     } else if (this.state.render === 'home' && this.state.loggedIn === true){
       return(
         <div>
-        <h1>FORBIDDEN MEMORIES</h1>
-        <button onClick={this.printState}>STATE</button>
-          <h1>Welcome, {this.state.currentPlayer.name}!</h1>
-          <br/>
-          <button className="collection" onClick={event => {this.renderStuff(event)}}>Collection</button>
-          <br/>
-          <button className="store" onClick={event => {this.renderStuff(event)}}>Card Store</button>
-          <br/>
-          <button className="decksList" onClick={event => {this.renderStuff(event)}}>Decks</button>
-          <br/>
-          <button className="duelistsList" onClick={event => {this.renderStuff(event)}}>DUEL!!!</button>
-          <br/>
-          <button onClick={this.log}>Log-Out</button>
-
+          <img id="demacia" src="image/demacia.jpeg" />
+          <div id="logged-in">
+            <h1>FORBIDDEN MEMORIES</h1>
+            {console.log(this.state)}
+              <h1>Welcome, {this.state.currentPlayer.name}!</h1>
+              <br/>
+              <br/>
+              <button className="collection" onClick={event => {this.renderStuff(event)}}>Collection</button>
+              <br/>
+              <br/>
+              <button className="store" onClick={event => {this.renderStuff(event)}}>Card Store</button>
+              <br/>
+              <br/>
+              <button className="decksList" onClick={event => {this.renderStuff(event)}}>Decks</button>
+              <br/>
+              <br/>
+              <button className="duelistsList" onClick={event => {this.renderStuff(event)}}>DUEL!!!</button>
+              <br/>
+              <br/>
+              <button onClick={this.log}>Log-Out</button>
+          </div>
         </div>
       )
     } else if (this.state.render === 'create' ){
       return(
         <div>
-        <h1>FORBIDDEN MEMORIES</h1>
-          <form>
-            Account Name: <input type="text" value={this.state.name} onChange={event => this.handleName(event)}/>
-            <br/>
-            Password: <input type="password" value={this.state.password} onChange={event => this.handlePassword(event)}/>
-            <br/>
-            <button type="button" onClick={this.createPlayer}>Submit</button>
-          </form>
+        <img id="shurima" src="image/shurima_sun_01.jpg" />
+          <div id="home">
+            <h1>FORBIDDEN MEMORIES</h1>
+              <form>
+                Account Name: <input type="text" value={this.state.name} onChange={event => this.handleName(event)}/>
+                <br/>
+                <br/>
+                Password: <input type="password" value={this.state.password} onChange={event => this.handlePassword(event)}/>
+                <br/>
+                <br/>
+                <button type="button" onClick={this.createPlayer}>Submit</button>
+              </form>
+          </div>
         </div>
       )
     } else if (this.state.render === 'decksList') {
