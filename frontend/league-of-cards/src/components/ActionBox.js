@@ -55,7 +55,7 @@ const ActionBox = (props) => {
         <br/>
         {(props.selectedCard.name)} will attack {props.selectedTarget.name}!
         <br/>
-        <button onClick={event => {props.fight(props.selectedCard, props.selectedTarget)}}>OBLITERATE</button>
+        <button onClick={event => {props.fight(props.selectedCard, props.selectedTarget, props.player1Monsters)}}>OBLITERATE</button>
         <br/>
         <button onClick={props.cancel}>Cancel</button>
       </div>
