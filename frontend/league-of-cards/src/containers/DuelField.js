@@ -561,18 +561,16 @@ export default class DuelField extends React.Component {
         return 0
       }
     )
-    //
-    // let totalDamage = 0
-    //
+
+    let totalDamage = 0
+
     sortedField.map(
       monster => {
         // console.log(monster)
         // console.log(Object.keys(monster).length)
         if (Object.keys(monster).length !== 0) {
           if (this.emptyField(sortedPlayerField)) {
-            this.setState({
-              player1Life: this.state.player1Life - this.highestAttack(monster)
-            })
+              totalDamage = totalDamage + this.highestAttack(monster)
           } else if (monster.position === 'attack' && this.findStrongestKillablePlayerMonster(monster) == undefined) {
             this.changePosition(monster)
           } else if (this.findStrongestKillablePlayerMonster(monster)) {
@@ -580,27 +578,11 @@ export default class DuelField extends React.Component {
             this.computerFight(monster, attackTarget, this.state.player2Monsters)
           }
         }
-        // else if (this.state.player1Monsters.some(
-        //     monster2 =>
-        //       ( Object.keys(monster).length !== 0 && monster.position === 'attack' && this.highestAttack(monster2) <= this.highestAttack(monster)) ||
-        //       ( Object.keys(monster).length !== 0 && monster.position === 'defense' && monster2.defense <= this.highestAttack(monster))
-        //     ) === false)
-        //   {
-        //     this.changePosition(monster)
-        //   } else {
-        //     console.log("run multi")
-        //     let targetMonster = this.findStrongestKillablePlayerMonster(monster)
-        //     if (targetMonster.position === 'defense' && this.highestAttack(monster) > targetMonster.defense) {
-        //       this.fight(monster, targetMonster)
-        //       this.changeToAttacked(monster)
-        //     } else if (targetMonster.position === 'attack' && this.highestAttack(monster) > this.highestAttack(targetMonster)) {
-        //       this.fight(monster, targetMonster)
-        //       this.changeToAttacked(monster)
-        //     }
-        //   }
       }
     )
-
+    this.setState({
+      player1Life: this.state.player1Life - totalDamage
+    })
   }
 
   findStrongestKillablePlayerMonster = (monster) => {
