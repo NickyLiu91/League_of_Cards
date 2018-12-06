@@ -33,6 +33,12 @@ export default class DuelField extends React.Component {
     selectedTarget: '',
   }
 
+  emptyField = (field) => {
+    return field.every(
+      enemyObject => Object.keys(enemyObject).length === 0
+    )
+  }
+
   start5CardsPlayer = () => {
     let newDeck = this.state.player1Deck
     let newHand = []
@@ -439,10 +445,11 @@ export default class DuelField extends React.Component {
       this.computerPlayMonster(strongestHandMonster)
     }
 
-    // this.computerFieldMoves()
+    this.computerFieldMoves()
   }
 
   computerFieldMoves = () => {
+
     let sortedField = this.state.player2Monsters.sort( (a, b) => {
       	if(this.highestAttack(a) > this.highestAttack(b)) {
       		return -1
@@ -463,34 +470,39 @@ export default class DuelField extends React.Component {
       }
     )
 
+    let totalDamage = 0
+
     sortedField.map(
       monster => {
         if (Object.keys(monster).length !== 0) {
-          if (sortedPlayerField.every(
-            enemyObject => Object.keys(enemyObject).length === 0
-          )) {
-            this.computerAttackFace(monster)
+          if (this.emptyField(sortedPlayerField)) {
+            totalDamage = totalDamage + this.highestAttack(monster)
+            this.setState({
+              player1Life: this.state.player1Life - totalDamage
+            })
           }
-        } else if (this.state.player1Monsters.some(
-            monster2 =>
-              ( Object.keys(monster).length !== 0 && monster.position === 'attack' && this.highestAttack(monster2) <= this.highestAttack(monster)) ||
-              ( Object.keys(monster).length !== 0 && monster.position === 'defense' && monster2.defense <= this.highestAttack(monster))
-            ) === false)
-          {
-            this.changePosition(monster)
-          } else {
-            console.log("run multi")
-            let targetMonster = this.findStrongestKillablePlayerMonster(monster)
-            if (targetMonster.position === 'defense' && this.highestAttack(monster) > targetMonster.defense) {
-              this.fight(monster, targetMonster)
-              this.changeToAttacked(monster)
-            } else if (targetMonster.position === 'attack' && this.highestAttack(monster) > this.highestAttack(targetMonster)) {
-              this.fight(monster, targetMonster)
-              this.changeToAttacked(monster)
-            }
-          }
+        }
+        // else if (this.state.player1Monsters.some(
+        //     monster2 =>
+        //       ( Object.keys(monster).length !== 0 && monster.position === 'attack' && this.highestAttack(monster2) <= this.highestAttack(monster)) ||
+        //       ( Object.keys(monster).length !== 0 && monster.position === 'defense' && monster2.defense <= this.highestAttack(monster))
+        //     ) === false)
+        //   {
+        //     this.changePosition(monster)
+        //   } else {
+        //     console.log("run multi")
+        //     let targetMonster = this.findStrongestKillablePlayerMonster(monster)
+        //     if (targetMonster.position === 'defense' && this.highestAttack(monster) > targetMonster.defense) {
+        //       this.fight(monster, targetMonster)
+        //       this.changeToAttacked(monster)
+        //     } else if (targetMonster.position === 'attack' && this.highestAttack(monster) > this.highestAttack(targetMonster)) {
+        //       this.fight(monster, targetMonster)
+        //       this.changeToAttacked(monster)
+        //     }
+        //   }
       }
     )
+
   }
 
   findStrongestKillablePlayerMonster = (monster) => {
@@ -531,11 +543,11 @@ export default class DuelField extends React.Component {
         newMonster.attacked = false
         newerMonsterField1 = [...newerMonsterField1, newMonster]
       } else {
-        console.log(monster)
-        console.log(newerMonsterField1)
-        console.log(Object.keys(monster).length)
+        // console.log(monster)
+        // console.log(newerMonsterField1)
+        // console.log(Object.keys(monster).length)
         newerMonsterField1 = [...newerMonsterField1, {}]
-        console.log(newerMonsterField1)
+        // console.log(newerMonsterField1)
       }
     })
 
@@ -573,9 +585,14 @@ export default class DuelField extends React.Component {
     })
   }
 
-  computerAttackFace = (monster) => {
+  computerAttackFace = (monster, lifepoints) => {
+    console.log(lifepoints)
+
+  }
+
+  attackFace = (monster) => {
     this.setState({
-      player1Life: this.state.player1Life - this.highestAttack(monster)
+      player2Life: this.state.player2Life - this.highestAttack(monster)
     })
   }
 
@@ -685,7 +702,6 @@ export default class DuelField extends React.Component {
             actionType={this.state.actionType}
             selectedCard={this.state.selectedCard}
             selectedTarget={this.state.selectedTarget}
-            selectMonsterPosition={this.selectMonsterPosition}
             playMonsterAttack={this.playMonsterAttack}
             playMonsterDefense={this.playMonsterDefense}
             getEnemyTargetMode={this.getEnemyTargetMode}
@@ -695,6 +711,8 @@ export default class DuelField extends React.Component {
             fight={this.fight}
             player1Graveyard={this.state.player1Graveyard}
             player2Graveyard={this.state.player2Graveyard}
+            emptyField={this.emptyField}
+            player2Monsters={this.state.player2Monsters}
           />
         </div>
       </div>
