@@ -1,3 +1,5 @@
+require "httparty"
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -75,5 +77,8 @@ darius_deck = Deck.create(name: "Darius Deck 1", player_id: darius.id)
 # kaiba_deckcard8 = Deckcard.create(deck_id: kaiba_deck.id, card_id: zed_card.id)
 
 def generate_cards
-  cardinfo = RestClient.get('http://localhost:3000/api/v1/cards')
+  cardinfo = HTTParty.get('http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json')
+  puts cardinfo
 end
+
+generate_cards
