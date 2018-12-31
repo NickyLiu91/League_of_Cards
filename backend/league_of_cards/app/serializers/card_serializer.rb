@@ -3,7 +3,7 @@ class CardSerializer < ActiveModel::Serializer
     :attack, :magic, :defense, :description, :quantity, :key, :image
 
 
-    has_many :players
+    belongs_to :player
 
     has_many :decks
 end
