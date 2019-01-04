@@ -111,7 +111,7 @@ export default class Home extends React.Component {
         if (playerObj.computer === true) {
           playerObj.decks[0].cards = []
           this.generateDeck(playerObj)
-        } 
+        }
       }
     )))
     .then(res => {
@@ -125,9 +125,6 @@ export default class Home extends React.Component {
 
   getPlayer = (event) => {
     event.preventDefault()
-    console.log(
-      this.state.allPlayers.find(playerObj => playerObj.name === this.state.name)
-    )
     this.setState({
       currentPlayer: this.state.allPlayers.find(playerObj => playerObj.name === this.state.name
         && playerObj.password_digest === this.state.password
@@ -138,9 +135,9 @@ export default class Home extends React.Component {
       .then(res => this.setState({
         currentPlayer: res,
         currentPlayerCollection: res.cards,
+        currentDeck: res.decks[0],
         loggedIn: true
       }))
-
     })
   }
 
@@ -210,7 +207,8 @@ export default class Home extends React.Component {
       })
   }
 
-  printState = () => {
+  printState = (event) => {
+    event.preventDefault()
     console.log(this.state)
   }
 
@@ -341,28 +339,28 @@ export default class Home extends React.Component {
     })
   }
 
-  createPlayerCollection = () => {
-
-      this.state.collection.map(
-        cardObj => fetch(`http://localhost:3000/api/v1/collections`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          body: JSON.stringify(
-              {
-                player_id: this.state.allPlayers.find(playerObj => playerObj.name === this.state.name).id,
-                card_id: cardObj.id
-              }
-          )})
-      )
-      let createdPlayer = this.state.allPlayers.find(
-        playerObj => playerObj.name === this.state.name
-      )
-
-      createdPlayer.cards = this.state.collection
-  }
+  // createPlayerCollection = () => {
+  //
+  //     this.state.collection.map(
+  //       cardObj => fetch(`http://localhost:3000/api/v1/collections`, {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //           'Accept': 'application/json',
+  //         },
+  //         body: JSON.stringify(
+  //             {
+  //               player_id: this.state.allPlayers.find(playerObj => playerObj.name === this.state.name).id,
+  //               card_id: cardObj.id
+  //             }
+  //         )})
+  //     )
+  //     let createdPlayer = this.state.allPlayers.find(
+  //       playerObj => playerObj.name === this.state.name
+  //     )
+  //
+  //     createdPlayer.cards = this.state.collection
+  // }
 
   createPlayer = (event) => {
     event.preventDefault()
@@ -383,7 +381,18 @@ export default class Home extends React.Component {
         allPlayers: [...this.state.allPlayers, {id: this.state.allPlayers.length + 1, name: this.state.name, decks: [], cards: [], collection: [], image: 'image/TwistedFatePortrait.png', computer: false, password_digest: this.state.password}],
         render: 'home'
     }, () => {
-        this.createPlayerCollection()
+      fetch(`http://localhost:3000/api/v1/decks`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(
+            {
+              name: "Deck 1",
+              player_id: this.state.allPlayers[this.state.allPlayers.length - 1].id
+            }
+      )})
     }
   ))
   }
@@ -396,6 +405,7 @@ export default class Home extends React.Component {
           <div id="home">
           <h1>FORBIDDEN MEMORIES</h1>
             <form>
+              <button onClick={event => this.printState(event)}>State</button>
               <h1>Log-In</h1>
                 Account: <input type="text" value={this.state.name} onChange={event => this.handleName(event)}/>
                 <br/>
@@ -416,7 +426,7 @@ export default class Home extends React.Component {
           <img id="demacia" src="image/demacia.jpeg" />
           <div id="logged-in">
             <h1>FORBIDDEN MEMORIES</h1>
-            {console.log(this.state)}
+              <button onClick={event => this.printState(event)}>State</button>
               <h1>Welcome, {this.state.currentPlayer.name}!</h1>
               <br/>
               <br/>
