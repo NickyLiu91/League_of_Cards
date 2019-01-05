@@ -1,5 +1,5 @@
 import React from "react";
-import StoreCard from "../components/StoreCard.js"
+import Card from "../components/Card.js"
 let packKey = 0
 let collectionId = 1
 let cardResults = []
@@ -89,7 +89,7 @@ export default class CardStore extends React.Component {
 
   generateCards = () => {
     return this.state.results.map(
-      cardObj => <StoreCard key={packKey++} card={cardObj}/>
+      cardObj => <Card key={packKey++} location={"store"} card={cardObj}/>
     )
   }
 

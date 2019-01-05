@@ -445,6 +445,7 @@ export default class Home extends React.Component {
           <Header renderStuff={this.renderStuff} />
           <div className="container-with-decklist">
             <Collection
+            collection={this.state.collection}
               currentPlayerCollection={this.state.currentPlayerCollection}
               getCardInfo={this.getCardInfo}
               renderHome={this.renderHome}
