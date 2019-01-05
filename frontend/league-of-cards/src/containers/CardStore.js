@@ -20,22 +20,30 @@ export default class CardStore extends React.Component {
     this.clearResults()
     for (var i = 0; i < 9; i++) {
       this.addCardToCollection()
-      this.setState({
-        results: cardResults
-      })
     }
+    this.setState({
+      results: cardResults
+    }, () => {
+      this.props.updateCurrentPlayerCollection()
+    })
   }
 
   addCardToCollection = () => {
     let number = Math.floor(Math.random() * 100) + 1
     let newCard
 
-    const ultraRare = this.props.currentPlayerCollection.filter(obj => obj.rarity === 10)
-    const superRare = this.props.currentPlayerCollection.filter(obj => obj.rarity === 9)
-    const rare = this.props.currentPlayerCollection.filter(obj => obj.rarity === 8)
-    const uncommon = this.props.currentPlayerCollection.filter(obj => obj.rarity === 7)
-    const common = this.props.currentPlayerCollection.filter(obj => obj.rarity > 0 && obj.rarity < 7)
+    console.log(this.props.collection)
 
+    const ultraRare = this.props.collection.filter(obj => obj.rarity === 10)
+    console.log(ultraRare)
+    const superRare = this.props.collection.filter(obj => obj.rarity === 9)
+    console.log(superRare)
+    const rare = this.props.collection.filter(obj => obj.rarity === 8)
+    console.log(rare)
+    const uncommon = this.props.collection.filter(obj => obj.rarity === 7)
+    console.log(uncommon)
+    const common = this.props.collection.filter(obj => obj.rarity > 0 && obj.rarity < 7)
+    console.log(common)
 
     if (number > 98) {
       newCard = ultraRare[Math.floor(Math.random() * ultraRare.length)]
@@ -48,27 +56,35 @@ export default class CardStore extends React.Component {
     } else {
       newCard = common[Math.floor(Math.random() * common.length)]
     }
-    // this.setState({
-    //   results: [...this.state.results, newCard]
-    // })
 
-    newCard.id = collectionId++
+    console.log(number)
+    console.log(newCard)
 
     cardResults = [...cardResults, newCard]
 
-    fetch(`http://localhost:3000/api/v1/players/${this.props.currentPlayer.id}/cards/${newCard.id}`, {
-      method: 'PATCH',
+    fetch("http://localhost:3000/api/v1/cards", {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
       body: JSON.stringify(
           {
-            quantity: newCard.quantity + 1
+            player_id: this.props.currentPlayer.id,
+            key: newCard.key,
+            name: newCard.name,
+            title: newCard.title,
+            role: newCard.role,
+            rarity: newCard.rarity,
+            attack: newCard.attack,
+            magic: newCard.magic,
+            defense: newCard.defense,
+            description: newCard.description,
+            image: newCard.image
           }
       )})
 
-      newCard.quantity = newCard.quantity + 1
+      // newCard.quantity = newCard.quantity + 1
   }
 
   generateCards = () => {
