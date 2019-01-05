@@ -57,9 +57,6 @@ export default class CardStore extends React.Component {
       newCard = common[Math.floor(Math.random() * common.length)]
     }
 
-    console.log(number)
-    console.log(newCard)
-
     cardResults = [...cardResults, newCard]
 
     fetch("http://localhost:3000/api/v1/cards", {
@@ -83,6 +80,8 @@ export default class CardStore extends React.Component {
             image: newCard.image
           }
       )})
+
+      this.props.updateNoDupesCurrentPlayCollection(newCard)
 
       // newCard.quantity = newCard.quantity + 1
   }
