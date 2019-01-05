@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2019_01_05_075823) do
     t.string "name"
     t.string "title"
     t.string "role"
-    t.string "rarity"
+    t.integer "rarity"
     t.integer "attack"
     t.integer "magic"
     t.integer "defense"

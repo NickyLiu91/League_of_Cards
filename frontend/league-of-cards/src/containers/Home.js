@@ -145,7 +145,7 @@ export default class Home extends React.Component {
     .then(response => response.json())
     .then(json => this.setState({
       collection: json
-    }
+    }))
   }
 
   printState = (event) => {
@@ -339,6 +339,14 @@ export default class Home extends React.Component {
   ))
   }
 
+  updateCurrentPlayerCollection = () => {
+    fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/cards`)
+    .then(response => response.json())
+    .then(json => this.setState({
+      currentPlayerCollection: json
+    }))
+  }
+
   render() {
     if (this.state.render === 'home' && this.state.loggedIn === false) {
       return(
@@ -423,10 +431,11 @@ export default class Home extends React.Component {
         <div>
           <Header renderStuff={this.renderStuff} />
           <CardStore
-            currentPlayerCollection={this.state.currentPlayerCollection}
+            collection={this.state.collection}
             currentPlayer={this.state.currentPlayer}
             renderCollection={this.renderCollection}
             packCard={this.state.packCard}
+            updateCurrentPlayerCollection={this.updateCurrentPlayerCollection}
           />
         </div>
       )

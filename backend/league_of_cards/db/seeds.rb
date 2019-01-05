@@ -89,7 +89,7 @@ def generate_cards
       name: cardObj["name"],
       title: cardObj["title"],
       role: cardObj["tags"][0],
-      rarity: cardObj["info"]["difficulty"],
+      rarity: cardObj["info"]["difficulty"].to_i,
       attack: cardObj["info"]["attack"],
       magic: cardObj["info"]["magic"],
       defense: cardObj["info"]["defense"],
