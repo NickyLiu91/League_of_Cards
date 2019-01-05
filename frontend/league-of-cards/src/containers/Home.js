@@ -20,6 +20,7 @@ export default class Home extends React.Component {
     currentDeckCards: [],
     currentPlayer: '',
     currentPlayerCollection: [],
+    noDupesCurrentPlayerCollection: [],
     selectedCard: '',
     player2: '',
     player2Deck: [],
@@ -136,7 +137,19 @@ export default class Home extends React.Component {
         currentPlayerCollection: res.cards,
         currentDeck: res.decks[0],
         loggedIn: true
+      }, () => {
+        this.noDupesCurrentPlayerCollection()
       }))
+    })
+  }
+
+  noDupesCurrentPlayerCollection = () => {
+    let newCollection = this.state.collection
+    this.state.currentPlayerCollection.forEach((card) => {
+        newCollection.filter(collectionCard => collectionCard.name === card.name)[0].quantity ++
+    })
+    this.setState({
+      noDupesCurrentPlayerCollection: newCollection
     })
   }
 
@@ -347,6 +360,10 @@ export default class Home extends React.Component {
     }))
   }
 
+  updateNoDupesCurrentPlayCollection = (card) => {
+    this.state.noDupesCurrentPlayerCollection.filter(collectionCard => collectionCard.name === card.name)[0].quantity ++
+  }
+
   render() {
     if (this.state.render === 'home' && this.state.loggedIn === false) {
       return(
@@ -436,6 +453,7 @@ export default class Home extends React.Component {
             renderCollection={this.renderCollection}
             packCard={this.state.packCard}
             updateCurrentPlayerCollection={this.updateCurrentPlayerCollection}
+            updateNoDupesCurrentPlayCollection={this.updateNoDupesCurrentPlayCollection}
           />
         </div>
       )
@@ -445,8 +463,7 @@ export default class Home extends React.Component {
           <Header renderStuff={this.renderStuff} />
           <div className="container-with-decklist">
             <Collection
-            collection={this.state.collection}
-              currentPlayerCollection={this.state.currentPlayerCollection}
+              noDupesCurrentPlayerCollection={this.state.noDupesCurrentPlayerCollection}
               getCardInfo={this.getCardInfo}
               renderHome={this.renderHome}
             />
