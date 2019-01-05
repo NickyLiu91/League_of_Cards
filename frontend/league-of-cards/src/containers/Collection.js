@@ -5,7 +5,7 @@ export default class Collection extends React.Component {
 
   generateCards = () => {
     return this.props.currentPlayerCollection.map(
-      cardObj => <Card key={cardObj.id} card={cardObj}
+      cardObj => <Card key={cardObj.id} location={"collection"} card={cardObj}
       getCardInfo={this.props.getCardInfo}/>
     )
   }
