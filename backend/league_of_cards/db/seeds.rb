@@ -18,6 +18,8 @@ zed = Player.create(name: "Zed", image: "image/ZedPortrait.png", computer: true)
 # caitlyn = Player.create(name: "Caitlyn", image: "image/CaitlynPortrait.png", computer: true)
 # heimerdinger = Player.create(name: "Heimerdinger", image: "image/HeimerdingerPortrait.png", computer: true)
 # malzahar = Player.create(name: "Malzahar", image: "image/MalzaharPortrait.png", computer: true)
+
+# zed_card = Allcard.create(name: "Zed", title: "The Master of Shadows", role: "Assassin", rarity: 10, attack: 8, magic: 3, defense: 2, description: "Badass as hell.", image: "Zed.png")
 #
 # zed_card = Card.create(player_id: azir.id, name: "Zed", title: "The Master of Shadows", role: "Assassin", rarity: 10, attack: 8, magic: 3, defense: 2, description: "Badass as hell.", image: "Zed.png")
 # orianna_card = Card.create(player_id: azir.id, name: "Orianna", title: "The Lady of Clockwork", role: "Mage", rarity: 9, attack: 2, magic: 7, defense: 5, description: "Robot girl.", image: "Orianna.png")
@@ -79,9 +81,24 @@ zed_deck = Deck.create(name: "Zed Deck 1", player_id: zed.id)
 # kaiba_deckcard7 = Deckcard.create(deck_id: kaiba_deck.id, card_id: orianna_card.id)
 # kaiba_deckcard8 = Deckcard.create(deck_id: kaiba_deck.id, card_id: zed_card.id)
 
-# def generate_cards
-#   cardinfo = HTTParty.get('http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json')
-#   puts cardinfo["data"]["Aatrox"]
-# end
+def generate_cards
+  cardinfo = HTTParty.get('http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json')
+  cardinfo["data"].each do |champ, cardObj|
+    Allcard.create(
+      key: cardObj["key"],
+      name: cardObj["name"],
+      title: cardObj["title"],
+      role: cardObj["tags"][0],
+      rarity: cardObj["info"]["difficulty"],
+      attack: cardObj["info"]["attack"],
+      magic: cardObj["info"]["magic"],
+      defense: cardObj["info"]["defense"],
+      description: cardObj["blurb"],
+      image: cardObj["image"]["full"],
+      quantity: 0
+    )
+  end
+
+end
 #
-# generate_cards
+generate_cards

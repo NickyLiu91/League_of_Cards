@@ -1,0 +1,2 @@
+class Allcard < ApplicationRecord
+end

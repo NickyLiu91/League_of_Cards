@@ -14,7 +14,6 @@ export default class Home extends React.Component {
     loggedIn: false,
     name: '',
     deckCardId: 1,
-    database: [],
     collection: [],
     allPlayers: [],
     currentDeck: '',
@@ -142,69 +141,11 @@ export default class Home extends React.Component {
   }
 
   fetchCards = () => {
-    fetch("http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json")
+    fetch("http://localhost:3000/api/v1/allcards")
     .then(response => response.json())
     .then(json => this.setState({
-      database: Object.values(json.data)
-    }, () => console.log(this.state)))
-    .then(res => this.generateCards())
-  }
-
-  generateCards = () => {
-    let collectionId = 1
-    let cardCollection = []
-
-    this.state.database.map(
-      champion => {
-        cardCollection = [...cardCollection, {
-          id: collectionId,
-          key: champion.key,
-          name: champion.name,
-          title: champion.title,
-          role: champion.tags[0],
-          rarity: champion.info.difficulty,
-          attack: champion.info.attack * 100,
-          magic: champion.info.magic * 100,
-          defense: champion.info.defense * 100,
-          description: champion.blurb,
-          image: champion.image.full,
-          quantity: 0
-        }]
-        collectionId ++
-      }
-    )
-
-    cardCollection.map(
-      cardObj => {fetch(`http://localhost:3000/api/v1/cards`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify(
-            {
-              key: cardObj.key,
-              name: cardObj.name,
-              title: cardObj.title,
-              role: cardObj.role,
-              rarity: cardObj.rarity,
-              attack: cardObj.attack,
-              magic: cardObj.magic,
-              defense: cardObj.defense,
-              description: cardObj.description,
-              image: cardObj.image,
-              quantity: cardObj.quantity,
-              players: [this.state.currentPlayer]
-            }
-          )
-        })
-      })
-
-      this.setState({
-        collection: cardCollection
-      }, () => {
-        this.getAllPlayers()
-      })
+      collection: json
+    }
   }
 
   printState = (event) => {
@@ -299,6 +240,7 @@ export default class Home extends React.Component {
 
   componentDidMount() {
     this.fetchCards()
+    this.getAllPlayers()
   }
 
   renderStuff = (event) => {
@@ -482,7 +424,6 @@ export default class Home extends React.Component {
           <Header renderStuff={this.renderStuff} />
           <CardStore
             currentPlayerCollection={this.state.currentPlayerCollection}
-            addCardToCollection={this.addCardToCollection}
             currentPlayer={this.state.currentPlayer}
             renderCollection={this.renderCollection}
             packCard={this.state.packCard}

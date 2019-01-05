@@ -46,6 +46,8 @@ Rails.application.routes.draw do
       # get 'decks/:deck_id/cards', to: 'cards#deck_cards'
 
       resources :deckcards
+
+      resources :allcards
     end
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
