@@ -84,21 +84,78 @@ zed_deck = Deck.create(name: "Zed Deck 1", player_id: zed.id)
 def generate_cards
   cardinfo = HTTParty.get('http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json')
   cardinfo["data"].each do |champ, cardObj|
-    Allcard.create(
-      key: cardObj["key"],
-      name: cardObj["name"],
-      title: cardObj["title"],
-      role: cardObj["tags"][0],
-      rarity: cardObj["info"]["difficulty"].to_i,
-      attack: cardObj["info"]["attack"],
-      magic: cardObj["info"]["magic"],
-      defense: cardObj["info"]["defense"],
-      description: cardObj["blurb"],
-      image: cardObj["image"]["full"],
-      quantity: 0
-    )
+    if (cardObj["info"]["difficulty"].to_i) === 10
+      Allcard.create(
+        key: cardObj["key"],
+        name: cardObj["name"],
+        title: cardObj["title"],
+        role: cardObj["tags"][0],
+        rarity: "Diamond",
+        attack: cardObj["info"]["attack"],
+        magic: cardObj["info"]["magic"],
+        defense: cardObj["info"]["defense"],
+        description: cardObj["blurb"],
+        image: cardObj["image"]["full"],
+        quantity: 0
+      )
+    elsif (cardObj["info"]["difficulty"].to_i) === 9
+      Allcard.create(
+        key: cardObj["key"],
+        name: cardObj["name"],
+        title: cardObj["title"],
+        role: cardObj["tags"][0],
+        rarity: "Platinum",
+        attack: cardObj["info"]["attack"],
+        magic: cardObj["info"]["magic"],
+        defense: cardObj["info"]["defense"],
+        description: cardObj["blurb"],
+        image: cardObj["image"]["full"],
+        quantity: 0
+      )
+    elsif (cardObj["info"]["difficulty"].to_i) === 8
+      Allcard.create(
+        key: cardObj["key"],
+        name: cardObj["name"],
+        title: cardObj["title"],
+        role: cardObj["tags"][0],
+        rarity: "Gold",
+        attack: cardObj["info"]["attack"],
+        magic: cardObj["info"]["magic"],
+        defense: cardObj["info"]["defense"],
+        description: cardObj["blurb"],
+        image: cardObj["image"]["full"],
+        quantity: 0
+        )
+    elsif (cardObj["info"]["difficulty"].to_i) === 7
+      Allcard.create(
+        key: cardObj["key"],
+        name: cardObj["name"],
+        title: cardObj["title"],
+        role: cardObj["tags"][0],
+        rarity: "Silver",
+        attack: cardObj["info"]["attack"],
+        magic: cardObj["info"]["magic"],
+        defense: cardObj["info"]["defense"],
+        description: cardObj["blurb"],
+        image: cardObj["image"]["full"],
+        quantity: 0
+      )
+    elsif (cardObj["info"]["difficulty"].to_i) < 7
+      Allcard.create(
+        key: cardObj["key"],
+        name: cardObj["name"],
+        title: cardObj["title"],
+        role: cardObj["tags"][0],
+        rarity: "Bronze",
+        attack: cardObj["info"]["attack"],
+        magic: cardObj["info"]["magic"],
+        defense: cardObj["info"]["defense"],
+        description: cardObj["blurb"],
+        image: cardObj["image"]["full"],
+        quantity: 0
+      )
+    end
   end
-
 end
 #
 generate_cards

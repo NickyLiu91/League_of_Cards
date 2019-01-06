@@ -358,9 +358,10 @@ export default class Home extends React.Component {
     .then(json => this.setState({
       currentPlayerCollection: json
     }))
+    console.log(this.state.currentPlayerCollection)
   }
 
-  updateNoDupesCurrentPlayCollection = (card) => {
+  updateNoDupesCurrentPlayerCollection = (card) => {
     this.state.noDupesCurrentPlayerCollection.filter(collectionCard => collectionCard.name === card.name)[0].quantity ++
   }
 
@@ -453,7 +454,7 @@ export default class Home extends React.Component {
             renderCollection={this.renderCollection}
             packCard={this.state.packCard}
             updateCurrentPlayerCollection={this.updateCurrentPlayerCollection}
-            updateNoDupesCurrentPlayCollection={this.updateNoDupesCurrentPlayCollection}
+            updateNoDupesCurrentPlayerCollection={this.updateNoDupesCurrentPlayerCollection}
           />
         </div>
       )
