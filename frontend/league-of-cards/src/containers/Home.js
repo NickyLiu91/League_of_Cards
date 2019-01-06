@@ -31,7 +31,7 @@ export default class Home extends React.Component {
   log = () => {
     this.setState({
       currentPlayer: '',
-      currentDeck: [],
+      currentDeck: "",
       currentPlayerCollection: [],
       currentDeckCards: [],
       loggedIn: !this.state.loggedIn
@@ -188,6 +188,10 @@ export default class Home extends React.Component {
     })
   }
 
+  numberNotInDeck = () => {
+
+  }
+
   addToDeck = (card) => {
     let cardToAdd
 
@@ -199,7 +203,7 @@ export default class Home extends React.Component {
     .then(res => {
       if (this.state.currentDeckCards.filter(
         cardObj => cardObj.name === card.name
-      ).length < 1 && this.state.currentDeckCards.length < 40 && card.quantity > 0 ) {
+      ).length < 3 && this.state.currentDeckCards.length < 40 && card.quantity > 0 ) {
         fetch(`http://localhost:3000/api/v1/deckcards`, {
           method: 'POST',
           headers: {
@@ -223,7 +227,6 @@ export default class Home extends React.Component {
           })
       }
     })
-
   }
 
   removeFromDeck = (card) => {
@@ -467,6 +470,7 @@ export default class Home extends React.Component {
               noDupesCurrentPlayerCollection={this.state.noDupesCurrentPlayerCollection}
               getCardInfo={this.getCardInfo}
               renderHome={this.renderHome}
+              currentDeckCards={this.state.currentDeckCards}
             />
             <SideBar
             currentDeckCards={this.state.currentDeckCards}

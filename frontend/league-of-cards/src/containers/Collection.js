@@ -7,9 +7,11 @@ export default class Collection extends React.Component {
     let newCollection = this.props.noDupesCurrentPlayerCollection
     return newCollection.map(
       cardObj => <Card key={cardObj.id} location={"collection"} card={cardObj}
-      getCardInfo={this.props.getCardInfo}/>
+      getCardInfo={this.props.getCardInfo} currentDeckCards={this.props.currentDeckCards}/>
     )
   }
+
+
 
   render() {
     return(
