@@ -21,7 +21,7 @@ const Card = (props) => {
 
           <div>Defense: {props.card.defense}</div>
 
-          <div id='copies'>Copies: {props.card.quantity}</div>
+          <div id='copies'>Copies: {props.card.quantity - props.currentDeckCards.filter(cardObj => cardObj.name === props.card.name).length}</div>
         </div>
       )
     } else {
@@ -43,7 +43,7 @@ const Card = (props) => {
 
           <div>Defense: {props.card.defense}</div>
 
-          <div id='copies'>Copies: {props.card.quantity}</div>
+          <div id='copies'>Copies: {props.card.quantity - props.currentDeckCards.filter(cardObj => cardObj.name === props.card.name).length}</div>
         </div>
       )
     }
