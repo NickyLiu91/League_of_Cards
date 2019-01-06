@@ -32,7 +32,7 @@ body {
   color: gold;
 }
 
-.common {
+.Bronze {
   width: 200px;
   height: 300px;
   border-style: solid;
@@ -45,19 +45,19 @@ body {
   background-color: brown;
 }
 
-.uncommon {
+.Silver {
   background-color: green;
 }
 
-.rare {
+.Gold {
   background-color: blue;
 }
 
-.super-rare {
+.Platinum {
   background-color: purple;
 }
 
-.ultra-rare {
+.Diamond {
   background-color: orange;
   color: blue;
   border-color: blue;

@@ -1,75 +1,55 @@
 import React from "react";
 
 const Card = (props) => {
-  if (props.card.quantity === 0 && props.location === "collection") {
+  if (props.location === "collection") {
+    if (props.card.quantity === 0) {
+      return(
+        <div className="greyed-card" onClick={event => props.getCardInfo(props.card)}>
+          <div>Name: {props.card.name}, {props.card.title}</div>
+          <br/>
+
+          <img className="greyed-img" src={'image/' + props.card.image}/>
+          <br/>
+
+          <div>Rarity: {props.card.rarity}</div>
+
+          <div>Type: {props.card.role}</div>
+
+          <div>Attack: {props.card.attack}</div>
+
+          <div>Magic: {props.card.magic}</div>
+
+          <div>Defense: {props.card.defense}</div>
+
+          <div id='copies'>Copies: {props.card.quantity}</div>
+        </div>
+      )
+    } else {
+      return(
+        <div className={`card ` + props.card.rarity} onClick={event => props.getCardInfo(props.card)}>
+          <div>Name: {props.card.name}, {props.card.title}</div>
+          <br/>
+
+          <img src={'image/' + props.card.image}/>
+          <br/>
+
+          <div>Rarity: {props.card.rarity}</div>
+
+          <div>Type: {props.card.role}</div>
+
+          <div>Attack: {props.card.attack}</div>
+
+          <div>Magic: {props.card.magic}</div>
+
+          <div>Defense: {props.card.defense}</div>
+
+          <div id='copies'>Copies: {props.card.quantity}</div>
+        </div>
+      )
+    }
+  } else {
     return(
-      <div className="greyed-card" onClick={event => props.getCardInfo(props.card)}>
-        <div>Name: {props.card.name}, {props.card.title}</div>
-        <br/>
-
-        <img className="greyed-img" src={'image/' + props.card.image}/>
-        <br/>
-
-        <div>Rarity: Common</div>
-
-        <div>Type: {props.card.role}</div>
-
-        <div>Attack: {props.card.attack}</div>
-
-        <div>Magic: {props.card.magic}</div>
-
-        <div>Defense: {props.card.defense}</div>
-
-        <div id='copies'>Copies: {props.card.quantity}</div>
-      </div>
-    )
-  } else if (props.card.rarity < 7 && props.location === "collection") {
-    return(
-      <div className="card common" onClick={event => props.getCardInfo(props.card)}>
-        <div>Name: {props.card.name}, {props.card.title}</div>
-        <br/>
-
-        <img src={'image/' + props.card.image}/>
-        <br/>
-
-        <div>Rarity: {props.card.rarity}</div>
-
-        <div>Type: {props.card.role}</div>
-
-        <div>Attack: {props.card.attack}</div>
-
-        <div>Magic: {props.card.magic}</div>
-
-        <div>Defense: {props.card.defense}</div>
-
-        <div id='copies'>Copies: {props.card.quantity}</div>
-      </div>
-    )
-  } else if (props.card.rarity < 7) {
-    return(
-      <div className="card common" >
-        <div>Name: {props.card.name}, {props.card.title}</div>
-        <br/>
-
-        <img src={'image/' + props.card.image}/>
-        <br/>
-
-        <div>Rarity: {props.card.rarity}</div>
-
-        <div>Type: {props.card.role}</div>
-
-        <div>Attack: {props.card.attack}</div>
-
-        <div>Magic: {props.card.magic}</div>
-
-        <div>Defense: {props.card.defense}</div>
-
-        <div id='copies'>Copies: {props.card.quantity}</div>
-      </div>
-    )
-  } else if (props.card.rarity < 7 && props.location === "collection") {
-    return(
-      <div className="card common" onClick={event => props.getCardInfo(props.card)}>
+      <div className={`card ` + props.card.rarity} >
         <div>Name: {props.card.name}, {props.card.title}</div>
         <br/>
 
@@ -77,160 +57,6 @@ const Card = (props) => {
         <br/>
 
         <div>Rarity: {props.card.rarity}</div>
-
-        <div>Type: {props.card.role}</div>
-
-        <div>Attack: {props.card.attack}</div>
-
-        <div>Magic: {props.card.magic}</div>
-
-        <div>Defense: {props.card.defense}</div>
-
-        <div id='copies'>Copies: {props.card.quantity}</div>
-      </div>
-    )
-  } else if (props.card.rarity === 7) {
-    return(
-      <div className="card uncommon">
-        <div>Name: {props.card.name}, {props.card.title}</div>
-        <br/>
-
-        <img src={'image/' + props.card.image}/>
-        <br/>
-
-        <div>Rarity: Uncommon</div>
-
-        <div>Type: {props.card.role}</div>
-
-        <div>Attack: {props.card.attack}</div>
-
-        <div>Magic: {props.card.magic}</div>
-
-        <div>Defense: {props.card.defense}</div>
-
-        <div id='copies'>Copies: {props.card.quantity}</div>
-      </div>
-    )
-  } else if (props.card.rarity === 8 && props.location === "collection") {
-    return(
-      <div className="card rare" onClick={event => props.getCardInfo(props.card)}>
-        <div>Name: {props.card.name}, {props.card.title}</div>
-        <br/>
-
-        <img src={'image/' + props.card.image}/>
-        <br/>
-
-        <div>Rarity: Rare</div>
-
-        <div>Type: {props.card.role}</div>
-
-        <div>Attack: {props.card.attack}</div>
-
-        <div>Magic: {props.card.magic}</div>
-
-        <div>Defense: {props.card.defense}</div>
-
-        <div id='copies'>Copies: {props.card.quantity}</div>
-      </div>
-    )
-  } else if (props.card.rarity === 8) {
-    return(
-      <div className="card rare" >
-        <div>Name: {props.card.name}, {props.card.title}</div>
-        <br/>
-
-        <img src={'image/' + props.card.image}/>
-        <br/>
-
-        <div>Rarity: Rare</div>
-
-        <div>Type: {props.card.role}</div>
-
-        <div>Attack: {props.card.attack}</div>
-
-        <div>Magic: {props.card.magic}</div>
-
-        <div>Defense: {props.card.defense}</div>
-
-        <div id='copies'>Copies: {props.card.quantity}</div>
-      </div>
-    )
-  } else if (props.card.rarity === 9 && props.location === "collection") {
-    return(
-      <div className="card super-rare" onClick={event => props.getCardInfo(props.card)}>
-        <div>Name: {props.card.name}, {props.card.title}</div>
-        <br/>
-
-        <img src={'image/' + props.card.image}/>
-        <br/>
-
-        <div>Rarity: Super Rare</div>
-
-        <div>Type: {props.card.role}</div>
-
-        <div>Attack: {props.card.attack}</div>
-
-        <div>Magic: {props.card.magic}</div>
-
-        <div>Defense: {props.card.defense}</div>
-
-        <div id='copies'>Copies: {props.card.quantity}</div>
-      </div>
-    )
-  } else if (props.card.rarity === 9) {
-    return(
-      <div className="card super-rare" >
-        <div>Name: {props.card.name}, {props.card.title}</div>
-        <br/>
-
-        <img src={'image/' + props.card.image}/>
-        <br/>
-
-        <div>Rarity: Super Rare</div>
-
-        <div>Type: {props.card.role}</div>
-
-        <div>Attack: {props.card.attack}</div>
-
-        <div>Magic: {props.card.magic}</div>
-
-        <div>Defense: {props.card.defense}</div>
-
-        <div id='copies'>Copies: {props.card.quantity}</div>
-      </div>
-    )
-  } else if (props.card.rarity === 10 && props.location === "collection") {
-    return(
-      <div className="card ultra-rare" onClick={event => props.getCardInfo(props.card)}>
-        <div>Name: {props.card.name}, {props.card.title}</div>
-        <br/>
-
-        <img src={'image/' + props.card.image}/>
-        <br/>
-
-        <div>Rarity: Ultra Rare</div>
-
-        <div>Type: {props.card.role}</div>
-
-        <div>Attack: {props.card.attack}</div>
-
-        <div>Magic: {props.card.magic}</div>
-
-        <div>Defense: {props.card.defense}</div>
-
-        <div id='copies'>Copies: {props.card.quantity}</div>
-      </div>
-    )
-  } else if (props.card.rarity === 10) {
-    return(
-      <div className="card ultra-rare" >
-        <div>Name: {props.card.name}, {props.card.title}</div>
-        <br/>
-
-        <img src={'image/' + props.card.image}/>
-        <br/>
-
-        <div>Rarity: Ultra Rare</div>
 
         <div>Type: {props.card.role}</div>
 

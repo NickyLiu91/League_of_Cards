@@ -32,29 +32,22 @@ export default class CardStore extends React.Component {
     let number = Math.floor(Math.random() * 100) + 1
     let newCard
 
-    console.log(this.props.collection)
-
-    const ultraRare = this.props.collection.filter(obj => obj.rarity === 10)
-    console.log(ultraRare)
-    const superRare = this.props.collection.filter(obj => obj.rarity === 9)
-    console.log(superRare)
-    const rare = this.props.collection.filter(obj => obj.rarity === 8)
-    console.log(rare)
-    const uncommon = this.props.collection.filter(obj => obj.rarity === 7)
-    console.log(uncommon)
-    const common = this.props.collection.filter(obj => obj.rarity > 0 && obj.rarity < 7)
-    console.log(common)
+    const diamonds = this.props.collection.filter(obj => obj.rarity === "Diamond")
+    const platinums = this.props.collection.filter(obj => obj.rarity === "Platinum")
+    const golds = this.props.collection.filter(obj => obj.rarity === "Gold")
+    const silvers = this.props.collection.filter(obj => obj.rarity === "Silver")
+    const rares = this.props.collection.filter(obj => obj.rarity === "Bronze")
 
     if (number > 98) {
-      newCard = ultraRare[Math.floor(Math.random() * ultraRare.length)]
+      newCard = diamonds[Math.floor(Math.random() * diamonds.length)]
     } else if ( number > 93) {
-      newCard = superRare[Math.floor(Math.random() * superRare.length)]
+      newCard = platinums[Math.floor(Math.random() * platinums.length)]
     } else if ( number > 85) {
-      newCard = rare[Math.floor(Math.random() * rare.length)]
+      newCard = golds[Math.floor(Math.random() * golds.length)]
     } else if ( number > 50) {
-      newCard = uncommon[Math.floor(Math.random() * uncommon.length)]
+      newCard = silvers[Math.floor(Math.random() * silvers.length)]
     } else {
-      newCard = common[Math.floor(Math.random() * common.length)]
+      newCard = rares[Math.floor(Math.random() * rares.length)]
     }
 
     cardResults = [...cardResults, newCard]
@@ -80,10 +73,10 @@ export default class CardStore extends React.Component {
             image: newCard.image
           }
       )})
+      console.log(newCard)
 
-      this.props.updateNoDupesCurrentPlayCollection(newCard)
-
-      // newCard.quantity = newCard.quantity + 1
+      this.props.updateNoDupesCurrentPlayerCollection(newCard)
+      console.log(this.props.currentPlayerCollection)
   }
 
   generateCards = () => {
