@@ -1,7 +1,6 @@
 import React from "react";
 import Deck from "../components/Deck.js"
 let deckKey = 0
-let deckId = 1
 
 export default class CardStore extends React.Component {
   state = {
@@ -10,6 +9,10 @@ export default class CardStore extends React.Component {
   }
 
   componentDidMount() {
+    this.getAllDecks()
+  }
+
+  getAllDecks = () => {
     fetch(`http://localhost:3000/api/v1/players/${this.props.currentPlayer.id}/decks`)
     .then(response => response.json())
     .then(json => this.setState({
@@ -43,24 +46,15 @@ export default class CardStore extends React.Component {
             name: this.state.deckName
           }
       )})
-
-      this.setState({
-        decks: [...this.state.decks, {id: deckId++, name: this.state.deckName, player_id: this.props.currentPlayer.id, cards: []}]
-      })
+      .then(response => this.getAllDecks())
   }
 
   deleteDeck = (deck) => {
-    const newDecks = this.state.decks
-    const removeIndex = this.state.decks.findIndex(
-      deckObj => deckObj.name === deck.name
-    )
-    fetch(`http://localhost:3000/api/v1/decks/${deck.id}`, {
-      method: 'DELETE'})
-
-      newDecks.splice(removeIndex, 1)
-      this.setState({
-        decks: newDecks
-      })
+    if (this.props.currentDeck.id !== deck.id) {
+      fetch(`http://localhost:3000/api/v1/decks/${deck.id}`, {
+        method: 'DELETE'}
+      ).then(response => this.getAllDecks())
+    }
   }
 
   render() {
