@@ -47,6 +47,8 @@ export default class CardStore extends React.Component {
       newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
     }
 
+    console.log(newCard)
+
     cardResults = [...cardResults, newCard]
 
     fetch("http://localhost:3000/api/v1/cards", {
