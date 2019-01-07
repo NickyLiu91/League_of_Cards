@@ -96,31 +96,42 @@ export default class Home extends React.Component {
     let newPlayersArray = []
     fetch("http://localhost:3000/api/v1/players")
     .then(response => response.json())
-    .then(json => {
-      json.map(playerObj => {
-        let newPlayerObj = playerObj
-        newPlayerObj.decks[0].cards = []
-          newPlayersArray = [...newPlayersArray, newPlayerObj]
-        }
-      )
-    })
-    .then(res => this.setState({
-      allPlayers: newPlayersArray
-    }, () => newPlayersArray.map(
-      playerObj => {
-        if (playerObj.computer === true) {
-          playerObj.decks[0].cards = []
-          this.generateDeck(playerObj)
-        }
-      }
-    )))
-    .then(res => {
-      fetch("http://localhost:3000/api/v1/decks")
-      .then(res => res.json())
-      .then(json => this.setState({
-        decksList: json
-      }))
-    })
+    .then(json => this.setState({
+      allPlayers: json
+    }))
+    // .then(json => {
+    //   json.map(playerObj => {
+    //     let newPlayerObj = playerObj
+    //     newPlayerObj.decks[0].cards = []
+    //       newPlayersArray = [...newPlayersArray, newPlayerObj]
+    //     }
+    //   )
+    // })
+    // .then(res => this.setState({
+    //   allPlayers: newPlayersArray
+    // }, () => newPlayersArray.map(
+    //   playerObj => {
+    //     if (playerObj.computer === true) {
+    //       playerObj.decks[0].cards = []
+    //       this.generateDeck(playerObj)
+    //     }
+    //   }
+    // )))
+    // .then(res => {
+    //   fetch("http://localhost:3000/api/v1/decks")
+    //   .then(res => res.json())
+    //   .then(json => this.setState({
+    //     decksList: json
+    //   }))
+    // })
+  }
+
+  updateDecksList = () => {
+    fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/decks`)
+    .then(response => response.json())
+    .then(json => this.setState({
+      currentPlayerCollection: json
+    }, () => this.generateNoDupesCurrentPlayerCollection()))
   }
 
   getPlayer = (event) => {
@@ -368,10 +379,6 @@ export default class Home extends React.Component {
     }, () => this.generateNoDupesCurrentPlayerCollection()))
   }
 
-  updateNoDupesCurrentPlayerCollection = (card) => {
-    this.state.noDupesCurrentPlayerCollection.filter(collectionCard => collectionCard.name === card.name)[0].quantity ++
-  }
-
   render() {
     if (this.state.render === 'home' && this.state.loggedIn === false) {
       return(
@@ -448,6 +455,7 @@ export default class Home extends React.Component {
             renderCollection={this.renderCollection}
             renderHome={this.renderHome}
             getDeck={this.getDeck}
+            currentDeck={this.state.currentDeck}
           />
         </div>
       )
@@ -461,7 +469,6 @@ export default class Home extends React.Component {
             renderCollection={this.renderCollection}
             packCard={this.state.packCard}
             updateCurrentPlayerCollection={this.updateCurrentPlayerCollection}
-            updateNoDupesCurrentPlayerCollection={this.updateNoDupesCurrentPlayerCollection}
           />
         </div>
       )
