@@ -13,7 +13,6 @@ export default class Home extends React.Component {
     render: 'home',
     loggedIn: false,
     name: '',
-    deckCardId: 1,
     collection: [],
     allPlayers: [],
     currentDeck: '',
@@ -160,12 +159,16 @@ export default class Home extends React.Component {
   }
 
   generateNoDupesCurrentPlayerCollection = () => {
-    let newCollection = this.state.collection
-    this.state.currentPlayerCollection.forEach((card) => {
-        newCollection.filter(collectionCard => collectionCard.name === card.name)[0].quantity ++
+    // let newCollection = this.state.collection
+    // this.state.currentPlayerCollection.forEach((card) => {
+    //     newCollection.filter(collectionCard => collectionCard.name === card.name)[0].quantity ++
+    // })
+
+    let newCollection = this.state.collection.map((card) => {
+        card.quantity = this.state.currentPlayerCollection.filter(cardObj => cardObj.name === card.name).length
     })
     this.setState({
-      noDupesCurrentPlayerCollection: newCollection
+      noDupesCurrentPlayerCollection: this.state.collection
     })
   }
 
@@ -209,62 +212,57 @@ export default class Home extends React.Component {
   }
 
   addToDeck = (card) => {
-    let cardToAdd
+    // let cardToAdd
 
-    fetch("http://localhost:3000/api/v1/cards")
-    .then(res => res.json())
-    .then(res => cardToAdd = res.find(
-      cardObj => cardObj.name === card.name
-    ))
-    .then(res => {
-      if (this.state.currentDeckCards.filter(
-        cardObj => cardObj.name === card.name
-      ).length < 3 && this.state.currentDeckCards.length < 40 && card.quantity > 0 ) {
-        fetch(`http://localhost:3000/api/v1/deckcards`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          body: JSON.stringify(
-              {
-                deck_id: this.state.currentDeck.id,
-                card_id: cardToAdd.id
-              }
-        )})
-        // card.quantity --
-          let newCard = card
-          newCard.deckId = this.state.deckCardId
-          console.log(newCard)
-          this.setState({
-            currentDeckCards: [...this.state.currentDeckCards, newCard],
-            deckCardId: this.state.currentPlayerCollection.length,
-            render: 'collection'
-          })
-      }
-    })
+    // fetch("http://localhost:3000/api/v1/cards")
+    // .then(res => res.json())
+    // .then(res => cardToAdd = res.find(
+    //   cardObj => cardObj.name === card.name
+    // ))
+    // .then(res => {
+    //   if (this.state.currentDeckCards.filter(
+    //     cardObj => cardObj.name === card.name
+    //   ).length < 3 && this.state.currentDeckCards.length < 40 && card.quantity > 0 ) {
+      fetch(`http://localhost:3000/api/v1/deckcards`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(
+            {
+              deck_id: this.state.currentDeck.id,
+              card_id: card.id
+            }
+      )})
+      .then(response => this.setState({
+        currentDeckCards: [...this.state.currentDeckCards, card]
+      }))
+          // let newCard = card
+          // newCard.deckId = this.state.deckCardId
+          // console.log(newCard)
+
   }
 
   removeFromDeck = (card) => {
-    // card.quantity ++
-    let newDeckCards = this.state.currentDeckCards
-    let objectToDelete
-    let removeIndex = newDeckCards.findIndex(
-      cardObj => cardObj === card.name
-    )
-
-    newDeckCards.splice(removeIndex, 1)
+    // let newDeckCards = this.state.currentDeckCards
+    // let objectToDelete
+    // let removeIndex = newDeckCards.findIndex(
+    //   cardObj => cardObj === card.name
+    // )
+    //
+    // newDeckCards.splice(removeIndex, 1)
     this.setState({
-      currentDeckCards: newDeckCards
+      currentDeckCards: this.state.currentDeckCards.filter(cardObj => cardObj.id === card.id)
     })
 
     fetch(`http://localhost:3000/api/v1/deckcards`)
-    .then(res => res.json())
-    .then(res => objectToDelete = res.find(
-      cardObj => cardObj.card.name === card.name && cardObj.deck.id === this.state.currentDeck.id
-    ))
+    // .then(res => res.json())
+    // .then(res => objectToDelete = res.find(
+    //   cardObj => cardObj.card.name === card.name && cardObj.deck.id === this.state.currentDeck.id
+    // ))
     .then(res => {
-      fetch(`http://localhost:3000/api/v1/deckcards/${objectToDelete.id}`, {
+      fetch(`http://localhost:3000/api/v1/deckcards/${card.id}`, {
         method: 'DELETE'
       })
     })
