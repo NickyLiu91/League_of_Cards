@@ -1,5 +1,5 @@
 class Api::V1::DeckcardsController < ApplicationController
-  before_action :find_deckcard, only: [:show]
+  before_action :find_deckcard, only: [:show, :update, :destroy]
 
   def index
     @deckcards = Deckcard.all
@@ -31,12 +31,12 @@ class Api::V1::DeckcardsController < ApplicationController
   end
 
   def update
-    @deckcard = Deckcard.find_by(id: params[:id])
+    # @deckcard = Deckcard.find_by(id: params[:id])
     @deckcard.update(deckcard_params)
   end
 
   def destroy
-    @deckcard = Deckcard.find_by(id: params[:id])
+    # @deckcard = Deckcard.find_by(id: params[:id])
     @deckcard.destroy
   end
 
