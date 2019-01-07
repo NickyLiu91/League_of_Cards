@@ -138,12 +138,17 @@ export default class Home extends React.Component {
         currentDeck: res.decks[0],
         loggedIn: true
       }, () => {
-        this.noDupesCurrentPlayerCollection()
+        fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/decks/${this.state.currentDeck.id}`)
+        .then(res => res.json())
+        .then(res => this.setState({
+          currentDeckCards: res.cards
+        }))
+        this.generateNoDupesCurrentPlayerCollection()
       }))
     })
   }
 
-  noDupesCurrentPlayerCollection = () => {
+  generateNoDupesCurrentPlayerCollection = () => {
     let newCollection = this.state.collection
     this.state.currentPlayerCollection.forEach((card) => {
         newCollection.filter(collectionCard => collectionCard.name === card.name)[0].quantity ++
@@ -222,7 +227,7 @@ export default class Home extends React.Component {
           console.log(newCard)
           this.setState({
             currentDeckCards: [...this.state.currentDeckCards, newCard],
-            deckCardId: this.state.deckCardId + 1,
+            deckCardId: this.state.currentPlayerCollection.length,
             render: 'collection'
           })
       }
@@ -360,8 +365,7 @@ export default class Home extends React.Component {
     .then(response => response.json())
     .then(json => this.setState({
       currentPlayerCollection: json
-    }))
-    console.log(this.state.currentPlayerCollection)
+    }, () => this.generateNoDupesCurrentPlayerCollection()))
   }
 
   updateNoDupesCurrentPlayerCollection = (card) => {

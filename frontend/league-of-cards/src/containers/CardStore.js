@@ -1,7 +1,6 @@
 import React from "react";
 import Card from "../components/Card.js"
 let packKey = 0
-let collectionId = 1
 let cardResults = []
 
 export default class CardStore extends React.Component {
@@ -23,8 +22,6 @@ export default class CardStore extends React.Component {
     }
     this.setState({
       results: cardResults
-    }, () => {
-      this.props.updateCurrentPlayerCollection()
     })
   }
 
@@ -36,7 +33,7 @@ export default class CardStore extends React.Component {
     const platinums = this.props.collection.filter(obj => obj.rarity === "Platinum")
     const golds = this.props.collection.filter(obj => obj.rarity === "Gold")
     const silvers = this.props.collection.filter(obj => obj.rarity === "Silver")
-    const rares = this.props.collection.filter(obj => obj.rarity === "Bronze")
+    const bronzes = this.props.collection.filter(obj => obj.rarity === "Bronze")
 
     if (number > 98) {
       newCard = diamonds[Math.floor(Math.random() * diamonds.length)]
@@ -47,7 +44,7 @@ export default class CardStore extends React.Component {
     } else if ( number > 50) {
       newCard = silvers[Math.floor(Math.random() * silvers.length)]
     } else {
-      newCard = rares[Math.floor(Math.random() * rares.length)]
+      newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
     }
 
     cardResults = [...cardResults, newCard]
@@ -56,7 +53,7 @@ export default class CardStore extends React.Component {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        'Accept': 'application/json'
       },
       body: JSON.stringify(
           {
@@ -73,10 +70,10 @@ export default class CardStore extends React.Component {
             image: newCard.image
           }
       )})
-      console.log(newCard)
-
-      this.props.updateNoDupesCurrentPlayerCollection(newCard)
-      console.log(this.props.currentPlayerCollection)
+      .then(response => this.props.updateCurrentPlayerCollection())
+      // .then((json) => {
+      //   console.log(json)
+      // })
   }
 
   generateCards = () => {

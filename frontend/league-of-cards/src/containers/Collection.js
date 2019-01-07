@@ -11,8 +11,6 @@ export default class Collection extends React.Component {
     )
   }
 
-
-
   render() {
     return(
       <div>
