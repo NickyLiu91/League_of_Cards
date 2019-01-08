@@ -69,7 +69,10 @@ export default class CardStore extends React.Component {
             magic: newCard.magic,
             defense: newCard.defense,
             description: newCard.description,
-            image: newCard.image
+            image: newCard.image,
+            cardtype: newCard.cardtype,
+            effect: newCard.effect,
+            target: newCard.target
           }
       )})
       .then(response => this.props.updateCurrentPlayerCollection())
@@ -80,7 +83,7 @@ export default class CardStore extends React.Component {
 
   generateCards = () => {
     return this.state.results.map(
-      cardObj => <Card key={packKey++} location={"store"} card={cardObj}/>
+      cardObj => <Card key={packKey++} location={"store"} card={cardObj} currentDeckCards={this.props.currentDeckCards}/>
     )
   }
 
