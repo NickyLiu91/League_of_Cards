@@ -32,7 +32,7 @@ class Api::V1::AllcardsController < ApplicationController
 
   def allcard_params
     params.require(:allcard).permit(:id, :name, :title, :role, :rarity,
-    :attack, :magic, :defense, :description, :quantity, :key, :image)
+    :attack, :magic, :defense, :description, :quantity, :key, :image, :cardtype, :effect, :target)
   end
 
   def find_allcard

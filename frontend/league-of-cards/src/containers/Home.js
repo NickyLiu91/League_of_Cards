@@ -297,14 +297,14 @@ export default class Home extends React.Component {
   }
 
   getDuelist = (player) => {
-    this.setState({
-      player2Deck: this.state.decksList.find(
-        deckObj => deckObj.player.name === player.name
-      ).cards
-    }, () => {
+    fetch(`http://localhost:3000/api/v1/players/${player.id}/decks/1`)
+    .then(response => response.json())
+    .then(json => {
       this.setState({
-        player2: player
-      }, () => this.renderDuel())
+        player2: player,
+        player2Deck: json.cards
+      }, () => { this.renderDuel()}
+    )
     })
   }
 
@@ -470,6 +470,7 @@ export default class Home extends React.Component {
             renderCollection={this.renderCollection}
             packCard={this.state.packCard}
             updateCurrentPlayerCollection={this.updateCurrentPlayerCollection}
+            currentDeckCards={this.state.currentDeckCards}
           />
         </div>
       )

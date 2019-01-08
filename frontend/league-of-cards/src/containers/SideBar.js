@@ -5,7 +5,7 @@ export default class SideBar extends React.Component {
 
   generateCards = () => {
     return this.props.currentDeckCards.map(
-      cardObj => <SideBarCard key={cardObj.key} sideBarCard={cardObj}
+      cardObj => <SideBarCard key={cardObj.key} card={cardObj}
       removeFromDeck={this.props.removeFromDeck}/>
     )
   }
