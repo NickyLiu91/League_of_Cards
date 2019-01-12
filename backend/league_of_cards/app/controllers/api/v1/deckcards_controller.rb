@@ -6,7 +6,7 @@ class Api::V1::DeckcardsController < ApplicationController
     render json: @deckcards.to_json(only: [:id, :deck_id, :card_id],
         include: [deck: {only: [:id, :name]},
                   card: {only: [:id, :name, :title, :role, :rarity,
-                  :attack, :magic, :defense, :description, :quantity, :key, :image]}]
+                  :attack, :magic, :defense, :description, :quantity, :key, :image, :effect, :cardtype]}]
       )
   end
 
@@ -14,7 +14,7 @@ class Api::V1::DeckcardsController < ApplicationController
     render json: @deckcard.to_json(only: [:id, :deck_id, :card_id],
       include: [deck: {only: [:id, :name]},
                 card: {only: [:id, :name, :title, :role, :rarity,
-                :attack, :magic, :defense, :description, :quantity, :key, :image]}]
+                :attack, :magic, :defense, :description, :quantity, :key, :image, :effect, :cardtype]}]
       )
   end
 

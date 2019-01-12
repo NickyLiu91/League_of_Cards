@@ -5,14 +5,14 @@ const SideBarCard = (props) => {
     return(
       <li className="sidebar-card" onClick={event => props.removeFromDeck(props.card)}>
         <div>Name: {props.card.name}</div>
-        <div>{props.card.attack}/{props.card.magic}/{props.card.defense}</div>
+        <div>{props.card.cardtype}/{props.card.attack}/{props.card.magic}/{props.card.defense}</div>
       </li>
     )
   } else {
     return(
       <li className="sidebar-card" onClick={event => props.removeFromDeck(props.card)}>
         <div>Name: {props.card.name}</div>
-        <div>Name: {props.card.cardtype}</div>
+        <div>{props.card.cardtype}</div>
       </li>
     )
   }

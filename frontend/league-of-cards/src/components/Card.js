@@ -28,7 +28,7 @@ const Card = (props) => {
       } else {
         return(
           <div className="greyed-card" onClick={event => props.getCardInfo(props.card)}>
-            <div>Name: {props.card.name}, {props.card.title}</div>
+            <div>Name: {props.card.name}</div>
             <br/>
 
             <img className="greyed-img" src={'image/' + props.card.image}/>
@@ -68,7 +68,7 @@ const Card = (props) => {
       } else {
         return(
           <div className={`card ` + props.card.rarity} onClick={event => props.getCardInfo(props.card)}>
-            <div>Name: {props.card.name}, {props.card.title}</div>
+            <div>Name: {props.card.name}</div>
             <br/>
 
             <img src={'image/' + props.card.image}/>
@@ -109,7 +109,7 @@ const Card = (props) => {
     } else {
       return(
         <div className={`card ` + props.card.rarity} >
-          <div>Name: {props.card.name}, {props.card.title}</div>
+          <div>Name: {props.card.name}</div>
           <br/>
 
           <img src={'image/' + props.card.image}/>

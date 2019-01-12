@@ -196,17 +196,38 @@ requieum = Allcard.create(
   name: "Requiem",
   cardtype: "Ability",
   rarity: "Diamond",
-  description: "Destroy every champion on your opponent's side of the field.",
-  effect: "this.setState({
-            player2Graveyard: [...this.state.player2Graveyard, ...this.state.player2Monsters].map (
-              obj => Object.keys(obj).length !== 0
-            )
-            }, () => {
-              this.setState({
-                  player2Monsters: [{}, {}, {}, {}, {}]
-                })
-              })
-          }",
+  description: "Destroy every champion on your opponent's side of the field",
+  effect: "props.requiem()",
   image: "Requiem.png",
+  quantity: 0
+)
+
+requieum = Allcard.create(
+  name: "Demacian Justice",
+  cardtype: "Ability",
+  rarity: "Gold",
+  description: "Destroy the champion with the highest attack on your opponent's side of the field",
+  effect: "props.demacianJustice()",
+  image: "DemacianJustice.png",
+  quantity: 0
+)
+
+requieum = Allcard.create(
+  name: "Primordial Burst",
+  cardtype: "Ability",
+  rarity: "Gold",
+  description: "Destroy the champion with the highest magic on your opponent's side of the field",
+  effect: "props.primordialBurst()",
+  image: "PrimordialBurst.png",
+  quantity: 0
+)
+
+requieum = Allcard.create(
+  name: "Silver Bolts",
+  cardtype: "Ability",
+  rarity: "Silver",
+  description: "Destroy the champion with the highest defense on your opponent's side of the field",
+  effect: "props.silverBolts()",
+  image: "SilverBolts.png",
   quantity: 0
 )
