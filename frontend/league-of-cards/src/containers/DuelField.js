@@ -13,7 +13,8 @@ export default class DuelField extends React.Component {
 
   state = {
     turn: 1,
-    currentPlayer: this.props.player1,
+    currentPlayer: "player1",
+    currentOpponent: "player2",
     summoned: false,
     player1: this.props.player1,
     player1Life: 4000,
@@ -32,6 +33,20 @@ export default class DuelField extends React.Component {
     actionType: '',
     selectedCard: '',
     selectedTarget: ''
+  }
+
+  swapCurrentPlayer = () => {
+    if (this.state.currentPlayer === "player1") {
+      this.setState({
+        currentPlayer: "player2",
+        currentOpponent: "player1"
+      }, () => {this.drawCard()})
+    } else if (this.state.currentPlayer === "player2") {
+      this.setState({
+        currentPlayer: "player1",
+        currentOpponent: "player2"
+      }, () => {this.drawCard()})
+    }
   }
 
   emptyField = (field) => {
@@ -141,7 +156,7 @@ export default class DuelField extends React.Component {
     // console.log(this.state.player1.id === this.state.currentPlayer.id)
     // console.log(this.state.summoned === false)
     if (card.cardtype === "Champion") {
-      if (this.state.summoned === false && this.state.player1.id === this.state.currentPlayer.id) {
+      if (this.state.summoned === false && this.state.currentPlayer === "player1") {
         this.setState({
           selectedCard: card,
           actionType: "summon-position"
@@ -204,7 +219,7 @@ export default class DuelField extends React.Component {
   }
 
   clickFieldMonster = (monster) => {
-    if (this.state.currentPlayer === this.state.player1) {
+    if (this.state.currentPlayer === "player1") {
       this.setState({
         selectedCard: monster,
         actionType: 'fieldMonster'
@@ -281,164 +296,240 @@ export default class DuelField extends React.Component {
   }
 
   sendOwnFromFieldToGraveyard = (monster) => {
-    console.log('playergrave')
-    let newGraveyard = this.state.player1Graveyard
-    let newMonsterField = this.state.player1Monsters
+    if (this.state.currentPlayer === 'player1') {
+      console.log('playergrave')
+      let newGraveyard = this.state.player1Graveyard
+      let newMonsterField = this.state.player1Monsters
 
-    let emptySlot = this.state.player1Monsters.findIndex(
-      obj => obj.name === monster.name
-    )
+      let emptySlot = this.state.player1Monsters.findIndex(
+        obj => obj.name === monster.name
+      )
 
-    newGraveyard = [...this.state.player1Graveyard, monster]
+      newGraveyard = [...this.state.player1Graveyard, monster]
 
-    newMonsterField.splice(emptySlot, 1, {})
+      newMonsterField.splice(emptySlot, 1, {})
 
-    this.setState({
-      player1Monsters: newMonsterField,
-      player1Graveyard: newGraveyard,
-      actionType: ''
-    })
+      this.setState({
+        player1Monsters: newMonsterField,
+        player1Graveyard: newGraveyard,
+        actionType: ''
+      })
+    } else {
+      console.log('playergrave')
+      let newGraveyard = this.state.player2Graveyard
+      let newMonsterField = this.state.player2Monsters
+
+      let emptySlot = this.state.player2Monsters.findIndex(
+        obj => obj.deckId === monster.deckId
+      )
+
+      newGraveyard = [...this.state.player2Graveyard, monster]
+
+      newMonsterField.splice(emptySlot, 1, {})
+
+      this.setState({
+        player2Monsters: newMonsterField,
+        player2Graveyard: newGraveyard,
+        actionType: ''
+      })
+    }
   }
 
   sendEnemyFromFieldToGraveyard = (monster) => {
     console.log('cpugrave')
-    let newGraveyard = this.state.player2Graveyard
-    let newMonsterField = this.state.player2Monsters
+    if (this.state.currentPlayer === "player1") {
+      let newGraveyard = this.state.player2Graveyard
+      let newMonsterField = this.state.player2Monsters
 
-    let emptySlot = this.state.player2Monsters.findIndex(
-      obj => obj.deckId === monster.deckId
-    )
+      let emptySlot = this.state.player2Monsters.findIndex(
+        obj => obj.deckId === monster.deckId
+      )
 
-    newGraveyard = [...this.state.player2Graveyard, monster]
+      newGraveyard = [...this.state.player2Graveyard, monster]
 
-    newMonsterField.splice(emptySlot, 1, {})
-    console.log(newMonsterField)
+      newMonsterField.splice(emptySlot, 1, {})
+      console.log(newMonsterField)
 
-    this.setState({
-      player2Monsters: newMonsterField,
-      player2Graveyard: newGraveyard,
-      actionType: ''
-    })
-  }
-
-  computerSendOwnFromFieldToGraveyard = (monster) => {
-    console.log('playergrave')
-    let newGraveyard = this.state.player2Graveyard
-    let newMonsterField = this.state.player2Monsters
-
-    let emptySlot = this.state.player2Monsters.findIndex(
-      obj => obj.deckId === monster.deckId
-    )
-
-    newGraveyard = [...this.state.player2Graveyard, monster]
-
-    newMonsterField.splice(emptySlot, 1, {})
-
-    this.setState({
-      player2Monsters: newMonsterField,
-      player2Graveyard: newGraveyard,
-      actionType: ''
-    })
-  }
-
-  computerSendEnemyFromFieldToGraveyard = (monster) => {
-    console.log('cpugrave')
-    let newGraveyard = this.state.player1Graveyard
-    let newMonsterField = this.state.player1Monsters
-
-    let emptySlot = this.state.player1Monsters.findIndex(
-      obj => obj.name === monster.name
-    )
-
-    newGraveyard = [...this.state.player1Graveyard, monster]
-
-    newMonsterField.splice(emptySlot, 1, {})
-
-    this.setState({
-      player1Monsters: newMonsterField,
-      player1Graveyard: newGraveyard,
-      actionType: ''
-    })
-  }
-
-  fight = (monster1, monster2, field) => {
-    if (this.emptyField(this.state.player2Monsters)) {
       this.setState({
-        player2Life: this.state.player2Life - this.highestAttack(monster1)
+        player2Monsters: newMonsterField,
+        player2Graveyard: newGraveyard,
+        actionType: ''
+      })
+    } else {
+      console.log('cpugrave')
+      let newGraveyard = this.state.player1Graveyard
+      let newMonsterField = this.state.player1Monsters
+
+      let emptySlot = this.state.player1Monsters.findIndex(
+        obj => obj.name === monster.name
+      )
+
+      newGraveyard = [...this.state.player1Graveyard, monster]
+
+      newMonsterField.splice(emptySlot, 1, {})
+
+      this.setState({
+        player1Monsters: newMonsterField,
+        player1Graveyard: newGraveyard,
+        actionType: ''
       })
     }
-    if (monster2.position === 'defense') {
-      if (this.highestAttack(monster1) > monster2.defense) {
-
-        this.changeToAttacked(monster1, field)
-
-        this.sendEnemyFromFieldToGraveyard(monster2)
-      } else if (this.highestAttack(monster1) < monster2.defense) {
-        this.changeToAttacked(monster1, field)
-        this.setState({
-          player1Life: this.state.player1Life - (monster2.defense - this.highestAttack(monster1))
-        })
-      }
-    } else if (monster2.position === 'attack'){
-      if (this.highestAttack(monster1) > this.highestAttack(monster2)) {
-        this.setState({
-          player2Life: this.state.player2Life - (this.highestAttack(monster1) - this.highestAttack(monster2))
-        })
-        this.changeToAttacked(monster1, field)
-        this.sendEnemyFromFieldToGraveyard(monster2)
-      } else if (this.highestAttack(monster1) < this.highestAttack(monster2)){
-        this.setState({
-          player1Life: this.state.player1Life - (this.highestAttack(monster2) - this.highestAttack(monster1))
-        })
-
-        this.sendOwnFromFieldToGraveyard(monster1)
-      } else if (this.highestAttack(monster1) === this.highestAttack(monster2)){
-
-        this.sendEnemyFromFieldToGraveyard(monster2)
-        this.sendOwnFromFieldToGraveyard(monster1)
-      }
-    }
-    this.setState({
-      selectedTarget: '',
-      actionType: ''
-    })
   }
 
-  computerFight = (monster1, monster2, field) => {
-    console.log("computer fighting")
-    if (monster2.position === 'defense') {
-      if (this.highestAttack(monster1) > monster2.defense) {
+  // computerSendOwnFromFieldToGraveyard = (monster) => {
+  //   console.log('playergrave')
+  //   let newGraveyard = this.state.player2Graveyard
+  //   let newMonsterField = this.state.player2Monsters
+  //
+  //   let emptySlot = this.state.player2Monsters.findIndex(
+  //     obj => obj.deckId === monster.deckId
+  //   )
+  //
+  //   newGraveyard = [...this.state.player2Graveyard, monster]
+  //
+  //   newMonsterField.splice(emptySlot, 1, {})
+  //
+  //   this.setState({
+  //     player2Monsters: newMonsterField,
+  //     player2Graveyard: newGraveyard,
+  //     actionType: ''
+  //   })
+  // }
 
-        // this.changeToAttacked(monster1, field)
+  // computerSendEnemyFromFieldToGraveyard = (monster) => {
+  //   console.log('cpugrave')
+  //   let newGraveyard = this.state.player1Graveyard
+  //   let newMonsterField = this.state.player1Monsters
+  //
+  //   let emptySlot = this.state.player1Monsters.findIndex(
+  //     obj => obj.name === monster.name
+  //   )
+  //
+  //   newGraveyard = [...this.state.player1Graveyard, monster]
+  //
+  //   newMonsterField.splice(emptySlot, 1, {})
+  //
+  //   this.setState({
+  //     player1Monsters: newMonsterField,
+  //     player1Graveyard: newGraveyard,
+  //     actionType: ''
+  //   })
+  // }
 
-        this.computerSendEnemyFromFieldToGraveyard(monster2)
-      } else if (this.highestAttack(monster1) < monster2.defense) {
-        // this.changeToAttacked(monster1, field)
+  fight = (monster1, monster2, field) => {
+    if (this.state.currentPlayer === 'player1') {
+      if (this.emptyField(this.state.player2Monsters)) {
         this.setState({
-          player2Life: this.state.player2Life - (monster2.defense - this.highestAttack(monster1))
+          player2Life: this.state.player2Life - this.highestAttack(monster1)
         })
       }
-    } else if (monster2.position === 'attack'){
-      if (this.highestAttack(monster1) > this.highestAttack(monster2)) {
+      if (monster2.position === 'defense') {
+        if (this.highestAttack(monster1) > monster2.defense) {
 
-          totalDamage = totalDamage - (this.highestAttack(monster1) - this.highestAttack(monster2))
+          this.changeToAttacked(monster1, field)
+
+          this.sendEnemyFromFieldToGraveyard(monster2)
+        } else if (this.highestAttack(monster1) < monster2.defense) {
+          this.changeToAttacked(monster1, field)
+          this.setState({
+            player1Life: this.state.player1Life - (monster2.defense - this.highestAttack(monster1))
+          })
+        }
+      } else if (monster2.position === 'attack'){
+        if (this.highestAttack(monster1) > this.highestAttack(monster2)) {
+          this.setState({
+            player2Life: this.state.player2Life - (this.highestAttack(monster1) - this.highestAttack(monster2))
+          })
+          this.changeToAttacked(monster1, field)
+          this.sendEnemyFromFieldToGraveyard(monster2)
+        } else if (this.highestAttack(monster1) < this.highestAttack(monster2)){
+          this.setState({
+            player1Life: this.state.player1Life - (this.highestAttack(monster2) - this.highestAttack(monster1))
+          })
+
+          this.sendOwnFromFieldToGraveyard(monster1)
+        } else if (this.highestAttack(monster1) === this.highestAttack(monster2)){
+
+          this.sendEnemyFromFieldToGraveyard(monster2)
+          this.sendOwnFromFieldToGraveyard(monster1)
+        }
+      }
+      this.setState({
+        selectedTarget: '',
+        actionType: ''
+      })
+    } else {
+      console.log("computer fighting")
+      if (monster2.position === 'defense') {
+        if (this.highestAttack(monster1) > monster2.defense) {
+
+          // this.changeToAttacked(monster1, field)
+
+          this.sendEnemyFromFieldToGraveyard(monster2)
+        } else if (this.highestAttack(monster1) < monster2.defense) {
+          // this.changeToAttacked(monster1, field)
+          this.setState({
+            player2Life: this.state.player2Life - (monster2.defense - this.highestAttack(monster1))
+          })
+        }
+      } else if (monster2.position === 'attack'){
+        if (this.highestAttack(monster1) > this.highestAttack(monster2)) {
+
+            totalDamage = totalDamage - (this.highestAttack(monster1) - this.highestAttack(monster2))
 
 
-        // this.changeToAttacked(monster1, field)
-        this.computerSendEnemyFromFieldToGraveyard(monster2)
-      } else if (this.highestAttack(monster1) < this.highestAttack(monster2)){
-        this.setState({
-          player2Life: this.state.player2Life - (this.highestAttack(monster2) - this.highestAttack(monster1))
-        })
+          // this.changeToAttacked(monster1, field)
+          this.sendEnemyFromFieldToGraveyard(monster2)
+        } else if (this.highestAttack(monster1) < this.highestAttack(monster2)){
+          this.setState({
+            player2Life: this.state.player2Life - (this.highestAttack(monster2) - this.highestAttack(monster1))
+          })
 
-        this.computerSendOwnFromFieldToGraveyard(monster1)
-      } else if (this.highestAttack(monster1) === this.highestAttack(monster2)){
+          this.sendOwnFromFieldToGraveyard(monster1)
+        } else if (this.highestAttack(monster1) === this.highestAttack(monster2)){
 
-        this.computerSendEnemyFromFieldToGraveyard(monster2)
-        this.computerSendOwnFromFieldToGraveyard(monster1)
+          this.sendEnemyFromFieldToGraveyard(monster2)
+          this.sendOwnFromFieldToGraveyard(monster1)
+        }
       }
     }
   }
+
+  // computerFight = (monster1, monster2, field) => {
+  //   console.log("computer fighting")
+  //   if (monster2.position === 'defense') {
+  //     if (this.highestAttack(monster1) > monster2.defense) {
+  //
+  //       // this.changeToAttacked(monster1, field)
+  //
+  //       this.sendEnemyFromFieldToGraveyard(monster2)
+  //     } else if (this.highestAttack(monster1) < monster2.defense) {
+  //       // this.changeToAttacked(monster1, field)
+  //       this.setState({
+  //         player2Life: this.state.player2Life - (monster2.defense - this.highestAttack(monster1))
+  //       })
+  //     }
+  //   } else if (monster2.position === 'attack'){
+  //     if (this.highestAttack(monster1) > this.highestAttack(monster2)) {
+  //
+  //         totalDamage = totalDamage - (this.highestAttack(monster1) - this.highestAttack(monster2))
+  //
+  //
+  //       // this.changeToAttacked(monster1, field)
+  //       this.sendEnemyFromFieldToGraveyard(monster2)
+  //     } else if (this.highestAttack(monster1) < this.highestAttack(monster2)){
+  //       this.setState({
+  //         player2Life: this.state.player2Life - (this.highestAttack(monster2) - this.highestAttack(monster1))
+  //       })
+  //
+  //       this.sendOwnFromFieldToGraveyard(monster1)
+  //     } else if (this.highestAttack(monster1) === this.highestAttack(monster2)){
+  //
+  //       this.sendEnemyFromFieldToGraveyard(monster2)
+  //       this.sendOwnFromFieldToGraveyard(monster1)
+  //     }
+  //   }
+  // }
 
   selectTarget = (monster) => {
     this.setState({
@@ -473,35 +564,51 @@ export default class DuelField extends React.Component {
     })
   }
 
-  computerDrawCard = () => {
-    const newDeck = this.state.player2Deck
-    let newCard
-    if (this.state.player2Deck.length > 0) {
-      newCard = newDeck.pop()
-      this.setState({
-        player2Deck: newDeck,
-        player2Hand: [...this.state.player2Hand, newCard]
-      })
-    } else {
-      this.setState({
-        player2Life: -9999
-      })
-    }
-  }
+  // computerDrawCard = () => {
+  //   const newDeck = this.state.player2Deck
+  //   let newCard
+  //   if (this.state.player2Deck.length > 0) {
+  //     newCard = newDeck.pop()
+  //     this.setState({
+  //       player2Deck: newDeck,
+  //       player2Hand: [...this.state.player2Hand, newCard]
+  //     })
+  //   } else {
+  //     this.setState({
+  //       player2Life: -9999
+  //     })
+  //   }
+  // }
 
   drawCard = () => {
-    const newDeck = this.state.player1Deck
-    let newCard
-    if (this.state.player1Deck.length > 0) {
-      newCard = newDeck.pop()
-      this.setState({
-        player1Deck: newDeck,
-        player1Hand: [...this.state.player1Hand, newCard]
-      })
+    if (this.state.currentPlayer === 'player1') {
+      const newDeck = this.state.player1Deck
+      let newCard
+      if (this.state.player1Deck.length > 0) {
+        newCard = newDeck.pop()
+        this.setState({
+          player1Deck: newDeck,
+          player1Hand: [...this.state.player1Hand, newCard]
+        })
+      } else {
+        this.setState({
+          player1Life: -9999
+        })
+      }
     } else {
-      this.setState({
-        player1Life: -9999
-      })
+      const newDeck = this.state.player2Deck
+      let newCard
+      if (this.state.player2Deck.length > 0) {
+        newCard = newDeck.pop()
+        this.setState({
+          player2Deck: newDeck,
+          player2Hand: [...this.state.player2Hand, newCard]
+        })
+      } else {
+        this.setState({
+          player2Life: -9999
+        })
+      }
     }
   }
 
@@ -613,7 +720,7 @@ export default class DuelField extends React.Component {
             })
           } else if (this.findStrongestKillablePlayerMonster(monster)) {
             let attackTarget = this.findStrongestKillablePlayerMonster(monster)
-            this.computerFight(monster, attackTarget, this.state.player2Monsters)
+            this.fight(monster, attackTarget, this.state.player2Monsters)
           }
         }
       }
@@ -653,7 +760,7 @@ export default class DuelField extends React.Component {
     this.setState({
       summoned: false
     }, () => {
-      this.drawCard()
+      this.swapCurrentPlayer()
     })
   }
 
@@ -723,7 +830,9 @@ export default class DuelField extends React.Component {
 
   computerTurn = () => {
     this.setState({
-      turn: this.state.turn + 1
+      turn: this.state.turn + 1,
+      currentPlayer: "player2",
+      currentOpponent: "player1"
     },
      () => {
       const newDeck = this.state.player2Deck
