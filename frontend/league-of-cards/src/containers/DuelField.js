@@ -6,7 +6,6 @@ import MonsterField from "./MonsterField.js"
 import ActionBox from "../components/ActionBox.js"
 import Graveyard from "./Graveyard.js"
 
-let deckId = 1
 let totalDamage = 4000
 
 export default class DuelField extends React.Component {
@@ -126,7 +125,6 @@ export default class DuelField extends React.Component {
     this.props.player2Deck.map(
       cardObj => {
         let newCardObj = cardObj
-        newCardObj.deckId = deckId++
         newCardObj.position = ''
         newCardObj.attacked = false
         player2Deck = [...player2Deck, newCardObj]
@@ -230,7 +228,7 @@ export default class DuelField extends React.Component {
   changePosition = (monster) => {
     let newMonsterField = this.state.player1Monsters
     let monsterIndex = newMonsterField.findIndex(
-      obj => obj.name === monster.name
+      obj => obj.id === monster.id
     )
 
     if (monster.position === 'attack') {
@@ -254,7 +252,7 @@ export default class DuelField extends React.Component {
     console.log('atacked')
     let newMonsterField = field
     let monsterIndex = newMonsterField.findIndex(
-      obj => obj.name === this.state.selectedCard.name
+      obj => obj.id === this.state.selectedCard.id
     )
 
     let newMonster = monster
@@ -319,7 +317,7 @@ export default class DuelField extends React.Component {
       let newMonsterField = eval(`this.state.${this.state.currentOpponent}Monsters`)
 
       let emptySlot = eval(`this.state.${this.state.currentOpponent}Monsters`).findIndex(
-        obj => obj.deckId === monster.deckId
+        obj => obj.id === monster.id
       )
 
       newGraveyard = [...eval(`this.state.${this.state.currentOpponent}Graveyard`), monster]
@@ -424,7 +422,7 @@ export default class DuelField extends React.Component {
     let newMonsterField = this.state.player2Monsters
     console.log(newMonsterField)
     let newHand = this.state.player2Hand.filter(
-      cardObj => cardObj.deckId !== monster.deckId
+      cardObj => cardObj.id !== monster.id
     )
 
     let emptySlot = this.state.player2Monsters.findIndex(
@@ -572,7 +570,7 @@ export default class DuelField extends React.Component {
             console.log(this.findStrongestKillablePlayerMonster(monster))
             let newMonsterField = this.state.player2Monsters
             let monsterIndex = newMonsterField.findIndex(
-              obj => obj.deckId === monster.deckId
+              obj => obj.id === monster.id
             )
 
             let newMonster = monster
@@ -585,6 +583,7 @@ export default class DuelField extends React.Component {
             })
           } else if (this.findStrongestKillablePlayerMonster(monster)) {
             let attackTarget = this.findStrongestKillablePlayerMonster(monster)
+            monster.position = 'attack'
             this.fight(monster, attackTarget, this.state.player2Monsters)
           }
         }
@@ -671,7 +670,7 @@ export default class DuelField extends React.Component {
   //   let newMonsterField = this.state.player2Monsters
   //
   //   let emptySlot = this.state.player2Monsters.findIndex(
-  //     obj => obj.deckId === this.state.selectedTarget.deckId
+  //     obj => obj.id === this.state.selectedTarget.id
   //   )
   //
   //   newMonsterField.splice(emptySlot, 1, {})
@@ -719,24 +718,45 @@ export default class DuelField extends React.Component {
   }
 
   requiem = () => {
-    let newHand = this.state.player1Hand
+    if (this.state.currentPlayer === "player1") {
+      let newHand = eval(this.state.player1Hand)
 
-    let emptyHandSlot = newHand.findIndex(
-      obj => obj.name === "Requiem"
-    )
+      let emptyHandSlot = newHand.findIndex(
+        obj => obj.name === "Requiem"
+      )
 
-    this.state.player1Hand.splice(emptyHandSlot, 1)
+      this.state.player1Hand.splice(emptyHandSlot, 1)
 
-    this.setState({
-        player2Graveyard: [...this.state.player2Graveyard, ...this.state.player2Monsters].map (
-          obj => Object.keys(obj).length !== 0
-        )
-      }, () => {
       this.setState({
-          player2Monsters: [{}, {}, {}, {}, {}],
-          player1Hand: newHand
+          player2Graveyard: [...this.state.player2Graveyard, ...this.state.player2Monsters].map (
+            obj => Object.keys(obj).length !== 0
+          )
+        }, () => {
+        this.setState({
+            player2Monsters: [{}, {}, {}, {}, {}],
+            player1Hand: newHand
+        })
       })
-    })
+    } else {
+      let newHand = eval(this.state.player2Hand)
+
+      let emptyHandSlot = newHand.findIndex(
+        obj => obj.name === "Requiem"
+      )
+
+      this.state.player2Hand.splice(emptyHandSlot, 1)
+
+      this.setState({
+          player1Graveyard: [...this.state.player1Graveyard, ...this.state.player1Monsters].map (
+            obj => Object.keys(obj).length !== 0
+          )
+        }, () => {
+        this.setState({
+            player1Monsters: [{}, {}, {}, {}, {}],
+            player2Hand: newHand
+        })
+      })
+    }
   }
 
   demacianJustice = () => {

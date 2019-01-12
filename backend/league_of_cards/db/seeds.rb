@@ -72,6 +72,16 @@ azir_card14 = amumu_card = Card.create(player_id: azir.id, name: "Amumu", title:
 description: "''Solitude can be lonelier than death.''<br><br>A lonely and melancholy soul from ancient Shurima, Amumu roams the world in search of a friend. Cursed by an ancient spell, he is doomed to remain alone forever, as his touch is death and his affection ...", image: "Amumu.png")
 azir_card15 = amumu_card = Card.create(player_id: azir.id, name: "Amumu", title: "the Sad Mummy", role: "Tank", rarity: "Bronze", attack: 2, magic: 8, defense: 6,
 description: "''Solitude can be lonelier than death.''<br><br>A lonely and melancholy soul from ancient Shurima, Amumu roams the world in search of a friend. Cursed by an ancient spell, he is doomed to remain alone forever, as his touch is death and his affection ...", image: "Amumu.png")
+azir_card16 = Card.create(
+  player_id: azir.id,
+  name: "Requiem",
+  cardtype: "Ability",
+  rarity: "Diamond",
+  description: "Destroy every champion on your opponent's side of the field",
+  effect: "props.requiem()",
+  image: "Requiem.png",
+  quantity: 0
+)
 
 azir_deckcard1 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card1.id)
 azir_deckcard2 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card2.id)
@@ -88,6 +98,7 @@ azir_deckcard12 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card12.id
 azir_deckcard13 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card13.id)
 azir_deckcard14 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card14.id)
 azir_deckcard15 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card15.id)
+azir_deckcard16 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card16.id)
 #
 # atem_deckcard1 = Deckcard.create(deck_id: atem_deck.id, card_id: zed_card.id)
 # atem_deckcard2 = Deckcard.create(deck_id: atem_deck.id, card_id: orianna_card.id)
@@ -192,7 +203,7 @@ end
 #
 generate_cards
 
-requieum = Allcard.create(
+requiem = Allcard.create(
   name: "Requiem",
   cardtype: "Ability",
   rarity: "Diamond",
