@@ -6,7 +6,7 @@ export default class Hand extends React.Component {
 
   generateHandCards = () => {
     return this.props.hand.map(
-      cardObj => <DuelCard key={handKey++} duelCard={cardObj} clickAction={this.props.clickHandMonster}/>
+      cardObj => <DuelCard key={handKey++} duelCard={cardObj} clickAction={this.props.clickHandCard}/>
     )
   }
 

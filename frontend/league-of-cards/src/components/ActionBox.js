@@ -60,6 +60,17 @@ const ActionBox = (props) => {
         <button onClick={props.cancel}>Cancel</button>
       </div>
     )
+  } else if (props.actionType === 'non-target ability') {
+    return(
+      <div className="action-box-text" >
+        {props.selectedCard.description}?
+        <br/>
+        <br/>
+        <button onClick={event => {eval(props.selectedCard.effect)}}>YES</button>
+        <br/>
+        <button onClick={props.cancel}>Cancel</button>
+      </div>
+    )
   } else if (props.actionType === 'displayPlayer1Graveyard') {
     return(
       <ul id="graveyard-bar">

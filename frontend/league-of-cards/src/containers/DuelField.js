@@ -136,16 +136,24 @@ export default class DuelField extends React.Component {
     })
   }
 
-  clickHandMonster = (monster) => {
-    console.log(monster)
-    console.log(this.state.player1.id === this.state.currentPlayer.id)
-    console.log(this.state.summoned === false)
-    if (this.state.summoned === false && this.state.player1.id === this.state.currentPlayer.id) {
-
-      this.setState({
-        selectedCard: monster,
-        actionType: "summon-position"
-      })
+  clickHandCard = (card) => {
+    console.log(card)
+    // console.log(this.state.player1.id === this.state.currentPlayer.id)
+    // console.log(this.state.summoned === false)
+    if (card.cardtype === "Champion") {
+      if (this.state.summoned === false && this.state.player1.id === this.state.currentPlayer.id) {
+        this.setState({
+          selectedCard: card,
+          actionType: "summon-position"
+        })
+      }
+    } else if (card.cardtype === "Ability") {
+      if (card.name === "Requiem" || card.name === "Demacian Justice" || card.name === "Primordial Burst" || card.name === "Silver Bolts") {
+        this.setState({
+          selectedCard: card,
+          actionType: "non-target ability"
+        })
+      }
     }
   }
 
@@ -490,6 +498,10 @@ export default class DuelField extends React.Component {
         player1Deck: newDeck,
         player1Hand: [...this.state.player1Hand, newCard]
       })
+    } else {
+      this.setState({
+        player1Life: -9999
+      })
     }
   }
 
@@ -640,14 +652,9 @@ export default class DuelField extends React.Component {
     this.renewAllFields()
     this.setState({
       summoned: false
-    })
-    if (this.state.player1Deck.length > 0) {
+    }, () => {
       this.drawCard()
-    } else {
-      this.setState({
-        player1Life: -9999
-      })
-    }
+    })
   }
 
   renewAllFields = () => {
@@ -687,24 +694,22 @@ export default class DuelField extends React.Component {
 
   }
 
-  sendTargetedCardFromFieldToGraveyard = () => {
-    let newGraveyard = this.state.player1Graveyard
-    let newMonsterField = this.state.player2Monsters
-
-    let emptySlot = this.state.player2Monsters.findIndex(
-      obj => obj.deckId === this.state.selectedTarget.deckId
-    )
-
-    newMonsterField.splice(emptySlot, 1, {})
-
-    this.setState({
-      player2Monsters: newMonsterField,
-      player2Graveyard: newGraveyard,
-      actionType: ''
-    })
-  }
-
-
+  // sendTargetedCardFromFieldToGraveyard = () => {
+  //   let newGraveyard = this.state.player1Graveyard
+  //   let newMonsterField = this.state.player2Monsters
+  //
+  //   let emptySlot = this.state.player2Monsters.findIndex(
+  //     obj => obj.deckId === this.state.selectedTarget.deckId
+  //   )
+  //
+  //   newMonsterField.splice(emptySlot, 1, {})
+  //
+  //   this.setState({
+  //     player2Monsters: newMonsterField,
+  //     player2Graveyard: newGraveyard,
+  //     actionType: ''
+  //   })
+  // }
 
   // getStrongestMonsterInEnemyField = () => {
   //   return this.state.player1Monsters.sort( function(a, b) {
@@ -736,6 +741,135 @@ export default class DuelField extends React.Component {
           player2Life: -9999
         })
       }
+    })
+  }
+
+  requiem = () => {
+    let newHand = this.state.player1Hand
+
+    let emptyHandSlot = newHand.findIndex(
+      obj => obj.name === "Requiem"
+    )
+
+    this.state.player1Hand.splice(emptyHandSlot, 1)
+
+    this.setState({
+        player2Graveyard: [...this.state.player2Graveyard, ...this.state.player2Monsters].map (
+          obj => Object.keys(obj).length !== 0
+        )
+      }, () => {
+      this.setState({
+          player2Monsters: [{}, {}, {}, {}, {}],
+          player1Hand: newHand
+      })
+    })
+  }
+
+  demacianJustice = () => {
+    let highestMonster = this.state.player2Monsters.sort( (a, b) => {
+    	if(a.attack > b.attack) {
+    		return -1
+      } else {
+      	return 1
+      }
+      return 0
+    })[0]
+
+    let newGraveyard = this.state.player2Graveyard
+    let newMonsterField = this.state.player2Monsters
+    let newHand = this.state.player1Hand
+
+    let emptyFieldSlot = this.state.player2Monsters.findIndex(
+      obj => obj.id === highestMonster.id
+    )
+
+    let emptyHandSlot = this.state.player1Hand.findIndex(
+      obj => obj.name === "Demacian Justice"
+    )
+
+    this.state.player1Hand.splice(emptyHandSlot, 1)
+
+    newGraveyard = [...this.state.player1Graveyard, highestMonster]
+
+    newMonsterField.splice(emptyFieldSlot, 1, {})
+
+    this.setState({
+      player2Monsters: newMonsterField,
+      player2Graveyard: newGraveyard,
+      player1Hand: newHand,
+      actionType: ''
+    })
+  }
+
+  primordialBurst = () => {
+    let highestMonster = this.state.player2Monsters.sort( (a, b) => {
+      if(a.magic > a.magic) {
+        return -1
+      } else {
+        return 1
+      }
+      return 0
+    })[0]
+
+    let newGraveyard = this.state.player2Graveyard
+    let newMonsterField = this.state.player2Monsters
+    let newHand = this.state.player1Hand
+
+    let emptyFieldSlot = this.state.player2Monsters.findIndex(
+      obj => obj.id === highestMonster.id
+    )
+
+    let emptyHandSlot = this.state.player1Hand.findIndex(
+      obj => obj.name === "Primordial Burst"
+    )
+
+    this.state.player1Hand.splice(emptyHandSlot, 1)
+
+    newGraveyard = [...this.state.player1Graveyard, highestMonster]
+
+    newMonsterField.splice(emptyFieldSlot, 1, {})
+
+    this.setState({
+      player2Monsters: newMonsterField,
+      player2Graveyard: newGraveyard,
+      player1Hand: newHand,
+      actionType: ''
+    })
+  }
+
+  silverBolts = () => {
+    let highestMonster = this.state.player2Monsters.sort( (a, b) => {
+      if(a.defense > a.defense) {
+        return -1
+      } else {
+        return 1
+      }
+      return 0
+    })[0]
+
+    let newGraveyard = this.state.player2Graveyard
+    let newMonsterField = this.state.player2Monsters
+    let newHand = this.state.player1Hand
+
+    let emptyFieldSlot = this.state.player2Monsters.findIndex(
+      obj => obj.id === highestMonster.id
+    )
+
+    let emptyHandSlot = this.state.player1Hand.findIndex(
+      obj => obj.name === "Silver Bolts"
+    )
+
+    this.state.player1Hand.splice(emptyHandSlot, 1)
+
+    newGraveyard = [...this.state.player1Graveyard, highestMonster]
+
+    newMonsterField.splice(emptyFieldSlot, 1, {})
+
+    this.setState({
+      player2Monsters: newMonsterField,
+      player2Graveyard: newGraveyard,
+      player1Hand: newHand,
+      actionType: ''
     })
   }
 
@@ -835,7 +969,7 @@ export default class DuelField extends React.Component {
                 <div id="player1-hand">
                   <Hand
                     hand={this.state.player1Hand}
-                    clickHandMonster={this.clickHandMonster}
+                    clickHandCard={this.clickHandCard}
                   />
                 </div>
               </div>
@@ -860,6 +994,10 @@ export default class DuelField extends React.Component {
                 player2Monsters={this.state.player2Monsters}
                 player1Monsters={this.state.player1Monsters}
                 turn={this.state.turn}
+                requiem={this.requiem}
+                demacianJustice={this.demacianJustice}
+                primordialBurst={this.primordialBurst}
+                silverBolts={this.silverBolts}
               />
             </div>
           </div>
