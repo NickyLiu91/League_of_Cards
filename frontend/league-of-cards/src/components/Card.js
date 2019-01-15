@@ -35,6 +35,7 @@ const Card = (props) => {
             <br/>
 
             <div>Type: {props.card.cardtype}</div>
+            <br/>
 
             <div>Effect: {props.card.description}</div>
 
@@ -75,6 +76,7 @@ const Card = (props) => {
             <br/>
 
             <div>Type: {props.card.cardtype}</div>
+            <br/>
 
             <div>Effect: {props.card.description}</div>
 
@@ -116,6 +118,7 @@ const Card = (props) => {
           <br/>
 
           <div>Type: {props.card.cardtype}</div>
+          <br/>
 
           <div>Effect: {props.card.description}</div>
 

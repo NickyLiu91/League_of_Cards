@@ -6,7 +6,7 @@ export default class SpellField extends React.Component {
 
   generateSpellCards = () => {
     return this.props.spells.map(
-      cardObj => <DuelCard key={spellKey++} duelCard={cardObj} />
+      cardObj => <DuelCard key={spellKey++} duelCard={cardObj} location={"SpellField"}/>
     )
   }
 

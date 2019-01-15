@@ -48,12 +48,12 @@ const ActionBox = (props) => {
         {props.selectedCard.name} has already attack this turn!
       </div>
     )
-  } else if (props.actionType === 'selectTarget') {
+  } else if (props.actionType === 'selectAttackTarget') {
     return(
       <div className="action-box-text" >
         Select a monster to Attack!
         <br/>
-        {(props.selectedCard.name)} will attack {props.selectedTarget.name}!
+        {props.selectedCard.name} will attack {props.selectedTarget.name}!
         <br/>
         <button onClick={event => {props.fight(props.selectedCard, props.selectedTarget, props.player1Monsters)}}>OBLITERATE</button>
         <br/>
@@ -71,12 +71,38 @@ const ActionBox = (props) => {
         <button onClick={props.cancel}>Cancel</button>
       </div>
     )
+  } else if (props.actionType === 'item') {
+    return(
+      <div className="action-box-text" >
+        {props.selectedCard.description}
+        <br/>
+        Equip a target with {props.selectedCard.name}?
+        <br/>
+        <br/>
+        <button onClick={props.getItemTargetMode}>YES</button>
+        <br/>
+        <button onClick={props.cancel}>Cancel</button>
+      </div>
+    )
+  } else if (props.actionType === 'selectItemTarget') {
+    return(
+      <div className="action-box-text" >
+      {console.log(props)}
+        Select a monster to equip with {props.selectedCard.name}!
+        <br/>
+        Give {props.selectedCard.name} to {props.selectedItemTarget.name}?
+        <br/>
+        <button onClick={event => {eval(props.selectedCard.effect)}}>Yes</button>
+        <br/>
+        <button onClick={props.cancel}>Cancel</button>
+      </div>
+    )
   } else if (props.actionType === 'displayPlayer1Graveyard') {
     return(
       <ul id="graveyard-bar">
       <div id="graveyard-bar-title">Graveyard</div>
         {props.player1Graveyard.map(
-          graveyardCardObj => <GraveyardCard key={cardKey++} graveyardCard={graveyardCardObj}/>
+          graveyardCardObj => <GraveyardCard key={cardKey++} card={graveyardCardObj}/>
         )}
       </ul>
     )
@@ -85,7 +111,7 @@ const ActionBox = (props) => {
       <ul id="graveyard-bar">
       <div id="graveyard-bar-title">Graveyard</div>
         {props.player2Graveyard.map(
-          graveyardCardObj => <GraveyardCard key={cardKey++} graveyardCard={graveyardCardObj}/>
+          graveyardCardObj => <GraveyardCard key={cardKey++} card={graveyardCardObj}/>
         )}
       </ul>
     )

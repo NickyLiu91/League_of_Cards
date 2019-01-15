@@ -10,10 +10,16 @@ export default class MonsterField extends React.Component {
         cardObj => <DuelCard key={monsterKey++} duelCard={cardObj} clickAction={this.props.selectTarget}
           actionType={this.props.actionType}/>
       )
-    } else {
-      return this.props.monsters.map(
-        cardObj => <DuelCard key={monsterKey++} duelCard={cardObj} clickAction={this.props.clickFieldMonster}/>
-      )
+    } else if (this.props.player === 'player1') {
+      if (this.props.actionType === 'selectItemTarget') {
+        return this.props.monsters.map(
+          cardObj => <DuelCard key={monsterKey++} duelCard={cardObj} clickAction={this.props.selectItemTarget}/>
+        )
+      } else {
+        return this.props.monsters.map(
+          cardObj => <DuelCard key={monsterKey++} duelCard={cardObj} clickAction={this.props.clickFieldMonster}/>
+        )
+      }
     }
   }
 

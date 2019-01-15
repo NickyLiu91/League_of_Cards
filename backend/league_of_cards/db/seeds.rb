@@ -42,35 +42,35 @@ zed_deck = Deck.create(name: "Zed Deck 1", player_id: zed.id)
 # heimerdinger_deck = Deck.create(name: "Heimerdinger Deck 1", player_id: heimerdinger.id)
 # malzahar_deck = Deck.create(name: "Malzahar Deck 1", player_id: malzahar.id)
 
-azir_card1 = aatrox_card = Card.create(player_id: azir.id, name: "Aatrox", title: "the Darkin Blade", role: "Fighter", rarity: "Bronze", attack: 8, magic: 3, defense: 4,
+azir_card1 = aatrox_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Aatrox", title: "the Darkin Blade", role: "Fighter", rarity: "Bronze", attack: 8, magic: 3, defense: 4,
 description: "Aatrox is a legendary warrior, one of only five that remain of an ancient race known as the Darkin. He wields his massive blade with grace and poise, slicing through legions in a style that is hypnotic to behold. With each foe felled, Aatrox's ...", image: "Aatrox.png")
-azir_card2 = aatrox_card = Card.create(player_id: azir.id, name: "Aatrox", title: "the Darkin Blade", role: "Fighter", rarity: "Bronze", attack: 8, magic: 3, defense: 4,
+azir_card2 = aatrox_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Aatrox", title: "the Darkin Blade", role: "Fighter", rarity: "Bronze", attack: 8, magic: 3, defense: 4,
 description: "Aatrox is a legendary warrior, one of only five that remain of an ancient race known as the Darkin. He wields his massive blade with grace and poise, slicing through legions in a style that is hypnotic to behold. With each foe felled, Aatrox's ...", image: "Aatrox.png")
-azir_card3 = aatrox_card = Card.create(player_id: azir.id, name: "Aatrox", title: "the Darkin Blade", role: "Fighter", rarity: "Bronze", attack: 8, magic: 3, defense: 4,
+azir_card3 = aatrox_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Aatrox", title: "the Darkin Blade", role: "Fighter", rarity: "Bronze", attack: 8, magic: 3, defense: 4,
 description: "Aatrox is a legendary warrior, one of only five that remain of an ancient race known as the Darkin. He wields his massive blade with grace and poise, slicing through legions in a style that is hypnotic to behold. With each foe felled, Aatrox's ...", image: "Aatrox.png")
-azir_card4 = ahri_card = Card.create(player_id: azir.id, name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 3, magic: 8, defense: 4,
+azir_card4 = ahri_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 3, magic: 8, defense: 4,
 description: "Unlike other foxes that roamed the woods of southern Ionia, Ahri had always felt a strange connection to the magical world around her; a connection that was somehow incomplete. Deep inside, she felt the skin she had been born into was an ill fit for ...", image: "Ahri.png")
-azir_card5 = ahri_card = Card.create(player_id: azir.id, name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 3, magic: 8, defense: 4,
+azir_card5 = ahri_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 3, magic: 8, defense: 4,
 description: "Unlike other foxes that roamed the woods of southern Ionia, Ahri had always felt a strange connection to the magical world around her; a connection that was somehow incomplete. Deep inside, she felt the skin she had been born into was an ill fit for ...", image: "Ahri.png")
-azir_card6 = ahri_card = Card.create(player_id: azir.id, name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 3, magic: 8, defense: 4,
+azir_card6 = ahri_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 3, magic: 8, defense: 4,
 description: "Unlike other foxes that roamed the woods of southern Ionia, Ahri had always felt a strange connection to the magical world around her; a connection that was somehow incomplete. Deep inside, she felt the skin she had been born into was an ill fit for ...", image: "Ahri.png")
-azir_card7 = akali_card = Card.create(player_id: azir.id, name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 6, magic: 10, defense: 3,
+azir_card7 = akali_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 6, magic: 10, defense: 3,
 description: "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", image: "Akali.png")
-azir_card8 = akali_card = Card.create(player_id: azir.id, name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 6, magic: 10, defense: 3,
+azir_card8 = akali_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 6, magic: 10, defense: 3,
 description: "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", image: "Akali.png")
-azir_card9 = akali_card = Card.create(player_id: azir.id, name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 6, magic: 10, defense: 3,
+azir_card9 = akali_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 6, magic: 10, defense: 3,
 description: "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", image: "Akali.png")
-azir_card10 = alistar_card = Card.create(player_id: azir.id, name: "Alistar", title: "the Minotaur", role: "Tank", rarity: "Silver", attack: 7, magic: 6, defense: 11,
+azir_card10 = alistar_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Alistar", title: "the Minotaur", role: "Tank", rarity: "Silver", attack: 7, magic: 6, defense: 11,
 description: "As the mightiest warrior to ever emerge from the Minotaur tribes of the Great Barrier, Alistar defended his tribe from Valoran's many dangers; that is, until the coming of the Noxian army. Alistar was lured from his village by the machinations of ...", image: "Alistar.png")
-azir_card11 = alistar_card = Card.create(player_id: azir.id, name: "Alistar", title: "the Minotaur", role: "Tank", rarity: "Silver", attack: 7, magic: 6, defense: 11,
+azir_card11 = alistar_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Alistar", title: "the Minotaur", role: "Tank", rarity: "Silver", attack: 7, magic: 6, defense: 11,
 description: "As the mightiest warrior to ever emerge from the Minotaur tribes of the Great Barrier, Alistar defended his tribe from Valoran's many dangers; that is, until the coming of the Noxian army. Alistar was lured from his village by the machinations of ...", image: "Alistar.png")
-azir_card12 = alistar_card = Card.create(player_id: azir.id, name: "Alistar", title: "the Minotaur", role: "Tank", rarity: "Silver", attack: 7, magic: 6, defense: 11,
+azir_card12 = alistar_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Alistar", title: "the Minotaur", role: "Tank", rarity: "Silver", attack: 7, magic: 6, defense: 11,
 description: "As the mightiest warrior to ever emerge from the Minotaur tribes of the Great Barrier, Alistar defended his tribe from Valoran's many dangers; that is, until the coming of the Noxian army. Alistar was lured from his village by the machinations of ...", image: "Alistar.png")
-azir_card13 = amumu_card = Card.create(player_id: azir.id, name: "Amumu", title: "the Sad Mummy", role: "Tank", rarity: "Bronze", attack: 2, magic: 8, defense: 6,
+azir_card13 = amumu_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Amumu", title: "the Sad Mummy", role: "Tank", rarity: "Bronze", attack: 2, magic: 8, defense: 6,
 description: "''Solitude can be lonelier than death.''<br><br>A lonely and melancholy soul from ancient Shurima, Amumu roams the world in search of a friend. Cursed by an ancient spell, he is doomed to remain alone forever, as his touch is death and his affection ...", image: "Amumu.png")
-azir_card14 = amumu_card = Card.create(player_id: azir.id, name: "Amumu", title: "the Sad Mummy", role: "Tank", rarity: "Bronze", attack: 2, magic: 8, defense: 6,
+azir_card14 = amumu_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Amumu", title: "the Sad Mummy", role: "Tank", rarity: "Bronze", attack: 2, magic: 8, defense: 6,
 description: "''Solitude can be lonelier than death.''<br><br>A lonely and melancholy soul from ancient Shurima, Amumu roams the world in search of a friend. Cursed by an ancient spell, he is doomed to remain alone forever, as his touch is death and his affection ...", image: "Amumu.png")
-azir_card15 = amumu_card = Card.create(player_id: azir.id, name: "Amumu", title: "the Sad Mummy", role: "Tank", rarity: "Bronze", attack: 2, magic: 8, defense: 6,
+azir_card15 = amumu_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Amumu", title: "the Sad Mummy", role: "Tank", rarity: "Bronze", attack: 2, magic: 8, defense: 6,
 description: "''Solitude can be lonelier than death.''<br><br>A lonely and melancholy soul from ancient Shurima, Amumu roams the world in search of a friend. Cursed by an ancient spell, he is doomed to remain alone forever, as his touch is death and his affection ...", image: "Amumu.png")
 azir_card16 = Card.create(
   player_id: azir.id,
@@ -208,37 +208,217 @@ requiem = Allcard.create(
   cardtype: "Ability",
   rarity: "Diamond",
   description: "Destroy every champion on your opponent's side of the field",
-  effect: "props.requiem()",
+  effect: "props.requiem(props.selectedCard)",
   image: "Requiem.png",
   quantity: 0
 )
 
-requieum = Allcard.create(
+demacianJustice = Allcard.create(
   name: "Demacian Justice",
   cardtype: "Ability",
   rarity: "Gold",
   description: "Destroy the champion with the highest attack on your opponent's side of the field",
-  effect: "props.demacianJustice()",
+  effect: "props.demacianJustice(props.selectedCard)",
   image: "DemacianJustice.png",
   quantity: 0
 )
 
-requieum = Allcard.create(
+primordialBurst = Allcard.create(
   name: "Primordial Burst",
   cardtype: "Ability",
   rarity: "Gold",
   description: "Destroy the champion with the highest magic on your opponent's side of the field",
-  effect: "props.primordialBurst()",
+  effect: "props.primordialBurst(props.selectedCard)",
   image: "PrimordialBurst.png",
   quantity: 0
 )
 
-requieum = Allcard.create(
+silverBolts = Allcard.create(
   name: "Silver Bolts",
   cardtype: "Ability",
   rarity: "Silver",
   description: "Destroy the champion with the highest defense on your opponent's side of the field",
-  effect: "props.silverBolts()",
+  effect: "props.silverBolts(props.selectedCard)",
   image: "SilverBolts.png",
+  quantity: 0
+)
+
+longSword = Allcard.create(
+  name: "Long Sword",
+  cardtype: "Item",
+  rarity: "Silver",
+  description: "Equip to a champion for 300 bonus to attack.",
+  effect: "props.longSword(props.selectedCard)",
+  image: "LongSword.png",
+  quantity: 0
+)
+
+bfSword = Allcard.create(
+  name: "B. F. Sword",
+  cardtype: "Item",
+  rarity: "Gold",
+  description: "Equip to a champion for 500 bonus to attack.",
+  effect: "props.bfSword(props.selectedCard)",
+  image: "BFSword.png",
+  quantity: 0
+)
+
+amplifyingTome = Allcard.create(
+  name: "Amplifying Tome",
+  cardtype: "Item",
+  rarity: "Silver",
+  description: "Equip to a champion for 300 bonus to magic.",
+  effect: "props.amplifyTome(props.selectedCard)",
+  image: "AmplifyingTome.png",
+  quantity: 0
+)
+
+needlesslyLargeRod = Allcard.create(
+  name: "Silver Bolts",
+  cardtype: "Item",
+  rarity: "Gold",
+  description: "Equip to a champion for 500 bonus to magic.",
+  effect: "props.needlesslyLargeRod(props.selectedCard)",
+  image: "NeedlesslyLargeRod.png",
+  quantity: 0
+)
+
+rubyCrystal = Allcard.create(
+  name: "Ruby Crystal",
+  cardtype: "Item",
+  rarity: "Bronze",
+  description: "Equip to a champion for 300 bonus to defense.",
+  effect: "props.rubyCrystal(props.selectedCard)",
+  image: "RubyCrystal.png",
+  quantity: 0
+)
+
+giantsBelt = Allcard.create(
+  name: "Giant's Belt",
+  cardtype: "Item",
+  rarity: "Silver",
+  description: "Equip to a champion for 500 bonus to defense.",
+  effect: "props.giantsBelt(props.selectedCard)",
+  image: "GiantsBelt.png",
+  quantity: 0
+)
+
+blackCleaver = Allcard.create(
+  name: "Black Cleaver",
+  cardtype: "Item",
+  rarity: "Platinum",
+  description: "Equip to a Fighter for 700 bonus to attack.",
+  effect: "props.blackCleaver(props.selectedCard)",
+  image: "BlackCleaver.png",
+  quantity: 0
+)
+
+trinityForce = Allcard.create(
+  name: "Trinity Force",
+  cardtype: "Item",
+  rarity: "Diamond",
+  description: "Equip to a Fighter for 1000 bonus to attack.",
+  effect: "props.trinityForce(props.selectedCard)",
+  image: "TrinityForce.png",
+  quantity: 0
+)
+
+voidStaff = Allcard.create(
+  name: "Void Staff",
+  cardtype: "Item",
+  rarity: "Platinum",
+  description: "Equip to a Mage for 700 bonus to magic.",
+  effect: "props.voidStaff(props.selectedCard)",
+  image: "VoidStaff.png",
+  quantity: 0
+)
+
+rabadonsDeathCap = Allcard.create(
+  name: "Rabadon's Deathca[]",
+  cardtype: "Item",
+  rarity: "Diamond",
+  description: "Equip to a Mage for 1000 bonus to magic.",
+  effect: "props.rabadonsDeathcap(props.selectedCard)",
+  image: "RabadonsDeathcap.png",
+  quantity: 0
+)
+
+duskbladeOfDraktharr = Allcard.create(
+  name: "Duskblade of Draktharr",
+  cardtype: "Item",
+  rarity: "Platinum",
+  description: "Equip to an Assassin for 700 bonus to attack.",
+  effect: "props.duskbladeOfDraktharr(props.selectedCard)",
+  image: "DuskbladeofDraktharr.png",
+  quantity: 0
+)
+
+youmuusGhostblade = Allcard.create(
+  name: "Youmuu's Ghostblade",
+  cardtype: "Item",
+  rarity: "Diamond",
+  description: "Equip to an Assassin for 1000 bonus to attack.",
+  effect: "props.youmuusGhostblade(props.selectedCard)",
+  image: "YoumuusGhostblade.png",
+  quantity: 0
+)
+
+sunfireCape = Allcard.create(
+  name: "Sunfore Ca[e]",
+  cardtype: "Item",
+  rarity: "Gold",
+  description: "Equip to a Tank for 700 bonus to defense.",
+  effect: "props.sunfireCape(props.selectedCard)",
+  image: "SunfireCape.png",
+  quantity: 0
+)
+
+warmogsArmor = Allcard.create(
+  name: "Warmog's Armor",
+  cardtype: "Item",
+  rarity: "Platinum",
+  description: "Equip to a Tank for 1000 bonus to defense.",
+  effect: "props.warmogsArmor(props.selectedCard)",
+  image: "WarmogsArmor.png",
+  quantity: 0
+)
+
+redemption = Allcard.create(
+  name: "Redemption",
+  cardtype: "Item",
+  rarity: "Platinum",
+  description: "Equip to a Support for 700 bonus to magic.",
+  effect: "props.redemption(props.selectedCard)",
+  image: "Redemption.png",
+  quantity: 0
+)
+
+shurelyasReverie = Allcard.create(
+  name: "Shurelya's Reverie",
+  cardtype: "Item",
+  rarity: "Diamond",
+  description: "Equip to a Support for 1000 bonus to magic.",
+  effect: "props.shurelyasReverie(props.selectedCard)",
+  image: "ShurelyasReverie.png",
+  quantity: 0
+)
+
+lastWhisper = Allcard.create(
+  name: "Last Whisper",
+  cardtype: "Item",
+  rarity: "Platinum",
+  description: "Equip to a Marksman for 700 bonus to attack.",
+  effect: "props.lastWhisper(props.selectedCard)",
+  image: "LastWhisper.png",
+  quantity: 0
+)
+
+infinityEdge = Allcard.create(
+  name: "Infinity Edge",
+  cardtype: "Item",
+  rarity: "Diamond",
+  description: "Equip to a Marksman for 1000 bonus to attack.",
+  effect: "props.infinityEdge(props.selectedCard)",
+  image: "InfinityEdge.png",
   quantity: 0
 )

@@ -6,14 +6,14 @@ export default class Graveyard extends React.Component {
 
   generateCards1 = () => {
     return this.props.player1Graveyard.map(
-      cardObj => <GraveyardCard key={cardKey++} graveyardCard={cardObj}
+      cardObj => <GraveyardCard key={cardKey++} card={cardObj}
       removeFromDeck={this.props.removeFromDeck}/>
     )
   }
 
   generateCards2 = () => {
     return this.props.player2Graveyard.map(
-      cardObj => <GraveyardCard key={cardKey++} graveyardCard={cardObj}
+      cardObj => <GraveyardCard key={cardKey++} card={cardObj}
       removeFromDeck={this.props.removeFromDeck}/>
     )
   }
