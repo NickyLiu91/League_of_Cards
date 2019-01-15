@@ -225,6 +225,7 @@ export default class Home extends React.Component {
       let cardToAdd = this.state.currentPlayerCollection.filter(cardObj =>
         cardObj.name === card.name && this.state.currentDeckCards.filter(cardObj2 => cardObj2.id === cardObj.id ).length === 0
       )[0]
+      console.log(cardToAdd)
 
         fetch(`http://localhost:3000/api/v1/deckcards`, {
           method: 'POST',
@@ -297,15 +298,25 @@ export default class Home extends React.Component {
   }
 
   getDuelist = (player) => {
-    fetch(`http://localhost:3000/api/v1/players/${player.id}/decks/1`)
-    .then(response => response.json())
-    .then(json => {
-      this.setState({
-        player2: player,
-        player2Deck: json.cards
-      }, () => { this.renderDuel()}
-    )
-    })
+    let desiredDeck
+    fetch(`http://localhost:3000/api/v1/decks/${this.state.currentDeck.id}`)
+    .then(res => res.json())
+    .then(res => this.setState(
+      {
+        currentDeckCards: res.cards
+      }, () => {
+        fetch(`http://localhost:3000/api/v1/players/${player.id}/decks/1`)
+        .then(response => response.json())
+        .then(json => {
+          this.setState({
+            player2: player,
+            player2Deck: json.cards
+          }, () => { this.renderDuel()}
+        )
+        })
+      }
+    ))
+
   }
 
   renderDuel = () => {

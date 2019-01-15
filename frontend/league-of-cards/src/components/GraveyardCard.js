@@ -1,13 +1,21 @@
 import React from "react";
 
 const GraveyardCard = (props) => {
-
-  return(
-    <li className="graveyard-card">
-      <div>Name: {props.graveyardCard.name}</div>
-      <div>{props.graveyardCard.attack}/{props.graveyardCard.magic}/{props.graveyardCard.defense}</div>
-    </li>
-  )
+  if (props.card.cardtype === 'Champion') {
+    return(
+      <li className="graveyard-card">
+        <div>Name: {props.card.name}</div>
+        <div>{props.card.attack}/{props.card.magic}/{props.card.defense}</div>
+      </li>
+    )
+  } else {
+    return(
+      <li className="graveyard-card">
+        <div>Name: {props.card.name}</div>
+        <div>{props.card.cardtype}</div>
+      </li>
+    )
+  }
 
 }
 
