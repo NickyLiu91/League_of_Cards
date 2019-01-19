@@ -82,6 +82,26 @@ azir_card16 = Card.create(
   image: "Requiem.png",
   quantity: 0
 )
+azir_card17 = Card.create(
+  player_id: azir.id,
+  name: "Demacian Justice",
+  cardtype: "Ability",
+  rarity: "Gold",
+  description: "Destroy the champion with the highest attack on your opponent's side of the field",
+  effect: "props.demacianJustice()",
+  image: "DemacianJustice.png",
+  quantity: 0
+)
+azir_card18 = Card.create(
+  player_id: azir.id,
+  name: "Long Sword",
+  cardtype: "Item",
+  rarity: "Silver",
+  description: "Equip to a champion for 300 bonus to attack.",
+  effect: "props.longSword()",
+  image: "longSword.png",
+  quantity: 0
+)
 
 azir_deckcard1 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card1.id)
 azir_deckcard2 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card2.id)
@@ -99,6 +119,8 @@ azir_deckcard13 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card13.id
 azir_deckcard14 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card14.id)
 azir_deckcard15 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card15.id)
 azir_deckcard16 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card16.id)
+azir_deckcard17 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card17.id)
+azir_deckcard18 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card18.id)
 #
 # atem_deckcard1 = Deckcard.create(deck_id: atem_deck.id, card_id: zed_card.id)
 # atem_deckcard2 = Deckcard.create(deck_id: atem_deck.id, card_id: orianna_card.id)
@@ -130,9 +152,9 @@ def generate_cards
         cardtype: "Champion",
         role: cardObj["tags"][0],
         rarity: "Diamond",
-        attack: cardObj["info"]["attack"] * 2,
-        magic: cardObj["info"]["magic"] * 2,
-        defense: cardObj["info"]["defense"] * 2,
+        attack: cardObj["info"]["attack"] * 200,
+        magic: cardObj["info"]["magic"] * 200,
+        defense: cardObj["info"]["defense"] * 200,
         description: cardObj["blurb"],
         image: cardObj["image"]["full"],
         quantity: 0
@@ -145,9 +167,9 @@ def generate_cards
         cardtype: "Champion",
         role: cardObj["tags"][0],
         rarity: "Platinum",
-        attack: cardObj["info"]["attack"] * 1.8,
-        magic: cardObj["info"]["magic"] * 1.8,
-        defense: cardObj["info"]["defense"] * 1.8,
+        attack: cardObj["info"]["attack"] * 180,
+        magic: cardObj["info"]["magic"] * 180,
+        defense: cardObj["info"]["defense"] * 180,
         description: cardObj["blurb"],
         image: cardObj["image"]["full"],
         quantity: 0
@@ -160,9 +182,9 @@ def generate_cards
         cardtype: "Champion",
         role: cardObj["tags"][0],
         rarity: "Gold",
-        attack: cardObj["info"]["attack"] * 1.5,
-        magic: cardObj["info"]["magic"] * 1.5,
-        defense: cardObj["info"]["defense"] * 1.5,
+        attack: cardObj["info"]["attack"] * 150,
+        magic: cardObj["info"]["magic"] * 150,
+        defense: cardObj["info"]["defense"] * 150,
         description: cardObj["blurb"],
         image: cardObj["image"]["full"],
         quantity: 0
@@ -175,9 +197,9 @@ def generate_cards
         cardtype: "Champion",
         role: cardObj["tags"][0],
         rarity: "Silver",
-        attack: cardObj["info"]["attack"] * 1.3,
-        magic: cardObj["info"]["magic"] * 1.3,
-        defense: cardObj["info"]["defense"] * 1.3,
+        attack: cardObj["info"]["attack"] * 130,
+        magic: cardObj["info"]["magic"] * 130,
+        defense: cardObj["info"]["defense"] * 130,
         description: cardObj["blurb"],
         image: cardObj["image"]["full"],
         quantity: 0
@@ -190,9 +212,9 @@ def generate_cards
         cardtype: "Champion",
         role: cardObj["tags"][0],
         rarity: "Bronze",
-        attack: cardObj["info"]["attack"],
-        magic: cardObj["info"]["magic"],
-        defense: cardObj["info"]["defense"],
+        attack: cardObj["info"]["attack"] * 100,
+        magic: cardObj["info"]["magic"] * 100,
+        defense: cardObj["info"]["defense"] * 100,
         description: cardObj["blurb"],
         image: cardObj["image"]["full"],
         quantity: 0
@@ -213,13 +235,33 @@ requiem = Allcard.create(
   quantity: 0
 )
 
+noxianGuillotine = Allcard.create(
+  name: "Noxian Guillotine",
+  cardtype: "Ability",
+  rarity: "Diamond",
+  description: "Destroy any champion on your opponent's side of the field",
+  effect: "props.noxianGuillotine(props.selectedCard)",
+  image: "NoxianGuillotine.png",
+  quantity: 0
+)
+
 demacianJustice = Allcard.create(
   name: "Demacian Justice",
   cardtype: "Ability",
-  rarity: "Gold",
-  description: "Destroy the champion with the highest attack on your opponent's side of the field",
+  rarity: "Platinum",
+  description: "Destroy the champion with the highest power on your opponent's side of the field",
   effect: "props.demacianJustice(props.selectedCard)",
   image: "DemacianJustice.png",
+  quantity: 0
+)
+
+deathMark = Allcard.create(
+  name: "Death Mark",
+  cardtype: "Ability",
+  rarity: "Gold",
+  description: "Destroy the champion with the highest attack on your opponent's side of the field",
+  effect: "props.deathMark(props.selectedCard)",
+  image: "DeathMark.png",
   quantity: 0
 )
 
@@ -247,8 +289,8 @@ longSword = Allcard.create(
   name: "Long Sword",
   cardtype: "Item",
   rarity: "Silver",
-  description: "Equip to a champion for 300 bonus to attack.",
-  effect: "props.longSword(props.selectedCard)",
+  description: "300 bonus to attack of equipped champion.",
+  effect: "props.equip(props.selectedCard)",
   image: "LongSword.png",
   quantity: 0
 )
@@ -257,8 +299,8 @@ bfSword = Allcard.create(
   name: "B. F. Sword",
   cardtype: "Item",
   rarity: "Gold",
-  description: "Equip to a champion for 500 bonus to attack.",
-  effect: "props.bfSword(props.selectedCard)",
+  description: "500 bonus to attack of equipped champion.",
+  effect: "props.equip(props.selectedCard)",
   image: "BFSword.png",
   quantity: 0
 )
@@ -267,8 +309,8 @@ amplifyingTome = Allcard.create(
   name: "Amplifying Tome",
   cardtype: "Item",
   rarity: "Silver",
-  description: "Equip to a champion for 300 bonus to magic.",
-  effect: "props.amplifyTome(props.selectedCard)",
+  description: "300 bonus to magic of equipped champion.",
+  effect: "props.equip(props.selectedCard)",
   image: "AmplifyingTome.png",
   quantity: 0
 )
@@ -277,8 +319,8 @@ needlesslyLargeRod = Allcard.create(
   name: "Silver Bolts",
   cardtype: "Item",
   rarity: "Gold",
-  description: "Equip to a champion for 500 bonus to magic.",
-  effect: "props.needlesslyLargeRod(props.selectedCard)",
+  description: "500 bonus to magic of equipped champion.",
+  effect: "props.equip(props.selectedCard)",
   image: "NeedlesslyLargeRod.png",
   quantity: 0
 )
@@ -287,8 +329,8 @@ rubyCrystal = Allcard.create(
   name: "Ruby Crystal",
   cardtype: "Item",
   rarity: "Bronze",
-  description: "Equip to a champion for 300 bonus to defense.",
-  effect: "props.rubyCrystal(props.selectedCard)",
+  description: "300 bonus to defense of equipped champion.",
+  effect: "props.equip(props.selectedCard)",
   image: "RubyCrystal.png",
   quantity: 0
 )
@@ -297,8 +339,8 @@ giantsBelt = Allcard.create(
   name: "Giant's Belt",
   cardtype: "Item",
   rarity: "Silver",
-  description: "Equip to a champion for 500 bonus to defense.",
-  effect: "props.giantsBelt(props.selectedCard)",
+  description: "500 bonus to defense of equipped champion.",
+  effect: "props.equip(props.selectedCard)",
   image: "GiantsBelt.png",
   quantity: 0
 )
@@ -307,7 +349,7 @@ blackCleaver = Allcard.create(
   name: "Black Cleaver",
   cardtype: "Item",
   rarity: "Platinum",
-  description: "Equip to a Fighter for 700 bonus to attack.",
+  description: "Equip to a Fighter for 500 bonus to all stats.",
   effect: "props.blackCleaver(props.selectedCard)",
   image: "BlackCleaver.png",
   quantity: 0
@@ -317,7 +359,7 @@ trinityForce = Allcard.create(
   name: "Trinity Force",
   cardtype: "Item",
   rarity: "Diamond",
-  description: "Equip to a Fighter for 1000 bonus to attack.",
+  description: "Equip to a Fighter for 700 to all stats",
   effect: "props.trinityForce(props.selectedCard)",
   image: "TrinityForce.png",
   quantity: 0
@@ -327,7 +369,7 @@ voidStaff = Allcard.create(
   name: "Void Staff",
   cardtype: "Item",
   rarity: "Platinum",
-  description: "Equip to a Mage for 700 bonus to magic.",
+  description: "Equip to a Mage for 500 to all stats",
   effect: "props.voidStaff(props.selectedCard)",
   image: "VoidStaff.png",
   quantity: 0
@@ -337,7 +379,7 @@ rabadonsDeathCap = Allcard.create(
   name: "Rabadon's Deathca[]",
   cardtype: "Item",
   rarity: "Diamond",
-  description: "Equip to a Mage for 1000 bonus to magic.",
+  description: "Equip to a Mage for 700 to all stats",
   effect: "props.rabadonsDeathcap(props.selectedCard)",
   image: "RabadonsDeathcap.png",
   quantity: 0
@@ -347,7 +389,7 @@ duskbladeOfDraktharr = Allcard.create(
   name: "Duskblade of Draktharr",
   cardtype: "Item",
   rarity: "Platinum",
-  description: "Equip to an Assassin for 700 bonus to attack.",
+  description: "Equip to an Assassin for 500 to all stats",
   effect: "props.duskbladeOfDraktharr(props.selectedCard)",
   image: "DuskbladeofDraktharr.png",
   quantity: 0
@@ -357,7 +399,7 @@ youmuusGhostblade = Allcard.create(
   name: "Youmuu's Ghostblade",
   cardtype: "Item",
   rarity: "Diamond",
-  description: "Equip to an Assassin for 1000 bonus to attack.",
+  description: "Equip to an Assassin for 700 to all stats",
   effect: "props.youmuusGhostblade(props.selectedCard)",
   image: "YoumuusGhostblade.png",
   quantity: 0
@@ -366,8 +408,8 @@ youmuusGhostblade = Allcard.create(
 sunfireCape = Allcard.create(
   name: "Sunfore Ca[e]",
   cardtype: "Item",
-  rarity: "Gold",
-  description: "Equip to a Tank for 700 bonus to defense.",
+  rarity: "Platinum",
+  description: "Equip to a Tank for 500 to all stats",
   effect: "props.sunfireCape(props.selectedCard)",
   image: "SunfireCape.png",
   quantity: 0
@@ -376,8 +418,8 @@ sunfireCape = Allcard.create(
 warmogsArmor = Allcard.create(
   name: "Warmog's Armor",
   cardtype: "Item",
-  rarity: "Platinum",
-  description: "Equip to a Tank for 1000 bonus to defense.",
+  rarity: "Diamond",
+  description: "Equip to a Tank for 700 to all stats",
   effect: "props.warmogsArmor(props.selectedCard)",
   image: "WarmogsArmor.png",
   quantity: 0
@@ -387,7 +429,7 @@ redemption = Allcard.create(
   name: "Redemption",
   cardtype: "Item",
   rarity: "Platinum",
-  description: "Equip to a Support for 700 bonus to magic.",
+  description: "Equip to a Support for 500 bonus to to all stats",
   effect: "props.redemption(props.selectedCard)",
   image: "Redemption.png",
   quantity: 0
@@ -397,7 +439,7 @@ shurelyasReverie = Allcard.create(
   name: "Shurelya's Reverie",
   cardtype: "Item",
   rarity: "Diamond",
-  description: "Equip to a Support for 1000 bonus to magic.",
+  description: "Equip to a Support for 700 bonus to to all stats",
   effect: "props.shurelyasReverie(props.selectedCard)",
   image: "ShurelyasReverie.png",
   quantity: 0
@@ -407,7 +449,7 @@ lastWhisper = Allcard.create(
   name: "Last Whisper",
   cardtype: "Item",
   rarity: "Platinum",
-  description: "Equip to a Marksman for 700 bonus to attack.",
+  description: "Equip to a Marksman for 500 to all stats",
   effect: "props.lastWhisper(props.selectedCard)",
   image: "LastWhisper.png",
   quantity: 0
@@ -417,7 +459,7 @@ infinityEdge = Allcard.create(
   name: "Infinity Edge",
   cardtype: "Item",
   rarity: "Diamond",
-  description: "Equip to a Marksman for 1000 bonus to attack.",
+  description: "Equip to a Marksman for 700 to all stats",
   effect: "props.infinityEdge(props.selectedCard)",
   image: "InfinityEdge.png",
   quantity: 0

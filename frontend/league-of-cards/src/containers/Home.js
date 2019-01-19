@@ -220,7 +220,7 @@ export default class Home extends React.Component {
       cardObj => cardObj.name === card.name
     ).length < 3 &&
     this.state.currentDeckCards.length < 40 &&
-    card.quantity - this.state.currentDeckCards.filter(cardObj => cardObj.name === card.name).length ) {
+    card.quantity - this.state.currentDeckCards.filter(cardObj => cardObj.name === card.name).length > 0) {
 
       let cardToAdd = this.state.currentPlayerCollection.filter(cardObj =>
         cardObj.name === card.name && this.state.currentDeckCards.filter(cardObj2 => cardObj2.id === cardObj.id ).length === 0
