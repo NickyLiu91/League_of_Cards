@@ -6,7 +6,7 @@ import MonsterField from "./MonsterField.js"
 import ActionBox from "../components/ActionBox.js"
 import Graveyard from "./Graveyard.js"
 
-let totalDamage = 4000
+let totalDamage = 8000
 
 export default class DuelField extends React.Component {
 
@@ -16,14 +16,14 @@ export default class DuelField extends React.Component {
     currentOpponent: "player2",
     summoned: false,
     player1: this.props.player1,
-    player1Life: 4000,
+    player1Life: 8000,
     player1Monsters: [{}, {}, {}, {}, {}],
     player1Spells: [{}, {}, {}, {}, {}],
     player1Hand: [],
     player1Deck: this.props.player1Deck,
     player1Graveyard: [],
     player2: this.props.player2,
-    player2Life: 4000,
+    player2Life: 8000,
     player2Monsters: [{}, {}, {}, {}, {}],
     player2Spells: [{}, {}, {}, {}, {}],
     player2Hand: [],
@@ -153,7 +153,9 @@ export default class DuelField extends React.Component {
 
   cancel = () => {
     this.setState({
-      actionType: ''
+      actionType: '',
+      selectedTarget: '',
+      selectedItemTarget: ''
     })
   }
 
@@ -1046,42 +1048,42 @@ export default class DuelField extends React.Component {
     })
   }
 
-  longSword = (card) => {
-    if (this.state.currentPlayer === 'player1') {
-      if (this.state.selectedItemTarget === '') {
-        this.setState({
-          actionType: ''
-        })
-      } else {
-        let newMonsterField = this.state.player1Monsters
-        let newHand = this.state.player1Hand.filter(
-          cardObj => cardObj.id !== card.id
-        )
-        let newSpellField = this.state.player1Spells
-
-        let monsterToEquip = newMonsterField.find(obj => obj.id === this.state.selectedItemTarget.id)
-        let monsterToEquipSlot = newMonsterField.findIndex(obj => obj.id === this.state.selectedItemTarget.id)
-        let emptySlot = this.state.player1Spells.findIndex(
-          obj => Object.keys(obj).length === 0
-        )
-
-        card.target = monsterToEquip
-
-        newSpellField.splice(emptySlot, 1, card)
-
-        monsterToEquip.attack = monsterToEquip.attack + 300
-
-        newMonsterField.splice(monsterToEquipSlot, 1, monsterToEquip)
-
-        this.setState({
-          player1Monsters: newMonsterField,
-          player1Hand: newHand,
-          player1Spells: newSpellField,
-          actionType: '',
-          selectedItemTarget: ''
-        })
-      }
-    }
+  // longSword = (card) => {
+  //   if (this.state.currentPlayer === 'player1') {
+  //     if (this.state.selectedItemTarget === '') {
+  //       this.setState({
+  //         actionType: ''
+  //       })
+  //     } else {
+  //       let newMonsterField = this.state.player1Monsters
+  //       let newHand = this.state.player1Hand.filter(
+  //         cardObj => cardObj.id !== card.id
+  //       )
+  //       let newSpellField = this.state.player1Spells
+  //
+  //       let monsterToEquip = newMonsterField.find(obj => obj.id === this.state.selectedItemTarget.id)
+  //       let monsterToEquipSlot = newMonsterField.findIndex(obj => obj.id === this.state.selectedItemTarget.id)
+  //       let emptySlot = this.state.player1Spells.findIndex(
+  //         obj => Object.keys(obj).length === 0
+  //       )
+  //
+  //       card.target = monsterToEquip
+  //
+  //       newSpellField.splice(emptySlot, 1, card)
+  //
+  //       monsterToEquip.attack = monsterToEquip.attack + 300
+  //
+  //       newMonsterField.splice(monsterToEquipSlot, 1, monsterToEquip)
+  //
+  //       this.setState({
+  //         player1Monsters: newMonsterField,
+  //         player1Hand: newHand,
+  //         player1Spells: newSpellField,
+  //         actionType: '',
+  //         selectedItemTarget: ''
+  //       })
+  //     }
+  //   }
     // else {
     //   let newMonsterField = this.state.player2Monsters
     //   let newHand = this.state.player2Hand.filter(
@@ -1111,13 +1113,15 @@ export default class DuelField extends React.Component {
     //     selectedItemTarget: ''
     //   })
     // }
-  }
+  // }
 
   equip = (card) => {
-    if (this.state.currentPlayer === 'player1') {
+    if (card.name === "Long Sword" || card.name === "B. F. Sword" || card.name === "Amplifying Tome" ||
+      card.name === "Needlessly Large Rod" || card.name === "Ruby Crystal" || card.name === "Giant's Belt") {
       if (this.state.selectedItemTarget === '') {
         this.setState({
-          actionType: ''
+          actionType: '',
+          selectedItemTarget: ''
         })
       } else {
         let newMonsterField = this.state.player1Monsters
@@ -1135,11 +1139,45 @@ export default class DuelField extends React.Component {
         card.target = monsterToEquip
 
         newSpellField.splice(emptySlot, 1, card)
-        console.log(card.description)
-        console.log(card.description.split(' ')[3])
-        console.log(monsterToEquip[`${card.description.split(' ')[3]}`])
 
         monsterToEquip[`${card.description.split(' ')[3]}`] = monsterToEquip[`${card.description.split(' ')[3]}`] + parseInt(card.description)
+
+        newMonsterField.splice(monsterToEquipSlot, 1, monsterToEquip)
+
+        this.setState({
+          player1Monsters: newMonsterField,
+          player1Hand: newHand,
+          player1Spells: newSpellField,
+          actionType: '',
+          selectedItemTarget: ''
+        })
+      }
+    } else {
+      if (this.state.selectedItemTarget === '' || !card.description.includes(this.state.selectedItemTarget.role)) {
+        this.setState({
+          actionType: '',
+          selectedItemTarget: ''
+        })
+      } else {
+        let newMonsterField = this.state.player1Monsters
+        let newHand = this.state.player1Hand.filter(
+          cardObj => cardObj.id !== card.id
+        )
+        let newSpellField = this.state.player1Spells
+
+        let monsterToEquip = newMonsterField.find(obj => obj.id === this.state.selectedItemTarget.id)
+        let monsterToEquipSlot = newMonsterField.findIndex(obj => obj.id === this.state.selectedItemTarget.id)
+        let emptySlot = this.state.player1Spells.findIndex(
+          obj => Object.keys(obj).length === 0
+        )
+
+        card.target = monsterToEquip
+
+        newSpellField.splice(emptySlot, 1, card)
+
+        monsterToEquip.attack = monsterToEquip.attack + parseInt(card.description)
+        monsterToEquip.magic = monsterToEquip.magic + parseInt(card.description)
+        monsterToEquip.defense = monsterToEquip.defense + parseInt(card.description)
 
         newMonsterField.splice(monsterToEquipSlot, 1, monsterToEquip)
 
