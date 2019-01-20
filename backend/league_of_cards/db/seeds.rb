@@ -316,7 +316,7 @@ amplifyingTome = Allcard.create(
 )
 
 needlesslyLargeRod = Allcard.create(
-  name: "Silver Bolts",
+  name: "Needlessly Large Rod",
   cardtype: "Item",
   rarity: "Gold",
   description: "500 bonus to magic of equipped champion.",
@@ -349,8 +349,8 @@ blackCleaver = Allcard.create(
   name: "Black Cleaver",
   cardtype: "Item",
   rarity: "Platinum",
-  description: "Equip to a Fighter for 500 bonus to all stats.",
-  effect: "props.blackCleaver(props.selectedCard)",
+  description: "500 bonus to all stats to equipped Fighter.",
+  effect: "props.equip(props.selectedCard)",
   image: "BlackCleaver.png",
   quantity: 0
 )
@@ -359,8 +359,8 @@ trinityForce = Allcard.create(
   name: "Trinity Force",
   cardtype: "Item",
   rarity: "Diamond",
-  description: "Equip to a Fighter for 700 to all stats",
-  effect: "props.trinityForce(props.selectedCard)",
+  description: "700 bonus to all stats to equipped Fighter.",
+  effect: "props.equip(props.selectedCard)",
   image: "TrinityForce.png",
   quantity: 0
 )
@@ -369,18 +369,18 @@ voidStaff = Allcard.create(
   name: "Void Staff",
   cardtype: "Item",
   rarity: "Platinum",
-  description: "Equip to a Mage for 500 to all stats",
-  effect: "props.voidStaff(props.selectedCard)",
+  description: "500 bonus to all stats to equipped Mage.",
+  effect: "props.equip(props.selectedCard)",
   image: "VoidStaff.png",
   quantity: 0
 )
 
 rabadonsDeathCap = Allcard.create(
-  name: "Rabadon's Deathca[]",
+  name: "Rabadon's Deathcap",
   cardtype: "Item",
   rarity: "Diamond",
-  description: "Equip to a Mage for 700 to all stats",
-  effect: "props.rabadonsDeathcap(props.selectedCard)",
+  description: "700 bonus to all stats to equipped Mage.",
+  effect: "props.equip(props.selectedCard)",
   image: "RabadonsDeathcap.png",
   quantity: 0
 )
@@ -389,8 +389,8 @@ duskbladeOfDraktharr = Allcard.create(
   name: "Duskblade of Draktharr",
   cardtype: "Item",
   rarity: "Platinum",
-  description: "Equip to an Assassin for 500 to all stats",
-  effect: "props.duskbladeOfDraktharr(props.selectedCard)",
+  description: "500 bonus to all stats to equipped Assassin.",
+  effect: "props.equip(props.selectedCard)",
   image: "DuskbladeofDraktharr.png",
   quantity: 0
 )
@@ -399,18 +399,18 @@ youmuusGhostblade = Allcard.create(
   name: "Youmuu's Ghostblade",
   cardtype: "Item",
   rarity: "Diamond",
-  description: "Equip to an Assassin for 700 to all stats",
-  effect: "props.youmuusGhostblade(props.selectedCard)",
+  description: "700 bonus to all stats to equipped Assassin.",
+  effect: "props.equip(props.selectedCard)",
   image: "YoumuusGhostblade.png",
   quantity: 0
 )
 
 sunfireCape = Allcard.create(
-  name: "Sunfore Ca[e]",
+  name: "Sunfore Cape",
   cardtype: "Item",
   rarity: "Platinum",
-  description: "Equip to a Tank for 500 to all stats",
-  effect: "props.sunfireCape(props.selectedCard)",
+  description: "500 bonus to all stats to equipped Tank.",
+  effect: "props.equip(props.selectedCard)",
   image: "SunfireCape.png",
   quantity: 0
 )
@@ -419,8 +419,8 @@ warmogsArmor = Allcard.create(
   name: "Warmog's Armor",
   cardtype: "Item",
   rarity: "Diamond",
-  description: "Equip to a Tank for 700 to all stats",
-  effect: "props.warmogsArmor(props.selectedCard)",
+  description: "700 bonus to all stats to equipped Tank.",
+  effect: "props.equip(props.selectedCard)",
   image: "WarmogsArmor.png",
   quantity: 0
 )
@@ -429,8 +429,8 @@ redemption = Allcard.create(
   name: "Redemption",
   cardtype: "Item",
   rarity: "Platinum",
-  description: "Equip to a Support for 500 bonus to to all stats",
-  effect: "props.redemption(props.selectedCard)",
+  description: "500 bonus to all stats to equipped Support.",
+  effect: "props.equip(props.selectedCard)",
   image: "Redemption.png",
   quantity: 0
 )
@@ -439,8 +439,8 @@ shurelyasReverie = Allcard.create(
   name: "Shurelya's Reverie",
   cardtype: "Item",
   rarity: "Diamond",
-  description: "Equip to a Support for 700 bonus to to all stats",
-  effect: "props.shurelyasReverie(props.selectedCard)",
+  description: "700 bonus to all stats to equipped Support.",
+  effect: "props.equip(props.selectedCard)",
   image: "ShurelyasReverie.png",
   quantity: 0
 )
@@ -449,8 +449,8 @@ lastWhisper = Allcard.create(
   name: "Last Whisper",
   cardtype: "Item",
   rarity: "Platinum",
-  description: "Equip to a Marksman for 500 to all stats",
-  effect: "props.lastWhisper(props.selectedCard)",
+  description: "500 bonus to all stats to equipped Marksman.",
+  effect: "props.equip(props.selectedCard)",
   image: "LastWhisper.png",
   quantity: 0
 )
@@ -459,8 +459,8 @@ infinityEdge = Allcard.create(
   name: "Infinity Edge",
   cardtype: "Item",
   rarity: "Diamond",
-  description: "Equip to a Marksman for 700 to all stats",
-  effect: "props.infinityEdge(props.selectedCard)",
+  description: "700 bonus to all stats to equipped Marksman.",
+  effect: "props.equip(props.selectedCard)",
   image: "InfinityEdge.png",
   quantity: 0
 )
