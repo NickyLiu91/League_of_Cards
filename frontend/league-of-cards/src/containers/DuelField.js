@@ -416,40 +416,41 @@ export default class DuelField extends React.Component {
         selectedTarget: '',
         actionType: ''
       })
-    } else {
-      console.log("computer fighting")
-      if (monster2.position === 'defense') {
-        if (this.highestAttack(monster1) > monster2.defense) {
-
-          // this.changeToAttacked(monster1, field)
-          this.sendEnemyFromFieldToGraveyard(monster2)
-        } else if (this.highestAttack(monster1) < monster2.defense) {
-          // this.changeToAttacked(monster1, field)
-          this.setState({
-            player2Life: this.state.player2Life - (monster2.defense - this.highestAttack(monster1))
-          })
-        }
-      } else if (monster2.position === 'attack'){
-        if (this.highestAttack(monster1) > this.highestAttack(monster2)) {
-
-            totalDamage = totalDamage - (this.highestAttack(monster1) - this.highestAttack(monster2))
-
-
-          // this.changeToAttacked(monster1, field)
-          this.sendEnemyFromFieldToGraveyard(monster2)
-        } else if (this.highestAttack(monster1) < this.highestAttack(monster2)){
-          this.setState({
-            player2Life: this.state.player2Life - (this.highestAttack(monster2) - this.highestAttack(monster1))
-          })
-
-          this.sendOwnFromFieldToGraveyard(monster1)
-        } else if (this.highestAttack(monster1) === this.highestAttack(monster2)){
-
-          this.sendEnemyFromFieldToGraveyard(monster2)
-          this.sendOwnFromFieldToGraveyard(monster1)
-        }
-      }
     }
+    // else {
+    //   console.log("computer fighting")
+    //   if (monster2.position === 'defense') {
+    //     if (this.highestAttack(monster1) > monster2.defense) {
+    //
+    //       // this.changeToAttacked(monster1, field)
+    //       this.sendEnemyFromFieldToGraveyard(monster2)
+    //     } else if (this.highestAttack(monster1) < monster2.defense) {
+    //       // this.changeToAttacked(monster1, field)
+    //       this.setState({
+    //         player2Life: this.state.player2Life - (monster2.defense - this.highestAttack(monster1))
+    //       })
+    //     }
+    //   } else if (monster2.position === 'attack'){
+    //     if (this.highestAttack(monster1) > this.highestAttack(monster2)) {
+    //
+    //         totalDamage = totalDamage - (this.highestAttack(monster1) - this.highestAttack(monster2))
+    //
+    //
+    //       // this.changeToAttacked(monster1, field)
+    //       this.sendEnemyFromFieldToGraveyard(monster2)
+    //     } else if (this.highestAttack(monster1) < this.highestAttack(monster2)){
+    //       this.setState({
+    //         player2Life: this.state.player2Life - (this.highestAttack(monster2) - this.highestAttack(monster1))
+    //       })
+    //
+    //       this.sendOwnFromFieldToGraveyard(monster1)
+    //     } else if (this.highestAttack(monster1) === this.highestAttack(monster2)){
+    //
+    //       this.sendEnemyFromFieldToGraveyard(monster2)
+    //       this.sendOwnFromFieldToGraveyard(monster1)
+    //     }
+    //   }
+    // }
   }
 
   selectTarget = (monster) => {
@@ -510,10 +511,6 @@ export default class DuelField extends React.Component {
 
   showState = () => {
     console.log(this.state)
-  }
-
-  test = (object) => {
-    return object.attack
   }
 
   getStrongestMonsterInOwnHand = () => {
@@ -654,11 +651,6 @@ export default class DuelField extends React.Component {
     )
 
     return strongestKillableMonster
-
-    // let strongestKillableMonsterSlot = this.state.player1Monsters.findIndex(
-    //   obj => obj.name === strongestKillableMonster.name
-    // )
-
   }
 
   computerEndTurn = () => {
@@ -748,7 +740,7 @@ export default class DuelField extends React.Component {
         this.setState({
           player2Deck: newDeck,
           player2Hand: [...this.state.player2Hand, newCard]
-        }, () => this.playAppropriateMonster()
+        }, () => this.performTurn()
       )
       this.computerEndTurn()
       } else {
@@ -758,6 +750,117 @@ export default class DuelField extends React.Component {
       }
     })
   }
+
+  performTurn = () => {
+    let testVar = "HELLO"
+    let computerHand = this.state.player2Hand
+    let computerMonsters = this.state.player2Monsters
+    let computerSpells = this.state.player2Spells
+    let computerGraveyard = this.state.player2Graveyard
+
+    let playerMonsters = this.state.player1Monsters
+    let playerSpells = this.state.player1Spells
+    let playerGraveyard = this.state.player1Graveyard
+
+    let items = computerHand.filter(card => card.cardtype === "Item")
+    let abilities = computerHand.filter(card => card.cardtype === "Ability")
+
+    let strongestPossibleHandMonster = this.getStrongestMonsterInOwnHand(computerHand, items)
+    let weakestPossibleHandMonster = this.getWeakestMonsterInOwnHand(computerHand, items)
+    let strongestMonsterOnField = this.getStrongestMonsterOnOwnField(computerMonsters)
+    console.log(strongestPossibleHandMonster)
+    console.log(weakestPossibleHandMonster)
+    console.log(strongestMonsterOnField)
+
+    // 1. get all items and abilities in hand
+    // 1. get own strongest monster on field and in hand (with items) and weakest in hand
+    // 2. get opponenet monsters stronger (cant kill) then own strongest field and hand
+    // 3. if stronger enemy length > 2 reqiuem
+    // 4. all own monsters attack face
+    // 5. else until enemy cant kill .length === 0 if monster.position === attack demcian Justice, else noxian guillotine
+    // 6. all monsters kill strongest target, if empty field go face
+
+  }
+
+  getStrongestMonsterInOwnHand = (hand, items) => {
+
+    let monsters = hand.filter(obj => obj.cardtype === 'Champion').sort( (a, b) => {
+      if(this.highestAttack(a) > this.highestAttack(b)) {
+    		return -1
+      } else {
+      	return 1
+      }
+      return 0
+    })
+
+    let buffedMonsters = []
+
+    monsters.forEach(monster => {
+      let newMonster = Object.assign({}, monster)
+      items.forEach(item => {
+        if (item.description.includes(newMonster.role)) {
+          newMonster.attack = newMonster.attack + parseInt(item.description)
+          newMonster.magic = newMonster.magic + parseInt(item.description)
+          newMonster.defense = newMonster.defense + parseInt(item.description)
+        }
+      })
+      buffedMonsters = [...buffedMonsters, newMonster]
+    })
+
+    return buffedMonsters.sort( (a, b) => {
+      if(this.highestAttack(a) > this.highestAttack(b)) {
+    		return -1
+      } else {
+      	return 1
+      }
+      return 0
+    })[0]
+  }
+
+  getWeakestMonsterInOwnHand = (hand, items) => {
+    let monsters = hand.filter(obj => obj.cardtype === 'Champion').sort( (a, b) => {
+      if(this.highestAttack(a) > this.highestAttack(b)) {
+    		return -1
+      } else {
+      	return 1
+      }
+      return 0
+    })
+
+    let buffedMonsters = []
+
+    monsters.forEach(monster => {
+      let newMonster = Object.assign({}, monster)
+      items.forEach(item => {
+        if (item.description.includes(newMonster.role)) {
+          newMonster.attack = newMonster.attack + parseInt(item.description)
+          newMonster.magic = newMonster.magic + parseInt(item.description)
+          newMonster.defense = newMonster.defense + parseInt(item.description)
+        }
+      })
+      buffedMonsters = [...buffedMonsters, newMonster]
+    })
+
+    return buffedMonsters.sort( (a, b) => {
+      if(this.highestAttack(a) > this.highestAttack(b)) {
+    		return -1
+      } else {
+      	return 1
+      }
+      return 0
+    })[buffedMonsters.length - 1]
+  }
+
+  getStrongestMonsterOnOwnField = (field) => {
+    return field.sort( (a, b) => {
+    	if(this.highestAttack(a) > this.highestAttack(b)) {
+    		return 1
+      } else {
+      	return -1
+      }
+    })[0]
+  }
+
 
   requiem = (card) => {
     if (this.state.currentPlayer === "player1") {
