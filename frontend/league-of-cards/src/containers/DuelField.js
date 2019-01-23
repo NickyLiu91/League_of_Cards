@@ -768,12 +768,25 @@ export default class DuelField extends React.Component {
     let strongestPossibleHandMonster = this.getStrongestMonsterInOwnHand(computerHand, items)
     let weakestPossibleHandMonster = this.getWeakestMonsterInOwnHand(computerHand, items)
     let strongestMonsterOnField = this.getStrongestMonsterOnOwnField(computerMonsters)
-    console.log(strongestPossibleHandMonster)
-    console.log(weakestPossibleHandMonster)
-    console.log(strongestMonsterOnField)
 
-    // 1. get all items and abilities in hand
-    // 1. get own strongest monster on field and in hand (with items) and weakest in hand
+    let strongestMonster
+
+    if (Object.keys(strongestMonsterOnField).length === 0 || this.highestAttack(strongestPossibleHandMonster) > this.highestAttack(strongestMonsterOnField) ) {
+      strongestMonster = strongestPossibleHandMonster
+      console.log("hi")
+    } else {
+      strongestMonster = strongestMonsterOnField
+    }
+    // console.log(strongestPossibleHandMonster)
+    // console.log(weakestPossibleHandMonster)
+    // console.log(strongestMonsterOnField)
+    // console.log(strongestMonster)
+
+    let strongerEnemyMonsters = this.getStrongerEnemyMonsters(strongestMonster, this.state.player1Monsters)
+    console.log(strongerEnemyMonsters)
+
+    // 1. get all items and abilities in hand***
+    // 1. get own strongest monster on field and in hand (with items) and weakest in hand***
     // 2. get opponenet monsters stronger (cant kill) then own strongest field and hand
     // 3. if stronger enemy length > 2 reqiuem
     // 4. all own monsters attack face
@@ -861,6 +874,12 @@ export default class DuelField extends React.Component {
     })[0]
   }
 
+  getStrongerEnemyMonsters = (monster, field) => {
+    console.log(monster)
+    return field.filter(monsterObj =>
+      this.highestAttack(monsterObj) > this.highestAttack(monster)
+    )
+  }
 
   requiem = (card) => {
     if (this.state.currentPlayer === "player1") {
