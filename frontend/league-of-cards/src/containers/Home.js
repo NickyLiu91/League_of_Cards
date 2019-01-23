@@ -279,9 +279,22 @@ export default class Home extends React.Component {
 
   renderStuff = (event) => {
     console.log(event.target.className)
-    this.setState({
-      render: event.target.className
-    })
+    if (event.target.className === 'collection') {
+      fetch(`http://localhost:3000/api/v1/decks/${this.state.currentDeck.id}`)
+      .then(res => res.json())
+      .then(json => {this.setState({
+          currentDeckCards: json.cards
+        }, () => {
+          this.setState({
+            render: 'collection'
+          })
+        })
+      })
+    } else {
+      this.setState({
+        render: event.target.className
+      })
+    }
   }
 
   getCardInfo = (card) =>{
