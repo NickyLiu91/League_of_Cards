@@ -25,6 +25,6 @@ React.js
 
 ```
 Run Postgres
-Rails S
-npm start > enter 'y' after to start on new port
+rails s
+npm start then enter 'y' after to start on new port
 ```
