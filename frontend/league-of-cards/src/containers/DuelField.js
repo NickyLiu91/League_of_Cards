@@ -162,8 +162,7 @@ export default class DuelField extends React.Component {
   clickHandCard = (card) => {
     console.log(card)
     // console.log(this.state.player1.id === this.state.currentPlayer.id)
-    // console.log(this.state.summoned === false)
-    if (card.cardtype === "Champion") {
+    if (this.state.summoned === false && card.cardtype === "Champion") {
       if (this.state.currentPlayer === "player1") {
         this.setState({
           selectedCard: card,

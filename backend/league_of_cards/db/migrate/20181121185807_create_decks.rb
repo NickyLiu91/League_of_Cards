@@ -3,7 +3,6 @@ class CreateDecks < ActiveRecord::Migration[5.2]
     create_table :decks do |t|
       t.string :name
       t.string :player_id
-      t.string :integer
 
       t.timestamps
     end

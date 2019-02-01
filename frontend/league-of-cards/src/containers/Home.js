@@ -24,7 +24,8 @@ export default class Home extends React.Component {
     player2: '',
     player2Deck: [],
     password: '',
-    decksList: []
+    decksList: [],
+    gold: ''
   }
 
   log = () => {
@@ -49,47 +50,62 @@ export default class Home extends React.Component {
     })
   }
 
-  generateDeckCard = (player, number) => {
+  // generateDeckCard = (player, number) => {
+  //
+  //   let randomCard = this.state.collection[Math.floor(Math.random() * this.state.collection.length)]
+  //
+  //   randomCard.enemydeckCardId = number
+  //
+  //   if (this.state.currentDeckCards.filter(
+  //     cardObj => cardObj.name === randomCard.name
+  //   ).length < 1) {
+  //     // player.decks[0].cards = [...player.decks[0].cards, randomCard]
+  //
+  //     fetch(`http://localhost:3000/api/v1/deckcards`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Accept': 'application/json',
+  //       },
+  //       body: JSON.stringify(
+  //           {
+  //             deck_id: player.id,
+  //             card_id: randomCard.key
+  //           }
+  //     )})
+  //   }
+  // }
 
-    let randomCard = this.state.collection[Math.floor(Math.random() * this.state.collection.length)]
-
-    randomCard.enemydeckCardId = number
-
-    if (this.state.currentDeckCards.filter(
-      cardObj => cardObj.name === randomCard.name
-    ).length < 1) {
-      // player.decks[0].cards = [...player.decks[0].cards, randomCard]
-
-      fetch(`http://localhost:3000/api/v1/deckcards`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify(
-            {
-              deck_id: player.id,
-              card_id: randomCard.key
-            }
-      )})
-    }
-
-  }
-
-  generateDeck = (playerObj) => {
-    let deck
-    fetch(`http://localhost:3000/api/v1/players/${playerObj.id}/decks/${playerObj.id}`)
-    .then(res => res.json())
-    .then(json => {deck = json})
-    .then(res => {
-      if (deck.cards.length === 0) {
-        let i = 1
-        for(i = 0; i < 30; i++) {
-          this.generateDeckCard(playerObj, i)
-        }
-      }
-    })
-  }
+  // generateDeck = (playerObj) => {
+  //   let deck
+  //   fetch(`http://localhost:3000/api/v1/players/${playerObj.id}/decks`)
+  //   .then(res => res.json())
+  //   .then(json => {deck = json})
+  //   .then(res => {
+  //     fetch("http://localhost:3000/api/v1/cards", {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Accept': 'application/json'
+  //       },
+  //       body: JSON.stringify(
+  //           {
+  //             player_id: this.state.currentPlayer.id,
+  //             name: "Amumu",
+  //             title: "the Sad Mummy",
+  //             role: "Tank",
+  //             rarity: "Bronze",
+  //             attack: 200,
+  //             magic: 800,
+  //             defense: 600,
+  //             description: "''Solitude can be lonelier than death.''<br><br>A lonely and melancholy soul from ancient Shurima, Amumu roams the world in search of a friend. Cursed by an ancient spell, he is doomed to remain alone forever, as his touch is death and his affection ...",
+  //             image: "Amumu.png",
+  //             cardtype: "Champion",
+  //           }
+  //       )})
+  //
+  //   })
+  // }
 
   getAllPlayers = () => {
     let newPlayersArray = []
@@ -146,7 +162,8 @@ export default class Home extends React.Component {
         currentPlayer: res,
         currentPlayerCollection: res.cards,
         currentDeck: res.decks[0],
-        loggedIn: true
+        loggedIn: true,
+        gold: res.gold
       }, () => {
         fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/decks/${this.state.currentDeck.id}`)
         .then(res => res.json())
@@ -375,6 +392,8 @@ export default class Home extends React.Component {
             password_digest: this.state.password,
             image: 'image/TwistedFatePortrait.png',
             computer: false,
+            level: "1-1",
+            gold: 1000
           }
     )}).then(res => this.setState({
         allPlayers: [...this.state.allPlayers, {id: this.state.allPlayers.length + 1, name: this.state.name, decks: [], cards: [], collection: [], image: 'image/TwistedFatePortrait.png', computer: false, password_digest: this.state.password}],
@@ -392,6 +411,7 @@ export default class Home extends React.Component {
               player_id: this.state.allPlayers[this.state.allPlayers.length - 1].id
             }
       )})
+      // .then(res => {this.generateDeck(this.state.allPlayers[this.state.allPlayers.length - 1])})
     }
   ))
   }
@@ -402,6 +422,25 @@ export default class Home extends React.Component {
     .then(json => this.setState({
       currentPlayerCollection: json
     }, () => this.generateNoDupesCurrentPlayerCollection()))
+  }
+
+  buyPack = () => {
+    fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(
+          {
+            gold: this.state.gold - 100
+          }
+    )})
+    .then(res => {
+      this.setState({
+        gold: this.state.gold - 100
+      })
+    })
   }
 
   render() {
@@ -495,6 +534,8 @@ export default class Home extends React.Component {
             packCard={this.state.packCard}
             updateCurrentPlayerCollection={this.updateCurrentPlayerCollection}
             currentDeckCards={this.state.currentDeckCards}
+            gold={this.state.gold}
+            buyPack={this.buyPack}
           />
         </div>
       )
