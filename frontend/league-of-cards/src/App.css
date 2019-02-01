@@ -63,10 +63,17 @@ body {
   border-color: blue;
 }
 
-#copies {
+#add-to-deck {
   font-size: 10px;
   position: absolute;
   right: 5px;
+  bottom: 5px;
+}
+
+#copies {
+  font-size: 10px;
+  position: absolute;
+  left: 5px;
   bottom: 5px;
 }
 
