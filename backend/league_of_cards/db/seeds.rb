@@ -72,26 +72,7 @@ azir_card14 = amumu_card = Card.create(player_id: azir.id, cardtype: 'Champion',
 description: "''Solitude can be lonelier than death.''<br><br>A lonely and melancholy soul from ancient Shurima, Amumu roams the world in search of a friend. Cursed by an ancient spell, he is doomed to remain alone forever, as his touch is death and his affection ...", image: "Amumu.png")
 azir_card15 = amumu_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Amumu", title: "the Sad Mummy", role: "Tank", rarity: "Bronze", attack: 2, magic: 8, defense: 6,
 description: "''Solitude can be lonelier than death.''<br><br>A lonely and melancholy soul from ancient Shurima, Amumu roams the world in search of a friend. Cursed by an ancient spell, he is doomed to remain alone forever, as his touch is death and his affection ...", image: "Amumu.png")
-# azir_card16 = Card.create(
-#   player_id: azir.id,
-#   name: "Requiem",
-#   cardtype: "Ability",
-#   rarity: "Diamond",
-#   description: "Destroy every champion on your opponent's side of the field",
-#   effect: "props.requiem()",
-#   image: "Requiem.png",
-#   quantity: 0
-# )
-# azir_card17 = Card.create(
-#   player_id: azir.id,
-#   name: "Demacian Justice",
-#   cardtype: "Ability",
-#   rarity: "Gold",
-#   description: "Destroy the champion with the highest attack on your opponent's side of the field",
-#   effect: "props.demacianJustice()",
-#   image: "DemacianJustice.png",
-#   quantity: 0
-# )
+
 azir_card16 = Card.create(
   player_id: azir.id,
   name: "Youmuu's Ghostblade",
@@ -100,6 +81,16 @@ azir_card16 = Card.create(
   description: "700 bonus to all stats to equipped Assassin.",
   effect: "props.equip(props.selectedCard)",
   image: "YoumuusGhostblade.png",
+  quantity: 0
+)
+azir_card17 = Card.create(
+  player_id: azir.id,
+  name: "Requiem",
+  cardtype: "Ability",
+  rarity: "Diamond",
+  description: "Destroy every champion on your opponent's side of the field",
+  effect: "props.requiem()",
+  image: "Requiem.png",
   quantity: 0
 )
 azir_card18 = Card.create(
@@ -139,23 +130,23 @@ azir_card22 = ahri_card = Card.create(player_id: azir.id, cardtype: 'Champion', 
 description: "Unlike other foxes that roamed the woods of southern Ionia, Ahri had always felt a strange connection to the magical world around her; a connection that was somehow incomplete. Deep inside, she felt the skin she had been born into was an ill fit for ...", image: "Ahri.png")
 
 
-# azir_deckcard1 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card1.id)
-# azir_deckcard2 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card2.id)
-# azir_deckcard3 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card3.id)
-# azir_deckcard4 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card4.id)
-# azir_deckcard5 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card5.id)
-# azir_deckcard6 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card6.id)
-# azir_deckcard7 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card7.id)
-# azir_deckcard8 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card8.id)
-# azir_deckcard9 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card9.id)
-# azir_deckcard10 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card10.id)
-# azir_deckcard11 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card11.id)
-# azir_deckcard12 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card12.id)
-# azir_deckcard13 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card13.id)
+azir_deckcard1 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card1.id)
+azir_deckcard2 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card2.id)
+azir_deckcard3 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card3.id)
+azir_deckcard4 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card4.id)
+azir_deckcard5 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card5.id)
+azir_deckcard6 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card6.id)
+azir_deckcard7 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card7.id)
+azir_deckcard8 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card8.id)
+azir_deckcard9 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card9.id)
+azir_deckcard10 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card10.id)
+azir_deckcard11 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card11.id)
+azir_deckcard12 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card12.id)
+azir_deckcard13 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card13.id)
 azir_deckcard14 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card14.id)
 azir_deckcard15 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card15.id)
 azir_deckcard16 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card16.id)
-# azir_deckcard17 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card17.id)
+azir_deckcard17 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card17.id)
 azir_deckcard18 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card18.id)
 azir_deckcard19 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card19.id)
 azir_deckcard20 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card20.id)

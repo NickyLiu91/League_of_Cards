@@ -508,6 +508,7 @@ export default class Home extends React.Component {
               getCardInfo={this.getCardInfo}
               renderHome={this.renderHome}
               currentDeckCards={this.state.currentDeckCards}
+              addToDeck={this.addToDeck}
             />
             <SideBar
             currentDeckCards={this.state.currentDeckCards}
