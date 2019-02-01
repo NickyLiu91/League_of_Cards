@@ -32,7 +32,7 @@ const ActionBox = (props) => {
         <button onClick={props.cancel}>Cancel</button>
       </div>
     )
-  } else if (props.actionType === 'fieldMonster' && props.selectedCard.attacked === false) {
+  }  else if (props.actionType === 'fieldMonster' && props.selectedCard.attacked === false) {
     return(
       <div className="action-box-text" >
         <button onClick={event => {props.changePosition(props.selectedCard)}}>Change Position</button>
@@ -48,14 +48,24 @@ const ActionBox = (props) => {
         {props.selectedCard.name} has already attack this turn!
       </div>
     )
-  } else if (props.actionType === 'selectAttackTarget') {
+  } else if (props.actionType === 'selectAttackTarget' && props.player2Monsters === [{}, {}, {}, {}, {}]) {
+    return(
+      <div className="action-box-text" >
+        {props.selectedCard.name} will attack directly!!
+        <br/>
+        <button onClick={event => {props.directAttack(props.selectedCard)}}>OBLITERATE</button>
+        <br/>
+        <button onClick={props.cancel}>Cancel</button>
+      </div>
+    )
+  }else if (props.actionType === 'selectAttackTarget') {
     return(
       <div className="action-box-text" >
         Select a monster to Attack!
         <br/>
         {props.selectedCard.name} will attack {props.selectedTarget.name}!
         <br/>
-        <button onClick={event => {props.fight(props.selectedCard, props.selectedTarget, props.player1Monsters)}}>OBLITERATE</button>
+        <button onClick={event => {props.fight(props.selectedCard, props.selectedTarget)}}>OBLITERATE</button>
         <br/>
         <button onClick={props.cancel}>Cancel</button>
       </div>
