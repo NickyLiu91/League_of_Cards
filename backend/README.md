@@ -1,9 +1,9 @@
-README: League of Cards
+# README: League of Cards
 
 Online card game that is a fusion of
 Yugioh and League of Legends. A user can create an account, use gold to buy packs from the store and add cards to your collection, use cards from your collection to build a deck, and use that deck to fight enemies in both story and free duel. Enemies will unlock in free duel upon being defeated in story mode.
 
-Duel Rules:
+## Duel Rules:
 1. Both players start with 8000 lifepoints.
 2. Players will draw a card at the start of a turn. If a players hand has 7 or more cards the newest card will be sent to the graveyard.
 3. One monster can be summoned per turn, and a monster can attack once per turn.
@@ -12,3 +12,19 @@ Duel Rules:
 6. If the enemy has no monsters on the field a monsters attack will be subtracted directly from the enemy's lifepoints.
 7. If there is space on the spell field items can be played and equipped to a monster. The item will remain on the field as long as the monster does. If the monster is sent to the graveyard all items equipped to the monster will be sent to the graveyard also.
 8. The first player to run out of cards from their deck or reach 0 lifepoints loses the duel.
+
+### Prerequisites
+
+```
+Postgres
+Ruby on Rails
+React.js
+```
+
+### Installing
+
+```
+Run Postgres
+Rails S
+npm start > enter 'y' after to start on new port
+```
