@@ -42,35 +42,35 @@ zed_deck = Deck.create(name: "Zed Deck 1", player_id: zed.id)
 # heimerdinger_deck = Deck.create(name: "Heimerdinger Deck 1", player_id: heimerdinger.id)
 # malzahar_deck = Deck.create(name: "Malzahar Deck 1", player_id: malzahar.id)
 
-azir_card1 = aatrox_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Aatrox", title: "the Darkin Blade", role: "Fighter", rarity: "Bronze", attack: 8, magic: 3, defense: 4,
+azir_card1 = aatrox_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Aatrox", title: "the Darkin Blade", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 400,
 description: "Aatrox is a legendary warrior, one of only five that remain of an ancient race known as the Darkin. He wields his massive blade with grace and poise, slicing through legions in a style that is hypnotic to behold. With each foe felled, Aatrox's ...", image: "Aatrox.png")
-azir_card2 = aatrox_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Aatrox", title: "the Darkin Blade", role: "Fighter", rarity: "Bronze", attack: 8, magic: 3, defense: 4,
+azir_card2 = aatrox_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Aatrox", title: "the Darkin Blade", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 400,
 description: "Aatrox is a legendary warrior, one of only five that remain of an ancient race known as the Darkin. He wields his massive blade with grace and poise, slicing through legions in a style that is hypnotic to behold. With each foe felled, Aatrox's ...", image: "Aatrox.png")
-azir_card3 = aatrox_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Aatrox", title: "the Darkin Blade", role: "Fighter", rarity: "Bronze", attack: 8, magic: 3, defense: 4,
+azir_card3 = aatrox_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Aatrox", title: "the Darkin Blade", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 400,
 description: "Aatrox is a legendary warrior, one of only five that remain of an ancient race known as the Darkin. He wields his massive blade with grace and poise, slicing through legions in a style that is hypnotic to behold. With each foe felled, Aatrox's ...", image: "Aatrox.png")
-azir_card4 = ahri_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 3, magic: 8, defense: 4,
+azir_card4 = ahri_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 300, magic: 800, defense: 400,
 description: "Unlike other foxes that roamed the woods of southern Ionia, Ahri had always felt a strange connection to the magical world around her; a connection that was somehow incomplete. Deep inside, she felt the skin she had been born into was an ill fit for ...", image: "Ahri.png")
-azir_card5 = ahri_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 3, magic: 8, defense: 4,
+azir_card5 = ahri_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 300, magic: 800, defense: 400,
 description: "Unlike other foxes that roamed the woods of southern Ionia, Ahri had always felt a strange connection to the magical world around her; a connection that was somehow incomplete. Deep inside, she felt the skin she had been born into was an ill fit for ...", image: "Ahri.png")
-azir_card6 = ahri_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 3, magic: 8, defense: 4,
+azir_card6 = ahri_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 300, magic: 800, defense: 400,
 description: "Unlike other foxes that roamed the woods of southern Ionia, Ahri had always felt a strange connection to the magical world around her; a connection that was somehow incomplete. Deep inside, she felt the skin she had been born into was an ill fit for ...", image: "Ahri.png")
-azir_card7 = akali_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 6, magic: 10, defense: 3,
+azir_card7 = akali_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 650, magic: 1040, defense: 390,
 description: "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", image: "Akali.png")
-azir_card8 = akali_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 6, magic: 10, defense: 3,
+azir_card8 = akali_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 650, magic: 1040, defense: 390,
 description: "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", image: "Akali.png")
-azir_card9 = akali_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 6, magic: 10, defense: 3,
+azir_card9 = akali_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 650, magic: 1040, defense: 390,
 description: "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", image: "Akali.png")
-azir_card10 = alistar_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Alistar", title: "the Minotaur", role: "Tank", rarity: "Silver", attack: 7, magic: 6, defense: 11,
+azir_card10 = alistar_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Alistar", title: "the Minotaur", role: "Tank", rarity: "Silver", attack: 780, magic: 650, defense: 1170,
 description: "As the mightiest warrior to ever emerge from the Minotaur tribes of the Great Barrier, Alistar defended his tribe from Valoran's many dangers; that is, until the coming of the Noxian army. Alistar was lured from his village by the machinations of ...", image: "Alistar.png")
-azir_card11 = alistar_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Alistar", title: "the Minotaur", role: "Tank", rarity: "Silver", attack: 7, magic: 6, defense: 11,
+azir_card11 = alistar_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Alistar", title: "the Minotaur", role: "Tank", rarity: "Silver", attack: 780, magic: 650, defense: 1170,
 description: "As the mightiest warrior to ever emerge from the Minotaur tribes of the Great Barrier, Alistar defended his tribe from Valoran's many dangers; that is, until the coming of the Noxian army. Alistar was lured from his village by the machinations of ...", image: "Alistar.png")
-azir_card12 = alistar_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Alistar", title: "the Minotaur", role: "Tank", rarity: "Silver", attack: 7, magic: 6, defense: 11,
+azir_card12 = alistar_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Alistar", title: "the Minotaur", role: "Tank", rarity: "Silver", attack: 780, magic: 650, defense: 1170,
 description: "As the mightiest warrior to ever emerge from the Minotaur tribes of the Great Barrier, Alistar defended his tribe from Valoran's many dangers; that is, until the coming of the Noxian army. Alistar was lured from his village by the machinations of ...", image: "Alistar.png")
-azir_card13 = amumu_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Amumu", title: "the Sad Mummy", role: "Tank", rarity: "Bronze", attack: 2, magic: 8, defense: 6,
+azir_card13 = amumu_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Amumu", title: "the Sad Mummy", role: "Tank", rarity: "Bronze", attack: 200, magic: 800, defense: 600,
 description: "''Solitude can be lonelier than death.''<br><br>A lonely and melancholy soul from ancient Shurima, Amumu roams the world in search of a friend. Cursed by an ancient spell, he is doomed to remain alone forever, as his touch is death and his affection ...", image: "Amumu.png")
-azir_card14 = amumu_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Amumu", title: "the Sad Mummy", role: "Tank", rarity: "Bronze", attack: 2, magic: 8, defense: 6,
+azir_card14 = amumu_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Amumu", title: "the Sad Mummy", role: "Tank", rarity: "Bronze", attack: 200, magic: 800, defense: 600,
 description: "''Solitude can be lonelier than death.''<br><br>A lonely and melancholy soul from ancient Shurima, Amumu roams the world in search of a friend. Cursed by an ancient spell, he is doomed to remain alone forever, as his touch is death and his affection ...", image: "Amumu.png")
-azir_card15 = amumu_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Amumu", title: "the Sad Mummy", role: "Tank", rarity: "Bronze", attack: 2, magic: 8, defense: 6,
+azir_card15 = amumu_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Amumu", title: "the Sad Mummy", role: "Tank", rarity: "Bronze", attack: 200, magic: 800, defense: 600,
 description: "''Solitude can be lonelier than death.''<br><br>A lonely and melancholy soul from ancient Shurima, Amumu roams the world in search of a friend. Cursed by an ancient spell, he is doomed to remain alone forever, as his touch is death and his affection ...", image: "Amumu.png")
 
 azir_card16 = Card.create(
@@ -124,9 +124,9 @@ azir_card20 = Card.create(
   quantity: 0
 )
 
-azir_card21 = akali_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 6, magic: 10, defense: 3,
+azir_card21 = akali_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 650, magic: 1040, defense: 390,
 description: "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", image: "Akali.png")
-azir_card22 = ahri_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 3, magic: 8, defense: 4,
+azir_card22 = ahri_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 300, magic: 800, defense: 400,
 description: "Unlike other foxes that roamed the woods of southern Ionia, Ahri had always felt a strange connection to the magical world around her; a connection that was somehow incomplete. Deep inside, she felt the skin she had been born into was an ill fit for ...", image: "Ahri.png")
 
 

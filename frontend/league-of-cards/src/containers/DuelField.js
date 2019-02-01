@@ -916,6 +916,7 @@ export default class DuelField extends React.Component {
       if (emptyMonsterSlot !== undefined ) {
         computerHand = computerHand.splice(card => card.id !== strongestPossibleHandMonster.id)
         computerMonsters.splice(emptyMonsterSlot, 1, strongestPossibleHandMonster)
+        strongestPossibleHandMonster.position = "attack"
       }
 
       items.forEach(item => {
