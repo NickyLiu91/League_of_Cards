@@ -16,13 +16,15 @@ export default class CardStore extends React.Component {
   }
 
   getFullPack = () => {
-    this.clearResults()
-    for (var i = 0; i < 9; i++) {
-      this.addCardToCollection()
+    if (this.props.gold >= 100) {
+      this.clearResults()
+      for (var i = 0; i < 9; i++) {
+        this.addCardToCollection()
+      }
+      this.setState({
+        results: cardResults
+      }, () => {this.props.buyPack()})
     }
-    this.setState({
-      results: cardResults
-    })
   }
 
   addCardToCollection = () => {
@@ -97,6 +99,9 @@ export default class CardStore extends React.Component {
           </div>
           <div id="store">
             <div id="pack">
+              <div id="gold-box">
+                <h1>{this.props.gold}</h1>
+              </div>
               <img id="pack-image" onClick={this.getFullPack} src="image/LeaguePack.jpg"/>
             </div>
           </div>

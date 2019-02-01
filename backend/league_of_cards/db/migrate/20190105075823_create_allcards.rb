@@ -6,6 +6,8 @@ class CreateAllcards < ActiveRecord::Migration[5.2]
       t.string :title
       t.string :role
       t.string :rarity
+      t.string :cardtype
+      t.string :effect
       t.integer :attack
       t.integer :magic
       t.integer :defense

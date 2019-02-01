@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_08_082853) do
+ActiveRecord::Schema.define(version: 2019_01_05_075823) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2019_01_08_082853) do
     t.string "title"
     t.string "role"
     t.string "rarity"
+    t.string "cardtype"
+    t.string "effect"
     t.integer "attack"
     t.integer "magic"
     t.integer "defense"
@@ -29,9 +31,6 @@ ActiveRecord::Schema.define(version: 2019_01_08_082853) do
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "cardtype"
-    t.string "effect"
-    t.integer "target"
   end
 
   create_table "cards", force: :cascade do |t|
@@ -39,19 +38,18 @@ ActiveRecord::Schema.define(version: 2019_01_08_082853) do
     t.string "title"
     t.string "role"
     t.string "description"
+    t.string "image"
     t.string "rarity"
+    t.string "cardtype"
+    t.string "effect"
     t.integer "attack"
     t.integer "magic"
     t.integer "defense"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "quantity"
     t.integer "key"
-    t.string "image"
     t.integer "player_id"
-    t.string "cardtype"
-    t.string "effect"
-    t.integer "target"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "deckcards", force: :cascade do |t|
@@ -70,11 +68,13 @@ ActiveRecord::Schema.define(version: 2019_01_08_082853) do
 
   create_table "players", force: :cascade do |t|
     t.string "name"
+    t.string "image"
+    t.string "password_digest"
+    t.string "level"
+    t.integer "gold"
+    t.boolean "computer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "image"
-    t.boolean "computer"
-    t.string "password_digest"
   end
 
 end

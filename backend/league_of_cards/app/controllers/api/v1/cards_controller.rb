@@ -87,7 +87,7 @@ class Api::V1::CardsController < ApplicationController
   def card_params
     params.require(:card).permit(:id, :name, :title, :role, :rarity,
     :attack, :magic, :defense, :description, :quantity, :key, :image, :player_id,
-    :cardtype, :effect, :target)
+    :cardtype, :effect)
   end
 
   def find_card

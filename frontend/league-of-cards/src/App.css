@@ -406,3 +406,7 @@ li{
   position: relative;
   top: 200px;
 }
+
+#gold-box {
+  background-color: black
+}
