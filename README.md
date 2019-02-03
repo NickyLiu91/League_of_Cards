@@ -25,6 +25,8 @@ React.js
 
 ```
 Run Postgres
+rails db: create
+rails db: migrate
 rails s
 npm start then enter 'y' after to start on new port
 ```
