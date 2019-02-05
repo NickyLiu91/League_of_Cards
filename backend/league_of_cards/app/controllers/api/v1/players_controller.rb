@@ -47,7 +47,7 @@ class Api::V1::PlayersController < ApplicationController
   private
 
   def player_params
-    params.require(:player).permit(:name, :image, :computer, :image, :password_digest, :gold, :level)
+    params.require(:player).permit(:name, :image, :computer, :image, :password_digest, :gold, :level, :defeated, :completed)
   end
 
   def find_player
