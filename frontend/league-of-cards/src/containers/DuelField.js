@@ -32,7 +32,9 @@ export default class DuelField extends React.Component {
     actionType: '',
     selectedCard: '',
     selectedTarget: '',
-    selectedItemTarget: ''
+    selectedItemTarget: '',
+    rewardCard: '',
+    display: ''
   }
 
   swapCurrentPlayer = () => {
@@ -67,10 +69,6 @@ export default class DuelField extends React.Component {
       if (this.state.player1Deck.length > 0) {
         newCard = newDeck.pop()
         newHand = [...newHand, newCard]
-      } else {
-        this.setState({
-          player1Life: -9999
-        })
       }
     }
     this.setState({
@@ -89,10 +87,6 @@ export default class DuelField extends React.Component {
         newCard = newDeck.pop()
         console.log(newCard)
         newHand = [...newHand, newCard]
-      } else {
-        this.setState({
-          player2Life: -9999
-        })
       }
     }
     this.setState({
@@ -460,6 +454,10 @@ export default class DuelField extends React.Component {
             player1Life: this.state.player1Life - (monster2.defense - this.highestAttack(monster1)),
             selectedTarget: '',
             actionType: ''
+          }, () => {
+            if (this.state.player1Life <= 0) {
+              this.lose()
+            }
           })
         }
       } else if (monster2.position === 'attack'){
@@ -469,15 +467,26 @@ export default class DuelField extends React.Component {
             player2Life: this.state.player2Life - (this.highestAttack(monster1) - this.highestAttack(monster2)),
             selectedTarget: '',
             actionType: ''
-          }, () => {this.sendEnemyFromFieldToGraveyard(monster2)})
+          }, () => {
+            if (this.state.player2life <= 0) {
+              this.win()
+            } else {
+              this.sendEnemyFromFieldToGraveyard(monster2)
+            }
+          })
         } else if (this.highestAttack(monster1) < this.highestAttack(monster2)){
           this.setState({
             player1Life: this.state.player1Life - (this.highestAttack(monster2) - this.highestAttack(monster1)),
             selectedTarget: '',
             actionType: ''
-          }, () => {this.sendOwnFromFieldToGraveyard(monster1)})
+          }, () => {
+            if (this.state.player1life <= 0) {
+              this.lose()
+            } else {
+              this.sendOwnFromFieldToGraveyard(monster1)
+            }
+          })
         } else if (this.highestAttack(monster1) === this.highestAttack(monster2)){
-
           this.sendBothFromFieldToGraveyard(monster1, monster2)
         }
       }
@@ -554,9 +563,7 @@ export default class DuelField extends React.Component {
           player1Hand: [...this.state.player1Hand, newCard]
         })
       } else {
-        this.setState({
-          player1Life: -9999
-        })
+        this.lose()
       }
     } else {
       const newDeck = this.state.player2Deck
@@ -568,11 +575,112 @@ export default class DuelField extends React.Component {
           player2Hand: [...this.state.player2Hand, newCard]
         })
       } else {
-        this.setState({
-          player2Life: -9999
-        })
+        this.win()
       }
     }
+  }
+
+  lose = () => {
+    this.setState({
+      display: 'Lose'
+    })
+  }
+
+  win = () => {
+    let listOfCards = this.state.player2Deck
+    let number = Math.floor(Math.random() * 100) + 1
+    let newCard
+    //
+    const diamonds = listOfCards.filter(obj => obj.rarity === "Diamond")
+    const platinums = listOfCards.filter(obj => obj.rarity === "Platinum")
+    const golds = listOfCards.filter(obj => obj.rarity === "Gold")
+    const silvers = listOfCards.filter(obj => obj.rarity === "Silver")
+    const bronzes = listOfCards.filter(obj => obj.rarity === "Bronze")
+    //
+    if (number > 98) {
+      if (diamonds.length === 0 && platinums.length === 0 && golds.length === 0 && silvers.length === 0) {
+        newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
+      } else if (diamonds.length === 0 && platinums.length === 0 && golds.length === 0) {
+        newCard = silvers[Math.floor(Math.random() * silvers.length)]
+      } else if (diamonds.length === 0 && platinums.length === 0) {
+        newCard = golds[Math.floor(Math.random() * golds.length)]
+      } else if (diamonds.length === 0) {
+        newCard = platinums[Math.floor(Math.random() * platinums.length)]
+      } else {
+        newCard = diamonds[Math.floor(Math.random() * diamonds.length)]
+      }
+    } else if ( number > 93) {
+      if (platinums.length === 0 && golds.length === 0 && silvers.length === 0) {
+        newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
+      } else if (platinums.length === 0 && golds.length === 0 ) {
+        newCard = silvers[Math.floor(Math.random() * silvers.length)]
+      } else if (platinums.length === 0) {
+        newCard = golds[Math.floor(Math.random() * golds.length)]
+      } else {
+        newCard = platinums[Math.floor(Math.random() * platinums.length)]
+      }
+    } else if ( number > 85) {
+      if (golds.length === 0 && silvers.length === 0) {
+        newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
+      } else if (golds.length === 0 ) {
+        newCard = silvers[Math.floor(Math.random() * silvers.length)]
+      } else {
+        newCard = golds[Math.floor(Math.random() * golds.length)]
+      }
+    } else if ( number > 50) {
+      if (silvers.length === 0) {
+        newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
+      } else {
+        newCard = silvers[Math.floor(Math.random() * silvers.length)]
+      }
+    } else {
+      newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
+    }
+    console.log(newCard)
+
+    this.setState({
+      rewardCard: newCard,
+      display: 'Win'
+    })
+
+    fetch("http://localhost:3000/api/v1/cards", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(
+          {
+            player_id: this.state.player1.id,
+            name: newCard.name,
+            title: newCard.title,
+            role: newCard.role,
+            rarity: newCard.rarity,
+            attack: newCard.attack,
+            magic: newCard.magic,
+            defense: newCard.defense,
+            description: newCard.description,
+            image: newCard.image,
+            cardtype: newCard.cardtype,
+            effect: newCard.effect,
+            target: newCard.target
+          }
+      )})
+      .then(fetch(`http://localhost:3000/api/v1/players/${this.state.player1.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(
+            {
+              gold: this.props.gold + 30
+            }
+      )})
+    )
+    .then(res => {
+      this.props.reward()
+    })
   }
 
   showState = () => {
@@ -934,6 +1042,9 @@ export default class DuelField extends React.Component {
           if (Object.keys(monster).length !== 0 && monster.attacked === false) {
             if (this.emptyField(playerMonsters)) {
               playerLife = playerLife - this.highestAttack(monster)
+              if (playerLife <= 0) {
+                this.lose()
+              }
             } else if (this.findStrongestKillablePlayerMonster(monster, playerMonsters)) {
               monster.position = "attack"
 
@@ -952,6 +1063,9 @@ export default class DuelField extends React.Component {
                 computerGraveyard = [...computerGraveyard, monster]
               } else if (attackTarget.position === "attack" && this.highestAttack(attackTarget) < this.highestAttack(monster)) {
                 playerLife = playerLife - (this.highestAttack(monster) - this.highestAttack(attackTarget))
+                if (playerLife <= 0) {
+                  this.lose()
+                }
               }
             } else {
               if (monster.defense > this.highestAttack(monster) || monster.attack < 1500) {
@@ -1602,7 +1716,7 @@ directAttack = (monster) => {
 }
 
   render() {
-    if (this.state.player1Life <= 0) {
+    if (this.state.display === 'Lose') {
       return(
         <div id="post-match">
         <img id="shadow-isles" src="image/shadow-isles.jpeg" />
@@ -1613,11 +1727,12 @@ directAttack = (monster) => {
           </div>
         </div>
       )
-    } else if (this.state.player2Life <= 0) {
+    } else if (this.state.display === 'Win') {
       return(
         <div id="post-match">
           <img id="targon" src="image/targon.jpeg" />
           <div id="post-match-message">
+            <h1>You have recieved {this.state.rewardCard.name}!</h1>
             <h1>CONGRATULATIONS!</h1>
             <h1>YOU HAVE DEFEATED YOUR OPPONENT!</h1>
           </div>
