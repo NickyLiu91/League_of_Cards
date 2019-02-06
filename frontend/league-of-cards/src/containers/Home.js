@@ -300,11 +300,36 @@ export default class Home extends React.Component {
       fetch(`http://localhost:3000/api/v1/decks/${this.state.currentDeck.id}`)
       .then(res => res.json())
       .then(json => {this.setState({
-          currentDeckCards: json.cards
+          currentDeckCards: json.cards,
+        })
+      })
+      .then(res => {
+        fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/cards`)
+        .then(response => response.json())
+        .then(json => this.setState({
+          currentPlayerCollection: json
         }, () => {
+          let newCollection = this.state.collection.map(card => {
+              card.quantity = this.state.currentPlayerCollection.filter(cardObj => cardObj.name === card.name).length;
+              return card
+            }
+          )
+
           this.setState({
-            render: 'collection'
+            noDupesCurrentPlayerCollection: newCollection
+          }, () => {
+            this.setState({
+              render: 'collection'
+            })
           })
+        }))
+      })
+    } else if (event.target.className === 'store'){
+      fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`)
+      .then(res => res.json())
+      .then(json => {this.setState({
+          gold: json.gold,
+          render: 'store'
         })
       })
     } else {
@@ -444,100 +469,10 @@ export default class Home extends React.Component {
   }
 
   reward = () => {
-    let listOfCards = this.state.player2deck
-
-    let number = Math.floor(Math.random() * 100) + 1
-    let newCard
-
-    const diamonds = listOfCards.filter(obj => obj.rarity === "Diamond")
-    const platinums = listOfCards.filter(obj => obj.rarity === "Platinum")
-    const golds = listOfCards.filter(obj => obj.rarity === "Gold")
-    const silvers = listOfCards.filter(obj => obj.rarity === "Silver")
-    const bronzes = listOfCards.filter(obj => obj.rarity === "Bronze")
-
-    if (number > 98) {
-      if (diamonds.length === 0 && platinums.length === 0 && golds.length === 0 && silvers.length === 0) {
-        newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
-      } else if (diamonds.length === 0 && platinums.length === 0 && golds.length === 0) {
-        newCard = silvers[Math.floor(Math.random() * silvers.length)]
-      } else if (diamonds.length === 0 && platinums.length === 0) {
-        newCard = golds[Math.floor(Math.random() * golds.length)]
-      } else if (diamonds.length === 0) {
-        newCard = platinums[Math.floor(Math.random() * platinums.length)]
-      } else {
-        newCard = diamonds[Math.floor(Math.random() * diamonds.length)]
-      }
-    } else if ( number > 93) {
-      if (platinums.length === 0 && golds.length === 0 && silvers.length === 0) {
-        newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
-      } else if (platinums.length === 0 && golds.length === 0 ) {
-        newCard = silvers[Math.floor(Math.random() * bronzes.length)]
-      } else if (platinums.length === 0) {
-        newCard = golds[Math.floor(Math.random() * bronzes.length)]
-      } else {
-        newCard = platinums[Math.floor(Math.random() * bronzes.length)]
-      }
-    } else if ( number > 85) {
-      if (golds.length === 0 && silvers.length === 0) {
-        newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
-      } else if (golds.length === 0 ) {
-        newCard = silvers[Math.floor(Math.random() * bronzes.length)]
-      } else {
-        newCard = golds[Math.floor(Math.random() * bronzes.length)]
-      }
-    } else if ( number > 50) {
-      if (silvers.length === 0) {
-        newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
-      } else {
-        newCard = silvers[Math.floor(Math.random() * bronzes.length)]
-      }
-    } else {
-      newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
-    }
-
-    fetch("http://localhost:3000/api/v1/cards", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(
-          {
-            player_id: this.props.currentPlayer.id,
-            key: newCard.key,
-            name: newCard.name,
-            title: newCard.title,
-            role: newCard.role,
-            rarity: newCard.rarity,
-            attack: newCard.attack,
-            magic: newCard.magic,
-            defense: newCard.defense,
-            description: newCard.description,
-            image: newCard.image,
-            cardtype: newCard.cardtype,
-            effect: newCard.effect,
-            target: newCard.target
-          }
-      )})
-      .then(response => this.props.updateCurrentPlayerCollection())
-      .then(fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify(
-            {
-              gold: this.state.gold + 30
-            }
-      )})
-      .then(res => {
-        this.setState({
-          gold: this.state.gold + 30
-        })
-      }))
+    this.setState({
+      gold: this.state.gold + 30
+    })
   }
-
 
   render() {
     if (this.state.render === 'home' && this.state.loggedIn === false) {
@@ -694,6 +629,9 @@ export default class Home extends React.Component {
             player2Deck={this.state.player2Deck}
             renderHome={this.renderHome}
             renderWin={this.renderWin}
+            updateCurrentPlayerCollection={this.updateCurrentPlayerCollection}
+            reward={this.reward}
+            gold={this.state.gold}
           />
         </div>
       )
