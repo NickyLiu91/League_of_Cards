@@ -577,16 +577,31 @@ export default class DuelField extends React.Component {
 
   drawCard = () => {
     if (this.state.currentPlayer === 'player1') {
-      const newDeck = this.state.player1Deck
-      let newCard
-      if (this.state.player1Deck.length > 0) {
-        newCard = newDeck.pop()
-        this.setState({
-          player1Deck: newDeck,
-          player1Hand: [...this.state.player1Hand, newCard]
-        })
+      if (this.state.player1Hand.length < 7) {
+        console.log(this.state.player1Hand.length)
+        const newDeck = this.state.player1Deck
+        let newCard
+        if (this.state.player1Deck.length > 0) {
+          newCard = newDeck.pop()
+          this.setState({
+            player1Deck: newDeck,
+            player1Hand: [...this.state.player1Hand, newCard]
+          })
+        } else {
+          this.lose()
+        }
       } else {
-        this.lose()
+        const newDeck = this.state.player1Deck
+        let newCard
+        if (this.state.player1Deck.length > 0) {
+          newCard = newDeck.pop()
+          this.setState({
+            player1Deck: newDeck,
+            player1Graveyard: [...this.state.player1Graveyard, newCard]
+          })
+        } else {
+          this.lose()
+        }
       }
     } else {
       const newDeck = this.state.player2Deck
@@ -988,7 +1003,7 @@ export default class DuelField extends React.Component {
 
     let strongerEnemyMonsters = this.getStrongerEnemyMonsters(strongestMonster, this.state.player1Monsters)
 
-    if (strongerEnemyMonsters.length > 0 && computerHand.filter(card => card.name === "Requiem").length > 0) {
+    if (strongerEnemyMonsters.length > 1 && computerHand.filter(card => card.name === "Requiem").length > 0) {
       let reqiuemCard = computerHand.find(card => card.name === "Requiem")
       computerHand = computerHand.filter(card => card.id !== reqiuemCard.id)
 
@@ -1008,32 +1023,55 @@ export default class DuelField extends React.Component {
 
       playerMonsters = [{}, {}, {}, {}, {}]
       playerSpells = [{}, {}, {}, {}, {}]
-    }
-    else if (strongerEnemyMonsters.length > 1 && computerHand.filter(card => card.name === "Noxian Guillotine").length > 0) {
-      while (strongerEnemyMonsters.length > 0 && computerHand.filter(card => card.name === "Noxian Guillotine").length > 0) {
-        let cardToUse = computerHand.find(card => card.name === "Noxian Guilltoine")
-        let cardToUseSlot = computerHand.findIndex(card => card.name === "Noxian Guilltoine")
+    } else if (strongerEnemyMonsters.length > 0) {
+      if (computerHand.filter(card => card.name === "Noxian Guillotine").length > 0) {
+        while (strongerEnemyMonsters.length > 0 && computerHand.filter(card => card.name === "Noxian Guillotine").length > 0) {
+          // console.log("EXECUTE TIME")
+          let cardToUse = computerHand.find(card => card.name === "Noxian Guillotine")
+          let cardToUseSlot = computerHand.findIndex(card => card.id === cardToUse.id)
 
-        computerHand.splice(cardToUseSlot, 1)
+          computerHand.splice(cardToUseSlot, 1)
 
-        computerGraveyard = [...computerGraveyard, cardToUse]
+          computerGraveyard = [...computerGraveyard, cardToUse]
 
-        let monsterToRemove = playerMonsters.find(card => card.id === strongerEnemyMonsters[0].id)
-        let monsterToRemoveSlot = playerMonsters.findIndex(card => card.id === strongerEnemyMonsters[0].id)
+          let monsterToRemove = playerMonsters.find(card => card.id === strongerEnemyMonsters[0].id)
+          let monsterToRemoveSlot = playerMonsters.findIndex(card => card.id === strongerEnemyMonsters[0].id)
 
-        playerMonsters.splice(monsterToRemoveSlot, 1, {})
+          playerMonsters.splice(monsterToRemoveSlot, 1, {})
 
-        for (let i = 0; i < playerSpells.length; i++) {
-          if (Object.keys(playerSpells[i]).length !== 0 && playerSpells[i].target.id === monsterToRemove.id){
-            playerGraveyard = [...playerGraveyard, playerSpells[i]]
-            playerSpells.splice(i, 1, {})
+          for (let i = 0; i < playerSpells.length; i++) {
+            if (Object.keys(playerSpells[i]).length !== 0 && playerSpells[i].target.id === monsterToRemove.id){
+              playerGraveyard = [...playerGraveyard, playerSpells[i]]
+              playerSpells.splice(i, 1, {})
+            }
           }
+
+          playerGraveyard = [...playerGraveyard, monsterToRemove]
+
+          strongerEnemyMonsters.splice(0, 1)
         }
+      } else if (computerHand.filter(card => card.name === "Requiem").length > 0) {
+        let reqiuemCard = computerHand.find(card => card.name === "Requiem")
+        computerHand = computerHand.filter(card => card.id !== reqiuemCard.id)
 
-        playerGraveyard = [...playerGraveyard, monsterToRemove]
+        computerGraveyard = [...computerGraveyard, reqiuemCard]
 
-        strongerEnemyMonsters.spice(0, 1)
+        playerMonsters.forEach(monster => {
+          if (Object.keys(monster).length > 0) {
+            playerGraveyard = [...playerGraveyard, monster]
+          }
+        })
+
+        playerSpells.forEach(spell => {
+          if (playerMonsters.includes(spell.target)) {
+            playerGraveyard = [...playerGraveyard, spell]
+          }
+        })
+
+        playerMonsters = [{}, {}, {}, {}, {}]
+        playerSpells = [{}, {}, {}, {}, {}]
       }
+
     }
 
     computerMonsters.forEach(
@@ -1052,6 +1090,15 @@ export default class DuelField extends React.Component {
 
             playerMonsters.splice(attackTargetSlot, 1, {})
             playerGraveyard = [...playerGraveyard, attackTarget]
+
+            for (let i = 0; i < playerSpells.length; i++) {
+              if (Object.keys(playerSpells[i]).length !== 0 && playerSpells[i].target.id === attackTarget.id){
+                console.log(attackTarget.idea)
+                console.log(playerSpells[i].target)
+                playerGraveyard = [...playerGraveyard, playerSpells[i]]
+                playerSpells.splice(i, 1, {})
+              }
+            }
 
             monster.attacked = true
 
@@ -1080,7 +1127,9 @@ export default class DuelField extends React.Component {
       console.log(emptyMonsterSlot)
 
       if (emptyMonsterSlot !== undefined ) {
-        computerHand = computerHand.splice(card => card.id !== strongestPossibleHandMonster.id)
+        let monsterToPlaySlot = computerHand.findIndex(card => card.id === strongestPossibleHandMonster.id)
+
+        computerHand.splice(monsterToPlaySlot, 1)
         computerMonsters.splice(emptyMonsterSlot, 1, strongestPossibleHandMonster)
         strongestPossibleHandMonster.position = "attack"
       }
@@ -1112,12 +1161,21 @@ export default class DuelField extends React.Component {
               playerMonsters.splice(attackTargetSlot, 1, {})
               playerGraveyard = [...playerGraveyard, attackTarget]
 
+              for (let i = 0; i < playerSpells.length; i++) {
+                if (Object.keys(playerSpells[i]).length !== 0 && playerSpells[i].target.id === attackTarget.id){
+                  console.log(attackTarget.idea)
+                  console.log(playerSpells[i].target)
+                  playerGraveyard = [...playerGraveyard, playerSpells[i]]
+                  playerSpells.splice(i, 1, {})
+                }
+              }
+
               monster.attacked = true
 
               if (attackTarget.position === "attack" && this.highestAttack(attackTarget) === this.highestAttack(monster)) {
                 let attackingMonsterSlot = computerMonsters.findIndex(card => card.id === monster.id)
 
-                computerMonsters.splice(attackingMonsterSlot, 1)
+                computerMonsters.splice(attackingMonsterSlot, 1, {})
                 computerGraveyard = [...computerGraveyard, monster]
               } else if (attackTarget.position === "attack" && this.highestAttack(attackTarget) < this.highestAttack(monster)) {
                 playerLife = playerLife - (this.highestAttack(monster) - this.highestAttack(attackTarget))
@@ -1907,6 +1965,7 @@ directAttack = (monster) => {
                 selectedItemTarget={this.state.selectedItemTarget}
                 equip={this.equip}
                 directAttack={this.directAttack}
+                noxianGuillotine={this.noxianGuillotine}
                 // longSword={this.longSword}
                 // bfSword={this.bfSword}
                 // amplifyingTome={this.amplifyingTome}
