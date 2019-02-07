@@ -268,6 +268,8 @@ export default class Home extends React.Component {
     let deckCardToDelete
     console.log(this.state.currentDeck.id)
     console.log(card.id)
+    console.log(this.state.currentDeckCards)
+    console.log(this.state.currentDeckCards.filter(cardObj => cardObj.id !== card.id))
     // let removeIndex = newDeckCards.findIndex(
     //   cardObj => cardObj === card.name
     // )
@@ -279,13 +281,12 @@ export default class Home extends React.Component {
     .then(json => deckCardToDelete = json.filter(
       obj => obj.card.id === card.id && obj.deck.id === this.state.currentDeck.id
     )[0])
-    .then(res => fetch(`http://localhost:3000/api/v1/deckcards/${deckCardToDelete.id}`, {
-      method: 'DELETE'
-    }))
     .then(response => {
       this.setState({
         currentDeckCards: this.state.currentDeckCards.filter(cardObj => cardObj.id !== card.id)
-      })
+      }, () => {fetch(`http://localhost:3000/api/v1/deckcards/${deckCardToDelete.id}`, {
+        method: 'DELETE'
+      })})
     })
   }
 

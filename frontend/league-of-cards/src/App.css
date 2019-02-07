@@ -125,7 +125,7 @@ img {
 
 #sidebar {
   list-style-type:none;
-  width: 6000px;
+  width: 200px;
   border-style: solid;
   border-color: gold;
   margin: 0;
@@ -136,7 +136,8 @@ img {
   /*top: 53px;*/
   height: 800px;
   display: inline-block;
-  overflow: scroll;
+  /*overflow: scroll;*/
+  /*overflow-y: overlay;*/
 }
 
 .sidebar-card {
