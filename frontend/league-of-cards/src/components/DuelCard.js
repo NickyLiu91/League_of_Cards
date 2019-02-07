@@ -6,7 +6,7 @@ const DuelCard = (props) => {
       <div className="duel-card" >
       </div>
     )
-  } else if(props.duelCard.position != ''){
+  } else if (props.duelCard.position != ''){
     return(
       <div className={`duel-card ${props.duelCard.position}`} onClick={event => props.clickAction(props.duelCard)}>
         <div>Name: {props.duelCard.name}, {props.duelCard.title}</div>

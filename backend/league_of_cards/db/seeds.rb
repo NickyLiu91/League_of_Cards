@@ -128,7 +128,24 @@ azir_card21 = akali_card = Card.create(player_id: azir.id, cardtype: 'Champion',
 description: "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", image: "Akali.png")
 azir_card22 = ahri_card = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 300, magic: 800, defense: 400,
 description: "Unlike other foxes that roamed the woods of southern Ionia, Ahri had always felt a strange connection to the magical world around her; a connection that was somehow incomplete. Deep inside, she felt the skin she had been born into was an ill fit for ...", image: "Ahri.png")
-
+# azir_card23 = Card.create(
+#   name: "Noxian Guillotine",
+#   cardtype: "Ability",
+#   rarity: "Diamond",
+#   description: "Destroy any champion on your opponent's side of the field",
+#   effect: "props.noxianGuillotine(props.selectedCard)",
+#   image: "NoxianGuillotine.png",
+#   quantity: 0
+# )
+# azir_card24 = Card.create(
+#   name: "Noxian Guillotine",
+#   cardtype: "Ability",
+#   rarity: "Diamond",
+#   description: "Destroy any champion on your opponent's side of the field",
+#   effect: "props.noxianGuillotine(props.selectedCard)",
+#   image: "NoxianGuillotine.png",
+#   quantity: 0
+# )
 
 azir_deckcard1 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card1.id)
 azir_deckcard2 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card2.id)
@@ -145,14 +162,15 @@ azir_deckcard12 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card12.id
 azir_deckcard13 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card13.id)
 azir_deckcard14 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card14.id)
 azir_deckcard15 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card15.id)
-azir_deckcard16 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card16.id)
-azir_deckcard17 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card17.id)
-azir_deckcard18 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card18.id)
-azir_deckcard19 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card19.id)
-azir_deckcard20 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card20.id)
-azir_deckcard21 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card21.id)
-azir_deckcard22 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card22.id)
+# azir_deckcard16 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card16.id)
+# azir_deckcard17 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card17.id)
+# azir_deckcard18 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card18.id)
+# azir_deckcard19 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card19.id)
+# azir_deckcard20 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card20.id)
+# azir_deckcard21 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card21.id)
+# azir_deckcard22 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card22.id)
 # azir_deckcard23 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card23.id)
+# azir_deckcard24 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card24.id)
 
 #
 # atem_deckcard1 = Deckcard.create(deck_id: atem_deck.id, card_id: zed_card.id)
