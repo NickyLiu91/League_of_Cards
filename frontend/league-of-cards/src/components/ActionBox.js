@@ -46,6 +46,7 @@ const ActionBox = (props) => {
     return(
       <div className="action-box-text" >
         {props.selectedCard.description}?
+        <br/>
         <button onClick={props.getEnemyTargetMode}>Yes</button>
         <br/>
         <button onClick={props.cancel}>Cancel</button>
@@ -86,7 +87,7 @@ const ActionBox = (props) => {
         <br/>
         Cast {props.selectedCard.name} on {props.selectedTarget.name}!
         <br/>
-        <button onClick={event => {props.NoxianGuillotine(props.selectedCard, props.selectedTarget)}}>Yes</button>
+        <button onClick={event => {props.noxianGuillotine(props.selectedCard, props.selectedTarget)}}>Yes</button>
         <br/>
         <button onClick={props.cancel}>Cancel</button>
       </div>
