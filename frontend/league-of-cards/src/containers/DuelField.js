@@ -1828,6 +1828,10 @@ directAttack = (monster) => {
     player2Life: this.state.player2Life - this.highestAttack(monster),
     selectedCard: '',
     actionType: ''
+  }, () => {
+    if (this.state.player2Life <= 0) {
+      this.win()
+    }
   })
 }
 
@@ -1848,7 +1852,7 @@ directAttack = (monster) => {
         <div id="post-match">
           <img id="targon" src="image/targon.jpeg" />
           <div id="post-match-message">
-            <h1>You have recieved {this.state.rewardCard.name}!</h1>
+            <h1>You have recieved {this.state.rewardCard.name} and 30 gold!</h1>
             <h1>CONGRATULATIONS!</h1>
             <h1>YOU HAVE DEFEATED YOUR OPPONENT!</h1>
           </div>
