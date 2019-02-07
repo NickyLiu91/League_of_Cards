@@ -125,7 +125,7 @@ img {
 
 #sidebar {
   list-style-type:none;
-  width: 200px;
+  width: 6000px;
   border-style: solid;
   border-color: gold;
   margin: 0;
@@ -134,8 +134,9 @@ img {
   right: 0;
   top: 0;
   /*top: 53px;*/
-  height: 100%;
+  height: 800px;
   display: inline-block;
+  overflow: scroll;
 }
 
 .sidebar-card {
@@ -144,7 +145,25 @@ img {
   border-top-color: gold;
 }
 
-#graveyard-bar, .action-box-text {
+#graveyard-bar{
+  list-style-type:none;
+  height: 600px;
+  width: 100%;
+  border-style: solid;
+  border-color: blue;
+  color: blue;
+  margin: 0;
+  padding: 0;
+  position: sticky;
+  right: 0;
+  top: 0;
+  /*top: 53px;*/
+  /*height: 100%;*/
+  display: inline-block;
+  overflow: scroll;
+}
+
+.action-box-text {
   list-style-type:none;
   width: 100%;
   border-style: solid;
