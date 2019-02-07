@@ -130,23 +130,45 @@ const ActionBox = (props) => {
       </div>
     )
   } else if (props.actionType === 'displayPlayer1Graveyard') {
-    return(
-      <ul id="graveyard-bar">
-      <div id="graveyard-bar-title">Graveyard</div>
-        {props.player1Graveyard.map(
-          graveyardCardObj => <GraveyardCard key={cardKey++} card={graveyardCardObj}/>
-        )}
-      </ul>
-    )
+    // if (props.player1Graveyard.length > 10) {
+      return(
+        <ul id="graveyard-bar">
+        <div id="graveyard-bar-title">Graveyard</div>
+          {props.player1Graveyard.map(
+            graveyardCardObj => <GraveyardCard key={cardKey++} card={graveyardCardObj}/>
+          )}
+        </ul>
+      )
+    // } else {
+    //   return(
+    //     <ul id="graveyard-bar">
+    //     <div id="graveyard-bar-title">Graveyard</div>
+    //       {props.player1Graveyard.map(
+    //         graveyardCardObj => <GraveyardCard key={cardKey++} card={graveyardCardObj}/>
+    //       )}
+    //     </ul>
+    //   )
+    // }
   } else if (props.actionType === 'displayPlayer2Graveyard') {
-    return(
-      <ul id="graveyard-bar">
-      <div id="graveyard-bar-title">Graveyard</div>
-        {props.player2Graveyard.map(
-          graveyardCardObj => <GraveyardCard key={cardKey++} card={graveyardCardObj}/>
-        )}
-      </ul>
-    )
+    // if (props.player2Graveyard.length > 10) {
+      return(
+        <ul id="graveyard-bar">
+        <div id="graveyard-bar-title">Graveyard</div>
+          {props.player2Graveyard.map(
+            graveyardCardObj => <GraveyardCard key={cardKey++} card={graveyardCardObj}/>
+          )}
+        </ul>
+      )
+    // } else {
+    //   return(
+    //     <ul id="graveyard-bar">
+    //     <div id="graveyard-bar-title">Graveyard</div>
+    //       {props.player2Graveyard.map(
+    //         graveyardCardObj => <GraveyardCard key={cardKey++} card={graveyardCardObj}/>
+    //       )}
+    //     </ul>
+    //   )
+    // }
   }
 
 }
