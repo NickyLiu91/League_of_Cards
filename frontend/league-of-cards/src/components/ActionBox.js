@@ -32,12 +32,21 @@ const ActionBox = (props) => {
         <button onClick={props.cancel}>Cancel</button>
       </div>
     )
-  }  else if (props.actionType === 'fieldMonster' && props.selectedCard.attacked === false) {
+  } else if (props.actionType === 'fieldMonster' && props.selectedCard.attacked === false) {
     return(
       <div className="action-box-text" >
         <button onClick={event => {props.changePosition(props.selectedCard)}}>Change Position</button>
         <br/>
         <button onClick={props.getEnemyTargetMode}>Attack</button>
+        <br/>
+        <button onClick={props.cancel}>Cancel</button>
+      </div>
+    )
+  } else if (props.actionType === 'noxianGuillotineTarget') {
+    return(
+      <div className="action-box-text" >
+        {props.selectedCard.description}?
+        <button onClick={props.getEnemyTargetMode}>Yes</button>
         <br/>
         <button onClick={props.cancel}>Cancel</button>
       </div>
@@ -48,7 +57,7 @@ const ActionBox = (props) => {
         {props.selectedCard.name} has already attack this turn!
       </div>
     )
-  } else if (props.actionType === 'selectAttackTarget' && props.player2Monsters === [{}, {}, {}, {}, {}]) {
+  } else if (props.actionType === 'selectAttackTarget' && props.player2Monsters.every(obj => Object.keys(obj).length === 0)) {
     return(
       <div className="action-box-text" >
         {props.selectedCard.name} will attack directly!!
@@ -58,7 +67,7 @@ const ActionBox = (props) => {
         <button onClick={props.cancel}>Cancel</button>
       </div>
     )
-  }else if (props.actionType === 'selectAttackTarget') {
+  } else if (props.actionType === 'selectAttackTarget') {
     return(
       <div className="action-box-text" >
         Select a monster to Attack!
@@ -66,6 +75,18 @@ const ActionBox = (props) => {
         {props.selectedCard.name} will attack {props.selectedTarget.name}!
         <br/>
         <button onClick={event => {props.fight(props.selectedCard, props.selectedTarget)}}>OBLITERATE</button>
+        <br/>
+        <button onClick={props.cancel}>Cancel</button>
+      </div>
+    )
+  } else if (props.actionType === 'noxianGuillotine') {
+    return(
+      <div className="action-box-text" >
+        Select a monster to Execute!
+        <br/>
+        Cast {props.selectedCard.name} on {props.selectedTarget.name}!
+        <br/>
+        <button onClick={event => {props.NoxianGuillotine(props.selectedCard, props.selectedTarget)}}>Yes</button>
         <br/>
         <button onClick={props.cancel}>Cancel</button>
       </div>
