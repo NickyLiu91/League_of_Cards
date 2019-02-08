@@ -25,7 +25,8 @@ export default class Home extends React.Component {
     player2Deck: [],
     password: '',
     decksList: [],
-    gold: ''
+    gold: '',
+    defeated: ''
   }
 
   log = () => {
@@ -163,7 +164,8 @@ export default class Home extends React.Component {
         currentPlayerCollection: res.cards,
         currentDeck: res.decks[0],
         loggedIn: true,
-        gold: res.gold
+        gold: res.gold,
+        defeated: res.defeated_id
       }, () => {
         fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/decks/${this.state.currentDeck.id}`)
         .then(res => res.json())
@@ -419,10 +421,11 @@ export default class Home extends React.Component {
             image: 'image/TwistedFatePortrait.png',
             computer: false,
             level: "1-1",
-            gold: 1000
+            gold: 1000,
+            defeated_id: 0
           }
     )}).then(res => this.setState({
-        allPlayers: [...this.state.allPlayers, {id: this.state.allPlayers.length + 1, name: this.state.name, decks: [], cards: [], collection: [], image: 'image/TwistedFatePortrait.png', computer: false, password_digest: this.state.password}],
+        allPlayers: [...this.state.allPlayers, {id: this.state.allPlayers.length + 1, name: this.state.name, decks: [], cards: [], collection: [], image: 'image/TwistedFatePortrait.png', computer: false, password_digest: this.state.password, defeated: 0}],
         render: 'home'
     }, () => {
       fetch(`http://localhost:3000/api/v1/decks`, {
@@ -470,8 +473,12 @@ export default class Home extends React.Component {
   }
 
   reward = () => {
+    let player = this.state.currentPlayer
+    player.defeated_id = this.state.player2.id
     this.setState({
-      gold: this.state.gold + 30
+      gold: this.state.gold + 30,
+      defeated: this.state.player2.id,
+      currentPlayer: player
     })
   }
 

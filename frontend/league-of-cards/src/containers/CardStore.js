@@ -62,7 +62,7 @@ export default class CardStore extends React.Component {
       body: JSON.stringify(
           {
             player_id: this.props.currentPlayer.id,
-            key: newCard.key,
+            // key: newCard.key,
             name: newCard.name,
             title: newCard.title,
             role: newCard.role,

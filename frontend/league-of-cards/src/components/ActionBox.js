@@ -32,7 +32,15 @@ const ActionBox = (props) => {
         <button onClick={props.cancel}>Cancel</button>
       </div>
     )
-  } else if (props.actionType === 'fieldMonster' && props.selectedCard.attacked === false) {
+  } else if (props.actionType === 'fieldMonster' && props.selectedCard.position === 'defense') {
+    return(
+      <div className="action-box-text" >
+        <button onClick={event => {props.changePosition(props.selectedCard)}}>Change Position</button>
+        <br/>
+        <button onClick={props.cancel}>Cancel</button>
+      </div>
+    )
+  }else if (props.actionType === 'fieldMonster' && props.selectedCard.attacked === false) {
     return(
       <div className="action-box-text" >
         <button onClick={event => {props.changePosition(props.selectedCard)}}>Change Position</button>
