@@ -7,6 +7,7 @@ import CardStore from "./CardStore.js"
 import DecksList from "./DecksList.js"
 import DuelistsList from "./DuelistsList.js"
 import Header from "../components/Header.js"
+import Campaign from "./Campaign.js"
 
 export default class Home extends React.Component {
   state = {
@@ -514,6 +515,11 @@ export default class Home extends React.Component {
               <button onClick={event => this.printState(event)}>State</button>
               <h1>Welcome, {this.state.currentPlayer.name}!</h1>
               <br/>
+              <button className="campaign" onClick={event => {this.renderStuff(event)}}>Campaign</button>
+              <br/>
+              <br/>
+              <button className="duelistsList" onClick={event => {this.renderStuff(event)}}>DUEL!!!</button>
+              <br/>
               <br/>
               <button className="collection" onClick={event => {this.renderStuff(event)}}>Collection</button>
               <br/>
@@ -524,11 +530,25 @@ export default class Home extends React.Component {
               <button className="decksList" onClick={event => {this.renderStuff(event)}}>Decks</button>
               <br/>
               <br/>
-              <button className="duelistsList" onClick={event => {this.renderStuff(event)}}>DUEL!!!</button>
-              <br/>
-              <br/>
               <button onClick={this.log}>Log-Out</button>
           </div>
+        </div>
+      )
+    } else if (this.state.render === 'campaign' ){
+      return(
+        <div>
+          <Header renderStuff={this.renderStuff}/>
+          <Campaign
+            player1={this.state.currentPlayer}
+            player1Deck={this.state.currentDeckCards}
+            player2={this.state.player2}
+            player2Deck={this.state.player2Deck}
+            renderHome={this.renderHome}
+            renderWin={this.renderWin}
+            updateCurrentPlayerCollection={this.updateCurrentPlayerCollection}
+            reward={this.reward}
+            gold={this.state.gold}
+          />
         </div>
       )
     } else if (this.state.render === 'create' ){
