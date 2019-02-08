@@ -1880,6 +1880,7 @@ directAttack = (monster) => {
             <br/>
             <h1>YOU HAVE DEFEATED YOUR OPPONENT!</h1>
             <br/>
+            <br/>
             <h1>You have recieved 30 gold and {this.state.rewardCard.name}!</h1>
           </div>
         </div>
