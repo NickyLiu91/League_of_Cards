@@ -72,9 +72,8 @@ ActiveRecord::Schema.define(version: 2019_01_05_075823) do
     t.string "password_digest"
     t.string "level"
     t.integer "gold"
-    t.string "defeated", default: [], array: true
+    t.integer "defeated_id"
     t.boolean "computer"
-    t.boolean "completed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

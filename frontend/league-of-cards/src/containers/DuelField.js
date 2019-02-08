@@ -457,7 +457,14 @@ export default class DuelField extends React.Component {
     } else if (this.state.currentPlayer === 'player1') {
 
       if (monster2.position === 'defense') {
-        if (this.highestAttack(monster1) > monster2.defense) {
+        if (this.highestAttack(monster1) === monster2.defense) {
+          monster1.attacked = true
+          this.setState({
+            selectedCard: '',
+            selectedTarget: '',
+            actionType: ''
+          })
+        } else if (this.highestAttack(monster1) > monster2.defense) {
           monster1.attacked = true
           this.setState({
             selectedCard: '',
@@ -716,6 +723,23 @@ export default class DuelField extends React.Component {
             }
       )})
     )
+    .then(res => {
+      if (this.state.player1.defeated_id <= this.state.player2.id) {
+        console.log("hi")
+        fetch(`http://localhost:3000/api/v1/players/${this.state.player1.id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify(
+              {
+                defeated_id: this.state.player2.id
+              }
+          )
+        })
+      }
+    })
     .then(res => {
       this.props.reward()
     })
@@ -1852,9 +1876,11 @@ directAttack = (monster) => {
         <div id="post-match">
           <img id="targon" src="image/targon.jpeg" />
           <div id="post-match-message">
-            <h1>You have recieved {this.state.rewardCard.name} and 30 gold!</h1>
             <h1>CONGRATULATIONS!</h1>
+            <br/>
             <h1>YOU HAVE DEFEATED YOUR OPPONENT!</h1>
+            <br/>
+            <h1>You have recieved 30 gold and {this.state.rewardCard.name}!</h1>
           </div>
         </div>
       )
