@@ -96,7 +96,7 @@ const Card = (props) => {
   } else {
     if (props.card.cardtype === "Champion") {
       return(
-        <div className={`card ` + props.card.rarity} >
+        <div className={`card ` + props.card.rarity + ' ' + 'store-card'} >
           <div>Name: {props.card.name}, {props.card.title}</div>
           <br/>
 
@@ -118,7 +118,7 @@ const Card = (props) => {
       )
     } else {
       return(
-        <div className={`card ` + props.card.rarity} >
+        <div className={`card ` + props.card.rarity + ' ' + 'store-card'} >
           <div>Name: {props.card.name}</div>
           <br/>
 
