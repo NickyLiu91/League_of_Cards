@@ -78,36 +78,104 @@ export default class Home extends React.Component {
   //   }
   // }
 
-  // generateDeck = (playerObj) => {
-  //   let deck
-  //   fetch(`http://localhost:3000/api/v1/players/${playerObj.id}/decks`)
-  //   .then(res => res.json())
-  //   .then(json => {deck = json})
-  //   .then(res => {
-  //     fetch("http://localhost:3000/api/v1/cards", {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Accept': 'application/json'
-  //       },
-  //       body: JSON.stringify(
-  //           {
-  //             player_id: this.state.currentPlayer.id,
-  //             name: "Amumu",
-  //             title: "the Sad Mummy",
-  //             role: "Tank",
-  //             rarity: "Bronze",
-  //             attack: 200,
-  //             magic: 800,
-  //             defense: 600,
-  //             description: "''Solitude can be lonelier than death.''<br><br>A lonely and melancholy soul from ancient Shurima, Amumu roams the world in search of a friend. Cursed by an ancient spell, he is doomed to remain alone forever, as his touch is death and his affection ...",
-  //             image: "Amumu.png",
-  //             cardtype: "Champion",
-  //           }
-  //       )})
-  //
-  //   })
-  // }
+  generateDeck = (playerObj) => {
+    let deck
+    let card
+    fetch("http://localhost:3000/api/v1/cards", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(
+        {
+          player_id: playerObj.id,
+          name: "Amumu",
+          title: "the Sad Mummy",
+          role: "Tank",
+          rarity: "Bronze",
+          attack: 200,
+          magic: 800,
+          defense: 600,
+          description: "''Solitude can be lonelier than death.''<br><br>A lonely and melancholy soul from ancient Shurima, Amumu roams the world in search of a friend. Cursed by an ancient spell, he is doomed to remain alone forever, as his touch is death and his affection ...",
+          image: "Amumu.png",
+          cardtype: "Champion",
+        }
+      )
+    })
+    .then(response => {
+      fetch(`http://localhost:3000/api/v1/players/${playerObj.id}`)
+      .then(res => res.json())
+      .then(json => {deck = json.decks[0]})
+      .then(response => {
+        fetch(`http://localhost:3000/api/v1/players/${playerObj.id}`)
+        .then(response => response.json())
+        .then(json => {card = json.cards[json.cards.length - 1]})
+        .then(response => {
+          fetch(`http://localhost:3000/api/v1/deckcards`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            body: JSON.stringify(
+                {
+                  deck_id: deck.id,
+                  card_id: card.id
+                }
+          )})
+        })
+      })
+    })
+    .then(res => {
+      fetch("http://localhost:3000/api/v1/cards", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(
+          {
+            player_id: playerObj.id,
+            name: "Amumu",
+            title: "the Sad Mummy",
+            role: "Tank",
+            rarity: "Bronze",
+            attack: 200,
+            magic: 800,
+            defense: 600,
+            description: "''Solitude can be lonelier than death.''<br><br>A lonely and melancholy soul from ancient Shurima, Amumu roams the world in search of a friend. Cursed by an ancient spell, he is doomed to remain alone forever, as his touch is death and his affection ...",
+            image: "Amumu.png",
+            cardtype: "Champion",
+          }
+        )
+      })
+      .then(response => {
+        fetch(`http://localhost:3000/api/v1/players/${playerObj.id}`)
+        .then(res => res.json())
+        .then(json => {deck = json.decks[0]})
+        .then(response => {
+          fetch(`http://localhost:3000/api/v1/players/${playerObj.id}`)
+          .then(response => response.json())
+          .then(json => {card = json.cards[json.cards.length - 1]})
+          .then(response => {
+            fetch(`http://localhost:3000/api/v1/deckcards`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+              },
+              body: JSON.stringify(
+                  {
+                    deck_id: deck.id,
+                    card_id: card.id
+                  }
+            )})
+          })
+        })
+      })
+    })
+  }
 
   getAllPlayers = () => {
     let newPlayersArray = []
@@ -263,7 +331,6 @@ export default class Home extends React.Component {
           currentDeckCards: [...this.state.currentDeckCards, cardToAdd]
         }))
     }
-
   }
 
   removeFromDeck = (card) => {
@@ -390,29 +457,6 @@ export default class Home extends React.Component {
     })
   }
 
-  // createPlayerCollection = () => {
-  //
-  //     this.state.collection.map(
-  //       cardObj => fetch(`http://localhost:3000/api/v1/collections`, {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //           'Accept': 'application/json',
-  //         },
-  //         body: JSON.stringify(
-  //             {
-  //               player_id: this.state.allPlayers.find(playerObj => playerObj.name === this.state.name).id,
-  //               card_id: cardObj.id
-  //             }
-  //         )})
-  //     )
-  //     let createdPlayer = this.state.allPlayers.find(
-  //       playerObj => playerObj.name === this.state.name
-  //     )
-  //
-  //     createdPlayer.cards = this.state.collection
-  // }
-
   createPlayer = (event) => {
     event.preventDefault()
     fetch(`http://localhost:3000/api/v1/players`, {
@@ -447,7 +491,7 @@ export default class Home extends React.Component {
               player_id: this.state.allPlayers[this.state.allPlayers.length - 1].id
             }
       )})
-      // .then(res => {this.generateDeck(this.state.allPlayers[this.state.allPlayers.length - 1])})
+      .then(res => {this.generateDeck(this.state.allPlayers[this.state.allPlayers.length - 1])})
     }
   ))
   }

@@ -16,7 +16,7 @@ export default class CardStore extends React.Component {
   }
 
   getFullPack = () => {
-    if (this.props.gold >= 100) {
+    // if (this.props.gold >= 100) {
       this.clearResults()
       for (var i = 0; i < 9; i++) {
         this.addCardToCollection()
@@ -24,9 +24,9 @@ export default class CardStore extends React.Component {
       this.setState({
         results: cardResults
       }, () => {this.props.buyPack()})
-    } else {
-      alert("You do not have enough gold!")
-    }
+    // } else {
+    //   alert("You do not have enough gold!")
+    // }
   }
 
   addCardToCollection = () => {
