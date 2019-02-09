@@ -59,19 +59,23 @@ body {
 }
 
 .Silver {
-  background-color: green;
+  color: black;
+  border-color: black;
+  background-color: silver;
 }
 
 .Gold {
-  background-color: blue;
+  color: black;
+  border-color: black;
+  background-color: gold;
 }
 
 .Platinum {
-  background-color: purple;
+  background-color: darkcyan;
 }
 
 .Diamond {
-  background-color: orange;
+  background-image: linear-gradient(darkturquoise, mediumpurple, white);
   color: blue;
   border-color: blue;
 }
