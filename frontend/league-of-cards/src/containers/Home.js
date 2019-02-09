@@ -337,9 +337,15 @@ export default class Home extends React.Component {
         })
       })
     } else {
-      this.setState({
-        render: event.target.className
-      })
+      if (event.target.className === 'duelistsList' || event.target.className === 'campaign') {
+        if (this.state.currentDeckCards.length < 40) {
+          alert('Your deck is less then 40 cards!')
+        }
+      } else {
+        this.setState({
+          render: event.target.className
+        })
+      }
     }
   }
 
@@ -537,7 +543,7 @@ export default class Home extends React.Component {
     } else if (this.state.render === 'campaign' ){
       return(
         <div>
-          <Header renderStuff={this.renderStuff}/>
+          <Header renderStuff={this.renderStuff} deck={this.state.currentDeckCards}/>
           <Campaign
             player1={this.state.currentPlayer}
             player1Deck={this.state.currentDeckCards}
@@ -636,7 +642,7 @@ export default class Home extends React.Component {
     } else if (this.state.render === 'duelistsList') {
       return(
         <div>
-          <Header renderStuff={this.renderStuff} />
+          <Header renderStuff={this.renderStuff} deck={this.state.currentDeckCards}/>
           <div className="duelist-list-container">
             <DuelistsList
               allPlayers={this.state.allPlayers}
