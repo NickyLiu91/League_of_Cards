@@ -59,15 +59,17 @@ body {
 }
 
 .Silver {
-  color: black;
-  border-color: black;
+  color: darkcyan;
+  border-color: darkcyan;
   background-color: silver;
+  box-shadow: 3px 3px 5px darkcyan;
 }
 
 .Gold {
-  color: black;
-  border-color: black;
+  color: red;
+  border-color: red;
   background-color: gold;
+  box-shadow: 3px 3px 5px red;
 }
 
 .Platinum {
@@ -78,6 +80,7 @@ body {
   background-image: linear-gradient(darkturquoise, mediumpurple, white);
   color: blue;
   border-color: blue;
+  box-shadow: 3px 3px 5px blue;
 }
 
 #add-to-deck {
