@@ -24,6 +24,19 @@ body {
   box-shadow: 3px 3px 5px gold;
 }
 
+.store-card {
+  width: 200px;
+  height: 300px;
+  border-style: solid;
+  border-width: 5px;
+  border-color: gold;
+  padding: 20px;
+  margin: 10px;
+  color: gold;
+  position: relative;
+  box-shadow: none;
+}
+
 .container-with-decklist  {
   display: flex;
   flex-direction: row;
@@ -248,7 +261,7 @@ img {
   align-content: space-around;
   border-color: black;
   border-radius: 5px;
-  /*background-color: black;*/
+  background-color: rgba(0, 0, 0, 0.6);
   height: 1150px;
   width: 850px;
 }
@@ -383,8 +396,8 @@ li{
  position: absolute;
  left: 0;
  opacity: 75;
- height: 100%;
- /*height: 1200px;*/
+ /*height: 100%;*/
+ height: 1200px;
  width: 100%;
  border: none;
  z-index: -1
@@ -403,19 +416,6 @@ li{
 #home, #logged-in {
   position: relative;
   top: 200px;
-}
-
-.store-card {
-  width: 200px;
-  height: 300px;
-  border-style: solid;
-  border-width: 5px;
-  border-color: black;
-  padding: 20px;
-  margin: 10px;
-  color: gold;
-  position: relative;
-  box-shadow: 3px 3px 5px black;
 }
 
 #create-deck {
