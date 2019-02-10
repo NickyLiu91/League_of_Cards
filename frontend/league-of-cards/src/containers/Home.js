@@ -29,7 +29,8 @@ export default class Home extends React.Component {
     password: '',
     decksList: [],
     gold: '',
-    defeated: ''
+    defeated: '',
+    duelLocation: ''
   }
 
   log = () => {
@@ -1980,6 +1981,18 @@ export default class Home extends React.Component {
     this.getAllPlayers()
   }
 
+  renderPostDuel = () => {
+    if (this.state.duelLocation === 'freeDuel') {
+      this.setState({
+        render: 'duelistsList'
+      })
+    } else if (this.state.duelLocation === 'campaign') {
+      this.setState({
+        render: 'campaign'
+      })
+    }
+  }
+
   renderStuff = (event) => {
     console.log(event.target.className)
     if (event.target.className === 'collection') {
@@ -2018,17 +2031,17 @@ export default class Home extends React.Component {
           render: 'store'
         })
       })
-    } else {
-      if (event.target.className === 'duelistsList' || event.target.className === 'campaign') {
-        if (this.state.currentDeckCards.length < 40) {
-          alert('Your deck is less then 40 cards!')
-        }
+    } else if ((event.target.className === 'duelistsList' || event.target.className === 'campaign')
+      && this.state.currentDeckCards.length !== 40) {
+      console.log(this.state.currentDeckCards.length)
+      console.log(this.state.currentDeckCards.length === 40)
+        alert('Your deck must contain 40 cards!')
       } else {
         this.setState({
           render: event.target.className
         })
       }
-    }
+    // }
   }
 
   getCardInfo = (card) =>{
@@ -2044,7 +2057,7 @@ export default class Home extends React.Component {
     })
   }
 
-  getDuelist = (player) => {
+  getDuelist = (player, location) => {
     let desiredDeck
     fetch(`http://localhost:3000/api/v1/decks/${this.state.currentDeck.id}`)
     .then(res => res.json())
@@ -2057,7 +2070,8 @@ export default class Home extends React.Component {
         .then(json => {
           this.setState({
             player2: player,
-            player2Deck: json.cards
+            player2Deck: json.cards,
+            duelLocation: location
           }, () => { this.renderDuel()}
         )
         })
@@ -2087,7 +2101,7 @@ export default class Home extends React.Component {
             image: 'image/TwistedFatePortrait.png',
             computer: false,
             level: "1-1",
-            gold: 1000,
+            gold: 100,
             defeated_id: 0
           }
     )}).then(res => this.setState({
@@ -2209,7 +2223,6 @@ export default class Home extends React.Component {
             player2={this.state.player2}
             player2Deck={this.state.player2Deck}
             renderHome={this.renderHome}
-            renderWin={this.renderWin}
             updateCurrentPlayerCollection={this.updateCurrentPlayerCollection}
             reward={this.reward}
             gold={this.state.gold}
@@ -2321,10 +2334,11 @@ export default class Home extends React.Component {
             player2={this.state.player2}
             player2Deck={this.state.player2Deck}
             renderHome={this.renderHome}
-            renderWin={this.renderWin}
+            renderPostDuel={this.renderPostDuel}
             updateCurrentPlayerCollection={this.updateCurrentPlayerCollection}
             reward={this.reward}
             gold={this.state.gold}
+            duelLocation={this.state.duelLocation}
           />
         </div>
       )

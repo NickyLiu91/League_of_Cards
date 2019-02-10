@@ -1103,6 +1103,7 @@ export default class DuelField extends React.Component {
         if (Object.keys(monster).length !== 0 && monster.attacked === false) {
           if (this.emptyField(playerMonsters)) {
             playerLife = playerLife - this.highestAttack(monster)
+            monster.attacked = true
             if (playerLife <= 0) {
               this.lose()
             }
@@ -1173,6 +1174,8 @@ export default class DuelField extends React.Component {
           if (Object.keys(monster).length !== 0 && monster.attacked === false) {
             if (this.emptyField(playerMonsters)) {
               playerLife = playerLife - this.highestAttack(monster)
+              monster.attacked = true
+              console.log(monster.attacked)
               if (playerLife <= 0) {
                 this.lose()
               }
@@ -1207,10 +1210,6 @@ export default class DuelField extends React.Component {
                   this.lose()
                 }
               }
-            } else {
-              if (monster.defense > this.highestAttack(monster) || monster.attack < 1500) {
-                monster.position = "defense"
-              }
             }
           }
         }
@@ -1225,7 +1224,7 @@ export default class DuelField extends React.Component {
       computerMonsters.forEach(
         monster => {
           if (Object.keys(monster).length !== 0 && monster.attacked === false) {
-            if (monster.defense > this.highestAttack(monster) || monster.attack < 1500) {
+            if (monster.defense > this.highestAttack(monster) || (monster.attack < 1500 && monster.magic < 1500)) {
               monster.position = "defense"
             }
           }
@@ -1861,30 +1860,34 @@ directAttack = (monster) => {
 
   render() {
     if (this.state.display === 'Lose') {
-      return(
-        <div id="post-match">
-        <img id="shadow-isles" src="image/shadow-isles.jpeg" />
-          <div id="post-match-message">
-            <h1>YOU HAVE RUN OUT OF STAMINA</h1>
-            <h1>YOU ARE NO LONGER ABLE TO FIGHT</h1>
-            <h1>YOU CAN ONLY WATCH ON AS YOUR ENEMY COMES TO DELIVER THE FINISHING BLOW</h1>
+      if (this.props.duelLocation === 'freeDuel') {
+        return(
+          <div id="post-match" onClick={event => this.props.renderPostDuel()}>
+          <img id="shadow-isles" src="image/shadow-isles.jpeg" />
+            <div id="post-match-message">
+              <h1>YOU HAVE RUN OUT OF STAMINA</h1>
+              <h1>YOU ARE NO LONGER ABLE TO FIGHT</h1>
+              <h1>YOU CAN ONLY WATCH ON AS YOUR ENEMY COMES TO DELIVER THE FINISHING BLOW</h1>
+            </div>
           </div>
-        </div>
-      )
+        )
+      }
     } else if (this.state.display === 'Win') {
-      return(
-        <div id="post-match">
-          <img id="targon" src="image/targon.jpeg" />
-          <div id="post-match-message">
-            <h1>CONGRATULATIONS!</h1>
-            <br/>
-            <h1>YOU HAVE DEFEATED YOUR OPPONENT!</h1>
-            <br/>
-            <br/>
-            <h1>You have recieved 30 gold and {this.state.rewardCard.name}!</h1>
+      if (this.props.duelLocation === 'freeDuel') {
+        return(
+          <div id="post-match" onClick={event => this.props.renderPostDuel()}>
+            <img id="targon" src="image/targon.jpeg" />
+            <div id="post-match-message">
+              <h1>CONGRATULATIONS!</h1>
+              <br/>
+              <h1>YOU HAVE DEFEATED YOUR OPPONENT!</h1>
+              <br/>
+              <br/>
+              <h1>You have recieved 30 gold and {this.state.rewardCard.name}!</h1>
+            </div>
           </div>
-        </div>
-      )
+        )
+      }
     } else {
       return(
         <div>
