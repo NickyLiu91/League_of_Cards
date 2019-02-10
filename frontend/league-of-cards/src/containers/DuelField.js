@@ -632,7 +632,7 @@ export default class DuelField extends React.Component {
   }
 
   win = () => {
-    let listOfCards = this.state.player2Deck
+    let listOfCards = this.props.player2Deck
     let number = Math.floor(Math.random() * 100) + 1
     let newCard
     //
@@ -988,9 +988,7 @@ export default class DuelField extends React.Component {
           player2Hand: [...this.state.player2Hand, newCard]
         }, () => this.performTurn()
       )} else {
-        this.setState({
-          player2Life: -9999
-        })
+        this.win()
       }
     })
   }
@@ -1860,9 +1858,8 @@ directAttack = (monster) => {
 
   render() {
     if (this.state.display === 'Lose') {
-      if (this.props.duelLocation === 'freeDuel') {
         return(
-          <div id="post-match" onClick={event => this.props.renderPostDuel()}>
+          <div id="post-match" onClick={event => this.props.renderPostDuel(this.props.location)}>
           <img id="shadow-isles" src="image/shadow-isles.jpeg" />
             <div id="post-match-message">
               <h1>YOU HAVE RUN OUT OF STAMINA</h1>
@@ -1871,11 +1868,9 @@ directAttack = (monster) => {
             </div>
           </div>
         )
-      }
     } else if (this.state.display === 'Win') {
-      if (this.props.duelLocation === 'freeDuel') {
         return(
-          <div id="post-match" onClick={event => this.props.renderPostDuel()}>
+          <div id="post-match" onClick={event => this.props.renderPostDuel(this.props.location)}>
             <img id="targon" src="image/targon.jpeg" />
             <div id="post-match-message">
               <h1>CONGRATULATIONS!</h1>
@@ -1887,7 +1882,6 @@ directAttack = (monster) => {
             </div>
           </div>
         )
-      }
     } else {
       return(
         <div>
@@ -1928,9 +1922,9 @@ directAttack = (monster) => {
               <br/>
               <br/>
               <div id="middle-bar">
-              <div className="life-points">{this.state.player2Life}</div>
-              <button onClick={this.computerTurn}>End Turn</button>
               <div className="life-points">{this.state.player1Life}</div>
+              <button onClick={this.computerTurn}>End Turn</button>
+              <div className="life-points">{this.state.player2Life}</div>
               </div>
               <br/>
               <br/>

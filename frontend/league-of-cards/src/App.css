@@ -452,7 +452,7 @@ li{
   /*border: 5px solid gold;*/
   /*font-size: 40px;*/
   position: relative;
-  /*background-color: black;*/
+  background-color: black;
   height: 300px;
   /*width: 1620px;*/
   width: 100%;
@@ -470,15 +470,15 @@ padding-left: 50px;
 padding-right: 250px;
 }
 
-/*#noxus-shurima2 {
- position: absolute;
- left: 0;
- opacity: 75;
- height: 100%;
- width: 100%;
- border: none;
- z-index: -1
-}*/
+#noxus-shurima2 {
+  position: absolute;
+  left: 0;
+  opacity: .75;
+  height: 100%;
+  width: 100%;
+  border: none;
+  z-index: -1
+}
 
 #speaker-picture {
   height: 200px;
