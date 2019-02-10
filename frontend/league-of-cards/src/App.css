@@ -487,3 +487,54 @@ padding-right: 250px;
   right: 50px;
   top: 50px;
 }
+
+.description {
+  width: 600px;
+}
+
+.card-info {
+  border-style: solid;
+  border-width: 5px;
+  padding: 20px;
+  margin: 10px;
+  position: relative;
+  height: 675px
+}
+
+.card-info-Bronze {
+  color: gold;
+  border-color: gold;
+  background-color: brown;
+  box-shadow: 3px 3px 5px gold;
+}
+
+.card-info-Silver {
+  color: darkcyan;
+  border-color: darkcyan;
+  background-color: silver;
+  box-shadow: 3px 3px 5px darkcyan;
+}
+
+.card-info-Gold {
+  color: red;
+  border-color: red;
+  background-color: gold;
+  box-shadow: 3px 3px 5px red;
+}
+
+.card-info-Platinum {
+  background-color: darkcyan;
+}
+
+.card-info-Diamond {
+  background-image: linear-gradient(darkturquoise, mediumpurple, white);
+  color: blue;
+  border-color: blue;
+  box-shadow: 3px 3px 5px blue;
+}
+
+/*.add-button {
+  position: absolute;
+  right: 279px;
+  bottom: 20px;
+}*/
