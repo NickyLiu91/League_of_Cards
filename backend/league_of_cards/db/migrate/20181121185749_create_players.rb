@@ -6,6 +6,7 @@ class CreatePlayers < ActiveRecord::Migration[5.2]
       t.string :password_digest
       t.string :level
       t.integer :gold
+      t.integer :dialogue
       t.integer :defeated_id
       t.boolean :computer
 

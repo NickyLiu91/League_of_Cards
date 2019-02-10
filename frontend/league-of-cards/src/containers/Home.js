@@ -1981,7 +1981,7 @@ export default class Home extends React.Component {
     this.getAllPlayers()
   }
 
-  renderPostDuel = () => {
+  renderPostDuel = (location) => {
     if (this.state.duelLocation === 'freeDuel') {
       this.setState({
         render: 'duelistsList'
@@ -2098,10 +2098,11 @@ export default class Home extends React.Component {
           {
             name: this.state.name,
             password_digest: this.state.password,
-            image: 'image/TwistedFatePortrait.png',
+            image: 'image/SivirPortrait.png',
             computer: false,
             level: "1-1",
             gold: 100,
+            dialogue: 0,
             defeated_id: 0
           }
     )}).then(res => this.setState({
@@ -2223,9 +2224,11 @@ export default class Home extends React.Component {
             player2={this.state.player2}
             player2Deck={this.state.player2Deck}
             renderHome={this.renderHome}
+            allPlayers={this.state.allPlayers}
             updateCurrentPlayerCollection={this.updateCurrentPlayerCollection}
             reward={this.reward}
             gold={this.state.gold}
+            getDuelist={this.getDuelist}
           />
         </div>
       )
@@ -2317,6 +2320,7 @@ export default class Home extends React.Component {
           <Header renderStuff={this.renderStuff} deck={this.state.currentDeckCards}/>
           <div className="duelist-list-container">
             <DuelistsList
+              currentPlayer={this.state.currentPlayer}
               allPlayers={this.state.allPlayers}
               getDuelist={this.getDuelist}
               renderDuel={this.renderDuel}
