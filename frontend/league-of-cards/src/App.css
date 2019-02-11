@@ -452,11 +452,11 @@ li{
   /*border: 5px solid gold;*/
   /*font-size: 40px;*/
   position: relative;
-  background-color: black;
+  /*background-color: black;*/
   height: 300px;
   /*width: 1620px;*/
   width: 100%;
-  bottom: -300px;
+  bottom: 0;
   /*text-align: left;*/
   /*padding-left: 50px;*/
   /*padding-right: 50px;*/
@@ -531,6 +531,18 @@ padding-right: 250px;
   color: blue;
   border-color: blue;
   box-shadow: 3px 3px 5px blue;
+}
+
+#campaign-screen {
+  height: 470px;
+  width: 1680px;
+  /*background-color: red;*/
+}
+
+#campaign-background {
+  /*background-size: cover;*/
+  height: 100%;
+  width: 100%;
 }
 
 /*.add-button {

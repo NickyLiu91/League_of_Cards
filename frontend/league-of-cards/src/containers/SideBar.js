@@ -1,6 +1,6 @@
 import React from "react";
 import SideBarCard from "../components/SideBarCard.js"
-let i = 1
+// let i = 1
 
 export default class SideBar extends React.Component {
 
@@ -26,7 +26,7 @@ export default class SideBar extends React.Component {
     })
 
     return sortedDeck.map(
-      cardObj => <SideBarCard key={i++} card={cardObj}
+      cardObj => <SideBarCard key={cardObj.id} card={cardObj}
       removeFromDeck={this.props.removeFromDeck}/>
     )
   }
