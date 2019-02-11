@@ -37,6 +37,16 @@ export default class DuelField extends React.Component {
     display: ''
   }
 
+  shuffle = (array) => {
+    for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return array
+}
+
   swapCurrentPlayer = () => {
     if (this.state.currentPlayer === "player1") {
       this.setState({
@@ -61,37 +71,45 @@ export default class DuelField extends React.Component {
   }
 
   start5CardsPlayer = () => {
-    let newDeck = this.state.player1Deck
-    let newHand = []
-    let newCard
-    let i = 0
-    for(i = 0; i < 5; i ++) {
-      if (this.state.player1Deck.length > 0) {
-        newCard = newDeck.pop()
-        newHand = [...newHand, newCard]
-      }
-    }
     this.setState({
-      player1Deck: newDeck,
-      player1Hand: newHand
+      player1Deck: this.shuffle(this.state.player1Deck)
+    }, () => {
+      let newDeck = this.state.player1Deck
+      let newHand = []
+      let newCard
+      let i = 0
+      for(i = 0; i < 5; i ++) {
+        if (this.state.player1Deck.length > 0) {
+          newCard = newDeck.pop()
+          newHand = [...newHand, newCard]
+        }
+      }
+      this.setState({
+        player1Deck: newDeck,
+        player1Hand: newHand
+      })
     })
   }
 
   start5CardsComputer = () => {
-    let newDeck = this.state.player2Deck
-    let newHand = []
-    let newCard
-    let i = 0
-    for(i = 0; i < 5; i ++) {
-      if (this.state.player2Deck.length > 0) {
-        newCard = newDeck.pop()
-        console.log(newCard)
-        newHand = [...newHand, newCard]
-      }
-    }
     this.setState({
-      player2Deck: newDeck,
-      player2Hand: newHand
+      player2Deck: this.shuffle(this.state.player2Deck)
+    }, () => {
+      let newDeck = this.state.player2Deck
+      let newHand = []
+      let newCard
+      let i = 0
+      for(i = 0; i < 5; i ++) {
+        if (this.state.player2Deck.length > 0) {
+          newCard = newDeck.pop()
+          console.log(newCard)
+          newHand = [...newHand, newCard]
+        }
+      }
+      this.setState({
+        player2Deck: newDeck,
+        player2Hand: newHand
+      })
     })
   }
 
@@ -124,6 +142,8 @@ export default class DuelField extends React.Component {
       }
     )
 
+    // player1Deck = this.shuffle(player1Deck)
+
     this.props.player2Deck.map(
       cardObj => {
         let newCardObj = cardObj
@@ -135,6 +155,8 @@ export default class DuelField extends React.Component {
         player2Deck = [...player2Deck, newCardObj]
       }
     )
+
+    // player2Deck = this.shuffle(player2Deck)
 
     this.setState({
       player1Deck: player1Deck,
@@ -1018,10 +1040,6 @@ export default class DuelField extends React.Component {
     } else {
       strongestMonster = strongestMonsterOnField
     }
-    // console.log(strongestPossibleHandMonster)
-    // console.log(weakestPossibleHandMonster)
-    // console.log(strongestMonsterOnField)
-    // console.log(strongestMonster)
 
     let strongerEnemyMonsters = this.getStrongerEnemyMonsters(strongestMonster, this.state.player1Monsters)
 
@@ -1859,7 +1877,7 @@ directAttack = (monster) => {
   render() {
     if (this.state.display === 'Lose') {
         return(
-          <div id="post-match" onClick={event => this.props.renderPostDuel(this.props.location)}>
+          <div id="post-match" onClick={event => this.props.renderHome()}>
           <img id="shadow-isles" src="image/shadow-isles.jpeg" />
             <div id="post-match-message">
               <h1>YOU HAVE RUN OUT OF STAMINA</h1>

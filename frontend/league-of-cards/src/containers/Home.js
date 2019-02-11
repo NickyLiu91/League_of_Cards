@@ -33,16 +33,6 @@ export default class Home extends React.Component {
     duelLocation: ''
   }
 
-  log = () => {
-    this.setState({
-      currentPlayer: '',
-      currentDeck: "",
-      currentPlayerCollection: [],
-      currentDeckCards: [],
-      loggedIn: !this.state.loggedIn
-    })
-  }
-
   handleName = (event) => {
     this.setState({
       name: event.target.value
@@ -1844,21 +1834,26 @@ export default class Home extends React.Component {
     }, () => {
       fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`)
       .then(res => res.json())
-      .then(res => this.setState({
-        currentPlayer: res,
-        currentPlayerCollection: res.cards,
-        currentDeck: res.decks[0],
-        loggedIn: true,
-        gold: res.gold,
-        defeated: res.defeated_id
-      }, () => {
-        fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/decks/${this.state.currentDeck.id}`)
-        .then(res => res.json())
-        .then(res => this.setState({
-          currentDeckCards: res.cards
-        }))
-        this.generateNoDupesCurrentPlayerCollection()
-      }))
+      .then(res => {
+        window.localStorage.setItem('jwt', res.jwt)
+        console.log(window.localStorage)
+        console.log(window.localStorage.length)
+        this.setState({
+          currentPlayer: res,
+          currentPlayerCollection: res.cards,
+          currentDeck: res.decks[0],
+          loggedIn: true,
+          gold: res.gold,
+          defeated: res.defeated_id
+        }, () => {
+          fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/decks/${this.state.currentDeck.id}`)
+          .then(res => res.json())
+          .then(res => this.setState({
+            currentDeckCards: res.cards
+          }))
+          this.generateNoDupesCurrentPlayerCollection()
+        }
+      )})
     })
   }
 
@@ -1987,9 +1982,12 @@ export default class Home extends React.Component {
         render: 'duelistsList'
       })
     } else if (this.state.duelLocation === 'campaign') {
+      let player = this.state.currentPlayer
+      player.dialogue = player.dialogue + 1
       this.setState({
+        currentPlayer: player,
         render: 'campaign'
-      })
+      }, (console.log(this.state.currentPlayer)))
     }
   }
 
@@ -2160,6 +2158,50 @@ export default class Home extends React.Component {
       gold: this.state.gold + 30,
       defeated: this.state.player2.id,
       currentPlayer: player
+    })
+  }
+
+  // campaignReward = () => {
+  //   let player = this.state.currentPlayer
+  //   player.defeated_id = this.state.player2.id
+  //   player.dialogue = player.dialogue + 1
+  //   this.setState({
+  //     gold: this.state.gold + 30,
+  //     defeated: this.state.player2.id,
+  //     currentPlayer: player
+  //   })
+  // }
+
+  resetUser = () => {
+   // // console.log(localStorage.getItem('jwt'))
+   if (localStorage.getItem('jwt')) {
+     fetch('http://localhost:3001/', {
+       method: 'GET',
+       headers: {
+         Authorization: `Bearer ${localStorage.getItem('jwt')}`
+       }
+     })
+     .then(resp => resp.json())
+     .then(data => {
+       if (data.user)
+       this.setState({
+         currentPlayer: data.user
+       })
+     })
+   }
+  }
+
+  log = () => {
+    this.setState({
+      currentPlayer: '',
+      currentDeck: "",
+      currentPlayerCollection: [],
+      currentDeckCards: [],
+      loggedIn: !this.state.loggedIn
+    }, () => {
+      console.log(localStorage.getItem('jwt'))
+      window.localStorage.removeItem('jwt')
+      console.log(window.localStorage)
     })
   }
 
@@ -2343,6 +2385,7 @@ export default class Home extends React.Component {
             reward={this.reward}
             gold={this.state.gold}
             duelLocation={this.state.duelLocation}
+            campaignReward={this.campaignReward}
           />
         </div>
       )
