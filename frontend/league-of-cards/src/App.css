@@ -498,7 +498,7 @@ padding-right: 250px;
   padding: 20px;
   margin: 10px;
   position: relative;
-  height: 675px
+  /*height: 675px*/
 }
 
 .card-info-Bronze {
@@ -541,6 +541,11 @@ padding-right: 250px;
 
 #campaign-background {
   /*background-size: cover;*/
+  height: 100%;
+  width: 100%;
+}
+
+#campaign-preduel {
   height: 100%;
   width: 100%;
 }
