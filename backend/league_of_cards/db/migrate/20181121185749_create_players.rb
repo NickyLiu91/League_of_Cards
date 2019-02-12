@@ -5,6 +5,8 @@ class CreatePlayers < ActiveRecord::Migration[5.2]
       t.string :image
       t.string :password_digest
       t.string :level
+      t.string :background
+      t.string :preduel
       t.integer :gold
       t.integer :dialogue
       t.integer :defeated_id
