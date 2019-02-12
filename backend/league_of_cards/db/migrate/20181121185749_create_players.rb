@@ -8,7 +8,6 @@ class CreatePlayers < ActiveRecord::Migration[5.2]
       t.string :background
       t.string :preduel
       t.integer :gold
-      t.integer :dialogue
       t.integer :defeated_id
       t.boolean :computer
 

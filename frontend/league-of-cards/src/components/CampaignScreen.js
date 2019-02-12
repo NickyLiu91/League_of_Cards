@@ -19,8 +19,8 @@ const CampaignScreen = (props) => {
     } else if (props.storyText[props.dialogue] === "DUEL") {
       return(
         <div id="campaign-screen" >
-          <img id="campaign-background" src={props.computers[props.defeated].preduel}/>
-            <div id="text-box" onClick={event => {props.getDuelist(props.computers[props.defeated], "campaign")}}>
+          <img id="campaign-preduel" src={props.computers[props.defeated].preduel}/>
+            <div id="text-box" onClick={event => {props.duel(props.computers[props.defeated], "campaign")}}>
               <div id="speaker-picture">
                 <img src={props.computers[props.defeated].image} />
               </div>
