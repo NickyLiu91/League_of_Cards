@@ -10,9 +10,9 @@ require "httparty"
 
 # garen = Player.create(name: "Garen", image: "image/GarenPortrait.png", computer: true)
 # zed = Player.create(name: "Zed", image: "image/ZedPortrait.png", computer: true)
-garen = Player.create(name: "Garen", image: "image/GarenPortrait.png", computer: true)
-jarvan = Player.create(name: "Jarvan", image: "image/JarvanIVPortrait.png", computer: true)
-lux = Player.create(name: "Lux", image: "image/LuxPortrait.png", computer: true)
+garen = Player.create(name: "Garen", image: "image/GarenPortrait.png", computer: true, background: "image/GarenBG.jpeg", preduel: "image/Garen.png")
+jarvan = Player.create(name: "Jarvan", image: "image/JarvanIVPortrait.png", computer: true, background: "image/JarvanIVBG.jpeg", preduel: "image/JarvanIV.png")
+lux = Player.create(name: "Lux", image: "image/LuxPortrait.png", computer: true, background: "image/LuxBG.jpeg", preduel: "image/Lux.png")
 # swain = Player.create(name: "Swain", image: "image/SwainPortrait.png", computer: true)
 # masterYi = Player.create(name: "MasterYi", image: "image/MasterYiPortrait.png", computer: true)
 # garen = Player.create(name: "Garen", image: "image/GarenPortrait.png", computer: true)
@@ -175,14 +175,14 @@ garen_deckcard13 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card13
 garen_deckcard14 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card14.id)
 garen_deckcard15 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card15.id)
 # garen_deckcard16 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card16.id)---
-garen_deckcard17 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card17.id)
+# garen_deckcard17 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card17.id)+++
 # garen_deckcard18 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card18.id)---
 # garen_deckcard19 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card19.id)---
 # garen_deckcard20 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card20.id)---
 # garen_deckcard21 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card21.id)---
 garen_deckcard22 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card22.id)
 garen_deckcard23 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card23.id)
-garen_deckcard24 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card24.id)
+# garen_deckcard24 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card24.id)+++
 
 
 jarvan_card1 = aatrox_card = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Aatrox", title: "the Darkin Blade", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 400,

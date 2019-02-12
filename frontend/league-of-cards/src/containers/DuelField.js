@@ -1028,6 +1028,7 @@ export default class DuelField extends React.Component {
 
     let items = computerHand.filter(card => card.cardtype === "Item")
     let abilities = computerHand.filter(card => card.cardtype === "Ability")
+    let monsters = computerHand.filter(card => card.cardtype === "Champion")
 
     let strongestPossibleHandMonster = this.getStrongestMonsterInOwnHand(computerHand, items)
     let weakestPossibleHandMonster = this.getWeakestMonsterInOwnHand(computerHand, items)
@@ -1146,7 +1147,7 @@ export default class DuelField extends React.Component {
             if (attackTarget.position === "attack" && this.highestAttack(attackTarget) === this.highestAttack(monster)) {
               let attackingMonsterSlot = computerMonsters.findIndex(card => card.id === monster.id)
 
-              computerMonsters.splice(attackingMonsterSlot, 1)
+              computerMonsters.splice(attackingMonsterSlot, 1, {})
               computerGraveyard = [...computerGraveyard, monster]
             } else if (attackTarget.position === "attack" && this.highestAttack(attackTarget) < this.highestAttack(monster)) {
               playerLife = playerLife - (this.highestAttack(monster) - this.highestAttack(attackTarget))
