@@ -50,35 +50,12 @@ export default class Campaign extends React.Component {
 
   }
 
-  duel = (duelist) => {
-    let dialogue = this.state.dialogue
-
-    fetch(`http://localhost:3000/api/v1/players/${this.props.player1.id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify(
-          {
-            dialogue: dialogue + 1
-          }
-      )
-    })
-    .then(res => {
-      this.setState({
-        dialogue: this.state.dialogue + 1
-      }, () => {this.props.getDuelist(this.state.computers[this.state.defeated], "campaign")})
-    })
-
-  }
-
   render() {
     return(
       <div id="campaign-screen" >
         <CampaignScreen player1={this.state.player1} computers={this.state.computers}
         dialogue={this.state.dialogue} defeated={this.state.defeated} storyText={this.state.storyText} increaseDialogue={this.increaseDialogue}
-        duel={this.duel}/>
+        getDuelist={this.props.getDuelist}/>
       </div>
     )
   }
