@@ -52,38 +52,47 @@ lux_deck = Deck.create(name: "Lux Deck 1", player_id: lux.id)
 # description:Throughout Valoran, the resolve of Demacia's military is alternately celebrated or despised, but always respected. Their ''zero tolerance'' moral code is strictly upheld by civilians and soldiers alike. In combat, this means Demacian troops may not .....", image:Garenox.png")
 
 
-garen_card1 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,
-description: "Throughout Valoran, the resolve of Demacia's military is alternately celebrated or despised, but always respected. Their ''zero tolerance'' moral code is strictly upheld by civilians and soldiers alike. In combat, this means Demacian troops may not ...", image: "Garen.png")
-garen_card2 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,
-description: "Throughout Valoran, the resolve of Demacia's military is alternately celebrated or despised, but always respected. Their ''zero tolerance'' moral code is strictly upheld by civilians and soldiers alike. In combat, this means Demacian troops may not ...", image: "Garen.png")
-garen_card3 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,
-description: "Throughout Valoran, the resolve of Demacia's military is alternately celebrated or despised, but always respected. Their ''zero tolerance'' moral code is strictly upheld by civilians and soldiers alike. In combat, this means Demacian troops may not ...", image: "Garen.png")
-garen_card4 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 300, magic: 800, defense: 400,
-description: "Unlike other foxes that roamed the woods of southern Ionia, Ahri had always felt a strange connection to the magical world around her; a connection that was somehow incomplete. Deep inside, she felt the skin she had been born into was an ill fit for ...", image: "Ahri.png")
-garen_card5 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 300, magic: 800, defense: 400,
-description: "Unlike other foxes that roamed the woods of southern Ionia, Ahri had always felt a strange connection to the magical world around her; a connection that was somehow incomplete. Deep inside, she felt the skin she had been born into was an ill fit for ...", image: "Ahri.png")
-garen_card6 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 300, magic: 800, defense: 400,
-description: "Unlike other foxes that roamed the woods of southern Ionia, Ahri had always felt a strange connection to the magical world around her; a connection that was somehow incomplete. Deep inside, she felt the skin she had been born into was an ill fit for ...", image: "Ahri.png")
-garen_card7 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 650, magic: 1040, defense: 390,
-description: "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", image: "Akali.png")
-garen_card8 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 650, magic: 1040, defense: 390,
-description: "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", image: "Akali.png")
-garen_card9 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 650, magic: 1040, defense: 390,
-description: "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", image: "Akali.png")
-garen_card10 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Alistar", title: "the Minotaur", role: "Tank", rarity: "Silver", attack: 780, magic: 650, defense: 1170,
-description: "As the mightiest warrior to ever emerge from the Minotaur tribes of the Great Barrier, Alistar defended his tribe from Valoran's many dangers; that is, until the coming of the Noxian army. Alistar was lured from his village by the machinations of ...", image: "Alistar.png")
-garen_card11 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Alistar", title: "the Minotaur", role: "Tank", rarity: "Silver", attack: 780, magic: 650, defense: 1170,
-description: "As the mightiest warrior to ever emerge from the Minotaur tribes of the Great Barrier, Alistar defended his tribe from Valoran's many dangers; that is, until the coming of the Noxian army. Alistar was lured from his village by the machinations of ...", image: "Alistar.png")
-garen_card12 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Alistar", title: "the Minotaur", role: "Tank", rarity: "Silver", attack: 780, magic: 650, defense: 1170,
-description: "As the mightiest warrior to ever emerge from the Minotaur tribes of the Great Barrier, Alistar defended his tribe from Valoran's many dangers; that is, until the coming of the Noxian army. Alistar was lured from his village by the machinations of ...", image: "Alistar.png")
-garen_card13 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Amumu", title: "the Sad Mummy", role: "Tank", rarity: "Bronze", attack: 200, magic: 800, defense: 600,
-description: "''Solitude can be lonelier than death.''<br><br>A lonely and melancholy soul from ancient Shurima, Amumu roams the world in search of a friend. Cursed by an ancient spell, he is doomed to remain alone forever, as his touch is death and his affection ...", image: "Amumu.png")
-garen_card14 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Amumu", title: "the Sad Mummy", role: "Tank", rarity: "Bronze", attack: 200, magic: 800, defense: 600,
-description: "''Solitude can be lonelier than death.''<br><br>A lonely and melancholy soul from ancient Shurima, Amumu roams the world in search of a friend. Cursed by an ancient spell, he is doomed to remain alone forever, as his touch is death and his affection ...", image: "Amumu.png")
-garen_card15 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Amumu", title: "the Sad Mummy", role: "Tank", rarity: "Bronze", attack: 200, magic: 800, defense: 600,
-description: "''Solitude can be lonelier than death.''<br><br>A lonely and melancholy soul from ancient Shurima, Amumu roams the world in search of a friend. Cursed by an ancient spell, he is doomed to remain alone forever, as his touch is death and his affection ...", image: "Amumu.png")
+garen_card1 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
+garen_card2 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
+garen_card3 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
+garen_card4 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Sona", title: "Maven of the Strings", role: "Support", rarity: "Bronze", attack: 500, magic: 800, defense: 200,image: "Sona.png")
+garen_card5 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Sona", title: "Maven of the Strings", role: "Support", rarity: "Bronze", attack: 500, magic: 800, defense: 200,image: "Sona.png")
+garen_card6 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Sona", title: "Maven of the Strings", role: "Support", rarity: "Bronze", attack: 500, magic: 800, defense: 200,image: "Sona.png")
+garen_card7 = Card.create(player_id: garen.id, cardtype: 'Champion',  name: "Jarvan IV", title: "the Exemplar of Demacia", role: "Tank", rarity: "Bronze", attack: 600, magic: 300, defense: 800, image: "JarvanIV.png")
+garen_card8 = Card.create(player_id: garen.id, cardtype: 'Champion',  name: "Jarvan IV", title: "the Exemplar of Demacia", role: "Tank", rarity: "Bronze", attack: 600, magic: 300, defense: 800, image: "JarvanIV.png")
+garen_card9 = Card.create(player_id: garen.id, cardtype: 'Champion',  name: "Jarvan IV", title: "the Exemplar of Demacia", role: "Tank", rarity: "Bronze", attack: 600, magic: 300, defense: 800, image: "JarvanIV.png")
+garen_card10 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Lucian", title: "the Purifier", role: "Marksman", rarity: "Bronze", attack: 800, magic: 300, defense: 500,image: "Lucian.png")
+garen_card11 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Lucian", title: "the Purifier", role: "Marksman", rarity: "Bronze", attack: 800, magic: 300, defense: 500,image: "Lucian.png")
+garen_card12 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Lucian", title: "the Purifier", role: "Marksman", rarity: "Bronze", attack: 800, magic: 300, defense: 500,image: "Lucian.png")
+garen_card13 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Poppy", title: "Keeper of the Hammer", role: "Tank", rarity: "Bronze", attack: 600, magic: 200, defense: 700,image: "Poppy.png")
+garen_card14 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Poppy", title: "Keeper of the Hammer", role: "Tank", rarity: "Bronze", attack: 600, magic: 200, defense: 700,image: "Poppy.png")
+garen_card15 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Poppy", title: "Keeper of the Hammer", role: "Tank", rarity: "Bronze", attack: 600, magic: 200, defense: 700,image: "Poppy.png")
+garen_card16 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Shyvana", title: "the Half-Dragon", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600,image: "Shyvana.png")
+garen_card17 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Shyvana", title: "the Half-Dragon", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600,image: "Shyvana.png")
+garen_card18 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Shyvana", title: "the Half-Dragon", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600,image: "Shyvana.png")
+garen_card19 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Xin Zhao", title: "the Seneschal of Demacia", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600,image: "XinZhao.png")
+garen_card20 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Xin Zhao", title: "the Seneschal of Demacia", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600,image: "XinZhao.png")
+garen_card21 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Xin Zhao", title: "the Seneschal of Demacia", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600,image: "XinZhao.png")
+garen_card22 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Galio", title: "the Sentinel's Sorrow", role: "Tank", rarity: "Bronze", attack: 300, magic: 600, defense: 700,image: "Galio.png")
+garen_card23 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Galio", title: "the Sentinel's Sorrow", role: "Tank", rarity: "Bronze", attack: 300, magic: 600, defense: 700,image: "Galio.png")
+garen_card24 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Galio", title: "the Sentinel's Sorrow", role: "Tank", rarity: "Bronze", attack: 300, magic: 600, defense: 700,image: "Galio.png")
+garen_card25 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
+garen_card26 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
+garen_card27 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
+garen_card28 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
+garen_card29 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
+garen_card30 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
+garen_card31 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
+garen_card32 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
+garen_card33 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
+garen_card34 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
+garen_card35 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
+garen_card36 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
+garen_card37 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
+garen_card38 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
+garen_card39 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
 
-garen_card16 = Card.create(
+garen_card40 = Card.create(
   player_id: garen.id,
   name: "Youmuu's Ghostblade",
   cardtype: "Item",
@@ -185,12 +194,9 @@ garen_deckcard23 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card23
 # garen_deckcard24 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card24.id)+++
 
 
-jarvan_card1 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,
-description: "Throughout Valoran, the resolve of Demacia's military is alternately celebrated or despised, but always respected. Their ''zero tolerance'' moral code is strictly upheld by civilians and soldiers alike. In combat, this means Demacian troops may not ...", image: "Garen.png")
-jarvan_card2 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,
-description: "Throughout Valoran, the resolve of Demacia's military is alternately celebrated or despised, but always respected. Their ''zero tolerance'' moral code is strictly upheld by civilians and soldiers alike. In combat, this means Demacian troops may not ...", image: "Garen.png")
-jarvan_card3 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,
-description: "Throughout Valoran, the resolve of Demacia's military is alternately celebrated or despised, but always respected. Their ''zero tolerance'' moral code is strictly upheld by civilians and soldiers alike. In combat, this means Demacian troops may not ...", image: "Garen.png")
+jarvan_card1 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
+jarvan_card2 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
+jarvan_card3 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
 jarvan_card4 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 300, magic: 800, defense: 400,
 description: "Unlike other foxes that roamed the woods of southern Ionia, Ahri had always felt a strange connection to the magical world around her; a connection that was somehow incomplete. Deep inside, she felt the skin she had been born into was an ill fit for ...", image: "Ahri.png")
 jarvan_card5 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 300, magic: 800, defense: 400,

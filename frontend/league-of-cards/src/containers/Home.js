@@ -30,7 +30,8 @@ export default class Home extends React.Component {
     decksList: [],
     gold: '',
     defeated: '',
-    duelLocation: ''
+    duelLocation: '',
+    dialogue: ''
   }
 
   handleName = (event) => {
@@ -1844,7 +1845,8 @@ export default class Home extends React.Component {
           currentDeck: res.decks[0],
           loggedIn: true,
           gold: res.gold,
-          defeated: res.defeated_id
+          defeated: res.defeated_id,
+          dialogue: res.dialogue
         }, () => {
           fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/decks/${this.state.currentDeck.id}`)
           .then(res => res.json())
@@ -1978,16 +1980,46 @@ export default class Home extends React.Component {
 
   renderPostDuel = (location) => {
     if (this.state.duelLocation === 'freeDuel') {
+      console.log("free")
       this.setState({
         render: 'duelistsList'
       })
     } else if (this.state.duelLocation === 'campaign') {
-      let player = this.state.currentPlayer
-      player.dialogue = player.dialogue + 1
-      this.setState({
-        currentPlayer: player,
-        render: 'campaign'
-      }, (console.log(this.state.currentPlayer)))
+      let dialogue = this.state.dialogue
+      console.log("campaign")
+
+      fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`)
+      .then(res => res.json())
+      .then(res => this.setState({
+        dialogue: res.dialogue
+      }, () => {
+        fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify(
+              {
+                dialogue: this.state.dialogue + 1
+              }
+          )
+        })
+        .then(res => {
+          let player = this.state.currentPlayer
+          player.dialogue = player.dialogue + 1
+
+          this.setState({
+            currentPlayer: player,
+            dialogue: this.state.dialogue + 1
+          }, () => {
+            this.setState({
+              render: 'campaign'
+            })
+          })
+        })
+      }))
+
     }
   }
 
@@ -2271,6 +2303,7 @@ export default class Home extends React.Component {
             reward={this.reward}
             gold={this.state.gold}
             getDuelist={this.getDuelist}
+            increaseDialogue={this.increaseDialogue}
           />
         </div>
       )
@@ -2385,7 +2418,6 @@ export default class Home extends React.Component {
             reward={this.reward}
             gold={this.state.gold}
             duelLocation={this.state.duelLocation}
-            campaignReward={this.campaignReward}
           />
         </div>
       )

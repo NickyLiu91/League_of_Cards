@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 2019_01_05_075823) do
     t.string "level"
     t.string "background"
     t.string "preduel"
+    t.integer "dialogue"
     t.integer "gold"
     t.integer "defeated_id"
     t.boolean "computer"
