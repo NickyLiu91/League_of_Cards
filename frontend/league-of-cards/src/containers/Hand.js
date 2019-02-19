@@ -5,9 +5,16 @@ let handKey = 0
 export default class Hand extends React.Component {
 
   generateHandCards = () => {
-    return this.props.hand.map(
-      cardObj => <DuelCard key={handKey++} duelCard={cardObj} clickAction={this.props.clickHandCard}/>
-    )
+    if (this.props.player === "player2") {
+      return this.props.hand.map(
+        cardObj => <DuelCard key={handKey++} duelCard={cardObj} clickAction={this.props.clickHandCard} location={"computerHand"}/>
+      )
+    } else {
+      return this.props.hand.map(
+        cardObj => <DuelCard key={handKey++} duelCard={cardObj} clickAction={this.props.clickHandCard} location={"playerHand"}/>
+      )
+    }
+
   }
 
   render() {
