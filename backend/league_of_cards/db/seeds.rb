@@ -8,7 +8,7 @@ require "httparty"
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# garen = Player.create(name: "Garen", image: "image/GarenPortrait.png", computer: true)
+azir = Player.create(name: "Azir", image: "image/AzirPortrait.png", computer: true, background: "image/GarenBG.jpeg", preduel: "image/Garen.png")
 # zed = Player.create(name: "Zed", image: "image/ZedPortrait.png", computer: true)
 garen = Player.create(name: "Garen", image: "image/GarenPortrait.png", computer: true, background: "image/GarenBG.jpeg", preduel: "image/Garen.png")
 jarvan = Player.create(name: "Jarvan", image: "image/JarvanIVPortrait.png", computer: true, background: "image/JarvanIVBG.jpeg", preduel: "image/JarvanIV.png")
@@ -34,7 +34,7 @@ lux = Player.create(name: "Lux", image: "image/LuxPortrait.png", computer: true,
 # yasuo_card = Card.create(name: "Yasuo", title: "The Wanderer", role: "Assassin", rarity: 10, attack: 10, magic: 8, defense: 8, description: "Weeb swordsman.", image: "Yasuo.png")
 #
 #
-# azir_deck = Deck.create(name: "Azir Deck 1", player_id: azir.id)
+azir_deck = Deck.create(name: "Azir Deck 1", player_id: azir.id)
 # zed_deck = Deck.create(name: "Zed Deck 1", player_id: zed.id)
 garen_deck = Deck.create(name: "Garen Deck 1", player_id: garen.id)
 jarvan_deck = Deck.create(name: "Jarvan Deck 1", player_id: jarvan.id)
@@ -143,12 +143,13 @@ garen_card20 = Card.create(
   quantity: 0
 )
 
-garen_card21 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 650, magic: 1040, defense: 390,
+azir_card21 = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 65, magic: 104, defense: 39,
 description: "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", image: "Akali.png")
-garen_card22 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 300, magic: 800, defense: 400,
-description: "Unlike other foxes that roamed the woods of southern Ionia, Ahri had always felt a strange connection to the magical world around her; a connection that was somehow incomplete. Deep inside, she felt the skin she had been born into was an ill fit for ...", image: "Ahri.png")
-garen_card23 = Card.create(
-  player_id: garen.id,
+azir_card22 = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Akali22", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 65, magic: 104, defense: 39,
+description: "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", image: "Akali.png")
+
+azir_card23 = Card.create(
+  player_id: azir.id,
   name: "Noxian Guillotine",
   cardtype: "Ability",
   rarity: "Diamond",
@@ -157,41 +158,119 @@ garen_card23 = Card.create(
   image: "NoxianGuillotine.png",
   quantity: 0
 )
-garen_card24 = Card.create(
-  player_id: garen.id,
+azir_card24 = Card.create(
+  player_id: azir.id,
   name: "Noxian Guillotine",
   cardtype: "Ability",
   rarity: "Diamond",
   description: "Destroy any champion on your opponent's side of the field",
   effect: "props.noxianGuillotine(props.selectedCard)",
   image: "NoxianGuillotine.png",
+  quantity: 0
+)
+azir_card25 = Card.create(
+  player_id: azir.id,
+  name: "Youmuu's Ghostblade",
+  cardtype: "Item",
+  rarity: "Diamond",
+  description: "700 bonus to all stats to equipped Assassin.",
+  effect: "props.equip(props.selectedCard)",
+  image: "YoumuusGhostblade.png",
+  quantity: 0
+)
+azir_card26 = Card.create(
+  player_id: azir.id,
+  name: "Youmuu's Ghostblade",
+  cardtype: "Item",
+  rarity: "Diamond",
+  description: "700 bonus to all stats to equipped Assassin.",
+  effect: "props.equip(props.selectedCard)",
+  image: "YoumuusGhostblade.png",
+  quantity: 0
+)
+azir_card27 = Card.create(
+  player_id: azir.id,
+  name: "Youmuu's Ghostblade",
+  cardtype: "Item",
+  rarity: "Diamond",
+  description: "700 bonus to all stats to equipped Assassin.",
+  effect: "props.equip(props.selectedCard)",
+  image: "YoumuusGhostblade.png",
+  quantity: 0
+)
+azir_card28 = Card.create(
+  player_id: azir.id,
+  name: "Youmuu's Ghostblade",
+  cardtype: "Item",
+  rarity: "Diamond",
+  description: "700 bonus to all stats to equipped Assassin.",
+  effect: "props.equip(props.selectedCard)",
+  image: "YoumuusGhostblade.png",
+  quantity: 0
+)
+azir_card29 = Card.create(
+  player_id: azir.id,
+  name: "Youmuu's Ghostblade",
+  cardtype: "Item",
+  rarity: "Diamond",
+  description: "700 bonus to all stats to equipped Assassin.",
+  effect: "props.equip(props.selectedCard)",
+  image: "YoumuusGhostblade.png",
+  quantity: 0
+)
+azir_card30 = Card.create(
+  player_id: azir.id,
+  name: "Youmuu's Ghostblade",
+  cardtype: "Item",
+  rarity: "Diamond",
+  description: "700 bonus to all stats to equipped Assassin.",
+  effect: "props.equip(props.selectedCard)",
+  image: "YoumuusGhostblade.png",
+  quantity: 0
+)
+azir_card31 = Card.create(
+  player_id: azir.id,
+  name: "Youmuu's Ghostblade",
+  cardtype: "Item",
+  rarity: "Diamond",
+  description: "700 bonus to all stats to equipped Assassin.",
+  effect: "props.equip(props.selectedCard)",
+  image: "YoumuusGhostblade.png",
   quantity: 0
 )
 
-garen_deckcard1 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card1.id)
-garen_deckcard2 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card2.id)
-garen_deckcard3 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card3.id)
-garen_deckcard4 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card4.id)
-garen_deckcard5 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card5.id)
-garen_deckcard6 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card6.id)
-garen_deckcard7 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card7.id)
-garen_deckcard8 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card8.id)
-garen_deckcard9 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card9.id)
-garen_deckcard10 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card10.id)
-garen_deckcard11 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card11.id)
-garen_deckcard12 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card12.id)
-garen_deckcard13 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card13.id)
-garen_deckcard14 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card14.id)
-garen_deckcard15 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card15.id)
-# garen_deckcard16 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card16.id)---
-# garen_deckcard17 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card17.id)+++
-# garen_deckcard18 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card18.id)---
-# garen_deckcard19 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card19.id)---
-# garen_deckcard20 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card20.id)---
-# garen_deckcard21 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card21.id)---
-garen_deckcard22 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card22.id)
-garen_deckcard23 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card23.id)
-# garen_deckcard24 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card24.id)+++
+
+# azir_deckcard1 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card1.id)
+# azir_deckcard2 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card2.id)
+# azir_deckcard3 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card3.id)
+# azir_deckcard4 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card4.id)
+# azir_deckcard5 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card5.id)
+# azir_deckcard6 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card6.id)
+# azir_deckcard7 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card7.id)
+# azir_deckcard8 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card8.id)
+# azir_deckcard9 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card9.id)
+# azir_deckcard10 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card10.id)
+# azir_deckcard11 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card11.id)
+# azir_deckcard12 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card12.id)
+# azir_deckcard13 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card13.id)
+# azir_deckcard14 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card14.id)
+# azir_deckcard15 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card15.id)
+# azir_deckcard16 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card16.id)---
+# azir_deckcard17 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card17.id)+++
+# azir_deckcard18 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card18.id)---
+# azir_deckcard19 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card19.id)---
+# azir_deckcard20 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card20.id)---
+azir_deckcard21 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card21.id)
+azir_deckcard22 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card22.id)
+azir_deckcard23 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card23.id)
+azir_deckcard24 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card24.id)
+azir_deckcard25 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card25.id)
+azir_deckcard26 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card26.id)
+azir_deckcard27 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card27.id)
+azir_deckcard28 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card28.id)
+azir_deckcard29 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card29.id)
+azir_deckcard30 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card30.id)
+azir_deckcard31 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card31.id)
 
 
 jarvan_card1 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
@@ -345,8 +424,8 @@ jarvan_deckcard24 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_car
 def generate_cards
   cardinfo = HTTParty.get('http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json')
   cardinfo["data"].each do |champ, cardObj|
-    cardDescription = HTTParty.get("http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion/#{cardObj["id"]}.json")["data"]["#{cardObj["id"]}"]["lore"]
-    puts(cardDescription)
+    # cardDescription = HTTParty.get("http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion/#{cardObj["id"]}.json")["data"]["#{cardObj["id"]}"]["lore"]
+    # puts(cardDescription)
     if (cardObj["info"]["difficulty"].to_i) === 10
       Allcard.create(
         key: cardObj["key"],
@@ -358,7 +437,8 @@ def generate_cards
         attack: cardObj["info"]["attack"] * 300,
         magic: cardObj["info"]["magic"] * 300,
         defense: cardObj["info"]["defense"] * 300,
-        description: cardDescription,
+        # description: cardDescription,
+        description: "tempSpace",
         image: cardObj["image"]["full"],
         quantity: 0
       )
@@ -373,7 +453,8 @@ def generate_cards
         attack: cardObj["info"]["attack"] * 250,
         magic: cardObj["info"]["magic"] * 250,
         defense: cardObj["info"]["defense"] * 250,
-        description: cardDescription,
+        # description: cardDescription,
+        description: "tempSpace",
         image: cardObj["image"]["full"],
         quantity: 0
       )
@@ -388,7 +469,8 @@ def generate_cards
         attack: cardObj["info"]["attack"] * 200,
         magic: cardObj["info"]["magic"] * 200,
         defense: cardObj["info"]["defense"] * 200,
-        description: cardDescription,
+        # description: cardDescription,
+        description: "tempSpace",
         image: cardObj["image"]["full"],
         quantity: 0
         )
@@ -403,7 +485,8 @@ def generate_cards
         attack: cardObj["info"]["attack"] * 150,
         magic: cardObj["info"]["magic"] * 150,
         defense: cardObj["info"]["defense"] * 150,
-        description: cardDescription,
+        # description: cardDescription,
+        description: "tempSpace",
         image: cardObj["image"]["full"],
         quantity: 0
       )
@@ -418,7 +501,8 @@ def generate_cards
         attack: cardObj["info"]["attack"] * 100,
         magic: cardObj["info"]["magic"] * 100,
         defense: cardObj["info"]["defense"] * 100,
-        description: cardDescription,
+        # description: cardDescription,
+        description: "tempSpace",
         image: cardObj["image"]["full"],
         quantity: 0
       )

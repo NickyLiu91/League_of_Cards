@@ -1781,7 +1781,9 @@ export default class Home extends React.Component {
         })
       })
     })
-    .then(res => {deckNumber = 0})
+    .then(res => this.setState({
+      render: 'home'
+    }, () => {deckNumber = 0}))
   }
 
   getAllPlayers = () => {
@@ -2136,8 +2138,7 @@ export default class Home extends React.Component {
             defeated_id: 0
           }
     )}).then(res => this.setState({
-        allPlayers: [...this.state.allPlayers, {id: this.state.allPlayers.length + 1, name: this.state.name, decks: [], cards: [], collection: [], image: 'image/TwistedFatePortrait.png', computer: false, password_digest: this.state.password, defeated: 0}],
-        render: 'home'
+        allPlayers: [...this.state.allPlayers, {id: this.state.allPlayers.length + 1, name: this.state.name, decks: [], cards: [], collection: [], image: 'image/TwistedFatePortrait.png', computer: false, password_digest: this.state.password, defeated: 0}]
     }, () => {
       fetch(`http://localhost:3000/api/v1/decks`, {
         method: 'POST',

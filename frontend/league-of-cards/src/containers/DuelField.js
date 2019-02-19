@@ -70,6 +70,12 @@ export default class DuelField extends React.Component {
     )
   }
 
+  fullField = (field) => {
+    return field.every(
+      object => Object.keys(object).length > 0
+    )
+  }
+
   start5CardsPlayer = () => {
     this.setState({
       player1Deck: this.shuffle(this.state.player1Deck)
@@ -182,7 +188,7 @@ export default class DuelField extends React.Component {
   clickHandCard = (card) => {
     console.log(card)
     // console.log(this.state.player1.id === this.state.currentPlayer.id)
-    if (this.state.summoned === false && card.cardtype === "Champion") {
+    if (card.cardtype === "Champion") {
       // if (this.state.currentPlayer === "player1") {
         this.setState({
           selectedCard: card,
@@ -1030,19 +1036,60 @@ export default class DuelField extends React.Component {
     let abilities = computerHand.filter(card => card.cardtype === "Ability")
     let monsters = computerHand.filter(card => card.cardtype === "Champion")
 
-    let strongestPossibleHandMonster = this.getStrongestMonsterInOwnHand(computerHand, items)
-    let weakestPossibleHandMonster = this.getWeakestMonsterInOwnHand(computerHand, items)
-    let strongestMonsterOnField = this.getStrongestMonsterOnOwnField(computerMonsters)
-
+    let strongestHandMonster
+    let strongestPossibleHandMonster
+    let weakestPossibleHandMonster
+    let strongestMonsterInField
+    let strongestPossibleMonsterInField
     let strongestMonster
+    let strongerEnemyMonsters
+    let buffedStrongestPossibleHandMonster
+    let buffedStrongestPossibleMonsterInField
 
-    if (Object.keys(strongestMonsterOnField).length === 0 || this.highestAttack(strongestPossibleHandMonster) > this.highestAttack(strongestMonsterOnField) ) {
+    if (monsters.length > 0 && !this.emptyField(computerMonsters)) {
+      strongestHandMonster = this.getStrongestMonsterInOwnHand(monsters)
+      strongestPossibleHandMonster = this.getStrongestPossibleMonsterInOwnHand(computerHand, items)
+      weakestPossibleHandMonster = this.getWeakestMonsterInOwnHand(computerHand, items)
+      strongestMonsterInField = this.getStrongestMonsterInOwnField(computerMonsters)
+      strongestPossibleMonsterInField = this.getStrongestPossibleMonsterInOwnField(computerMonsters, items)
+      buffedStrongestPossibleHandMonster = this.getBuffedStrongestPossibleMonsterInOwnHand(computerHand, items)
+      buffedStrongestPossibleMonsterInField = this.getBuffedStrongestPossibleMonsterInOwnField(computerMonsters, items)
+
+      if (Object.keys(strongestPossibleMonsterInField).length === 0 || this.highestAttack(strongestPossibleHandMonster) > this.highestAttack(strongestPossibleMonsterInField) ) {
+        strongestMonster = strongestPossibleHandMonster
+        strongerEnemyMonsters = this.getStrongerEnemyMonsters(buffedStrongestPossibleHandMonster, playerMonsters)
+      } else {
+        strongestMonster = strongestPossibleMonsterInField
+        strongerEnemyMonsters = this.getStrongerEnemyMonsters(buffedStrongestPossibleMonsterInField, playerMonsters)
+      }
+      console.log("a")
+    } else if (monsters.length > 0 && this.emptyField(computerMonsters)) {
+      strongestPossibleHandMonster = this.getStrongestPossibleMonsterInOwnHand(computerHand, items)
+      weakestPossibleHandMonster = this.getWeakestMonsterInOwnHand(computerHand, items)
+      strongestHandMonster = this.getStrongestMonsterInOwnHand(monsters)
+      buffedStrongestPossibleHandMonster = this.getBuffedStrongestPossibleMonsterInOwnHand(computerHand, items)
+
       strongestMonster = strongestPossibleHandMonster
+
+      strongerEnemyMonsters = this.getStrongerEnemyMonsters(buffedStrongestPossibleHandMonster, playerMonsters)
+      // console.log(strongestMonster)
+      // console.log(strongerEnemyMonsters)
+      // console.log(strongerEnemyMonsters[0])
+      // console.log(strongerEnemyMonsters.length)
+      console.log("b")
+    } else if (monsters.length === 0 && !this.emptyField(computerMonsters)){
+      strongestPossibleMonsterInField = this.getStrongestPossibleMonsterInOwnField(computerMonsters, items)
+      buffedStrongestPossibleMonsterInField = this.getBuffedStrongestPossibleMonsterInOwnField(computerMonsters, items)
+      strongestMonster = strongestPossibleMonsterInField
+
+      strongerEnemyMonsters = this.getStrongerEnemyMonsters(buffedStrongestPossibleMonsterInField, playerMonsters)
+      console.log("c")
     } else {
-      strongestMonster = strongestMonsterOnField
+      strongerEnemyMonsters = playerMonsters.filter(obj => Object.keys(obj).length > 0)
+      console.log("d")
     }
 
-    let strongerEnemyMonsters = this.getStrongerEnemyMonsters(strongestMonster, this.state.player1Monsters)
+    console.log(strongerEnemyMonsters)
 
     if (strongerEnemyMonsters.length > 1 && computerHand.filter(card => card.name === "Requiem").length > 0) {
       let reqiuemCard = computerHand.find(card => card.name === "Requiem")
@@ -1115,65 +1162,97 @@ export default class DuelField extends React.Component {
 
     }
 
-    computerMonsters.forEach(
-      monster => {
-        if (Object.keys(monster).length !== 0 && monster.attacked === false) {
-          if (this.emptyField(playerMonsters)) {
-            playerLife = playerLife - this.highestAttack(monster)
-            monster.attacked = true
-            if (playerLife <= 0) {
-              this.lose()
-            }
-          } else if (this.findStrongestKillablePlayerMonster(monster, playerMonsters)) {
-            monster.position = "attack"
+    if (monsters.length === 0 && !this.emptyField(computerMonsters)) {
+      items.forEach(item => {
+        if (item.description.includes(strongestMonster.role)) {
 
-            let attackTarget = this.findStrongestKillablePlayerMonster(monster, playerMonsters)
-            let attackTargetSlot = playerMonsters.findIndex(card => card.id === attackTarget.id)
+          if (!this.fullField(computerSpells)) {
+            let emptySpellSlot = computerSpells.findIndex(slot => Object.keys(slot).length === 0)
+            computerSpells.splice(emptySpellSlot, 1, item)
+            item.target = strongestMonster
 
-            playerMonsters.splice(attackTargetSlot, 1, {})
-            playerGraveyard = [...playerGraveyard, attackTarget]
+            strongestMonster.attack = strongestMonster.attack + parseInt(item.description)
+            strongestMonster.magic = strongestMonster.magic + parseInt(item.description)
+            strongestMonster.defense = strongestMonster.defense + parseInt(item.description)
 
-            for (let i = 0; i < playerSpells.length; i++) {
-              if (Object.keys(playerSpells[i]).length !== 0 && playerSpells[i].target.id === attackTarget.id){
-                console.log(attackTarget.idea)
-                console.log(playerSpells[i].target)
-                playerGraveyard = [...playerGraveyard, playerSpells[i]]
-                playerSpells.splice(i, 1, {})
-              }
-            }
+            computerHand = computerHand.filter(card => card.id !== item.id)
+          }
 
-            monster.attacked = true
+        }
 
-            if (attackTarget.position === "attack" && this.highestAttack(attackTarget) === this.highestAttack(monster)) {
-              let attackingMonsterSlot = computerMonsters.findIndex(card => card.id === monster.id)
+      })
+    }
 
-              computerMonsters.splice(attackingMonsterSlot, 1, {})
-              computerGraveyard = [...computerGraveyard, monster]
-            } else if (attackTarget.position === "attack" && this.highestAttack(attackTarget) < this.highestAttack(monster)) {
-              playerLife = playerLife - (this.highestAttack(monster) - this.highestAttack(attackTarget))
+      // let sortedMonsters = computerMonsters.slice(0, computerMonsters.length).sort( (a, b) => {
+      //   if(this.highestAttack(a) > this.highestAttack(b)) {
+      // 		return -1
+      //   } else {
+      //   	return 1
+      //   }
+      //   return 0
+      // })
+
+    if (!this.emptyField(playerMonsters)) {
+      computerMonsters.forEach(
+        monster => {
+          if (Object.keys(monster).length !== 0 && monster.attacked === false) {
+            if (this.emptyField(playerMonsters)) {
+              playerLife = playerLife - this.highestAttack(monster)
+              monster.attacked = true
               if (playerLife <= 0) {
                 this.lose()
               }
-            }
-          } else {
-            if (monster.defense > this.highestAttack(monster) || monster.attack < 1500) {
-              monster.position = "defense"
+            } else if (this.findStrongestKillablePlayerMonster(monster, playerMonsters)) {
+              monster.position = "attack"
+
+              let attackTarget = this.findStrongestKillablePlayerMonster(monster, playerMonsters)
+              let attackTargetSlot = playerMonsters.findIndex(card => card.id === attackTarget.id)
+
+              playerMonsters.splice(attackTargetSlot, 1, {})
+              playerGraveyard = [...playerGraveyard, attackTarget]
+
+              for (let i = 0; i < playerSpells.length; i++) {
+                if (Object.keys(playerSpells[i]).length !== 0 && playerSpells[i].target.id === attackTarget.id){
+                  console.log(attackTarget.idea)
+                  console.log(playerSpells[i].target)
+                  playerGraveyard = [...playerGraveyard, playerSpells[i]]
+                  playerSpells.splice(i, 1, {})
+                }
+              }
+
+              monster.attacked = true
+
+              if (attackTarget.position === "attack" && this.highestAttack(attackTarget) === this.highestAttack(monster)) {
+                let attackingMonsterSlot = computerMonsters.findIndex(card => card.id === monster.id)
+
+                computerMonsters.splice(attackingMonsterSlot, 1, {})
+                computerGraveyard = [...computerGraveyard, monster]
+              } else if (attackTarget.position === "attack" && this.highestAttack(attackTarget) < this.highestAttack(monster)) {
+                playerLife = playerLife - (this.highestAttack(monster) - this.highestAttack(attackTarget))
+                if (playerLife <= 0) {
+                  this.lose()
+                }
+              }
+            } else {
+              if (monster.defense > this.highestAttack(monster) || monster.attack < 1500) {
+                monster.position = "defense"
+              }
             }
           }
         }
-      }
-    )
+      )
+    }
 
-    if (this.emptyField(playerMonsters) || this.findStrongestKillablePlayerMonster(strongestPossibleHandMonster, playerMonsters)) {
-      let emptyMonsterSlot = computerMonsters.findIndex(slot => Object.keys(slot).length === 0)
-      console.log(emptyMonsterSlot)
+    if (monsters.length > 0 && (this.emptyField(playerMonsters) || this.findStrongestKillablePlayerMonster(buffedStrongestPossibleHandMonster, playerMonsters))) {
 
-      if (emptyMonsterSlot !== undefined ) {
+      if (!this.fullField(computerMonsters)) {
+        let emptyMonsterSlot = computerMonsters.findIndex(slot => Object.keys(slot).length === 0)
         let monsterToPlaySlot = computerHand.findIndex(card => card.id === strongestPossibleHandMonster.id)
 
         computerHand.splice(monsterToPlaySlot, 1)
         computerMonsters.splice(emptyMonsterSlot, 1, strongestPossibleHandMonster)
         strongestPossibleHandMonster.position = "attack"
+        strongestPossibleHandMonster.attacked = false
       }
 
       items.forEach(item => {
@@ -1183,6 +1262,10 @@ export default class DuelField extends React.Component {
           let emptySpellSlot = computerSpells.findIndex(slot => Object.keys(slot).length === 0)
           computerSpells.splice(emptySpellSlot, 1, item)
           item.target = strongestPossibleHandMonster
+
+          strongestPossibleHandMonster.attack = strongestPossibleHandMonster.attack + parseInt(item.description)
+          strongestPossibleHandMonster.magic = strongestPossibleHandMonster.magic + parseInt(item.description)
+          strongestPossibleHandMonster.defense = strongestPossibleHandMonster.defense + parseInt(item.description)
         }
       })
 
@@ -1231,13 +1314,23 @@ export default class DuelField extends React.Component {
           }
         }
       )
-    } else {
+    } else if (monsters.length > 0) {
       let summonMonsterHandSlot = computerHand.findIndex(monster => monster.id === weakestPossibleHandMonster.id)
       computerHand.splice(summonMonsterHandSlot, 1)
 
       let emptyMonsterSlot = computerMonsters.findIndex(slot => Object.keys(slot).length === 0)
       computerMonsters[emptyMonsterSlot] = weakestPossibleHandMonster
 
+      computerMonsters.forEach(
+        monster => {
+          if (Object.keys(monster).length !== 0 && monster.attacked === false) {
+            if (monster.defense > this.highestAttack(monster) || (monster.attack < 1500 && monster.magic < 1500)) {
+              monster.position = "defense"
+            }
+          }
+        }
+      )
+    } else {
       computerMonsters.forEach(
         monster => {
           if (Object.keys(monster).length !== 0 && monster.attacked === false) {
@@ -1261,7 +1354,18 @@ export default class DuelField extends React.Component {
     }, () => {this.computerEndTurn()})
   }
 
-  getStrongestMonsterInOwnHand = (hand, items) => {
+  getStrongestMonsterInOwnHand = (hand) => {
+    let monster = ''
+    hand.forEach(
+      monsterObj => {if (this.highestAttack(monsterObj) > this.highestAttack(monster) || monster === '') {
+        monster = monsterObj
+      }}
+    )
+    return monster
+  }
+
+  getStrongestPossibleMonsterInOwnHand = (hand, items) => {
+    let strongestMonster
 
     let monsters = hand.filter(obj => obj.cardtype === 'Champion').sort( (a, b) => {
       if(this.highestAttack(a) > this.highestAttack(b)) {
@@ -1286,7 +1390,7 @@ export default class DuelField extends React.Component {
       buffedMonsters = [...buffedMonsters, newMonster]
     })
 
-    return buffedMonsters.sort( (a, b) => {
+    strongestMonster = buffedMonsters.sort( (a, b) => {
       if(this.highestAttack(a) > this.highestAttack(b)) {
     		return -1
       } else {
@@ -1294,6 +1398,51 @@ export default class DuelField extends React.Component {
       }
       return 0
     })[0]
+
+    // console.log("STRONGEST Hand")
+    // console.log(strongestMonster)
+
+    let x = monsters.find(obj => obj.id === strongestMonster.id)
+    // console.log(x)
+
+    return monsters.find(obj => obj.id === strongestMonster.id)
+  }
+
+  getBuffedStrongestPossibleMonsterInOwnHand = (hand, items) => {
+    let strongestMonster
+
+    let monsters = hand.filter(obj => obj.cardtype === 'Champion').sort( (a, b) => {
+      if(this.highestAttack(a) > this.highestAttack(b)) {
+    		return -1
+      } else {
+      	return 1
+      }
+      return 0
+    })
+
+    let buffedMonsters = []
+
+    monsters.forEach(monster => {
+      let newMonster = Object.assign({}, monster)
+      items.forEach(item => {
+        if (item.description.includes(newMonster.role)) {
+          newMonster.attack = newMonster.attack + parseInt(item.description)
+          newMonster.magic = newMonster.magic + parseInt(item.description)
+          newMonster.defense = newMonster.defense + parseInt(item.description)
+        }
+      })
+      buffedMonsters = [...buffedMonsters, newMonster]
+    })
+
+    return strongestMonster = buffedMonsters.sort( (a, b) => {
+      if(this.highestAttack(a) > this.highestAttack(b)) {
+    		return -1
+      } else {
+      	return 1
+      }
+      return 0
+    })[0]
+
   }
 
   getWeakestMonsterInOwnHand = (hand, items) => {
@@ -1306,31 +1455,31 @@ export default class DuelField extends React.Component {
       return 0
     })
 
-    let buffedMonsters = []
+    // let buffedMonsters = []
+    //
+    // monsters.forEach(monster => {
+    //   let newMonster = Object.assign({}, monster)
+    //   items.forEach(item => {
+    //     if (item.description.includes(newMonster.role)) {
+    //       newMonster.attack = newMonster.attack + parseInt(item.description)
+    //       newMonster.magic = newMonster.magic + parseInt(item.description)
+    //       newMonster.defense = newMonster.defense + parseInt(item.description)
+    //     }
+    //   })
+    //   buffedMonsters = [...buffedMonsters, newMonster]
+    // })
 
-    monsters.forEach(monster => {
-      let newMonster = Object.assign({}, monster)
-      items.forEach(item => {
-        if (item.description.includes(newMonster.role)) {
-          newMonster.attack = newMonster.attack + parseInt(item.description)
-          newMonster.magic = newMonster.magic + parseInt(item.description)
-          newMonster.defense = newMonster.defense + parseInt(item.description)
-        }
-      })
-      buffedMonsters = [...buffedMonsters, newMonster]
-    })
-
-    return buffedMonsters.sort( (a, b) => {
+    return monsters.sort( (a, b) => {
       if(this.highestAttack(a) > this.highestAttack(b)) {
     		return -1
       } else {
       	return 1
       }
       return 0
-    })[buffedMonsters.length - 1]
+    })[monsters.length - 1]
   }
 
-  getStrongestMonsterOnOwnField = (field) => {
+  getStrongestMonsterInOwnField = (field) => {
     let monster = ''
     field.forEach(
       monsterObj => {if (this.highestAttack(monsterObj) > this.highestAttack(monster) || monster === '') {
@@ -1338,24 +1487,103 @@ export default class DuelField extends React.Component {
       }}
     )
     return monster
-    // return field.sort( (a, b) => {
-    // 	if(this.highestAttack(a) > this.highestAttack(b)) {
-    // 		return 1
-    //   } else {
-    //   	return -1
-    //   }
-    // })[0]
+  }
+
+  getStrongestPossibleMonsterInOwnField = (field, items) => {
+    let strongestMonster
+    if (!this.emptyField(field)) {
+      let monsters = field.filter(obj => Object.keys(obj).length > 0)
+      let buffedMonsters = []
+
+      monsters.forEach(monster => {
+        let newMonster = Object.assign({}, monster)
+        items.forEach(item => {
+          if (item.description.includes(newMonster.role)) {
+            newMonster.attack = newMonster.attack + parseInt(item.description)
+            newMonster.magic = newMonster.magic + parseInt(item.description)
+            newMonster.defense = newMonster.defense + parseInt(item.description)
+          }
+        })
+        buffedMonsters = [...buffedMonsters, newMonster]
+      })
+
+      strongestMonster = buffedMonsters.sort( (a, b) => {
+        if(this.highestAttack(a) > this.highestAttack(b)) {
+      		return -1
+        } else {
+        	return 1
+        }
+        return 0
+      })[0]
+    }
+
+    // console.log("STRONGEST FIELD")
+    // console.log(strongestMonster)
+
+    let x = field.find(obj => obj.id === strongestMonster.id)
+    // console.log(x)
+
+    return field.find(obj => obj.id === strongestMonster.id)
+  }
+
+  getBuffedStrongestPossibleMonsterInOwnField = (field, items) => {
+    let strongestMonster
+    if (!this.emptyField(field)) {
+      let monsters = field.filter(obj => Object.keys(obj).length > 0)
+      let buffedMonsters = []
+
+      monsters.forEach(monster => {
+        let newMonster = Object.assign({}, monster)
+        items.forEach(item => {
+          if (item.description.includes(newMonster.role)) {
+            newMonster.attack = newMonster.attack + parseInt(item.description)
+            newMonster.magic = newMonster.magic + parseInt(item.description)
+            newMonster.defense = newMonster.defense + parseInt(item.description)
+          }
+        })
+        buffedMonsters = [...buffedMonsters, newMonster]
+      })
+
+      return strongestMonster = buffedMonsters.sort( (a, b) => {
+        if(this.highestAttack(a) > this.highestAttack(b)) {
+      		return -1
+        } else {
+        	return 1
+        }
+        return 0
+      })[0]
+    }
+
   }
 
   getStrongerEnemyMonsters = (monster, field) => {
-    console.log(monster)
-    return field.filter(monsterObj => {
+    let strongerEnemyMonsters = field.filter(monsterObj => {
       if (monsterObj.position === "attack") {
+        console.log(monster)
+        console.log(monster.attack)
+        console.log(monster.magic)
+        console.log(monsterObj)
+        console.log(this.highestAttack(monster))
+        console.log(this.highestAttack(monsterObj))
+        console.log(this.highestAttack(monsterObj) > this.highestAttack(monster))
+        console.log(this.highestAttack(monsterObj) < this.highestAttack(monster))
         return this.highestAttack(monsterObj) > this.highestAttack(monster)
       } else if (monsterObj.position === "defense"){
+        console.log(monster)
+        console.log(monster.attack)
+        console.log(monster.magic)
+        console.log(monsterObj)
+        console.log(this.highestAttack(monster))
+        console.log(this.highestAttack(monsterObj))
+        console.log(this.highestAttack(monsterObj) > this.highestAttack(monster))
+        console.log(this.highestAttack(monsterObj) < this.highestAttack(monster))
         return monsterObj.defense > this.highestAttack(monster)
       }
     })
+    // console.log(monster)
+    // console.log(strongerEnemyMonsters)
+    return strongerEnemyMonsters
+
   }
 
   findStrongestKillablePlayerMonster = (monster, field) => {
@@ -1914,7 +2142,7 @@ directAttack = (monster) => {
                 <img id="summoners-rift" src="image/summoners-rift.jpg"/>
                 <div id="enemy-field">
                   <div id="player2-hand">
-                  <Hand hand={this.state.player2Hand}/>
+                  <Hand hand={this.state.player2Hand} player={"player2"}/>
                   </div>
                   <br/>
                   <div className="extra-field">
@@ -1934,6 +2162,7 @@ directAttack = (monster) => {
                     player={"player2"}
                       monsters={this.state.player2Monsters}
                       selectTarget={this.selectTarget}
+                      player={"player2"}
                     />
                   </div>
                 </div>
@@ -1966,7 +2195,7 @@ directAttack = (monster) => {
                   </div>
                   <br/>
                   <div className="extra-field">
-                  <div id="player1-deck" className="duel-card" onClick={this.drawCard}>
+                  <div id="player1-deck" className="duel-card">
                   p1 Deck
                   </div>
                   <div id="player1-graveyard" className="duel-card" onClick={this.displayGraveyard1}>
@@ -1979,6 +2208,7 @@ directAttack = (monster) => {
                     hand={this.state.player1Hand}
                     clickHandCard={this.clickHandCard}
                     noxianGuillotine={this.noxianGuillotine}
+                    player={"player1"}
                   />
                 </div>
               </div>
