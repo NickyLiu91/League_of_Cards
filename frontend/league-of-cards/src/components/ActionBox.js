@@ -112,19 +112,18 @@ const ActionBox = (props) => {
       </div>
     )
   } else if (props.actionType === 'item') {
-    return(
-      <div className="action-box-text" >
-        {props.selectedCard.description}
-        <br/>
-        Equip a target with {props.selectedCard.name}?
-        <br/>
-        <br/>
-        <button onClick={props.getItemTargetMode}>YES</button>
-        <br/>
-        <button onClick={props.cancel}>Cancel</button>
-      </div>
-    )
-  } else if (props.actionType === 'selectItemTarget') {
+    // return(
+    //   <div className="action-box-text" >
+    //     {props.selectedCard.description}
+    //     <br/>
+    //     Equip a target with {props.selectedCard.name}?
+    //     <br/>
+    //     <br/>
+    //     <button onClick={props.getItemTargetMode}>YES</button>
+    //     <br/>
+    //     <button onClick={props.cancel}>Cancel</button>
+    //   </div>
+    // )
     return(
       <div className="action-box-text" >
       {console.log(props)}
@@ -137,7 +136,22 @@ const ActionBox = (props) => {
         <button onClick={props.cancel}>Cancel</button>
       </div>
     )
-  } else if (props.actionType === 'displayPlayer1Graveyard') {
+  }
+  // else if (props.actionType === 'selectItemTarget') {
+  //   return(
+  //     <div className="action-box-text" >
+  //     {console.log(props)}
+  //       Select a monster to equip with {props.selectedCard.name}!
+  //       <br/>
+  //       Give {props.selectedCard.name} to {props.selectedItemTarget.name}?
+  //       <br/>
+  //       <button onClick={event => {eval(props.selectedCard.effect)}}>Yes</button>
+  //       <br/>
+  //       <button onClick={props.cancel}>Cancel</button>
+  //     </div>
+  //   )
+  // } 
+  else if (props.actionType === 'displayPlayer1Graveyard') {
     // if (props.player1Graveyard.length > 10) {
       return(
         <ul id="graveyard-bar">
