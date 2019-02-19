@@ -1940,15 +1940,16 @@ export default class DuelField extends React.Component {
     }
   }
 
-  getItemTargetMode = () => {
-    console.log(this.state)
-    console.log(this.state.selectedCard)
-    this.setState({
-      actionType: 'selectItemTarget'
-    })
-  }
+  // getItemTargetMode = () => {
+  //   console.log(this.state)
+  //   console.log(this.state.selectedCard)
+  //   this.setState({
+  //     actionType: 'selectItemTarget'
+  //   })
+  // }
 
   selectItemTarget = (card) => {
+    console.log("hi")
     this.setState({
       selectedItemTarget: card
     })
@@ -2217,6 +2218,8 @@ directAttack = (monster) => {
                     clickHandCard={this.clickHandCard}
                     noxianGuillotine={this.noxianGuillotine}
                     player={"player1"}
+                    actionType={this.state.actionType}
+                    itemTarget={this.itemTarget}
                   />
                 </div>
               </div>

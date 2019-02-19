@@ -9,6 +9,10 @@ export default class Hand extends React.Component {
       return this.props.hand.map(
         cardObj => <DuelCard key={handKey++} duelCard={cardObj} clickAction={this.props.clickHandCard} location={"computerHand"}/>
       )
+    } else if (this.props.actionType === 'item') {
+      return this.props.hand.map(
+        cardObj => <DuelCard key={handKey++} duelCard={cardObj} clickAction={this.props.selectItemTarget} location={"computerHand"}/>
+      )
     } else {
       return this.props.hand.map(
         cardObj => <DuelCard key={handKey++} duelCard={cardObj} clickAction={this.props.clickHandCard} location={"playerHand"}/>
