@@ -23,7 +23,7 @@ export default class DuelField extends React.Component {
     player1Deck: [...this.props.player1Deck],
     player1Graveyard: [],
     player2: this.props.player2,
-    player2Life: 1000,
+    player2Life: 8000,
     player2Monsters: [{}, {}, {}, {}, {}],
     player2Spells: [{}, {}, {}, {}, {}],
     player2Hand: [],
@@ -186,15 +186,15 @@ export default class DuelField extends React.Component {
   }
 
   clickHandCard = (card) => {
-    console.log(card)
+    // console.log(card)
     // console.log(this.state.player1.id === this.state.currentPlayer.id)
-    if (card.cardtype === "Champion") {
-      // if (this.state.currentPlayer === "player1") {
+    if (this.state.summoned === false && card.cardtype === "Champion") {
+      if (this.state.currentPlayer === "player1") {
         this.setState({
           selectedCard: card,
           actionType: "summon-position"
         })
-      // }
+      }
     } else if (card.cardtype === "Ability") {
       if (card.name === "Requiem" || card.name === "Death Mark" || card.name === "Primordial Burst" || card.name === "Silver Bolts" ||
     card.name === "Demacian Justice") {
@@ -1299,6 +1299,8 @@ export default class DuelField extends React.Component {
 
               let attackTarget = this.findStrongestKillablePlayerMonster(monster, playerMonsters)
               let attackTargetSlot = playerMonsters.findIndex(card => card.id === attackTarget.id)
+              console.log(monster)
+              console.log(attackTarget)
 
               playerMonsters.splice(attackTargetSlot, 1, {})
               playerGraveyard = [...playerGraveyard, attackTarget]

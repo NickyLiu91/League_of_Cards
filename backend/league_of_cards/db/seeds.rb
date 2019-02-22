@@ -8,11 +8,11 @@ require "httparty"
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-azir = Player.create(name: "Azir", image: "image/AzirPortrait.png", computer: true, background: "image/GarenBG.jpeg", preduel: "image/Garen.png")
+# azir = Player.create(name: "Azir", image: "image/AzirPortrait.png", computer: true, background: "image/GarenBG.jpeg", preduel: "image/Garen.png")
 # zed = Player.create(name: "Zed", image: "image/ZedPortrait.png", computer: true)
-garen = Player.create(name: "Garen", image: "image/GarenPortrait.png", computer: true, background: "image/GarenBG.jpeg", preduel: "image/Garen.png")
-jarvan = Player.create(name: "Jarvan", image: "image/JarvanIVPortrait.png", computer: true, background: "image/JarvanIVBG.jpeg", preduel: "image/JarvanIV.png")
-lux = Player.create(name: "Lux", image: "image/LuxPortrait.png", computer: true, background: "image/LuxBG.jpeg", preduel: "image/Lux.png")
+garen = Player.create(name: "Garen", image: "image/GarenPortrait.png", computer: true, background: "image/GarenBG.jpeg", preduel: "image/Garen.png", password_digest: "1")
+jarvan = Player.create(name: "Jarvan", image: "image/JarvanIVPortrait.png", computer: true, background: "image/JarvanIVBG.jpeg", preduel: "image/JarvanIV.png", password_digest: "2")
+lux = Player.create(name: "Lux", image: "image/LuxPortrait.png", computer: true, background: "image/LuxBG.jpeg", preduel: "image/Lux.png", password_digest: "3")
 # swain = Player.create(name: "Swain", image: "image/SwainPortrait.png", computer: true)
 # masterYi = Player.create(name: "MasterYi", image: "image/MasterYiPortrait.png", computer: true)
 # garen = Player.create(name: "Garen", image: "image/GarenPortrait.png", computer: true)
@@ -34,7 +34,7 @@ lux = Player.create(name: "Lux", image: "image/LuxPortrait.png", computer: true,
 # yasuo_card = Card.create(name: "Yasuo", title: "The Wanderer", role: "Assassin", rarity: 10, attack: 10, magic: 8, defense: 8, description: "Weeb swordsman.", image: "Yasuo.png")
 #
 #
-azir_deck = Deck.create(name: "Azir Deck 1", player_id: azir.id)
+# azir_deck = Deck.create(name: "Azir Deck 1", player_id: azir.id)
 # zed_deck = Deck.create(name: "Zed Deck 1", player_id: zed.id)
 garen_deck = Deck.create(name: "Garen Deck 1", player_id: garen.id)
 jarvan_deck = Deck.create(name: "Jarvan Deck 1", player_id: jarvan.id)
@@ -102,142 +102,165 @@ garen_card40 = Card.create(
   image: "YoumuusGhostblade.png",
   quantity: 0
 )
-garen_card17 = Card.create(
-  player_id: garen.id,
-  name: "Requiem",
-  cardtype: "Ability",
-  rarity: "Diamond",
-  description: "Destroy every champion on your opponent's side of the field",
-  effect: "props.requiem()",
-  image: "Requiem.png",
-  quantity: 0
-)
-garen_card18 = Card.create(
-  player_id: garen.id,
-  name: "Youmuu's Ghostblade",
-  cardtype: "Item",
-  rarity: "Diamond",
-  description: "700 bonus to all stats to equipped Assassin.",
-  effect: "props.equip(props.selectedCard)",
-  image: "YoumuusGhostblade.png",
-  quantity: 0
-)
-garen_card19 = Card.create(
-  player_id: garen.id,
-  name: "Void Staff",
-  cardtype: "Item",
-  rarity: "Platinum",
-  description: "500 bonus to all stats to equipped Mage.",
-  effect: "props.equip(props.selectedCard)",
-  image: "VoidStaff.png",
-  quantity: 0
-)
-garen_card20 = Card.create(
-  player_id: garen.id,
-  name: "Redemption",
-  cardtype: "Item",
-  rarity: "Platinum",
-  description: "500 bonus to all stats to equipped Support.",
-  effect: "props.equip(props.selectedCard)",
-  image: "Redemption.png",
-  quantity: 0
-)
 
-azir_card21 = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 65, magic: 104, defense: 39,
-description: "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", image: "Akali.png")
-azir_card22 = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Akali22", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 65, magic: 104, defense: 39,
-description: "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", image: "Akali.png")
+garen_deckcard1 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card1.id)
+garen_deckcard2 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card2.id)
+garen_deckcard3 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card3.id)
+garen_deckcard4 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card4.id)
+garen_deckcard5 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card5.id)
+garen_deckcard6 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card6.id)
+garen_deckcard7 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card7.id)
+garen_deckcard8 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card8.id)
+garen_deckcard9 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card9.id)
+garen_deckcard10 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card10.id)
+garen_deckcard11 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card11.id)
+garen_deckcard12 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card12.id)
+garen_deckcard13 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card13.id)
+garen_deckcard14 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card14.id)
+garen_deckcard15 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card15.id)
+garen_deckcard16 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card16.id)
+garen_deckcard17 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card17.id)
+garen_deckcard18 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card18.id)
+garen_deckcard19 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card19.id)
+garen_deckcard20 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card20.id)
+garen_deckcard21 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card21.id)
 
-azir_card23 = Card.create(
-  player_id: azir.id,
-  name: "Noxian Guillotine",
-  cardtype: "Ability",
-  rarity: "Diamond",
-  description: "Destroy any champion on your opponent's side of the field",
-  effect: "props.noxianGuillotine(props.selectedCard)",
-  image: "NoxianGuillotine.png",
-  quantity: 0
-)
-azir_card24 = Card.create(
-  player_id: azir.id,
-  name: "Noxian Guillotine",
-  cardtype: "Ability",
-  rarity: "Diamond",
-  description: "Destroy any champion on your opponent's side of the field",
-  effect: "props.noxianGuillotine(props.selectedCard)",
-  image: "NoxianGuillotine.png",
-  quantity: 0
-)
-azir_card25 = Card.create(
-  player_id: azir.id,
-  name: "Youmuu's Ghostblade",
-  cardtype: "Item",
-  rarity: "Diamond",
-  description: "700 bonus to all stats to equipped Assassin.",
-  effect: "props.equip(props.selectedCard)",
-  image: "YoumuusGhostblade.png",
-  quantity: 0
-)
-azir_card26 = Card.create(
-  player_id: azir.id,
-  name: "Youmuu's Ghostblade",
-  cardtype: "Item",
-  rarity: "Diamond",
-  description: "700 bonus to all stats to equipped Assassin.",
-  effect: "props.equip(props.selectedCard)",
-  image: "YoumuusGhostblade.png",
-  quantity: 0
-)
-azir_card27 = Card.create(
-  player_id: azir.id,
-  name: "Youmuu's Ghostblade",
-  cardtype: "Item",
-  rarity: "Diamond",
-  description: "700 bonus to all stats to equipped Assassin.",
-  effect: "props.equip(props.selectedCard)",
-  image: "YoumuusGhostblade.png",
-  quantity: 0
-)
-azir_card28 = Card.create(
-  player_id: azir.id,
-  name: "Youmuu's Ghostblade",
-  cardtype: "Item",
-  rarity: "Diamond",
-  description: "700 bonus to all stats to equipped Assassin.",
-  effect: "props.equip(props.selectedCard)",
-  image: "YoumuusGhostblade.png",
-  quantity: 0
-)
-azir_card29 = Card.create(
-  player_id: azir.id,
-  name: "Youmuu's Ghostblade",
-  cardtype: "Item",
-  rarity: "Diamond",
-  description: "700 bonus to all stats to equipped Assassin.",
-  effect: "props.equip(props.selectedCard)",
-  image: "YoumuusGhostblade.png",
-  quantity: 0
-)
-azir_card30 = Card.create(
-  player_id: azir.id,
-  name: "Youmuu's Ghostblade",
-  cardtype: "Item",
-  rarity: "Diamond",
-  description: "700 bonus to all stats to equipped Assassin.",
-  effect: "props.equip(props.selectedCard)",
-  image: "YoumuusGhostblade.png",
-  quantity: 0
-)
-azir_card31 = Card.create(
-  player_id: azir.id,
-  name: "Youmuu's Ghostblade",
-  cardtype: "Item",
-  rarity: "Diamond",
-  description: "700 bonus to all stats to equipped Assassin.",
-  effect: "props.equip(props.selectedCard)",
-  image: "YoumuusGhostblade.png",
-  quantity: 0
-)
+# garen_card17 = Card.create(
+#   player_id: garen.id,
+#   name: "Requiem",
+#   cardtype: "Ability",
+#   rarity: "Diamond",
+#   description: "Destroy every champion on your opponent's side of the field",
+#   effect: "props.requiem()",
+#   image: "Requiem.png",
+#   quantity: 0
+# )
+# garen_card18 = Card.create(
+#   player_id: garen.id,
+#   name: "Youmuu's Ghostblade",
+#   cardtype: "Item",
+#   rarity: "Diamond",
+#   description: "700 bonus to all stats to equipped Assassin.",
+#   effect: "props.equip(props.selectedCard)",
+#   image: "YoumuusGhostblade.png",
+#   quantity: 0
+# )
+# garen_card19 = Card.create(
+#   player_id: garen.id,
+#   name: "Void Staff",
+#   cardtype: "Item",
+#   rarity: "Platinum",
+#   description: "500 bonus to all stats to equipped Mage.",
+#   effect: "props.equip(props.selectedCard)",
+#   image: "VoidStaff.png",
+#   quantity: 0
+# )
+# garen_card20 = Card.create(
+#   player_id: garen.id,
+#   name: "Redemption",
+#   cardtype: "Item",
+#   rarity: "Platinum",
+#   description: "500 bonus to all stats to equipped Support.",
+#   effect: "props.equip(props.selectedCard)",
+#   image: "Redemption.png",
+#   quantity: 0
+# )
+
+# azir_card21 = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 65, magic: 104, defense: 39,
+# description: "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", image: "Akali.png")
+# azir_card22 = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Akali22", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 65, magic: 104, defense: 39,
+# description: "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", image: "Akali.png")
+#
+# azir_card23 = Card.create(
+#   player_id: azir.id,
+#   name: "Noxian Guillotine",
+#   cardtype: "Ability",
+#   rarity: "Diamond",
+#   description: "Destroy any champion on your opponent's side of the field",
+#   effect: "props.noxianGuillotine(props.selectedCard)",
+#   image: "NoxianGuillotine.png",
+#   quantity: 0
+# )
+# azir_card24 = Card.create(
+#   player_id: azir.id,
+#   name: "Noxian Guillotine",
+#   cardtype: "Ability",
+#   rarity: "Diamond",
+#   description: "Destroy any champion on your opponent's side of the field",
+#   effect: "props.noxianGuillotine(props.selectedCard)",
+#   image: "NoxianGuillotine.png",
+#   quantity: 0
+# )
+# azir_card25 = Card.create(
+#   player_id: azir.id,
+#   name: "Youmuu's Ghostblade",
+#   cardtype: "Item",
+#   rarity: "Diamond",
+#   description: "700 bonus to all stats to equipped Assassin.",
+#   effect: "props.equip(props.selectedCard)",
+#   image: "YoumuusGhostblade.png",
+#   quantity: 0
+# )
+# azir_card26 = Card.create(
+#   player_id: azir.id,
+#   name: "Youmuu's Ghostblade",
+#   cardtype: "Item",
+#   rarity: "Diamond",
+#   description: "700 bonus to all stats to equipped Assassin.",
+#   effect: "props.equip(props.selectedCard)",
+#   image: "YoumuusGhostblade.png",
+#   quantity: 0
+# )
+# azir_card27 = Card.create(
+#   player_id: azir.id,
+#   name: "Youmuu's Ghostblade",
+#   cardtype: "Item",
+#   rarity: "Diamond",
+#   description: "700 bonus to all stats to equipped Assassin.",
+#   effect: "props.equip(props.selectedCard)",
+#   image: "YoumuusGhostblade.png",
+#   quantity: 0
+# )
+# azir_card28 = Card.create(
+#   player_id: azir.id,
+#   name: "Youmuu's Ghostblade",
+#   cardtype: "Item",
+#   rarity: "Diamond",
+#   description: "700 bonus to all stats to equipped Assassin.",
+#   effect: "props.equip(props.selectedCard)",
+#   image: "YoumuusGhostblade.png",
+#   quantity: 0
+# )
+# azir_card29 = Card.create(
+#   player_id: azir.id,
+#   name: "Youmuu's Ghostblade",
+#   cardtype: "Item",
+#   rarity: "Diamond",
+#   description: "700 bonus to all stats to equipped Assassin.",
+#   effect: "props.equip(props.selectedCard)",
+#   image: "YoumuusGhostblade.png",
+#   quantity: 0
+# )
+# azir_card30 = Card.create(
+#   player_id: azir.id,
+#   name: "Youmuu's Ghostblade",
+#   cardtype: "Item",
+#   rarity: "Diamond",
+#   description: "700 bonus to all stats to equipped Assassin.",
+#   effect: "props.equip(props.selectedCard)",
+#   image: "YoumuusGhostblade.png",
+#   quantity: 0
+# )
+# azir_card31 = Card.create(
+#   player_id: azir.id,
+#   name: "Youmuu's Ghostblade",
+#   cardtype: "Item",
+#   rarity: "Diamond",
+#   description: "700 bonus to all stats to equipped Assassin.",
+#   effect: "props.equip(props.selectedCard)",
+#   image: "YoumuusGhostblade.png",
+#   quantity: 0
+# )
 
 
 # azir_deckcard1 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card1.id)
@@ -260,17 +283,17 @@ azir_card31 = Card.create(
 # azir_deckcard18 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card18.id)---
 # azir_deckcard19 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card19.id)---
 # azir_deckcard20 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card20.id)---
-azir_deckcard21 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card21.id)
-azir_deckcard22 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card22.id)
+# azir_deckcard21 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card21.id)
+# azir_deckcard22 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card22.id)
 # azir_deckcard23 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card23.id)
 # azir_deckcard24 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card24.id)
-azir_deckcard25 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card25.id)
-azir_deckcard26 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card26.id)
-azir_deckcard27 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card27.id)
-azir_deckcard28 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card28.id)
-azir_deckcard29 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card29.id)
-azir_deckcard30 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card30.id)
-azir_deckcard31 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card31.id)
+# azir_deckcard25 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card25.id)
+# azir_deckcard26 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card26.id)
+# azir_deckcard27 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card27.id)
+# azir_deckcard28 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card28.id)
+# azir_deckcard29 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card29.id)
+# azir_deckcard30 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card30.id)
+# azir_deckcard31 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card31.id)
 
 
 jarvan_card1 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
