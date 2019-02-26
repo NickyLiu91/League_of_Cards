@@ -1834,7 +1834,7 @@ export default class Home extends React.Component {
     .then(res => res.json())
     .then(json => {
       if (json.find(obj => obj.name === this.state.name && obj.password_digest === this.state.password) === undefined) {
-        alert('No account with that name nad password has been found!')
+        alert('No account with that name and password combination has been found!')
       } else {
         fetch(`http://localhost:3000/api/v1/players`)
         .then(res => res.json())
@@ -1844,6 +1844,7 @@ export default class Home extends React.Component {
           // console.log(window.localStorage.length)
           // console.log(res)
           player = res.find(obj => obj.name === this.state.name && obj.password_digest === this.state.password)
+          console.log(player)
         })
         .then(res => {
           this.setState({
@@ -2205,24 +2206,31 @@ export default class Home extends React.Component {
                 dialogue: 0,
                 defeated_id: 0
               }
-        )}).then(res => this.setState({
-            allPlayers: [...this.state.allPlayers, {id: this.state.allPlayers.length + 1, name: this.state.name, decks: [], cards: [], collection: [], image: 'image/TwistedFatePortrait.png', computer: false, password_digest: this.state.password, defeated: 0}]
-        }, () => {
-          fetch(`http://localhost:3000/api/v1/decks`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-            },
-            body: JSON.stringify(
-                {
-                  name: "Deck 1",
-                  player_id: this.state.allPlayers[this.state.allPlayers.length - 1].id
-                }
-          )})
-          .then(res => {this.generateDeck(this.state.allPlayers[this.state.allPlayers.length - 1])})
-        }
-      ))
+        )}).then(res => {
+            // allPlayers: [...this.state.allPlayers, {id: this.state.allPlayers.length + 1, name: this.state.name, decks: [], cards: [], collection: [], image: 'image/TwistedFatePortrait.png', computer: false, password_digest: this.state.password, defeated: 0}]
+            fetch(`http://localhost:3000/api/v1/players`)
+            .then(res => res.json())
+            .then(json => {
+              let player = json.find(obj => obj.name === this.state.name && obj.password_digest === this.state.password)
+              this.setState({
+                currentPlayer: player
+              }, () => {
+                fetch(`http://localhost:3000/api/v1/decks`, {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                  },
+                  body: JSON.stringify(
+                      {
+                        name: "Deck 1",
+                        player_id: this.state.currentPlayer.id
+                      }
+                )})
+                .then(res => {this.generateDeck(this.state.currentPlayer)})
+              })
+            })
+        })
       }
     })
 
@@ -2355,7 +2363,7 @@ export default class Home extends React.Component {
         <div>
         <img id="shurima" src="image/shurima_sun_01.jpg" />
           <div id="home">
-          <h1>FORBIDDEN MEMORIES</h1>
+          <h1>LEAGUE OF CARDS</h1>
             <form>
               <button onClick={event => this.printState(event)}>State</button>
               <h1>Log-In</h1>
@@ -2377,7 +2385,7 @@ export default class Home extends React.Component {
         <div>
           <img id="demacia" src="image/demacia.jpeg" />
           <div id="logged-in">
-            <h1>FORBIDDEN MEMORIES</h1>
+            <h1>LEAGUE OF CARDS</h1>
               <button onClick={event => this.printState(event)}>State</button>
               <h1>Welcome, {this.state.currentPlayer.name}!</h1>
               <br/>
@@ -2424,7 +2432,7 @@ export default class Home extends React.Component {
         <div>
         <img id="shurima" src="image/shurima_sun_01.jpg" />
           <div id="home">
-            <h1>FORBIDDEN MEMORIES</h1>
+            <h1>LEAGUE OF CARDS</h1>
               <form>
                 Account Name: <input type="text" value={this.state.name} onChange={event => this.handleName(event)}/>
                 <br/>
