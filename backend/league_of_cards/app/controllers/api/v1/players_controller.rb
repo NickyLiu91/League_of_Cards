@@ -1,5 +1,5 @@
 class Api::V1::PlayersController < ApplicationController
-  skip_before_action :authorized, only: %i[create], raise: false
+  # skip_before_action :authorized, only: %i[create], raise: false
   before_action :find_player, only: [:show]
 
   def index
@@ -17,11 +17,11 @@ class Api::V1::PlayersController < ApplicationController
 
   def create
     @player = Player.create(player_params)
-    if @player.valid?
-      render json: { player: PlayerSerializer.new(@player) }, status: :created
-    else
-      render json: { error: 'failed to create user' }, status: :not_acceptable
-    end
+    # if @player.valid?
+    #   render json: { player: PlayerSerializer.new(@player) }, status: :created
+    # else
+    #   render json: { error: 'failed to create user' }, status: :not_acceptable
+    # end
   end
 
   def edit
