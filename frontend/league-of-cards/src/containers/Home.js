@@ -1786,12 +1786,12 @@ export default class Home extends React.Component {
     }, () => {deckNumber = 0}))
   }
 
-  getAllPlayers = () => {
+  getAllComputers = () => {
     let newPlayersArray = []
     fetch("http://localhost:3000/api/v1/players")
     .then(response => response.json())
     .then(json => this.setState({
-      allPlayers: json
+      allPlayers: json.slice(0, 3)
     }))
     // .then(json => {
     //   json.map(playerObj => {
@@ -1829,62 +1829,98 @@ export default class Home extends React.Component {
   }
 
   getPlayer = (event) => {
-    event.preventDefault()
-    if (!this.state.allPlayers.find(playerObj => playerObj.name === this.state.name
-      && playerObj.password_digest === this.state.password)) {
+    let player
+    fetch(`http://localhost:3000/api/v1/players`)
+    .then(res => res.json())
+    .then(json => {
+      if (json.find(obj => obj.name === this.state.name && obj.password_digest === this.state.password) === undefined) {
         alert('No account with that name nad password has been found!')
       } else {
-        this.setState({
-          currentPlayer: this.state.allPlayers.find(playerObj => playerObj.name === this.state.name
-            && playerObj.password_digest === this.state.password
-          )
-        }, () => {
-          fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`)
-          .then(res => res.json())
-          .then(res => {
-            window.localStorage.setItem('jwt', res.jwt)
-            console.log(window.localStorage)
-            console.log(window.localStorage.length)
-            this.setState({
-              currentPlayer: res,
-              currentPlayerCollection: res.cards,
-              currentDeck: res.decks[0],
-              loggedIn: true,
-              gold: res.gold,
-              defeated: res.defeated_id,
-              dialogue: res.dialogue
-            }, () => {
-              fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/decks/${this.state.currentDeck.id}`)
-              .then(res => res.json())
-              .then(res => this.setState({
-                currentDeckCards: res.cards
-              }))
-              this.generateNoDupesCurrentPlayerCollection()
-            }
-          )})
-          // fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`, {
-          //   method: 'POST',
-          //   body: JSON.stringify({
-          //     player: {
-          //       name: this.state.name,
-          //       password_digest: this.state.password_digest
-          //     }
-          //   }),
-          //   headers:{
-          //     'Content-Type': 'application/json'
-          //   }
-          // })
-          // .then(response => {
-          //   console.log(response)
-          //   if (response.ok) {
-          //     return response.json()
-          //    } else {
-          //        window.alert('Invalid username or password')
-          //       // throw response
-          //    }
-          //  })
+        fetch(`http://localhost:3000/api/v1/players`)
+        .then(res => res.json())
+        .then(res => {
+          // window.localStorage.setItem('jwt', res.jwt)
+          // console.log(window.localStorage)
+          // console.log(window.localStorage.length)
+          // console.log(res)
+          player = res.find(obj => obj.name === this.state.name && obj.password_digest === this.state.password)
         })
-      }
+        .then(res => {
+          this.setState({
+            currentPlayer: player,
+            currentPlayerCollection: player.cards,
+            currentDeck: player.decks[0],
+            loggedIn: true,
+            gold: player.gold,
+            defeated: player.defeated_id,
+            dialogue: player.dialogue
+          }, () => {
+            fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/decks/${this.state.currentDeck.id}`)
+            .then(res => res.json())
+            .then(res => this.setState({
+              currentDeckCards: res.cards
+            }))
+            this.generateNoDupesCurrentPlayerCollection()
+          })
+        })
+      }})
+
+
+    // if (!this.state.allPlayers.find(playerObj => playerObj.name === this.state.name
+    //   && playerObj.password_digest === this.state.password)) {
+    //     alert('No account with that name nad password has been found!')
+    //   } else {
+    //     this.setState({
+    //       currentPlayer: this.state.allPlayers.find(playerObj => playerObj.name === this.state.name
+    //         && playerObj.password_digest === this.state.password
+    //       )
+    //     }, () => {
+    //       fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`)
+    //       .then(res => res.json())
+    //       .then(res => {
+    //         window.localStorage.setItem('jwt', res.jwt)
+    //         console.log(window.localStorage)
+    //         console.log(window.localStorage.length)
+    //         this.setState({
+    //           currentPlayer: res,
+    //           currentPlayerCollection: res.cards,
+    //           currentDeck: res.decks[0],
+    //           loggedIn: true,
+    //           gold: res.gold,
+    //           defeated: res.defeated_id,
+    //           dialogue: res.dialogue
+    //         }, () => {
+    //           fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/decks/${this.state.currentDeck.id}`)
+    //           .then(res => res.json())
+    //           .then(res => this.setState({
+    //             currentDeckCards: res.cards
+    //           }))
+    //           this.generateNoDupesCurrentPlayerCollection()
+    //         }
+    //       )})
+    //       // fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`, {
+    //       //   method: 'POST',
+    //       //   body: JSON.stringify({
+    //       //     player: {
+    //       //       name: this.state.name,
+    //       //       password_digest: this.state.password_digest
+    //       //     }
+    //       //   }),
+    //       //   headers:{
+    //       //     'Content-Type': 'application/json'
+    //       //   }
+    //       // })
+    //       // .then(response => {
+    //       //   console.log(response)
+    //       //   if (response.ok) {
+    //       //     return response.json()
+    //       //    } else {
+    //       //        window.alert('Invalid username or password')
+    //       //       // throw response
+    //       //    }
+    //       //  })
+    //     })
+      // }
   }
 
   generateNoDupesCurrentPlayerCollection = () => {
@@ -2003,7 +2039,7 @@ export default class Home extends React.Component {
 
   componentDidMount() {
     this.fetchCards()
-    this.getAllPlayers()
+    this.getAllComputers()
   }
 
   renderPostDuel = (location) => {
@@ -2145,10 +2181,13 @@ export default class Home extends React.Component {
   }
 
   createPlayer = (event) => {
-    if (this.state.allPlayers.find(playerObj => playerObj.name === this.state.name)) {
+    event.preventDefault()
+    fetch(`http://localhost:3000/api/v1/players`)
+    .then(res => res.json())
+    .then(json => {
+      if (json.find(obj => obj.name === this.state.name)) {
         alert('That name is already used!')
       } else {
-        event.preventDefault()
         fetch(`http://localhost:3000/api/v1/players`, {
           method: 'POST',
           headers: {
@@ -2184,7 +2223,49 @@ export default class Home extends React.Component {
           .then(res => {this.generateDeck(this.state.allPlayers[this.state.allPlayers.length - 1])})
         }
       ))
-    }
+      }
+    })
+
+    // if (this.state.allPlayers.find(playerObj => playerObj.name === this.state.name)) {
+    //     alert('That name is already used!')
+    //   } else {
+    //     event.preventDefault()
+    //     fetch(`http://localhost:3000/api/v1/players`, {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //         'Accept': 'application/json',
+    //       },
+    //       body: JSON.stringify(
+    //           {
+    //             name: this.state.name,
+    //             password_digest: this.state.password,
+    //             image: 'image/SivirPortrait.png',
+    //             computer: false,
+    //             level: "1-1",
+    //             gold: 100,
+    //             dialogue: 0,
+    //             defeated_id: 0
+    //           }
+    //     )}).then(res => this.setState({
+    //         allPlayers: [...this.state.allPlayers, {id: this.state.allPlayers.length + 1, name: this.state.name, decks: [], cards: [], collection: [], image: 'image/TwistedFatePortrait.png', computer: false, password_digest: this.state.password, defeated: 0}]
+    //     }, () => {
+    //       fetch(`http://localhost:3000/api/v1/decks`, {
+    //         method: 'POST',
+    //         headers: {
+    //           'Content-Type': 'application/json',
+    //           'Accept': 'application/json',
+    //         },
+    //         body: JSON.stringify(
+    //             {
+    //               name: "Deck 1",
+    //               player_id: this.state.allPlayers[this.state.allPlayers.length - 1].id
+    //             }
+    //       )})
+    //       .then(res => {this.generateDeck(this.state.allPlayers[this.state.allPlayers.length - 1])})
+    //     }
+    //   ))
+    // }
   }
 
   updateCurrentPlayerCollection = () => {
@@ -2352,6 +2433,9 @@ export default class Home extends React.Component {
                 <br/>
                 <br/>
                 <button type="button" onClick={this.createPlayer}>Submit</button>
+                <br/>
+                <br/>
+                <button className="home" onClick={event => {this.renderStuff(event)}}>Home</button>
               </form>
           </div>
         </div>
