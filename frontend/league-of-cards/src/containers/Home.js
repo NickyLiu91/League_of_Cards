@@ -2361,66 +2361,19 @@ export default class Home extends React.Component {
 
 
   render() {
-    // if (this.state.render === 'home' && this.state.loggedIn === false) {
-    //   return(
-    //     <div>
-    //     <img id="shurima" src="image/shurima_sun_01.jpg" />
-    //       <div id="home">
-    //       <h1>LEAGUE OF CARDS</h1>
-    //         <form>
-    //           <button onClick={event => this.printState(event)}>State</button>
-    //           <h1>Log-In</h1>
-    //             Account: <input type="text" value={this.state.name} onChange={event => this.handleName(event)}/>
-    //             <br/>
-    //             <br/>
-    //             Password: <input type="password" value={this.state.password} onChange={event => this.handlePassword(event)}/>
-    //             <br/>
-    //             <br/>
-    //             <button type="button" onClick={this.getPlayer}>Submit</button>
-    //         </form>
-    //           <br/>
-    //         <button className="create" onClick={event => {this.renderStuff(event)}}>Create Account</button>
-    //       </div>
-    //     </div>
-    //   )
-    // } else if (this.state.render === 'home' && this.state.loggedIn === true){
-      // return(
-      //   <div>
-      //     <img id="demacia" src="image/demacia.jpeg" />
-      //     <div id="logged-in">
-      //       <h1>LEAGUE OF CARDS</h1>
-      //         <button onClick={event => this.printState(event)}>State</button>
-      //         <h1>Welcome, {this.state.currentPlayer.name}!</h1>
-      //         <br/>
-      //         <button className="campaign" onClick={event => {this.renderStuff(event)}}>Campaign</button>
-      //         <br/>
-      //         <br/>
-      //         <button className="duelistsList" onClick={event => {this.renderStuff(event)}}>DUEL!!!</button>
-      //         <br/>
-      //         <br/>
-      //         <button className="collection" onClick={event => {this.renderStuff(event)}}>Collection</button>
-      //         <br/>
-      //         <br/>
-      //         <button className="store" onClick={event => {this.renderStuff(event)}}>Card Store</button>
-      //         <br/>
-      //         <br/>
-      //         <button className="decksList" onClick={event => {this.renderStuff(event)}}>Decks</button>
-      //         <br/>
-      //         <br/>
-      //         <button onClick={this.log}>Log-Out</button>
-      //     </div>
-      //   </div>
-      // )
-    // }
-    if (this.state.render === 'home') {
+    if (this.state.render === 'home' || this.state.render === 'create') {
       return(
         <div>
           <HomeScreen
+            render={this.state.render}
+            name={this.state.name}
+            password={this.state.password}
             currentPlayer={this.state.currentPlayer}
             loggedIn={this.state.loggedIn}
             handleName={this.handleName}
             handlePassword={this.handlePassword}
             renderStuff={this.renderStuff}
+            createPlayer={this.createPlayer}
             getPlayer={this.getPlayer}
             logOut={this.log}
           />
@@ -2443,27 +2396,6 @@ export default class Home extends React.Component {
             getDuelist={this.getDuelist}
             increaseDialogue={this.increaseDialogue}
           />
-        </div>
-      )
-    } else if (this.state.render === 'create' ){
-      return(
-        <div>
-        <img id="shurima" src="image/shurima_sun_01.jpg" />
-          <div id="home">
-            <h1>LEAGUE OF CARDS</h1>
-              <form>
-                Account Name: <input type="text" value={this.state.name} onChange={event => this.handleName(event)}/>
-                <br/>
-                <br/>
-                Password: <input type="password" value={this.state.password} onChange={event => this.handlePassword(event)}/>
-                <br/>
-                <br/>
-                <button type="button" onClick={this.createPlayer}>Submit</button>
-                <br/>
-                <br/>
-                <button className="home" onClick={event => {this.renderStuff(event)}}>Home</button>
-              </form>
-          </div>
         </div>
       )
     } else if (this.state.render === 'decksList') {
