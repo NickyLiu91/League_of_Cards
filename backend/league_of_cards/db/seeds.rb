@@ -11,95 +11,107 @@ require "httparty"
 # azir = Player.create(name: "Azir", image: "image/AzirPortrait.png", computer: true, background: "image/GarenBG.jpeg", preduel: "image/Garen.png")
 # zed = Player.create(name: "Zed", image: "image/ZedPortrait.png", computer: true)
 garen = Player.create(name: "Garen", image: "image/GarenPortrait.png", computer: true, background: "image/GarenBG.jpeg", preduel: "image/Garen.png", password_digest: "1")
-jarvan = Player.create(name: "Jarvan", image: "image/JarvanIVPortrait.png", computer: true, background: "image/JarvanIVBG.jpeg", preduel: "image/JarvanIV.png", password_digest: "2")
-lux = Player.create(name: "Lux", image: "image/LuxPortrait.png", computer: true, background: "image/LuxBG.jpeg", preduel: "image/Lux.png", password_digest: "3")
-# swain = Player.create(name: "Swain", image: "image/SwainPortrait.png", computer: true)
-# masterYi = Player.create(name: "MasterYi", image: "image/MasterYiPortrait.png", computer: true)
-# garen = Player.create(name: "Garen", image: "image/GarenPortrait.png", computer: true)
-# darius = Player.create(name: "Darius", image: "image/DariusPortrait.png", computer: true)
-# leBlanc = Player.create(name: "LeBlanc", image: "image/LeblancPortrait.png", computer: true)
-# caitlyn = Player.create(name: "Caitlyn", image: "image/CaitlynPortrait.png", computer: true)
-# heimerdinger = Player.create(name: "Heimerdinger", image: "image/HeimerdingerPortrait.png", computer: true)
-# malzahar = Player.create(name: "Malzahar", image: "image/MalzaharPortrait.png", computer: true)
+lux = Player.create(name: "Lux", image: "image/LuxPortrait.png", computer: true, background: "image/LuxBG.jpeg", preduel: "image/Lux.png", password_digest: "2")
+jarvan = Player.create(name: "Jarvan", image: "image/JarvanIVPortrait.png", computer: true, background: "image/JarvanIVBG.jpeg", preduel: "image/JarvanIV.png", password_digest: "3")
+karma = Player.create(name: "Karma", image: "image/KarmaPortrait.png", computer: true, background: "image/KarmaBG.jpeg", preduel: "image/Karma.png", password_digest: "4")
+shen = Player.create(name: "Shen", image: "image/ShenPortrait.png", computer: true, background: "image/ShenBG.jpeg", preduel: "image/Shen.png", password_digest: "5")
+zed = Player.create(name: "Zed", image: "image/ZedPortrait.png", computer: true, background: "image/ZedBG.jpeg", preduel: "image/Zed.png", password_digest: "6")
+darius = Player.create(name: "Darius", image: "image/DariusPortrait.png", computer: true, background: "image/DariusBG.jpeg", preduel: "image/Darius.png", password_digest: "7")
+katarina = Player.create(name: "Katarina", image: "image/KatarinaPortrait.png", computer: true, background: "image/KatarinaBG.jpeg", preduel: "image/Katarina.png", password_digest: "8")
+swain = Player.create(name: "Swain", image: "image/SwainPortrait.png", computer: true, background: "image/SwainBG.jpeg", preduel: "image/Swain.png", password_digest: "9")
+missFortune = Player.create(name: "MissFortune", image: "image/MissFortunePortrait.png", computer: true, background: "image/MissFortuneBG.jpeg", preduel: "image/MissFortune.png", password_digest: "10")
+illaoi = Player.create(name: "Illaoi", image: "image/IllaoiPortrait.png", computer: true, background: "image/IllaoiBG.jpeg", preduel: "image/Illaoi.png", password_digest: "11")
+gangplank = Player.create(name: "Gangplank", image: "image/GangplankPortrait.png", computer: true, background: "image/GangplankBG.jpeg", preduel: "image/Gangplank.png", password_digest: "12")
+yorick = Player.create(name: "Yorick", image: "image/YorickPortrait.png", computer: true, background: "image/YorickBG.jpeg", preduel: "image/Yorick.png", password_digest: "13")
+thresh = Player.create(name: "Thresh", image: "image/ThreshPortrait.png", computer: true, background: "image/ThreshBG.jpeg", preduel: "image/Thresh.png", password_digest: "14")
+elise = Player.create(name: "Elise", image: "image/ElisePortrait.png", computer: true, background: "image/EliseBG.jpeg", preduel: "image/Elise.png", password_digest: "15")
+pantheon = Player.create(name: "Pantheon", image: "image/PantheonPortrait.png", computer: true, background: "image/PantheonBG.jpeg", preduel: "image/Pantheon.png", password_digest: "16")
+soraka = Player.create(name: "Soraka", image: "image/SorakaPortrait.png", computer: true, background: "image/SorakaBG.jpeg", preduel: "image/Soraka.png", password_digest: "17")
+leona = Player.create(name: "Leona", image: "image/LeonaPortrait.png", computer: true, background: "image/LeonaBG.jpeg", preduel: "image/Leona.png", password_digest: "18")
+ashe = Player.create(name: "Ashe", image: "image/AshePortrait.png", computer: true, background: "image/AsheBG.jpeg", preduel: "image/Ashe.png", password_digest: "19")
+sejuani = Player.create(name: "Sejuani", image: "image/SejuaniPortrait.png", computer: true, background: "image/SejuaniBG.jpeg", preduel: "image/Sejuani.png", password_digest: "20")
+lissandra = Player.create(name: "Lissandra", image: "image/LissandraPortrait.png", computer: true, background: "image/LissandraBG.jpeg", preduel: "image/Lissandra.png", password_digest: "21")
+renekton = Player.create(name: "Renekton", image: "image/RenektonPortrait.png", computer: true, background: "image/RenektonBG.jpeg", preduel: "image/Renekton.png", password_digest: "22")
+nasus = Player.create(name: "Nasus", image: "image/NasusPortrait.png", computer: true, background: "image/NasusBG.jpeg", preduel: "image/Nasus.png", password_digest: "23")
+ascendedXerath = Player.create(name: "AscendedXerath", image: "image/AscendedXerathPortrait.png", computer: true, background: "image/AscendedXerathBG.jpeg", preduel: "image/AscendedXerath.png", password_digest: "24")
+xerath = Player.create(name: "Xerath", image: "image/XerathPortrait.png", computer: true, background: "image/XerathBG.jpeg", preduel: "image/Xerath.png", password_digest: "25")
 
-# zed_card = Allcard.create(name: "Zed", title: "The Master of Shadows", role: "Assassin", rarity: 10, attack: 8, magic: 3, defense: 2, description: "Badass as hell.", image: "Zed.png")
-#
-# zed_card = Card.create(player_id: azir.id, name: "Zed", title: "The Master of Shadows", role: "Assassin", rarity: 10, attack: 8, magic: 3, defense: 2, description: "Badass as hell.", image: "Zed.png")
-# orianna_card = Card.create(player_id: azir.id, name: "Orianna", title: "The Lady of Clockwork", role: "Mage", rarity: 9, attack: 2, magic: 7, defense: 5, description: "Robot girl.", image: "Orianna.png")
-# veigar_card = Card.create(player_id: zed.id, name: "Veigar", title: "The Tiny Master of Evil", role: "Mage", rarity: 8, attack: 2, magic: 10, defense: 1, description: "Evil midget", image: "veigar.png")
-# nasus_card = Card.create(name: "Nasus", title: "The Keeper of the Sands", role: "Tank", rarity: 2, attack: 6, magic: 5, defense: 8, description: "Such Doge. Much Wow.", image: "Nasus.png")
-# renekton_card = Card.create(name: "Renekton", title: "The Butcher of the Sands", role: "Fighter", rarity: 4, attack: 6, magic: 4, defense: 5, description: "Gucci Gator.", image: "Renekton.png")
-# fizz_card = Card.create(name: "Fizz", title: "The Tidal Trickster", role: "Assassin", rarity: 8, attack: 4, magic: 7, defense: 3, description: "Fizzual Pun.", image: "Fizz.png")
-# anivia_card = Card.create(name: "Anivia", title: "The Cryophoenix", role: "Mage", rarity: 10, attack: 1, magic: 10, defense: 6, description: "Bird is the word.", image: "Anivia.png")
-# yasuo_card = Card.create(name: "Yasuo", title: "The Wanderer", role: "Assassin", rarity: 10, attack: 10, magic: 8, defense: 8, description: "Weeb swordsman.", image: "Yasuo.png")
-#
-#
-# azir_deck = Deck.create(name: "Azir Deck 1", player_id: azir.id)
-# zed_deck = Deck.create(name: "Zed Deck 1", player_id: zed.id)
 garen_deck = Deck.create(name: "Garen Deck 1", player_id: garen.id)
-jarvan_deck = Deck.create(name: "Jarvan Deck 1", player_id: jarvan.id)
 lux_deck = Deck.create(name: "Lux Deck 1", player_id: lux.id)
-# swain_deck = Deck.create(name: "Swain Deck 1", player_id: swain.id)
-# masterYi_deck = Deck.create(name: "MasterYi Deck 1", player_id: masterYi.id)
-# garen_deck = Deck.create(name: "Garen Deck 1", player_id: garen.id)
-# darius_deck = Deck.create(name: "Darius Deck 1", player_id: darius.id)
-# leBlanc_deck = Deck.create(name: "LeBlanc Deck 1", player_id: leBlanc.id)
-# caitlyn_deck = Deck.create(name: "Caitlyn Deck 1", player_id: caitlyn.id)
-# heimerdinger_deck = Deck.create(name: "Heimerdinger Deck 1", player_id: heimerdinger.id)
-# malzahar_deck = Deck.create(name: "Malzahar Deck 1", player_id: malzahar.id)
+jarvan_deck = Deck.create(name: "Jarvan Deck 1", player_id: jarvan.id)
+karma_deck = Deck.create(name: "Karma Deck 1", player_id: karma.id)
+shen_deck = Deck.create(name: "Shen Deck 1", player_id: shen.id)
+zed_deck = Deck.create(name: "Zed Deck 1", player_id: zed.id)
+darius_deck = Deck.create(name: "Darius Deck 1", player_id: darius.id)
+katarina_deck = Deck.create(name: "Katarina Deck 1", player_id: katarina.id)
+swain_deck = Deck.create(name: "Swain Deck 1", player_id: swain.id)
+missFortune_deck = Deck.create(name: "Miss Fortune Deck 1", player_id: missFortune.id)
+illaoi_deck = Deck.create(name: "Illaoi Deck 1", player_id: illaoi.id)
+gangplank_deck = Deck.create(name: "Gangplank Deck 1", player_id: gangplank.id)
+yorick_deck = Deck.create(name: "Yorick Deck 1", player_id: yorick.id)
+thresh_deck = Deck.create(name: "Thresh Deck 1", player_id: thresh.id)
+elise_deck = Deck.create(name: "Elise Deck 1", player_id: elise.id)
+pantheon_deck = Deck.create(name: "Pantheon Deck 1", player_id: pantheon.id)
+soraka_deck = Deck.create(name: "Soraka Deck 1", player_id: soraka.id)
+leona_deck = Deck.create(name: "Leona Deck 1", player_id: leona.id)
+ashe_deck = Deck.create(name: "Ashe Deck 1", player_id: ashe.id)
+sejuani_deck = Deck.create(name: "Sejuani Deck 1", player_id: sejuani.id)
+lissandra_deck = Deck.create(name: "Lissandra Deck 1", player_id: lissandra.id)
+renekton_deck = Deck.create(name: "Renekton Deck 1", player_id: renekton.id)
+nasus_deck = Deck.create(name: "Nasus Deck 1", player_id: nasus.id)
+ascendedXerath_deck = Deck.create(name: "Ascended Xerath Deck 1", player_id: ascendedXerath.id)
+xerath_deck = Deck.create(name: "Xerath Deck 1", player_id: xerath.id)
 
-# garen_card1 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,
-# description:Throughout Valoran, the resolve of Demacia's military is alternately celebrated or despised, but always respected. Their ''zero tolerance'' moral code is strictly upheld by civilians and soldiers alike. In combat, this means Demacian troops may not .....", image:Garenox.png")
 
 
-garen_card1 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
-garen_card2 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
-garen_card3 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
-garen_card4 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Sona", title: "Maven of the Strings", role: "Support", rarity: "Bronze", attack: 500, magic: 800, defense: 200,image: "Sona.png")
-garen_card5 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Sona", title: "Maven of the Strings", role: "Support", rarity: "Bronze", attack: 500, magic: 800, defense: 200,image: "Sona.png")
-garen_card6 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Sona", title: "Maven of the Strings", role: "Support", rarity: "Bronze", attack: 500, magic: 800, defense: 200,image: "Sona.png")
+garen_card1 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "the Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700, image: "Garen.png")
+garen_card2 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "the Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700, image: "Garen.png")
+garen_card3 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "the Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700, image: "Garen.png")
+garen_card4 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Sona", title: "Maven of the Strings", role: "Support", rarity: "Bronze", attack: 500, magic: 800, defense: 200, image: "Sona.png")
+garen_card5 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Sona", title: "Maven of the Strings", role: "Support", rarity: "Bronze", attack: 500, magic: 800, defense: 200, image: "Sona.png")
+garen_card6 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Sona", title: "Maven of the Strings", role: "Support", rarity: "Bronze", attack: 500, magic: 800, defense: 200, image: "Sona.png")
 garen_card7 = Card.create(player_id: garen.id, cardtype: 'Champion',  name: "Jarvan IV", title: "the Exemplar of Demacia", role: "Tank", rarity: "Bronze", attack: 600, magic: 300, defense: 800, image: "JarvanIV.png")
 garen_card8 = Card.create(player_id: garen.id, cardtype: 'Champion',  name: "Jarvan IV", title: "the Exemplar of Demacia", role: "Tank", rarity: "Bronze", attack: 600, magic: 300, defense: 800, image: "JarvanIV.png")
 garen_card9 = Card.create(player_id: garen.id, cardtype: 'Champion',  name: "Jarvan IV", title: "the Exemplar of Demacia", role: "Tank", rarity: "Bronze", attack: 600, magic: 300, defense: 800, image: "JarvanIV.png")
-garen_card10 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Lucian", title: "the Purifier", role: "Marksman", rarity: "Bronze", attack: 800, magic: 300, defense: 500,image: "Lucian.png")
-garen_card11 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Lucian", title: "the Purifier", role: "Marksman", rarity: "Bronze", attack: 800, magic: 300, defense: 500,image: "Lucian.png")
-garen_card12 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Lucian", title: "the Purifier", role: "Marksman", rarity: "Bronze", attack: 800, magic: 300, defense: 500,image: "Lucian.png")
-garen_card13 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Poppy", title: "Keeper of the Hammer", role: "Tank", rarity: "Bronze", attack: 600, magic: 200, defense: 700,image: "Poppy.png")
-garen_card14 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Poppy", title: "Keeper of the Hammer", role: "Tank", rarity: "Bronze", attack: 600, magic: 200, defense: 700,image: "Poppy.png")
-garen_card15 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Poppy", title: "Keeper of the Hammer", role: "Tank", rarity: "Bronze", attack: 600, magic: 200, defense: 700,image: "Poppy.png")
-garen_card16 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Shyvana", title: "the Half-Dragon", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600,image: "Shyvana.png")
-garen_card17 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Shyvana", title: "the Half-Dragon", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600,image: "Shyvana.png")
-garen_card18 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Shyvana", title: "the Half-Dragon", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600,image: "Shyvana.png")
-garen_card19 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Xin Zhao", title: "the Seneschal of Demacia", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600,image: "XinZhao.png")
-garen_card20 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Xin Zhao", title: "the Seneschal of Demacia", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600,image: "XinZhao.png")
-garen_card21 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Xin Zhao", title: "the Seneschal of Demacia", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600,image: "XinZhao.png")
-garen_card22 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Galio", title: "the Sentinel's Sorrow", role: "Tank", rarity: "Bronze", attack: 300, magic: 600, defense: 700,image: "Galio.png")
-garen_card23 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Galio", title: "the Sentinel's Sorrow", role: "Tank", rarity: "Bronze", attack: 300, magic: 600, defense: 700,image: "Galio.png")
-garen_card24 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Galio", title: "the Sentinel's Sorrow", role: "Tank", rarity: "Bronze", attack: 300, magic: 600, defense: 700,image: "Galio.png")
-garen_card25 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
-garen_card26 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
-garen_card27 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
-garen_card28 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
-garen_card29 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
-garen_card30 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
-garen_card31 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
-garen_card32 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
-garen_card33 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
-garen_card34 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
-garen_card35 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
-garen_card36 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
-garen_card37 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
-garen_card38 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
-garen_card39 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
+garen_card10 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Lucian", title: "the Purifier", role: "Marksman", rarity: "Bronze", attack: 800, magic: 300, defense: 500, image: "Lucian.png")
+garen_card11 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Lucian", title: "the Purifier", role: "Marksman", rarity: "Bronze", attack: 800, magic: 300, defense: 500, image: "Lucian.png")
+garen_card12 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Lucian", title: "the Purifier", role: "Marksman", rarity: "Bronze", attack: 800, magic: 300, defense: 500, image: "Lucian.png")
+garen_card13 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Poppy", title: "Keeper of the Hammer", role: "Tank", rarity: "Bronze", attack: 600, magic: 200, defense: 700, image: "Poppy.png")
+garen_card14 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Poppy", title: "Keeper of the Hammer", role: "Tank", rarity: "Bronze", attack: 600, magic: 200, defense: 700, image: "Poppy.png")
+garen_card15 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Poppy", title: "Keeper of the Hammer", role: "Tank", rarity: "Bronze", attack: 600, magic: 200, defense: 700, image: "Poppy.png")
+garen_card16 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Shyvana", title: "the Half-Dragon", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600, image: "Shyvana.png")
+garen_card17 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Shyvana", title: "the Half-Dragon", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600, image: "Shyvana.png")
+garen_card18 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Shyvana", title: "the Half-Dragon", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600, image: "Shyvana.png")
+garen_card19 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Xin Zhao", title: "the Seneschal of Demacia", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600, image: "XinZhao.png")
+garen_card20 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Xin Zhao", title: "the Seneschal of Demacia", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600, image: "XinZhao.png")
+garen_card21 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Xin Zhao", title: "the Seneschal of Demacia", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600, image: "XinZhao.png")
+garen_card22 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Galio", title: "the Sentinel's Sorrow", role: "Tank", rarity: "Bronze", attack: 300, magic: 600, defense: 700, image: "Galio.png")
+garen_card23 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Galio", title: "the Sentinel's Sorrow", role: "Tank", rarity: "Bronze", attack: 300, magic: 600, defense: 700, image: "Galio.png")
+garen_card24 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Galio", title: "the Sentinel's Sorrow", role: "Tank", rarity: "Bronze", attack: 300, magic: 600, defense: 700, image: "Galio.png")
+garen_card25 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Taric", title: "the Shield of Valoran", role: "Support", rarity: "Bronze", attack: 400, magic: 500, defense: 800, image: "Taric.png")
+garen_card26 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Taric", title: "the Shield of Valoran", role: "Support", rarity: "Bronze", attack: 400, magic: 500, defense: 800, image: "Taric.png")
+garen_card27 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Taric", title: "the Shield of Valoran", role: "Support", rarity: "Bronze", attack: 400, magic: 500, defense: 800, image: "Taric.png")
+garen_card28 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Soraka", title: "the Starchild", role: "Support", rarity: "Bronze", attack: 200, magic: 700, defense: 500, image: "Soraka.png")
+garen_card29 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Soraka", title: "the Starchild", role: "Support", rarity: "Bronze", attack: 200, magic: 700, defense: 500, image: "Soraka.png")
+garen_card30 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Soraka", title: "the Starchild", role: "Support", rarity: "Bronze", attack: 200, magic: 700, defense: 500, image: "Soraka.png")
+garen_card31 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Ashe", title: "the Frost Archer", role: "Marksman", rarity: "Bronze", attack: 700, magic: 200, defense: 300, image: "Ashe.png")
+garen_card32 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Ashe", title: "the Frost Archer", role: "Marksman", rarity: "Bronze", attack: 700, magic: 200, defense: 300, image: "Ashe.png")
+garen_card33 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Ashe", title: "the Frost Archer", role: "Marksman", rarity: "Bronze", attack: 700, magic: 200, defense: 300, image: "Ashe.png")
+garen_card34 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Nami", title: "the Tidecaller", role: "Support", rarity: "Bronze", attack: 400, magic: 700, defense: 300, image: "Nami.png")
+garen_card35 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Nami", title: "the Tidecaller", role: "Support", rarity: "Bronze", attack: 400, magic: 700, defense: 300, image: "Nami.png")
+garen_card36 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Nami", title: "the Tidecaller", role: "Support", rarity: "Bronze", attack: 400, magic: 700, defense: 300, image: "Nami.png")
+garen_card37 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Gragas", title: "the Rabble Rouser", role: "Fighter", rarity: "Bronze", attack: 400, magic: 600, defense: 700, image: "Gragas.png")
+garen_card38 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Gragas", title: "the Rabble Rouser", role: "Fighter", rarity: "Bronze", attack: 400, magic: 600, defense: 700, image: "Gragas.png")
+garen_card39 = Card.create(player_id: garen.id, cardtype: 'Champion', name: "Gragas", title: "the Rabble Rouser", role: "Fighter", rarity: "Bronze", attack: 400, magic: 600, defense: 700, image: "Gragas.png")
 
 garen_card40 = Card.create(
   player_id: garen.id,
-  name: "Youmuu's Ghostblade",
-  cardtype: "Item",
-  rarity: "Diamond",
-  description: "700 bonus to all stats to equipped Assassin.",
-  effect: "props.equip(props.selectedCard)",
-  image: "YoumuusGhostblade.png",
+  name: "Demacian Justice",
+  cardtype: "Ability",
+  rarity: "Platinum",
+  description: "Destroy the champion with the highest power on your opponent's side of the field",
+  effect: "props.demacianJustice(props.selectedCard)",
+  image: "DemacianJustice.png",
   quantity: 0
 )
 
@@ -124,279 +136,167 @@ garen_deckcard18 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card18
 garen_deckcard19 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card19.id)
 garen_deckcard20 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card20.id)
 garen_deckcard21 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card21.id)
+garen_deckcard22 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card22.id)
+garen_deckcard23 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card23.id)
+garen_deckcard24 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card24.id)
+garen_deckcard25 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card25.id)
+garen_deckcard26 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card26.id)
+garen_deckcard27 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card27.id)
+garen_deckcard28 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card28.id)
+garen_deckcard29 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card29.id)
+garen_deckcard30 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card30.id)
+garen_deckcard31 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card31.id)
+garen_deckcard32 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card32.id)
+garen_deckcard33 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card33.id)
+garen_deckcard34 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card34.id)
+garen_deckcard35 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card35.id)
+garen_deckcard36 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card36.id)
+garen_deckcard37 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card37.id)
+garen_deckcard38 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card38.id)
+garen_deckcard39 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card39.id)
+garen_deckcard40 = Deckcard.create(deck_id: garen_deck.id, card_id: garen_card40.id)
 
-# garen_card17 = Card.create(
-#   player_id: garen.id,
-#   name: "Requiem",
-#   cardtype: "Ability",
-#   rarity: "Diamond",
-#   description: "Destroy every champion on your opponent's side of the field",
-#   effect: "props.requiem()",
-#   image: "Requiem.png",
-#   quantity: 0
-# )
-# garen_card18 = Card.create(
-#   player_id: garen.id,
-#   name: "Youmuu's Ghostblade",
-#   cardtype: "Item",
-#   rarity: "Diamond",
-#   description: "700 bonus to all stats to equipped Assassin.",
-#   effect: "props.equip(props.selectedCard)",
-#   image: "YoumuusGhostblade.png",
-#   quantity: 0
-# )
-# garen_card19 = Card.create(
-#   player_id: garen.id,
-#   name: "Void Staff",
-#   cardtype: "Item",
-#   rarity: "Platinum",
-#   description: "500 bonus to all stats to equipped Mage.",
-#   effect: "props.equip(props.selectedCard)",
-#   image: "VoidStaff.png",
-#   quantity: 0
-# )
-# garen_card20 = Card.create(
-#   player_id: garen.id,
-#   name: "Redemption",
-#   cardtype: "Item",
-#   rarity: "Platinum",
-#   description: "500 bonus to all stats to equipped Support.",
-#   effect: "props.equip(props.selectedCard)",
-#   image: "Redemption.png",
-#   quantity: 0
-# )
+lux_card1 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Garen", title: "the Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700, image: "Garen.png")
+lux_card2 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Garen", title: "the Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700, image: "Garen.png")
+lux_card3 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Garen", title: "the Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700, image: "Garen.png")
+lux_card4 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Sona", title: "Maven of the Strings", role: "Support", rarity: "Bronze", attack: 500, magic: 800, defense: 200, image: "Sona.png")
+lux_card5 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Sona", title: "Maven of the Strings", role: "Support", rarity: "Bronze", attack: 500, magic: 800, defense: 200, image: "Sona.png")
+lux_card6 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Sona", title: "Maven of the Strings", role: "Support", rarity: "Bronze", attack: 500, magic: 800, defense: 200, image: "Sona.png")
+lux_card7 = Card.create(player_id: lux.id, cardtype: 'Champion',  name: "Jarvan IV", title: "the Exemplar of Demacia", role: "Tank", rarity: "Bronze", attack: 600, magic: 300, defense: 800, image: "JarvanIV.png")
+lux_card8 = Card.create(player_id: lux.id, cardtype: 'Champion',  name: "Jarvan IV", title: "the Exemplar of Demacia", role: "Tank", rarity: "Bronze", attack: 600, magic: 300, defense: 800, image: "JarvanIV.png")
+lux_card9 = Card.create(player_id: lux.id, cardtype: 'Champion',  name: "Jarvan IV", title: "the Exemplar of Demacia", role: "Tank", rarity: "Bronze", attack: 600, magic: 300, defense: 800, image: "JarvanIV.png")
+lux_card10 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Lucian", title: "the Purifier", role: "Marksman", rarity: "Bronze", attack: 800, magic: 300, defense: 500, image: "Lucian.png")
+lux_card11 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Lucian", title: "the Purifier", role: "Marksman", rarity: "Bronze", attack: 800, magic: 300, defense: 500, image: "Lucian.png")
+lux_card12 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Lucian", title: "the Purifier", role: "Marksman", rarity: "Bronze", attack: 800, magic: 300, defense: 500, image: "Lucian.png")
+lux_card13 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Poppy", title: "Keeper of the Hammer", role: "Tank", rarity: "Bronze", attack: 600, magic: 200, defense: 700, image: "Poppy.png")
+lux_card14 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Poppy", title: "Keeper of the Hammer", role: "Tank", rarity: "Bronze", attack: 600, magic: 200, defense: 700, image: "Poppy.png")
+lux_card15 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Poppy", title: "Keeper of the Hammer", role: "Tank", rarity: "Bronze", attack: 600, magic: 200, defense: 700, image: "Poppy.png")
+lux_card16 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Shyvana", title: "the Half-Dragon", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600, image: "Shyvana.png")
+lux_card17 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Shyvana", title: "the Half-Dragon", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600, image: "Shyvana.png")
+lux_card18 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Shyvana", title: "the Half-Dragon", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600, image: "Shyvana.png")
+lux_card19 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Xin Zhao", title: "the Seneschal of Demacia", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600, image: "XinZhao.png")
+lux_card20 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Xin Zhao", title: "the Seneschal of Demacia", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600, image: "XinZhao.png")
+lux_card21 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Xin Zhao", title: "the Seneschal of Demacia", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600, image: "XinZhao.png")
+lux_card22 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Galio", title: "the Sentinel's Sorrow", role: "Tank", rarity: "Bronze", attack: 300, magic: 600, defense: 700, image: "Galio.png")
+lux_card23 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Galio", title: "the Sentinel's Sorrow", role: "Tank", rarity: "Bronze", attack: 300, magic: 600, defense: 700, image: "Galio.png")
+lux_card24 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Galio", title: "the Sentinel's Sorrow", role: "Tank", rarity: "Bronze", attack: 300, magic: 600, defense: 700, image: "Galio.png")
+lux_card25 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Taric", title: "the Shield of Valoran", role: "Support", rarity: "Bronze", attack: 400, magic: 500, defense: 800, image: "Taric.png")
+lux_card26 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Taric", title: "the Shield of Valoran", role: "Support", rarity: "Bronze", attack: 400, magic: 500, defense: 800, image: "Taric.png")
+lux_card27 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Taric", title: "the Shield of Valoran", role: "Support", rarity: "Bronze", attack: 400, magic: 500, defense: 800, image: "Taric.png")
+lux_card28 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Soraka", title: "the Starchild", role: "Support", rarity: "Bronze", attack: 200, magic: 700, defense: 500, image: "Soraka.png")
+lux_card29 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Soraka", title: "the Starchild", role: "Support", rarity: "Bronze", attack: 200, magic: 700, defense: 500, image: "Soraka.png")
+lux_card30 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Soraka", title: "the Starchild", role: "Support", rarity: "Bronze", attack: 200, magic: 700, defense: 500, image: "Soraka.png")
+lux_card31 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Lux", title: "the Lady of Luminosity", role: "Mage", rarity: "Bronze", attack: 200, magic: 900, defense: 400, image: "Lux.png")
+lux_card32 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Lux", title: "the Lady of Luminosity", role: "Mage", rarity: "Bronze", attack: 200, magic: 900, defense: 400, image: "Lux.png")
+lux_card33 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Lux", title: "the Lady of Luminosity", role: "Mage", rarity: "Bronze", attack: 200, magic: 900, defense: 400, image: "Lux.png")
+lux_card34 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Nami", title: "the Tidecaller", role: "Support", rarity: "Bronze", attack: 400, magic: 700, defense: 300, image: "Nami.png")
+lux_card35 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Nami", title: "the Tidecaller", role: "Support", rarity: "Bronze", attack: 400, magic: 700, defense: 300, image: "Nami.png")
+lux_card36 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Nami", title: "the Tidecaller", role: "Support", rarity: "Bronze", attack: 400, magic: 700, defense: 300, image: "Nami.png")
+lux_card37 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Morgana", title: "Fallen Angel", role: "Mage", rarity: "Bronze", attack: 100, magic: 800, defense: 600, image: "Morgana.png")
+lux_card38 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Morgana", title: "Fallen Angel", role: "Mage", rarity: "Bronze", attack: 100, magic: 800, defense: 600, image: "Morgana.png")
+lux_card39 = Card.create(player_id: lux.id, cardtype: 'Champion', name: "Morgana", title: "Fallen Angel", role: "Mage", rarity: "Bronze", attack: 100, magic: 800, defense: 600, image: "Morgana.png")
 
-# azir_card21 = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 65, magic: 104, defense: 39,
-# description: "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", image: "Akali.png")
-# azir_card22 = Card.create(player_id: azir.id, cardtype: 'Champion', name: "Akali22", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 65, magic: 104, defense: 39,
-# description: "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", image: "Akali.png")
-#
-# azir_card23 = Card.create(
-#   player_id: azir.id,
-#   name: "Noxian Guillotine",
-#   cardtype: "Ability",
-#   rarity: "Diamond",
-#   description: "Destroy any champion on your opponent's side of the field",
-#   effect: "props.noxianGuillotine(props.selectedCard)",
-#   image: "NoxianGuillotine.png",
-#   quantity: 0
-# )
-# azir_card24 = Card.create(
-#   player_id: azir.id,
-#   name: "Noxian Guillotine",
-#   cardtype: "Ability",
-#   rarity: "Diamond",
-#   description: "Destroy any champion on your opponent's side of the field",
-#   effect: "props.noxianGuillotine(props.selectedCard)",
-#   image: "NoxianGuillotine.png",
-#   quantity: 0
-# )
-# azir_card25 = Card.create(
-#   player_id: azir.id,
-#   name: "Youmuu's Ghostblade",
-#   cardtype: "Item",
-#   rarity: "Diamond",
-#   description: "700 bonus to all stats to equipped Assassin.",
-#   effect: "props.equip(props.selectedCard)",
-#   image: "YoumuusGhostblade.png",
-#   quantity: 0
-# )
-# azir_card26 = Card.create(
-#   player_id: azir.id,
-#   name: "Youmuu's Ghostblade",
-#   cardtype: "Item",
-#   rarity: "Diamond",
-#   description: "700 bonus to all stats to equipped Assassin.",
-#   effect: "props.equip(props.selectedCard)",
-#   image: "YoumuusGhostblade.png",
-#   quantity: 0
-# )
-# azir_card27 = Card.create(
-#   player_id: azir.id,
-#   name: "Youmuu's Ghostblade",
-#   cardtype: "Item",
-#   rarity: "Diamond",
-#   description: "700 bonus to all stats to equipped Assassin.",
-#   effect: "props.equip(props.selectedCard)",
-#   image: "YoumuusGhostblade.png",
-#   quantity: 0
-# )
-# azir_card28 = Card.create(
-#   player_id: azir.id,
-#   name: "Youmuu's Ghostblade",
-#   cardtype: "Item",
-#   rarity: "Diamond",
-#   description: "700 bonus to all stats to equipped Assassin.",
-#   effect: "props.equip(props.selectedCard)",
-#   image: "YoumuusGhostblade.png",
-#   quantity: 0
-# )
-# azir_card29 = Card.create(
-#   player_id: azir.id,
-#   name: "Youmuu's Ghostblade",
-#   cardtype: "Item",
-#   rarity: "Diamond",
-#   description: "700 bonus to all stats to equipped Assassin.",
-#   effect: "props.equip(props.selectedCard)",
-#   image: "YoumuusGhostblade.png",
-#   quantity: 0
-# )
-# azir_card30 = Card.create(
-#   player_id: azir.id,
-#   name: "Youmuu's Ghostblade",
-#   cardtype: "Item",
-#   rarity: "Diamond",
-#   description: "700 bonus to all stats to equipped Assassin.",
-#   effect: "props.equip(props.selectedCard)",
-#   image: "YoumuusGhostblade.png",
-#   quantity: 0
-# )
-# azir_card31 = Card.create(
-#   player_id: azir.id,
-#   name: "Youmuu's Ghostblade",
-#   cardtype: "Item",
-#   rarity: "Diamond",
-#   description: "700 bonus to all stats to equipped Assassin.",
-#   effect: "props.equip(props.selectedCard)",
-#   image: "YoumuusGhostblade.png",
-#   quantity: 0
-# )
-
-
-# azir_deckcard1 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card1.id)
-# azir_deckcard2 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card2.id)
-# azir_deckcard3 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card3.id)
-# azir_deckcard4 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card4.id)
-# azir_deckcard5 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card5.id)
-# azir_deckcard6 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card6.id)
-# azir_deckcard7 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card7.id)
-# azir_deckcard8 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card8.id)
-# azir_deckcard9 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card9.id)
-# azir_deckcard10 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card10.id)
-# azir_deckcard11 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card11.id)
-# azir_deckcard12 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card12.id)
-# azir_deckcard13 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card13.id)
-# azir_deckcard14 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card14.id)
-# azir_deckcard15 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card15.id)
-# azir_deckcard16 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card16.id)---
-# azir_deckcard17 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card17.id)+++
-# azir_deckcard18 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card18.id)---
-# azir_deckcard19 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card19.id)---
-# azir_deckcard20 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card20.id)---
-# azir_deckcard21 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card21.id)
-# azir_deckcard22 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card22.id)
-# azir_deckcard23 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card23.id)
-# azir_deckcard24 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card24.id)
-# azir_deckcard25 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card25.id)
-# azir_deckcard26 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card26.id)
-# azir_deckcard27 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card27.id)
-# azir_deckcard28 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card28.id)
-# azir_deckcard29 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card29.id)
-# azir_deckcard30 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card30.id)
-# azir_deckcard31 = Deckcard.create(deck_id: azir_deck.id, card_id: azir_card31.id)
-
-
-jarvan_card1 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
-jarvan_card2 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
-jarvan_card3 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Garen", title: "The Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700,image: "Garen.png")
-jarvan_card4 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 300, magic: 800, defense: 400,
-description: "Unlike other foxes that roamed the woods of southern Ionia, Ahri had always felt a strange connection to the magical world around her; a connection that was somehow incomplete. Deep inside, she felt the skin she had been born into was an ill fit for ...", image: "Ahri.png")
-jarvan_card5 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 300, magic: 800, defense: 400,
-description: "Unlike other foxes that roamed the woods of southern Ionia, Ahri had always felt a strange connection to the magical world around her; a connection that was somehow incomplete. Deep inside, she felt the skin she had been born into was an ill fit for ...", image: "Ahri.png")
-jarvan_card6 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 300, magic: 800, defense: 400,
-description: "Unlike other foxes that roamed the woods of southern Ionia, Ahri had always felt a strange connection to the magical world around her; a connection that was somehow incomplete. Deep inside, she felt the skin she had been born into was an ill fit for ...", image: "Ahri.png")
-jarvan_card7 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 650, magic: 1040, defense: 390,
-description: "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", image: "Akali.png")
-jarvan_card8 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 650, magic: 1040, defense: 390,
-description: "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", image: "Akali.png")
-jarvan_card9 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 650, magic: 1040, defense: 390,
-description: "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", image: "Akali.png")
-jarvan_card10 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Alistar", title: "the Minotaur", role: "Tank", rarity: "Silver", attack: 780, magic: 650, defense: 1170,
-description: "As the mightiest warrior to ever emerge from the Minotaur tribes of the Great Barrier, Alistar defended his tribe from Valoran's many dangers; that is, until the coming of the Noxian army. Alistar was lured from his village by the machinations of ...", image: "Alistar.png")
-jarvan_card11 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Alistar", title: "the Minotaur", role: "Tank", rarity: "Silver", attack: 780, magic: 650, defense: 1170,
-description: "As the mightiest warrior to ever emerge from the Minotaur tribes of the Great Barrier, Alistar defended his tribe from Valoran's many dangers; that is, until the coming of the Noxian army. Alistar was lured from his village by the machinations of ...", image: "Alistar.png")
-jarvan_card12 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Alistar", title: "the Minotaur", role: "Tank", rarity: "Silver", attack: 780, magic: 650, defense: 1170,
-description: "As the mightiest warrior to ever emerge from the Minotaur tribes of the Great Barrier, Alistar defended his tribe from Valoran's many dangers; that is, until the coming of the Noxian army. Alistar was lured from his village by the machinations of ...", image: "Alistar.png")
-jarvan_card13 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Amumu", title: "the Sad Mummy", role: "Tank", rarity: "Bronze", attack: 200, magic: 800, defense: 600,
-description: "''Solitude can be lonelier than death.''<br><br>A lonely and melancholy soul from ancient Shurima, Amumu roams the world in search of a friend. Cursed by an ancient spell, he is doomed to remain alone forever, as his touch is death and his affection ...", image: "Amumu.png")
-jarvan_card14 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Amumu", title: "the Sad Mummy", role: "Tank", rarity: "Bronze", attack: 200, magic: 800, defense: 600,
-description: "''Solitude can be lonelier than death.''<br><br>A lonely and melancholy soul from ancient Shurima, Amumu roams the world in search of a friend. Cursed by an ancient spell, he is doomed to remain alone forever, as his touch is death and his affection ...", image: "Amumu.png")
-jarvan_card15 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Amumu", title: "the Sad Mummy", role: "Tank", rarity: "Bronze", attack: 200, magic: 800, defense: 600,
-description: "''Solitude can be lonelier than death.''<br><br>A lonely and melancholy soul from ancient Shurima, Amumu roams the world in search of a friend. Cursed by an ancient spell, he is doomed to remain alone forever, as his touch is death and his affection ...", image: "Amumu.png")
-
-jarvan_card16 = Card.create(
-  player_id: jarvan.id,
-  name: "Youmuu's Ghostblade",
-  cardtype: "Item",
-  rarity: "Diamond",
-  description: "700 bonus to all stats to equipped Assassin.",
-  effect: "props.equip(props.selectedCard)",
-  image: "YoumuusGhostblade.png",
-  quantity: 0
-)
-jarvan_card17 = Card.create(
-  player_id: jarvan.id,
-  name: "Requiem",
+lux_card40 = Card.create(
+  player_id: lux.id,
+  name: "Demacian Justice",
   cardtype: "Ability",
-  rarity: "Diamond",
-  description: "Destroy every champion on your opponent's side of the field",
-  effect: "props.requiem()",
-  image: "Requiem.png",
-  quantity: 0
-)
-jarvan_card18 = Card.create(
-  player_id: jarvan.id,
-  name: "Youmuu's Ghostblade",
-  cardtype: "Item",
-  rarity: "Diamond",
-  description: "700 bonus to all stats to equipped Assassin.",
-  effect: "props.equip(props.selectedCard)",
-  image: "YoumuusGhostblade.png",
-  quantity: 0
-)
-jarvan_card19 = Card.create(
-  player_id: jarvan.id,
-  name: "Void Staff",
-  cardtype: "Item",
   rarity: "Platinum",
-  description: "500 bonus to all stats to equipped Mage.",
-  effect: "props.equip(props.selectedCard)",
-  image: "VoidStaff.png",
-  quantity: 0
-)
-jarvan_card20 = Card.create(
-  player_id: jarvan.id,
-  name: "Redemption",
-  cardtype: "Item",
-  rarity: "Platinum",
-  description: "500 bonus to all stats to equipped Support.",
-  effect: "props.equip(props.selectedCard)",
-  image: "Redemption.png",
+  description: "Destroy the champion with the highest power on your opponent's side of the field",
+  effect: "props.demacianJustice(props.selectedCard)",
+  image: "DemacianJustice.png",
   quantity: 0
 )
 
-jarvan_card21 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Akali", title: "the Fist of Shadow", role: "Assassin", rarity: "Silver", attack: 650, magic: 1040, defense: 390,
-description: "There exists an ancient order originating in the Ionian Isles dedicated to the preservation of balance. Order, chaos, light, darkness -- all things must exist in perfect harmony for such is the way of the universe. This order is known as the Kinkou ...", image: "Akali.png")
-jarvan_card22 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Ahri", title: "the Nine-Tailed Fox", role: "Mage", rarity: "Bronze", attack: 300, magic: 800, defense: 400,
-description: "Unlike other foxes that roamed the woods of southern Ionia, Ahri had always felt a strange connection to the magical world around her; a connection that was somehow incomplete. Deep inside, she felt the skin she had been born into was an ill fit for ...", image: "Ahri.png")
-jarvan_card23 = Card.create(
+lux_deckcard1 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card1.id)
+lux_deckcard2 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card2.id)
+lux_deckcard3 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card3.id)
+lux_deckcard4 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card4.id)
+lux_deckcard5 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card5.id)
+lux_deckcard6 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card6.id)
+lux_deckcard7 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card7.id)
+lux_deckcard8 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card8.id)
+lux_deckcard9 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card9.id)
+lux_deckcard10 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card10.id)
+lux_deckcard11 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card11.id)
+lux_deckcard12 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card12.id)
+lux_deckcard13 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card13.id)
+lux_deckcard14 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card14.id)
+lux_deckcard15 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card15.id)
+lux_deckcard16 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card16.id)
+lux_deckcard17 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card17.id)
+lux_deckcard18 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card18.id)
+lux_deckcard19 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card19.id)
+lux_deckcard20 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card20.id)
+lux_deckcard21 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card21.id)
+lux_deckcard22 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card22.id)
+lux_deckcard23 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card23.id)
+lux_deckcard24 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card24.id)
+lux_deckcard25 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card25.id)
+lux_deckcard26 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card26.id)
+lux_deckcard27 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card27.id)
+lux_deckcard28 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card28.id)
+lux_deckcard29 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card29.id)
+lux_deckcard30 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card30.id)
+lux_deckcard31 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card31.id)
+lux_deckcard32 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card32.id)
+lux_deckcard33 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card33.id)
+lux_deckcard34 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card34.id)
+lux_deckcard35 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card35.id)
+lux_deckcard36 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card36.id)
+lux_deckcard37 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card37.id)
+lux_deckcard38 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card38.id)
+lux_deckcard39 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card39.id)
+lux_deckcard40 = Deckcard.create(deck_id: lux_deck.id, card_id: lux_card40.id)
+
+
+jarvan_card1 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Garen", title: "the Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700, image: "Garen.png")
+jarvan_card2 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Garen", title: "the Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700, image: "Garen.png")
+jarvan_card3 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Garen", title: "the Might of Demacia", role: "Fighter", rarity: "Bronze", attack: 700, magic: 100, defense: 700, image: "Garen.png")
+jarvan_card4 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Sona", title: "Maven of the Strings", role: "Support", rarity: "Bronze", attack: 500, magic: 800, defense: 200, image: "Sona.png")
+jarvan_card5 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Sona", title: "Maven of the Strings", role: "Support", rarity: "Bronze", attack: 500, magic: 800, defense: 200, image: "Sona.png")
+jarvan_card6 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Sona", title: "Maven of the Strings", role: "Support", rarity: "Bronze", attack: 500, magic: 800, defense: 200, image: "Sona.png")
+jarvan_card7 = Card.create(player_id: jarvan.id, cardtype: 'Champion',  name: "Jarvan IV", title: "the Exemplar of Demacia", role: "Tank", rarity: "Bronze", attack: 600, magic: 300, defense: 800, image: "JarvanIV.png")
+jarvan_card8 = Card.create(player_id: jarvan.id, cardtype: 'Champion',  name: "Jarvan IV", title: "the Exemplar of Demacia", role: "Tank", rarity: "Bronze", attack: 600, magic: 300, defense: 800, image: "JarvanIV.png")
+jarvan_card9 = Card.create(player_id: jarvan.id, cardtype: 'Champion',  name: "Jarvan IV", title: "the Exemplar of Demacia", role: "Tank", rarity: "Bronze", attack: 600, magic: 300, defense: 800, image: "JarvanIV.png")
+jarvan_card10 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Lucian", title: "the Purifier", role: "Marksman", rarity: "Bronze", attack: 800, magic: 300, defense: 500, image: "Lucian.png")
+jarvan_card11 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Lucian", title: "the Purifier", role: "Marksman", rarity: "Bronze", attack: 800, magic: 300, defense: 500, image: "Lucian.png")
+jarvan_card12 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Lucian", title: "the Purifier", role: "Marksman", rarity: "Bronze", attack: 800, magic: 300, defense: 500, image: "Lucian.png")
+jarvan_card13 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Ezreal", title: "the Prodigal Explorer", role: "Marksman", rarity: "Silver", attack: 1050, magic: 900, defense: 300, image: "Poppy.png")
+jarvan_card14 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Ezreal", title: "the Prodigal Explorer", role: "Marksman", rarity: "Silver", attack: 1050, magic: 900, defense: 300, image: "Poppy.png")
+jarvan_card15 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Ezreal", title: "the Prodigal Explorer", role: "Marksman", rarity: "Silver", attack: 1050, magic: 900, defense: 300, image: "Poppy.png")
+jarvan_card16 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Shyvana", title: "the Half-Dragon", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600, image: "Shyvana.png")
+jarvan_card17 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Shyvana", title: "the Half-Dragon", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600, image: "Shyvana.png")
+jarvan_card18 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Shyvana", title: "the Half-Dragon", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600, image: "Shyvana.png")
+jarvan_card19 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Xin Zhao", title: "the Seneschal of Demacia", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600, image: "XinZhao.png")
+jarvan_card20 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Xin Zhao", title: "the Seneschal of Demacia", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600, image: "XinZhao.png")
+jarvan_card21 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Xin Zhao", title: "the Seneschal of Demacia", role: "Fighter", rarity: "Bronze", attack: 800, magic: 300, defense: 600, image: "XinZhao.png")
+jarvan_card22 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Galio", title: "the Sentinel's Sorrow", role: "Tank", rarity: "Bronze", attack: 300, magic: 600, defense: 700, image: "Galio.png")
+jarvan_card23 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Galio", title: "the Sentinel's Sorrow", role: "Tank", rarity: "Bronze", attack: 300, magic: 600, defense: 700, image: "Galio.png")
+jarvan_card24 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Galio", title: "the Sentinel's Sorrow", role: "Tank", rarity: "Bronze", attack: 300, magic: 600, defense: 700, image: "Galio.png")
+jarvan_card25 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Morgana", title: "Fallen Angel", role: "Mage", rarity: "Bronze", attack: 100, magic: 800, defense: 600, image: "Morgana.png")
+jarvan_card26 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Morgana", title: "Fallen Angel", role: "Mage", rarity: "Bronze", attack: 100, magic: 800, defense: 600, image: "Morgana.png")
+jarvan_card27 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Morgana", title: "Fallen Angel", role: "Mage", rarity: "Bronze", attack: 100, magic: 800, defense: 600, image: "Morgana.png")
+jarvan_card28 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Fiora", title: "the Grand Duelist", role: "Fighter", rarity: "Bronze", attack: 1000, magic: 200, defense: 400, image: "Fiora.png")
+jarvan_card29 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Fiora", title: "the Grand Duelist", role: "Fighter", rarity: "Bronze", attack: 1000, magic: 200, defense: 400, image: "Fiora.png")
+jarvan_card30 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Fiora", title: "the Grand Duelist", role: "Fighter", rarity: "Bronze", attack: 1000, magic: 200, defense: 400, image: "Fiora.png")
+jarvan_card31 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Lux", title: "the Lady of Luminosity", role: "Mage", rarity: "Bronze", attack: 200, magic: 900, defense: 400, image: "Lux.png")
+jarvan_card32 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Lux", title: "the Lady of Luminosity", role: "Mage", rarity: "Bronze", attack: 200, magic: 900, defense: 400, image: "Lux.png")
+jarvan_card33 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Lux", title: "the Lady of Luminosity", role: "Mage", rarity: "Bronze", attack: 200, magic: 900, defense: 400, image: "Lux.png")
+jarvan_card34 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Nami", title: "the Tidecaller", role: "Support", rarity: "Bronze", attack: 400, magic: 700, defense: 300, image: "Nami.png")
+jarvan_card35 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Nami", title: "the Tidecaller", role: "Support", rarity: "Bronze", attack: 400, magic: 700, defense: 300, image: "Nami.png")
+jarvan_card36 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Nami", title: "the Tidecaller", role: "Support", rarity: "Bronze", attack: 400, magic: 700, defense: 300, image: "Nami.png")
+jarvan_card37 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Soraka", title: "the Starchild", role: "Support", rarity: "Bronze", attack: 200, magic: 700, defense: 500, image: "Soraka.png")
+jarvan_card38 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Soraka", title: "the Starchild", role: "Support", rarity: "Bronze", attack: 200, magic: 700, defense: 500, image: "Soraka.png")
+jarvan_card39 = Card.create(player_id: jarvan.id, cardtype: 'Champion', name: "Soraka", title: "the Starchild", role: "Support", rarity: "Bronze", attack: 200, magic: 700, defense: 500, image: "Soraka.png")
+
+jarvan_card40 = Card.create(
   player_id: jarvan.id,
-  name: "Noxian Guillotine",
+  name: "Demacian Justice",
   cardtype: "Ability",
-  rarity: "Diamond",
-  description: "Destroy any champion on your opponent's side of the field",
-  effect: "props.noxianGuillotine(props.selectedCard)",
-  image: "NoxianGuillotine.png",
-  quantity: 0
-)
-jarvan_card24 = Card.create(
-  player_id: jarvan.id,
-  name: "Noxian Guillotine",
-  cardtype: "Ability",
-  rarity: "Diamond",
-  description: "Destroy any champion on your opponent's side of the field",
-  effect: "props.noxianGuillotine(props.selectedCard)",
-  image: "NoxianGuillotine.png",
+  rarity: "Platinum",
+  description: "Destroy the champion with the highest power on your opponent's side of the field",
+  effect: "props.demacianJustice(props.selectedCard)",
+  image: "DemacianJustice.png",
   quantity: 0
 )
 
@@ -415,33 +315,31 @@ jarvan_deckcard12 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_car
 jarvan_deckcard13 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card13.id)
 jarvan_deckcard14 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card14.id)
 jarvan_deckcard15 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card15.id)
-# jarvan_deckcard16 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card16.id)---
+jarvan_deckcard16 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card16.id)
 jarvan_deckcard17 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card17.id)
-# jarvan_deckcard18 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card18.id)---
-# jarvan_deckcard19 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card19.id)---
-# jarvan_deckcard20 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card20.id)---
-# jarvan_deckcard21 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card21.id)---
+jarvan_deckcard18 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card18.id)
+jarvan_deckcard19 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card19.id)
+jarvan_deckcard20 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card20.id)
+jarvan_deckcard21 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card21.id)
 jarvan_deckcard22 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card22.id)
 jarvan_deckcard23 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card23.id)
 jarvan_deckcard24 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card24.id)
-#
-# atem_deckcard1 = Deckcard.create(deck_id: atem_deck.id, card_id: zed_card.id)
-# atem_deckcard2 = Deckcard.create(deck_id: atem_deck.id, card_id: orianna_card.id)
-# atem_deckcard3 = Deckcard.create(deck_id: atem_deck.id, card_id: veigar_card.id)
-# atem_deckcard4 = Deckcard.create(deck_id: atem_deck.id, card_id: nasus_card.id)
-# atem_deckcard5 = Deckcard.create(deck_id: atem_deck.id, card_id: renekton_card.id)
-# atem_deckcard6 = Deckcard.create(deck_id: atem_deck.id, card_id: fizz_card.id)
-# atem_deckcard7 = Deckcard.create(deck_id: atem_deck.id, card_id: anivia_card.id)
-# atem_deckcard8 = Deckcard.create(deck_id: atem_deck.id, card_id: yasuo_card.id)
-#
-# kaiba_deckcard1 = Deckcard.create(deck_id: kaiba_deck.id, card_id: yasuo_card.id)
-# kaiba_deckcard2 = Deckcard.create(deck_id: kaiba_deck.id, card_id: anivia_card.id)
-# kaiba_deckcard3 = Deckcard.create(deck_id: kaiba_deck.id, card_id: fizz_card.id)
-# kaiba_deckcard4 = Deckcard.create(deck_id: kaiba_deck.id, card_id: renekton_card.id)
-# kaiba_deckcard5 = Deckcard.create(deck_id: kaiba_deck.id, card_id: nasus_card.id)
-# kaiba_deckcard6 = Deckcard.create(deck_id: kaiba_deck.id, card_id: veigar_card.id)
-# kaiba_deckcard7 = Deckcard.create(deck_id: kaiba_deck.id, card_id: orianna_card.id)
-# kaiba_deckcard8 = Deckcard.create(deck_id: kaiba_deck.id, card_id: zed_card.id)
+jarvan_deckcard25 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card25.id)
+jarvan_deckcard26 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card26.id)
+jarvan_deckcard27 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card27.id)
+jarvan_deckcard28 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card28.id)
+jarvan_deckcard29 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card29.id)
+jarvan_deckcard30 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card30.id)
+jarvan_deckcard31 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card31.id)
+jarvan_deckcard32 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card32.id)
+jarvan_deckcard33 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card33.id)
+jarvan_deckcard34 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card34.id)
+jarvan_deckcard35 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card35.id)
+jarvan_deckcard36 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card36.id)
+jarvan_deckcard37 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card37.id)
+jarvan_deckcard38 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card38.id)
+jarvan_deckcard39 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card39.id)
+jarvan_deckcard40 = Deckcard.create(deck_id: jarvan_deck.id, card_id: jarvan_card40.id)
 
 
 def generate_cards

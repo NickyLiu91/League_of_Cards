@@ -1792,7 +1792,7 @@ export default class Home extends React.Component {
     fetch("http://localhost:3000/api/v1/players")
     .then(response => response.json())
     .then(json => this.setState({
-      allPlayers: json.slice(0, 3)
+      allPlayers: json.slice(0, 25)
     }))
     // .then(json => {
     //   json.map(playerObj => {
