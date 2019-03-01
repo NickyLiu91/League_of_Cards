@@ -10,6 +10,7 @@ class CreatePlayers < ActiveRecord::Migration[5.2]
       t.integer :dialogue
       t.integer :gold
       t.integer :defeated_id
+      t.boolean :completed
       t.boolean :computer
 
       t.timestamps

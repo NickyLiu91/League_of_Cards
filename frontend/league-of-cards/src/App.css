@@ -167,12 +167,13 @@ img {
 }
 
 #graveyard-bar{
+  background-color: black;
   list-style-type:none;
   height: 600px;
   width: 100%;
   border-style: solid;
-  border-color: blue;
-  color: blue;
+  border-color: gold;
+  color: gold;
   margin: 0;
   padding: 0;
   position: sticky;
@@ -185,11 +186,12 @@ img {
 }
 
 .action-box-text {
+  background-color: black;
   list-style-type:none;
   width: 100%;
   border-style: solid;
-  border-color: blue;
-  color: blue;
+  border-color: gold;
+  color: gold;
   margin: 0;
   padding: 0;
   position: sticky;
@@ -203,7 +205,7 @@ img {
 .graveyard-card {
   border-top-style: solid;
   /*border-radius: 1px;*/
-  border-top-color: blue;
+  border-top-color: gold;
 }
 
 .big-container {
@@ -352,9 +354,14 @@ li{
 
 #duelist-list {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  padding: 20px;
+  flex-wrap: wrap;
+  width: 900px;
+  /*flex-direction: row;*/
+  margin: 0 auto;
+  /*justify-content: space-around;*/
+  padding: 30px 30px 30px 30px;
+
+
 }
 
 .deck-button-div {
@@ -548,6 +555,32 @@ padding-right: 250px;
 #campaign-preduel {
   height: 100%;
   width: 100%;
+}
+
+.duelist-name {
+  background-color: black;
+  border: solid gold;
+  position: relative;
+  /*width: 160px;*/
+  top: -6px;
+}
+
+.duelist {
+  margin: 10px 5px 15px 5px;
+}
+
+.locked-duelist-portrait {
+  background-color: black;
+  margin: 0px 0px 15px 0px;
+}
+
+button {
+  color: gold;
+  background-color: black;
+  border: solid gold 1px;
+  /*height: 20px;
+  width: 60px;*/
+  font-size: 20px;
 }
 
 /*.add-button {

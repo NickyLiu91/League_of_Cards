@@ -673,7 +673,7 @@ export default class DuelField extends React.Component {
     const platinums = listOfCards.filter(obj => obj.rarity === "Platinum")
     const golds = listOfCards.filter(obj => obj.rarity === "Gold")
     const silvers = listOfCards.filter(obj => obj.rarity === "Silver")
-    const bronzes = listOfCards.filter(obj => obj.rarity === "Bronze")
+    const bronzes = this.props.collection.filter(obj => obj.rarity === "Bronze")
     //
     if (number > 98) {
       if (diamonds.length === 0 && platinums.length === 0 && golds.length === 0 && silvers.length === 0) {
@@ -2160,7 +2160,9 @@ directAttack = (monster) => {
             </div>
           </div>
         )
-    } else {
+    } else if (this.props.player2.name === "Xerath"){
+      var audio = new Audio('files/SummonersCall.mp3')
+      audio.play()
       return(
         <div>
           <img id="noxus-arena" src="image/noxus-arena.jpeg" />
@@ -2203,6 +2205,131 @@ directAttack = (monster) => {
               <div id="middle-bar">
               <div className="life-points">{this.state.player1Life}</div>
               <button onClick={this.computerTurn}>End Turn</button>
+              <button onClick={this.win}>Win</button>
+              <div className="life-points">{this.state.player2Life}</div>
+              </div>
+              <br/>
+              <br/>
+              <div>
+                <img id="summoners-rift" src="image/summoners-rift.jpg"/>
+                <div id="player-field">
+
+                  <div id="player1-monsters">
+                    <MonsterField
+                      monsters={this.state.player1Monsters}
+                      clickFieldMonster={this.clickFieldMonster}
+                      selectTarget={this.selectTarget}
+                      selectItemTarget={this.selectItemTarget}
+                      actionType={this.state.actionType}
+                      player={"player1"}
+                    />
+                  </div>
+                  <div id="player1-spells">
+                  <SpellField spells={this.state.player1Spells} playMonster={this.playMonster}/>
+                  </div>
+                  <br/>
+                  <div className="extra-field">
+                  <div id="player1-deck" className="duel-card">
+                  p1 Deck
+                  </div>
+                  <div id="player1-graveyard" className="duel-card" onClick={this.displayGraveyard1}>
+                  Graveyard
+                  </div>
+                </div>
+                </div>
+                <div id="player1-hand">
+                  <Hand
+                    hand={this.state.player1Hand}
+                    clickHandCard={this.clickHandCard}
+                    noxianGuillotine={this.noxianGuillotine}
+                    player={"player1"}
+                    actionType={this.state.actionType}
+                    itemTarget={this.itemTarget}
+                  />
+                </div>
+              </div>
+              <img src="image/AzirPortrait.png"/>
+              <div>Azir</div>
+            </div>
+            <div id="action-box">
+              <ActionBox
+                actionType={this.state.actionType}
+                selectedCard={this.state.selectedCard}
+                selectedTarget={this.state.selectedTarget}
+                playMonsterAttack={this.playMonsterAttack}
+                playMonsterDefense={this.playMonsterDefense}
+                getEnemyTargetMode={this.getEnemyTargetMode}
+                cancel={this.cancel}
+                changePosition={this.changePosition}
+                selectedTarget={this.state.selectedTarget}
+                fight={this.fight}
+                player1Graveyard={this.state.player1Graveyard}
+                player2Graveyard={this.state.player2Graveyard}
+                emptyField={this.emptyField}
+                player2Monsters={this.state.player2Monsters}
+                player1Monsters={this.state.player1Monsters}
+                turn={this.state.turn}
+                requiem={this.requiem}
+                demacianJustice={this.demacianJustice}
+                deathMark={this.deathMark}
+                primordialBurst={this.primordialBurst}
+                silverBolts={this.silverBolts}
+                getItemTargetMode={this.getItemTargetMode}
+                selectedItemTarget={this.state.selectedItemTarget}
+                equip={this.equip}
+                directAttack={this.directAttack}
+                noxianGuillotine={this.noxianGuillotine}
+              />
+            </div>
+          </div>
+        </div>
+      )
+    } else {
+      // var audio = new Audio('files/SummonersCall.mp3')
+      // audio.play()
+      return(
+        <div>
+          <img id="noxus-arena" src="image/noxus-arena.jpeg" />
+          <div id="duel-field-container">
+            <div id="duel-field">
+
+              <div>{this.props.player2.name}</div>
+              <img src={this.props.player2.image}/>
+              <div>
+                <img id="summoners-rift" src="image/summoners-rift.jpg"/>
+                <div id="enemy-field">
+                  <div id="player2-hand">
+                  <Hand hand={this.state.player2Hand} player={"player2"}/>
+                  </div>
+                  <br/>
+                  <div className="extra-field">
+                  <div id="player2-deck" className="duel-card" >
+                  p2 Deck
+                  </div>
+                  <div id="player2-graveyard" className="duel-card" onClick={this.displayGraveyard2}>
+                  Graveyard
+                  </div>
+                  </div>
+                  <br/>
+                  <div id="player2-spells">
+                  <SpellField spells={this.state.player2Spells} />
+                  </div>
+                  <div id="player2-monsters">
+                    <MonsterField
+                    player={"player2"}
+                      monsters={this.state.player2Monsters}
+                      selectTarget={this.selectTarget}
+                      player={"player2"}
+                    />
+                  </div>
+                </div>
+              </div>
+              <br/>
+              <br/>
+              <div id="middle-bar">
+              <div className="life-points">{this.state.player1Life}</div>
+              <button onClick={this.computerTurn}>End Turn</button>
+              <button onClick={this.win}>Win</button>
               <div className="life-points">{this.state.player2Life}</div>
               </div>
               <br/>
@@ -2276,12 +2403,6 @@ directAttack = (monster) => {
                 equip={this.equip}
                 directAttack={this.directAttack}
                 noxianGuillotine={this.noxianGuillotine}
-                // longSword={this.longSword}
-                // bfSword={this.bfSword}
-                // amplifyingTome={this.amplifyingTome}
-                // needlesslyLargeRod={this.needlesslyLargeRod}
-                // rubyCrystal={this.rubyCrystal}
-                // giantsBelt={this.giantsBelt}
               />
             </div>
           </div>

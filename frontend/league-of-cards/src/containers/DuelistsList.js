@@ -3,9 +3,9 @@ import Duelist from "../components/Duelist.js"
 let duelistKey = 0
 
 export default class DuelistsList extends React.Component {
-  // state = {
-  //   duelists: []
-  // }
+  state = {
+    duelists: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
+  }
 
   // componentDidMount() {
   //   fetch('http://localhost:3000/api/v1/players')
@@ -18,12 +18,26 @@ export default class DuelistsList extends React.Component {
   // }
 
   generateDuelists = () => {
-    if (this.props.currentPlayer.defeated_id === 0 ) {
-      return this.props.allPlayers.slice(0, 0).map(
+    let list = this.state.duelists
+
+    if (this.props.currentPlayer.completed === true) {
+      this.props.allPlayers.slice(0, 24).forEach(duelist => {
+        let index = list.findIndex(obj => Object.keys(obj).length === 0)
+        list[index] = duelist
+      })
+      return list.map(
         duelistObj => <Duelist key={duelistKey++} duelist={duelistObj} getDuelist={this.props.getDuelist}/>
       )
+    } else if (this.props.currentPlayer.defeated_id === 0 ) {
+      return(list.map(
+        duelistObj => <Duelist key={duelistKey++} duelist={duelistObj} getDuelist={this.props.getDuelist}/>
+      ))
     } else {
-      return this.props.allPlayers.slice(0, this.props.currentPlayer.defeated_id).map(
+      this.props.allPlayers.slice(0, this.props.currentPlayer.defeated_id).forEach(duelist => {
+        let index = list.findIndex(obj => Object.keys(obj).length === 0)
+        list[index] = duelist
+      })
+      return list.map(
         duelistObj => <Duelist key={duelistKey++} duelist={duelistObj} getDuelist={this.props.getDuelist}/>
       )
     }
