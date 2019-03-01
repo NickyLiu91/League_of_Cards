@@ -33,7 +33,7 @@ sejuani = Player.create(name: "Sejuani", image: "image/SejuaniPortrait.png", com
 lissandra = Player.create(name: "Lissandra", image: "image/LissandraPortrait.png", computer: true, background: "image/LissandraBG.jpeg", preduel: "image/Lissandra.png", password_digest: "21")
 renekton = Player.create(name: "Renekton", image: "image/RenektonPortrait.png", computer: true, background: "image/RenektonBG.jpeg", preduel: "image/Renekton.png", password_digest: "22")
 nasus = Player.create(name: "Nasus", image: "image/NasusPortrait.png", computer: true, background: "image/NasusBG.jpeg", preduel: "image/Nasus.png", password_digest: "23")
-xerath = Player.create(name: "Xerath", image: "image/XerathPortrait.png", computer: true, background: "image/XerathBG.jpeg", preduel: "image/Xerath.png", password_digest: "25")
+xerath = Player.create(name: "Xerath", image: "image/XerathPortrait.png", computer: true, background: "image/XerathBG.jpeg", preduel: "image/Xerath.png", password_digest: "24")
 
 garen_deck = Deck.create(name: "Garen Deck 1", player_id: garen.id)
 lux_deck = Deck.create(name: "Lux Deck 1", player_id: lux.id)
