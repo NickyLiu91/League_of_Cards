@@ -77,6 +77,55 @@ export default class Home extends React.Component {
     return array1.filter()
   }
 
+  // generateCard = (nameVar, titleVar, roleVar, rarityVar, attackVar, magicVar, defenseVar, descriptionVar, imageVar) => {
+  //   fetch("http://localhost:3000/api/v1/cards", {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Accept': 'application/json'
+  //     },
+  //     body: JSON.stringify(
+  //       {
+  //         player_id: playerObj.id,
+  //         name: nameVar,
+  //         title: titleVar,
+  //         role: roleVar,
+  //         rarity: rarityVar,
+  //         attack: attackVar,
+  //         magic: magicVar,
+  //         defense: defenseVar,
+  //         description: descriptionVar,
+  //         image: imageVar,
+  //         cardtype: "Champion"
+  //       }
+  //     )
+  //   })
+  //   .then(response => {
+  //     fetch(`http://localhost:3000/api/v1/players/${playerObj.id}`)
+  //     .then(res => res.json())
+  //     .then(json => {deck = json.decks[0]})
+  //     .then(response => {
+  //       fetch(`http://localhost:3000/api/v1/players/${playerObj.id}`)
+  //       .then(response => response.json())
+  //       .then(json => {Object.assign(object, {newCard: json.cards[deckNumber++], allCards: json.cards})})
+  //       .then(response => {
+  //         fetch(`http://localhost:3000/api/v1/deckcards`, {
+  //           method: 'POST',
+  //           headers: {
+  //             'Content-Type': 'application/json',
+  //             'Accept': 'application/json',
+  //           },
+  //           body: JSON.stringify(
+  //               {
+  //                 deck_id: deck.id,
+  //                 card_id: object.newCard.id
+  //               }
+  //         )})
+  //       })
+  //     })
+  //   })
+  // }
+
   generateDeck = (playerObj) => {
     // let allCards =
     let object = {}

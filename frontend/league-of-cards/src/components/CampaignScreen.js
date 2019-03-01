@@ -136,12 +136,12 @@ const CampaignScreen = (props) => {
           </div>
         )
       }
-    } else if (props.dialogue > 327 && props.dialogue < 336) {
+    } else if (props.dialogue > 327 && props.dialogue < 339) {
       console.log(props.dialogue)
       if (props.storyText[props.dialogue].sivir !== undefined){
         return(
           <div id="campaign-screen" >
-            <img id="campaign-background" src={"image/XerathBG.png"}/>
+            <img id="campaign-background" src={props.computers[props.defeated].background}/>
               <div id="text-box" onClick={event => {props.increaseDialogue()}}>
                 <div id="speaker-picture">
                   <img src={props.player1.image} />
@@ -155,7 +155,7 @@ const CampaignScreen = (props) => {
       } else if (props.storyText[props.dialogue].xerath !== undefined) {
         return(
           <div id="campaign-screen" >
-            <img id="campaign-background" src={"image/XerathBG.png"}/>
+            <img id="campaign-background" src={props.computers[props.defeated].background}/>
               <div id="text-box" onClick={event => {props.increaseDialogue()}}>
                 <div id="speaker-picture">
                   <img src="image/XerathPortrait.png"/>
@@ -169,7 +169,7 @@ const CampaignScreen = (props) => {
       } else if (props.storyText[props.dialogue].ezreal !== undefined) {
         return(
           <div id="campaign-screen" >
-            <img id="campaign-background" src={"image/XerathBG.png"}/>
+            <img id="campaign-background" src={props.computers[props.defeated].background}/>
               <div id="text-box" onClick={event => {props.increaseDialogue()}}>
                 <div id="speaker-picture">
                   <img src="image/EzrealPortrait.png"/>
@@ -183,7 +183,7 @@ const CampaignScreen = (props) => {
       } else if (props.storyText[props.dialogue].azir !== undefined) {
         return(
           <div id="campaign-screen" >
-            <img id="campaign-background" src={"image/XerathBG.png"}/>
+            <img id="campaign-background" src={props.computers[props.defeated].background}/>
               <div id="text-box" onClick={event => {props.increaseDialogue()}}>
                 <div id="speaker-picture">
                   <img src="image/AzirPortrait.png"/>
@@ -218,7 +218,7 @@ const CampaignScreen = (props) => {
           </div>
         </div>
       )
-    } else if (props.dialogue > 339) {
+    } else if (props.dialogue > 342) {
       console.log(props.dialogue)
       if (props.storyText[props.dialogue].sivir !== undefined){
         return(
