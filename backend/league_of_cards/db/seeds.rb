@@ -33,7 +33,6 @@ sejuani = Player.create(name: "Sejuani", image: "image/SejuaniPortrait.png", com
 lissandra = Player.create(name: "Lissandra", image: "image/LissandraPortrait.png", computer: true, background: "image/LissandraBG.jpeg", preduel: "image/Lissandra.png", password_digest: "21")
 renekton = Player.create(name: "Renekton", image: "image/RenektonPortrait.png", computer: true, background: "image/RenektonBG.jpeg", preduel: "image/Renekton.png", password_digest: "22")
 nasus = Player.create(name: "Nasus", image: "image/NasusPortrait.png", computer: true, background: "image/NasusBG.jpeg", preduel: "image/Nasus.png", password_digest: "23")
-ascendedXerath = Player.create(name: "AscendedXerath", image: "image/AscendedXerathPortrait.png", computer: true, background: "image/AscendedXerathBG.jpeg", preduel: "image/AscendedXerath.png", password_digest: "24")
 xerath = Player.create(name: "Xerath", image: "image/XerathPortrait.png", computer: true, background: "image/XerathBG.jpeg", preduel: "image/Xerath.png", password_digest: "25")
 
 garen_deck = Deck.create(name: "Garen Deck 1", player_id: garen.id)
@@ -59,7 +58,6 @@ sejuani_deck = Deck.create(name: "Sejuani Deck 1", player_id: sejuani.id)
 lissandra_deck = Deck.create(name: "Lissandra Deck 1", player_id: lissandra.id)
 renekton_deck = Deck.create(name: "Renekton Deck 1", player_id: renekton.id)
 nasus_deck = Deck.create(name: "Nasus Deck 1", player_id: nasus.id)
-ascendedXerath_deck = Deck.create(name: "Ascended Xerath Deck 1", player_id: ascendedXerath.id)
 xerath_deck = Deck.create(name: "Xerath Deck 1", player_id: xerath.id)
 
 

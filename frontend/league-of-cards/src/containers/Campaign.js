@@ -13,12 +13,14 @@ export default class Campaign extends React.Component {
       "However, they saw potential in me as a mercenary, and decided to hire me to join Ezreal as a bodyguard on a large scale expedition funded by the royal family.",
       "Thus, I travelled with them back to Demacia, to prepare for our journey.",
       "Alright, we gave you everything you said you would need to be a proper bodyguard.",
-      "Now, show me what you can do!",
+      "Now, I am Garen, the might of Demacia!",
+      "Show me what you can do!",
       "DUEL",
       "Well fought! You are every bit as strong as we thought you would be.",
-      "Now it's my turn!",
-      "I am Jarvan IV, the Prince of Demacia!",
-      "Prepare yourself!",
+      "Now show you can fight against magic as well by defeating my sister.",
+      "I am Lux, the Lady of Luminosity.",
+      "I will now test your aptitude for fighting against mages.",
+      "Let us begin.",
       "DUEL"
     ]
   }

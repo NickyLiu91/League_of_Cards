@@ -30,6 +30,20 @@ const CampaignScreen = (props) => {
           </div>
         </div>
       )
+    } else if (props.storyText[props.dialogue - 1] === "DUEL" || props.storyText[props.dialogue - 2] === "DUEL") {
+      return(
+        <div id="campaign-screen" >
+          <img id="campaign-background" src={props.computers[props.defeated - 1].background}/>
+            <div id="text-box" onClick={event => {props.increaseDialogue()}}>
+              <div id="speaker-picture">
+                <img src={props.computers[props.player1.defeated_id - 1].image} />
+              </div>
+            <div id="story-text">
+              <p>{props.storyText[props.dialogue]}</p>
+            </div>
+          </div>
+        </div>
+      )
     } else {
       return(
         <div id="campaign-screen" >

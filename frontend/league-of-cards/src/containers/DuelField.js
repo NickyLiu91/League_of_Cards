@@ -23,7 +23,7 @@ export default class DuelField extends React.Component {
     player1Deck: [...this.props.player1Deck],
     player1Graveyard: [],
     player2: this.props.player2,
-    player2Life: 8000,
+    player2Life: 1000,
     player2Monsters: [{}, {}, {}, {}, {}],
     player2Spells: [{}, {}, {}, {}, {}],
     player2Hand: [],
@@ -515,15 +515,19 @@ export default class DuelField extends React.Component {
       } else if (monster2.position === 'attack'){
         if (this.highestAttack(monster1) > this.highestAttack(monster2)) {
           monster1.attacked = true
+          // console.log(this.state.player2Life)
+          // console.log(this.state.player2Life - (this.highestAttack(monster1) - this.highestAttack(monster2)))
           this.setState({
             player2Life: this.state.player2Life - (this.highestAttack(monster1) - this.highestAttack(monster2)),
             selectedCard: '',
             selectedTarget: '',
             actionType: ''
           }, () => {
-            if (this.state.player2life <= 0) {
+            if (this.state.player2Life <= 0) {
+              console.log("WIN")
               this.win()
             } else {
+              console.log("wtf")
               this.sendEnemyFromFieldToGraveyard(monster2)
             }
           })
@@ -534,7 +538,7 @@ export default class DuelField extends React.Component {
             selectedTarget: '',
             actionType: ''
           }, () => {
-            if (this.state.player1life <= 0) {
+            if (this.state.player1Life <= 0) {
               this.lose()
             } else {
               this.sendOwnFromFieldToGraveyard(monster1)
@@ -662,6 +666,7 @@ export default class DuelField extends React.Component {
   win = () => {
     let listOfCards = this.props.player2Deck
     let number = Math.floor(Math.random() * 100) + 1
+    console.log(number)
     let newCard
     //
     const diamonds = listOfCards.filter(obj => obj.rarity === "Diamond")
@@ -672,41 +677,56 @@ export default class DuelField extends React.Component {
     //
     if (number > 98) {
       if (diamonds.length === 0 && platinums.length === 0 && golds.length === 0 && silvers.length === 0) {
+        console.log("a")
         newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
       } else if (diamonds.length === 0 && platinums.length === 0 && golds.length === 0) {
+        console.log("b")
         newCard = silvers[Math.floor(Math.random() * silvers.length)]
       } else if (diamonds.length === 0 && platinums.length === 0) {
+        console.log("c")
         newCard = golds[Math.floor(Math.random() * golds.length)]
       } else if (diamonds.length === 0) {
+        console.log("d")
         newCard = platinums[Math.floor(Math.random() * platinums.length)]
       } else {
+        console.log("e")
         newCard = diamonds[Math.floor(Math.random() * diamonds.length)]
       }
     } else if ( number > 93) {
       if (platinums.length === 0 && golds.length === 0 && silvers.length === 0) {
+        console.log("f")
         newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
       } else if (platinums.length === 0 && golds.length === 0 ) {
         newCard = silvers[Math.floor(Math.random() * silvers.length)]
+        console.log("g")
       } else if (platinums.length === 0) {
+        console.log("h")
         newCard = golds[Math.floor(Math.random() * golds.length)]
       } else {
+        console.log("i")
         newCard = platinums[Math.floor(Math.random() * platinums.length)]
       }
     } else if ( number > 85) {
       if (golds.length === 0 && silvers.length === 0) {
+        console.log("j")
         newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
       } else if (golds.length === 0 ) {
+        console.log("k")
         newCard = silvers[Math.floor(Math.random() * silvers.length)]
       } else {
+        console.log("l")
         newCard = golds[Math.floor(Math.random() * golds.length)]
       }
     } else if ( number > 50) {
       if (silvers.length === 0) {
+        console.log("m")
         newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
       } else {
+        console.log("n")
         newCard = silvers[Math.floor(Math.random() * silvers.length)]
       }
     } else {
+      console.log("o")
       newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
     }
     console.log(newCard)
