@@ -334,18 +334,20 @@ export default class Campaign extends React.Component {
       {azir: "My descendent's blood has reached me from the bottom of the dessert!"},
       {azir: "I HAVE BEEN REBORN!"},
       {azir: "NOW, I SHALL TAKE BACK WHAT YOU STOLE FROM ME!"},
+      {ascendedXerath: "WHAT?!"},
       {azir: "RECOGNIZE YOUR EMPEROR!"},
       {azir: "SERVE ME!"},
-      {xerath: "MY POWER...?!"},
+      "MY POWER...?!",
       {azir: "It was never yours to begin with."},
-      {azir: "Now that I'm here again, your power serves its rightful host."},
-      {xerath: "AZIR!"},
-      {xerath: "I WILL SLAUGHTER YOU AND ALL OF YOUR DESCENDENTS!"},
+      {azir: "Now that I have returned, that power serves its rightful host."},
+      "AZIIIIIIIIR!!!!",
+      "I WILL SLAUGHTER YOU AND ALL OF YOUR DESCENDENTS!",
       {azir: "You are but my shadow, Xerath."},
       {azir: "The time for your judgment has come!"},
+      "THIS TIME I WONT LEAVE A PARTICLE OF YOU TO RESSURECT FROM!!!",
       "DUEL",
-      {xerath: "NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"},
-      {xerath: "CURSE YOUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU"},
+      "NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+      "CURSE YOUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
       {ezreal: "Is it... over?"},
       {azir: "Rest easy."},
       {azir: "Give me my descendent."},
@@ -353,7 +355,7 @@ export default class Campaign extends React.Component {
       {sivir: "...?"},
       {ezreal: "Amazing..."},
       {azir: "You two have fought valiantly to get to this point."},
-      {azir: "With your efforts I was able to ressurrect, and I was finally able to rid the world of my treacher advisor."},
+      {azir: "With your efforts I was able to ressurrect, and I was finally able to rid the world of my treacherous advisor."},
       {azir: "You have my gratitude."},
       {ezreal: "I am honored..."},
       {azir: "As a reward for the efforts of your country, you can count Shurima as an ally from this day forward."},
@@ -390,7 +392,9 @@ export default class Campaign extends React.Component {
     })
   }
 
-  resetCampaign = () => {
+  resetCampaign = (event) => {
+    console.log(this.state)
+    console.log("????")
     fetch(`http://localhost:3000/api/v1/players/${this.state.player1.id}`, {
       method: 'PATCH',
       headers: {
@@ -401,10 +405,11 @@ export default class Campaign extends React.Component {
           {
             defeated_id: 0,
             dialogue: 0,
-            completed: true
+            completed: true,
           }
       )
     })
+    .then(res => this.props.renderHome())
   }
 
   render() {

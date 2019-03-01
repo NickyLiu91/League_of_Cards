@@ -7,6 +7,7 @@ import ActionBox from "../components/ActionBox.js"
 import Graveyard from "./Graveyard.js"
 
 let totalDamage = 8000
+var audio = new Audio('files/SummonersCall.mp3')
 
 export default class DuelField extends React.Component {
 
@@ -2136,6 +2137,7 @@ directAttack = (monster) => {
 
   render() {
     if (this.state.display === 'Lose') {
+      audio.pause()
         return(
           <div id="post-match" onClick={event => this.props.renderHome()}>
           <img id="shadow-isles" src="image/shadow-isles.jpeg" />
@@ -2147,6 +2149,7 @@ directAttack = (monster) => {
           </div>
         )
     } else if (this.state.display === 'Win') {
+      audio.pause()
         return(
           <div id="post-match" onClick={event => this.props.renderPostDuel(this.props.location)}>
             <img id="targon" src="image/targon.jpeg" />
@@ -2161,7 +2164,6 @@ directAttack = (monster) => {
           </div>
         )
     } else if (this.props.player2.name === "Xerath"){
-      var audio = new Audio('files/SummonersCall.mp3')
       audio.play()
       return(
         <div>

@@ -583,6 +583,15 @@ button {
   font-size: 20px;
 }
 
+#end-screen {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 50px;
+  font-size: 500px;
+}
+
 /*.add-button {
   position: absolute;
   right: 279px;
