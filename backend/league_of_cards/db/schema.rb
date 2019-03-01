@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2019_01_05_075823) do
     t.integer "dialogue"
     t.integer "gold"
     t.integer "defeated_id"
+    t.boolean "completed"
     t.boolean "computer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
