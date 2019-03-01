@@ -28,6 +28,7 @@ const HomeScreen = (props) => {
         <div>
           <img id="demacia" src="image/demacia.jpeg" />
           <div id="logged-in">
+          // <button onClick={event => props.printState}>STATE</button>
             <h1>LEAGUE OF CARDS</h1>
               <h1>Welcome, {props.currentPlayer.name}!</h1>
               <br/>

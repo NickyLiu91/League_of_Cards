@@ -1792,7 +1792,7 @@ export default class Home extends React.Component {
     fetch("http://localhost:3000/api/v1/players")
     .then(response => response.json())
     .then(json => this.setState({
-      allPlayers: json.slice(0, 25)
+      allPlayers: json.slice(0, 24)
     }))
     // .then(json => {
     //   json.map(playerObj => {
@@ -2155,6 +2155,7 @@ export default class Home extends React.Component {
   }
 
   getDuelist = (player, location) => {
+    console.log(player)
     let desiredDeck
     fetch(`http://localhost:3000/api/v1/decks/${this.state.currentDeck.id}`)
     .then(res => res.json())
@@ -2376,6 +2377,7 @@ export default class Home extends React.Component {
             createPlayer={this.createPlayer}
             getPlayer={this.getPlayer}
             logOut={this.log}
+            printState={this.printState}
           />
         </div>
       )
