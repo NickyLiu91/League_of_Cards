@@ -2250,8 +2250,8 @@ directAttack = (monster) => {
                   />
                 </div>
               </div>
-              <img src="image/AzirPortrait.png"/>
-              <div>Azir</div>
+              <img src={this.props.player1.image}/>
+              <div>{this.props.player1.name}</div>
             </div>
             <div id="action-box">
               <ActionBox
