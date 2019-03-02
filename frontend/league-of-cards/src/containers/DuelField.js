@@ -25,7 +25,7 @@ export default class DuelField extends React.Component {
     player1Deck: [...this.props.player1Deck],
     player1Graveyard: [],
     player2: this.props.player2,
-    player2Life: 1000,
+    player2Life: 8000,
     player2Monsters: [{}, {}, {}, {}, {}],
     player2Spells: [{}, {}, {}, {}, {}],
     player2Hand: [],

@@ -71,7 +71,7 @@ const ActionBox = (props) => {
       <div className="action-box-text" >
         {props.selectedCard.name} will attack directly!!
         <br/>
-        <button onClick={event => {props.directAttack(props.selectedCard)}}>OBLITERATE</button>
+        <button onClick={event => {props.directAttack(props.selectedCard)}}>Attack</button>
         <br/>
         <button onClick={props.cancel}>Cancel</button>
       </div>
@@ -83,7 +83,7 @@ const ActionBox = (props) => {
         <br/>
         {props.selectedCard.name} will attack {props.selectedTarget.name}!
         <br/>
-        <button onClick={event => {props.fight(props.selectedCard, props.selectedTarget)}}>OBLITERATE</button>
+        <button onClick={event => {props.fight(props.selectedCard, props.selectedTarget)}}>Attack</button>
         <br/>
         <button onClick={props.cancel}>Cancel</button>
       </div>
@@ -150,7 +150,7 @@ const ActionBox = (props) => {
   //       <button onClick={props.cancel}>Cancel</button>
   //     </div>
   //   )
-  // } 
+  // }
   else if (props.actionType === 'displayPlayer1Graveyard') {
     // if (props.player1Graveyard.length > 10) {
       return(
