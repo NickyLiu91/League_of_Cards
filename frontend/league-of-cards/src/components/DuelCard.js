@@ -1,25 +1,10 @@
 import React from "react";
 
 const DuelCard = (props) => {
-  if (props.location === "computerHand" && props.duelCard.cardtype === 'Champion') {
+  if (props.location === "computerHand" ) {
     return(
       <div className="duel-card" >
-        <div>Name: {props.duelCard.name}, {props.duelCard.title}</div>
-        <img className="duel-card-image" src={'image/' + props.duelCard.image}/>
-        <br/>
-        <div>Role: {props.duelCard.role}</div>
-        <div>Attack: {props.duelCard.attack}</div>
-        <div>Magic: {props.duelCard.magic}</div>
-        <div>Defense: {props.duelCard.defense}</div>
-      </div>
-    )
-  } else if (props.location === "computerHand") {
-    return(
-      <div className="duel-card" >
-        <div>Name: {props.duelCard.name}</div>
-        <img className="duel-card-image" src={'image/' + props.duelCard.image}/>
-        <br/>
-        <div>Effect: {props.duelCard.description}</div>
+
       </div>
     )
   } else if (Object.keys(props.duelCard).length === 0) {
