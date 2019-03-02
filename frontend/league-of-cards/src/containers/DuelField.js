@@ -5,6 +5,7 @@ import SpellField from "./SpellField.js"
 import MonsterField from "./MonsterField.js"
 import ActionBox from "../components/ActionBox.js"
 import Graveyard from "./Graveyard.js"
+import PostDuel from "../components/PostDuel.js"
 
 let totalDamage = 8000
 var audio = new Audio('files/SummonersCall.mp3')
@@ -2136,33 +2137,20 @@ directAttack = (monster) => {
 }
 
   render() {
-    if (this.state.display === 'Lose') {
+    if (this.state.display === 'Lose' || this.state.display === 'Win') {
       audio.pause()
-        return(
-          <div id="post-match" onClick={event => this.props.renderHome()}>
-          <img id="shadow-isles" src="image/shadow-isles.jpeg" />
-            <div id="post-match-message">
-              <h1>YOU HAVE RUN OUT OF STAMINA</h1>
-              <h1>YOU ARE NO LONGER ABLE TO FIGHT</h1>
-              <h1>YOU CAN ONLY WATCH ON AS YOUR ENEMY COMES TO DELIVER THE FINISHING BLOW</h1>
-            </div>
-          </div>
-        )
-    } else if (this.state.display === 'Win') {
-      audio.pause()
-        return(
-          <div id="post-match" onClick={event => this.props.renderPostDuel(this.props.location)}>
-            <img id="targon" src="image/targon.jpeg" />
-            <div id="post-match-message">
-              <h1>CONGRATULATIONS!</h1>
-              <br/>
-              <h1>YOU HAVE DEFEATED YOUR OPPONENT!</h1>
-              <br/>
-              <br/>
-              <h1>You have recieved 30 gold and {this.state.rewardCard.name}!</h1>
-            </div>
-          </div>
-        )
+      audio.currentTime = 0
+      return(
+        <div>
+          <PostDuel
+          display={this.state.display}
+          renderHome={this.props.renderHome}
+          renderPostDuel={this.props.renderPostDuel}
+          location={this.props.location}
+          rewardCard={this.state.rewardCard}
+          />
+        </div>
+      )
     } else if (this.props.player2.name === "Xerath"){
       audio.play()
       return(
@@ -2250,8 +2238,8 @@ directAttack = (monster) => {
                   />
                 </div>
               </div>
-              <img src={this.props.player1.image}/>
-              <div>{this.props.player1.name}</div>
+              <img src="image/AzirPortrait.png"/>
+              <div>Azir</div>
             </div>
             <div id="action-box">
               <ActionBox
@@ -2375,7 +2363,7 @@ directAttack = (monster) => {
                 </div>
               </div>
               <img src={this.props.player1.image}/>
-              <div>{this.props.player1.name}</div>
+              <div>Sivir</div>
             </div>
             <div id="action-box">
               <ActionBox
