@@ -2155,7 +2155,6 @@ directAttack = (monster) => {
       audio.play()
       return(
         <div>
-          <img id="noxus-arena" src="image/noxus-arena.jpeg" />
           <div id="duel-field-container">
             <div id="duel-field">
 
@@ -2279,7 +2278,6 @@ directAttack = (monster) => {
       // audio.play()
       return(
         <div>
-          <img id="noxus-arena" src="image/noxus-arena.jpeg" />
           <div id="duel-field-container">
             <div id="duel-field">
 

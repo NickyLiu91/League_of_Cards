@@ -488,11 +488,21 @@ padding-right: 250px;
 }
 
 #speaker-picture {
-  height: 200px;
-  width: 200px;
+  height: 164px;
+  width: 164px;
   position: absolute;
   right: 50px;
   top: 50px;
+  border: solid gold 2px;
+}
+
+#speaker-picture-2{
+  /*background: cover;*/
+  position: relative;
+  /*height: 100%;
+  width: 100%;*/
+  left: -1px;
+  top: -1px;
 }
 
 .description {
