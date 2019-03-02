@@ -2141,6 +2141,9 @@ export default class Home extends React.Component {
 
   renderStuff = (event) => {
     console.log(event.target.className)
+    var sounds = document.getElementsByTagName('audio')
+    console.log(sounds)
+    for (let i = 0; i < sounds.length; i++) {sounds[i].pause()}
     if (event.target.className === 'collection') {
       fetch(`http://localhost:3000/api/v1/decks/${this.state.currentDeck.id}`)
       .then(res => res.json())
@@ -2531,7 +2534,6 @@ export default class Home extends React.Component {
     } else if (this.state.render === 'duel') {
       return(
         <div>
-          <Header renderStuff={this.renderStuff}/>
           <DuelField
             player1={this.state.currentPlayer}
             player1Deck={this.state.currentDeckCards}

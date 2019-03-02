@@ -49,6 +49,8 @@ const CampaignScreen = (props) => {
         )
       }
     } else if (props.dialogue === 281) {
+      var audio = new Audio('files/Thunder.mp4')
+      audio.play()
       return(
         <div id="campaign-screen" >
           <img id="campaign-background" src={"image/XerathSummon.gif"}/>
@@ -180,7 +182,23 @@ const CampaignScreen = (props) => {
             </div>
           </div>
         )
-      } else if (props.storyText[props.dialogue].azir !== undefined) {
+      } else if (props.storyText[props.dialogue].azir === "Xerath, the time of your judgment has come!") {
+        var audio = new Audio('files/Thunder.mp4')
+        audio.play("https://vignette.wikia.nocookie.net/leagueoflegends/latest?cb=20140827015020")
+        return(
+          <div id="campaign-screen" >
+            <img id="campaign-background" src={props.computers[props.defeated].background}/>
+              <div id="text-box" onClick={event => {props.increaseDialogue()}}>
+                <div id="speaker-picture">
+                  <img src="image/AzirPortrait.png"/>
+                </div>
+              <div id="story-text">
+                <p>{props.storyText[props.dialogue].azir}</p>
+              </div>
+            </div>
+          </div>
+        )
+      }else if (props.storyText[props.dialogue].azir !== undefined) {
         return(
           <div id="campaign-screen" >
             <img id="campaign-background" src={props.computers[props.defeated].background}/>
