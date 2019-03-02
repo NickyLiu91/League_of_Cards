@@ -8,6 +8,7 @@ import DecksList from "./DecksList.js"
 import DuelistsList from "./DuelistsList.js"
 import Header from "../components/Header.js"
 import HomeScreen from "../components/HomeScreen.js"
+import Rules from "../components/Rules.js"
 import Campaign from "./Campaign.js"
 
 let deckNumber = 0
@@ -2431,7 +2432,15 @@ export default class Home extends React.Component {
             getPlayer={this.getPlayer}
             logOut={this.log}
             printState={this.printState}
+            rules={this.renderStuff}
           />
+        </div>
+      )
+    } else if (this.state.render === 'rules') {
+      return(
+        <div>
+          <Header renderStuff={this.renderStuff} />
+          <Rules/>
         </div>
       )
     } else if (this.state.render === 'campaign' ){

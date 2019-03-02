@@ -31,10 +31,13 @@ const HomeScreen = (props) => {
             <h1>LEAGUE OF CARDS</h1>
               <h1>Welcome, {props.currentPlayer.name}!</h1>
               <br/>
+              <button className="rules" onClick={event => {props.renderStuff(event)}}>Rules</button>
+              <br/>
+              <br/>
               <button className="campaign" onClick={event => {props.renderStuff(event)}}>Campaign</button>
               <br/>
               <br/>
-              <button className="duelistsList" onClick={event => {props.renderStuff(event)}}>DUEL!!!</button>
+              <button className="duelistsList" onClick={event => {props.renderStuff(event)}}>Free Duel</button>
               <br/>
               <br/>
               <button className="collection" onClick={event => {props.renderStuff(event)}}>Collection</button>

@@ -2571,7 +2571,7 @@ xerath_deckcard40 = Deckcard.create(deck_id: xerath_deck.id, card_id: xerath_car
 def generate_cards
   cardinfo = HTTParty.get('http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json')
   cardinfo["data"].each do |champ, cardObj|
-    # cardDescription = HTTParty.get("http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion/#{cardObj["id"]}.json")["data"]["#{cardObj["id"]}"]["lore"]
+    cardDescription = HTTParty.get("http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion/#{cardObj["id"]}.json")["data"]["#{cardObj["id"]}"]["lore"]
     # puts(cardDescription)
     if (cardObj["info"]["difficulty"].to_i) === 10
       Allcard.create(
@@ -2584,7 +2584,7 @@ def generate_cards
         attack: cardObj["info"]["attack"] * 300,
         magic: cardObj["info"]["magic"] * 300,
         defense: cardObj["info"]["defense"] * 300,
-        # description: cardDescription,
+        description: cardDescription,
         description: "tempSpace",
         image: cardObj["image"]["full"],
         quantity: 0
@@ -2600,7 +2600,7 @@ def generate_cards
         attack: cardObj["info"]["attack"] * 250,
         magic: cardObj["info"]["magic"] * 250,
         defense: cardObj["info"]["defense"] * 250,
-        # description: cardDescription,
+        description: cardDescription,
         description: "tempSpace",
         image: cardObj["image"]["full"],
         quantity: 0
@@ -2616,7 +2616,7 @@ def generate_cards
         attack: cardObj["info"]["attack"] * 200,
         magic: cardObj["info"]["magic"] * 200,
         defense: cardObj["info"]["defense"] * 200,
-        # description: cardDescription,
+        description: cardDescription,
         description: "tempSpace",
         image: cardObj["image"]["full"],
         quantity: 0
@@ -2632,7 +2632,7 @@ def generate_cards
         attack: cardObj["info"]["attack"] * 150,
         magic: cardObj["info"]["magic"] * 150,
         defense: cardObj["info"]["defense"] * 150,
-        # description: cardDescription,
+        description: cardDescription,
         description: "tempSpace",
         image: cardObj["image"]["full"],
         quantity: 0
@@ -2648,7 +2648,7 @@ def generate_cards
         attack: cardObj["info"]["attack"] * 100,
         magic: cardObj["info"]["magic"] * 100,
         defense: cardObj["info"]["defense"] * 100,
-        # description: cardDescription,
+        description: cardDescription,
         description: "tempSpace",
         image: cardObj["image"]["full"],
         quantity: 0
