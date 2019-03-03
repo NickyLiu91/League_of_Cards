@@ -1832,9 +1832,11 @@ export default class Home extends React.Component {
         })
       })
     })
-    .then(res => this.setState({
+    .then(res => {
+      // console.log("WHAT")
+      this.setState({
       render: 'home'
-    }, () => {deckNumber = 0}))
+    }, () => {deckNumber = 0})})
   }
 
   getAllComputers = () => {
@@ -2259,8 +2261,8 @@ export default class Home extends React.Component {
                 computer: false,
                 level: "1-1",
                 gold: 100,
-                dialogue: 0,
-                defeated_id: 0,
+                dialogue: 280,
+                defeated_id: 23,
                 completed: false
               }
         )}).then(res => {
@@ -2410,6 +2412,7 @@ export default class Home extends React.Component {
       defeated: 0
     }, () => this.renderHome())
     })
+    .then(console.log(this.state.currentPlayer))
   }
 
   resetUser = () => {

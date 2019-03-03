@@ -112,18 +112,6 @@ const ActionBox = (props) => {
       </div>
     )
   } else if (props.actionType === 'item') {
-    // return(
-    //   <div className="action-box-text" >
-    //     {props.selectedCard.description}
-    //     <br/>
-    //     Equip a target with {props.selectedCard.name}?
-    //     <br/>
-    //     <br/>
-    //     <button onClick={props.getItemTargetMode}>YES</button>
-    //     <br/>
-    //     <button onClick={props.cancel}>Cancel</button>
-    //   </div>
-    // )
     return(
       <div className="action-box-text" >
       {console.log(props)}
