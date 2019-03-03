@@ -2360,14 +2360,17 @@ export default class Home extends React.Component {
     })
   }
 
-  reward = () => {
+  reward = (location) => {
     let player = this.state.currentPlayer
-    player.defeated_id = this.state.player2.id
-    this.setState({
-      gold: this.state.gold + 30,
-      defeated: this.state.player2.id,
-      currentPlayer: player
-    })
+    console.log(location)
+    if (location === 'campaign') {
+      player.defeated_id = this.state.player2.id
+      this.setState({
+        gold: this.state.gold + 30,
+        defeated: this.state.player2.id,
+        currentPlayer: player
+      })
+    }
   }
 
   // campaignReward = () => {
@@ -2553,7 +2556,7 @@ export default class Home extends React.Component {
             updateCurrentPlayerCollection={this.updateCurrentPlayerCollection}
             reward={this.reward}
             gold={this.state.gold}
-            duelLocation={this.state.duelLocation}
+            location={this.state.duelLocation}
             collection={this.state.collection}
           />
         </div>

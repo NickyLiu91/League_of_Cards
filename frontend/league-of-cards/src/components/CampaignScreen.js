@@ -2,6 +2,9 @@ import React from "react";
 var audio = new Audio('files/ExcitedDuelists.mp3')
 
 export default class CampaignScreen extends React.Component {
+  componentDidMount() {
+    console.log(this.props)
+  }
 
   manageMusic = function(){
     if (audio.currentTime === 0) {
@@ -47,6 +50,21 @@ export default class CampaignScreen extends React.Component {
           </div>
         )
       }
+    } else if (this.props.storyText[this.props.dialogue - 1] === "THIS TIME I WONT LEAVE EVEN A PARTICLE FOR YOU TO RESURRECT FROM!!!" || this.props.storyText[this.props.dialogue - 2] === "THIS TIME I WONT LEAVE EVEN A PARTICLE FOR YOU TO RESURRECT FROM!!!") {
+      console.log(this.props.dialogue)
+      return(
+        <div id="campaign-screen" >
+          <img id="campaign-background" src={this.props.computers[this.props.defeated - 1].preduel}/>
+            <div id="text-box" onClick={event => {this.props.increaseDialogue()}}>
+              <div id="speaker-picture">
+                <img id="speaker-picture-2" src={this.props.computers[this.props.player1.defeated_id - 1].image} />
+              </div>
+            <div id="story-text">
+              <p>{this.props.storyText[this.props.dialogue]}</p>
+            </div>
+          </div>
+        </div>
+      )
     } else if (this.props.dialogue >= 279 && this.props.dialogue <= 280){
       if (this.props.storyText[this.props.dialogue].sivir !== undefined){
         return(
@@ -64,10 +82,9 @@ export default class CampaignScreen extends React.Component {
         )
       }
     } else if (this.props.dialogue === 281) {
-      let audio = new Audio('files/Thunder.mp4')
-      audio.play()
       return(
         <div id="campaign-screen" >
+        <audio src='files/LongThunderSoundEffects.mp4' autoPlay/>
           <img id="campaign-background" src={"image/XerathSummon.gif"}/>
             <div id="text-box" onClick={event => {this.props.increaseDialogue()}}>
               <div id="speaker-picture">
@@ -79,7 +96,21 @@ export default class CampaignScreen extends React.Component {
           </div>
         </div>
       )
-    } else if (this.props.dialogue > 281 && this.props.dialogue < 340) {
+    } else if (this.props.dialogue === 282) {
+      return(
+        <div id="campaign-screen" >
+          <img id="campaign-background" src={"image/XerathSummon.gif"}/>
+            <div id="text-box" onClick={event => {this.props.increaseDialogue()}}>
+              <div id="speaker-picture">
+                <div> </div>
+              </div>
+            <div id="story-text">
+              <p>{this.props.storyText[this.props.dialogue].ascendedXerath}</p>
+            </div>
+          </div>
+        </div>
+      )
+    } else if (this.props.dialogue > 281 && this.props.dialogue < 339) {
       if (this.props.storyText[this.props.dialogue] === "THIS TIME I WONT LEAVE EVEN A PARTICLE FOR YOU TO RESURRECT FROM!!!") {
         return(
           <div id="campaign-screen" >
@@ -243,7 +274,7 @@ export default class CampaignScreen extends React.Component {
           )
         }
       }
-    } else if (this.props.storyText[this.props.dialogue] === "DUEL") {
+    } else if (this.props.storyText[this.props.dialogue - 1] === "DUEL" ) {
       console.log(this.props)
       return(
         <div id="campaign-screen" >
@@ -266,7 +297,7 @@ export default class CampaignScreen extends React.Component {
           </div>
         </div>
       )
-    } else if (this.props.dialogue > 341) {
+    } else if (this.props.dialogue > 340) {
       console.log(this.props.dialogue)
       if (this.props.storyText[this.props.dialogue].sivir !== undefined){
         return(
@@ -311,8 +342,8 @@ export default class CampaignScreen extends React.Component {
           </div>
         )
       }
-    } else if ((this.props.storyText[this.props.dialogue - 1] === "DUEL" || this.props.storyText[this.props.dialogue -1] === "THIS TIME I WONT LEAVE EVEN A PARTICLE FOR YOU TO RESURRECT FROM!!!") ||
-    (this.props.storyText[this.props.dialogue - 2] === "DUEL" || this.props.storyText[this.props.dialogue - 2 === "THIS TIME I WONT LEAVE EVEN A PARTICLE FOR YOU TO RESURRECT FROM!!!"])) {
+    } else if (this.props.storyText[this.props.dialogue - 1] === "DUEL" || this.props.storyText[this.props.dialogue - 2] === "DUEL" ||
+  this.props.storyText[this.props.dialogue - 1] === "THIS TIME I WONT LEAVE EVEN A PARTICLE FOR YOU TO RESURRECT FROM!!!" || this.props.storyText[this.props.dialogue - 2] === "THIS TIME I WONT LEAVE EVEN A PARTICLE FOR YOU TO RESURRECT FROM!!!") {
       return(
         <div id="campaign-screen" >
           <img id="campaign-background" src={this.props.computers[this.props.defeated - 1].background}/>

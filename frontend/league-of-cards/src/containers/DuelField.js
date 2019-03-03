@@ -173,6 +173,7 @@ export default class DuelField extends React.Component {
   }
 
   componentDidMount() {
+
     this.setUpDecks()
     this.start5CardsPlayer()
     this.start5CardsComputer()
@@ -791,7 +792,7 @@ export default class DuelField extends React.Component {
       }
     })
     .then(res => {
-      this.props.reward()
+      this.props.reward(this.props.location)
     })
   }
 
