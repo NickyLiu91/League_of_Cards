@@ -763,7 +763,7 @@ export default class DuelField extends React.Component {
           }
       )})
       .then( res => {
-        if (this.props.dialogue !== 0) {
+        if (this.props.location === "campaign") {
           fetch(`http://localhost:3000/api/v1/players/${this.state.player1.id}`, {
           method: 'PATCH',
           headers: {
@@ -776,7 +776,7 @@ export default class DuelField extends React.Component {
                 dialogue: this.props.dialogue + 1
               }
         )})
-        }
+      } else {
         fetch(`http://localhost:3000/api/v1/players/${this.state.player1.id}`, {
         method: 'PATCH',
         headers: {
@@ -786,12 +786,13 @@ export default class DuelField extends React.Component {
         body: JSON.stringify(
             {
               gold: this.props.gold + 30,
-              dialogue: this.props.dialogue + 1
             }
-      )})}
+      )})
+      }
+      }
     )
     .then(res => {
-      if (this.state.player1.defeated_id <= this.state.player2.id) {
+      if (this.props.location === "campaign" && this.state.player1.defeated_id <= this.state.player2.id) {
         console.log("hi")
         fetch(`http://localhost:3000/api/v1/players/${this.state.player1.id}`, {
           method: 'PATCH',
