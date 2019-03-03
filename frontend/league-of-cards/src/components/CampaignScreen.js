@@ -50,21 +50,6 @@ export default class CampaignScreen extends React.Component {
           </div>
         )
       }
-    } else if (this.props.storyText[this.props.dialogue - 1] === "THIS TIME I WONT LEAVE EVEN A PARTICLE FOR YOU TO RESURRECT FROM!!!" || this.props.storyText[this.props.dialogue - 2] === "THIS TIME I WONT LEAVE EVEN A PARTICLE FOR YOU TO RESURRECT FROM!!!") {
-      console.log(this.props.dialogue)
-      return(
-        <div id="campaign-screen" >
-          <img id="campaign-background" src={this.props.computers[this.props.defeated - 1].preduel}/>
-            <div id="text-box" onClick={event => {this.props.increaseDialogue()}}>
-              <div id="speaker-picture">
-                <img id="speaker-picture-2" src={this.props.computers[this.props.player1.defeated_id - 1].image} />
-              </div>
-            <div id="story-text">
-              <p>{this.props.storyText[this.props.dialogue]}</p>
-            </div>
-          </div>
-        </div>
-      )
     } else if (this.props.dialogue >= 279 && this.props.dialogue <= 280){
       if (this.props.storyText[this.props.dialogue].sivir !== undefined){
         return(
@@ -274,7 +259,7 @@ export default class CampaignScreen extends React.Component {
           )
         }
       }
-    } else if (this.props.storyText[this.props.dialogue - 1] === "DUEL" ) {
+    } else if (this.props.storyText[this.props.dialogue] === "DUEL" ) {
       console.log(this.props)
       return(
         <div id="campaign-screen" >
