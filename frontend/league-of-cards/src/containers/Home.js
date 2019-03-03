@@ -2128,7 +2128,6 @@ export default class Home extends React.Component {
 
           this.setState({
             currentPlayer: player,
-            dialogue: this.state.dialogue + 1
           }, () => {
             this.setState({
               render: 'campaign'
@@ -2207,7 +2206,7 @@ export default class Home extends React.Component {
     })
   }
 
-  getDuelist = (player, location) => {
+  getDuelist = (player, location, dialogue=0) => {
     console.log(player)
     let desiredDeck
     fetch(`http://localhost:3000/api/v1/decks/${this.state.currentDeck.id}`)
@@ -2222,7 +2221,8 @@ export default class Home extends React.Component {
           this.setState({
             player2: player,
             player2Deck: json.cards,
-            duelLocation: location
+            duelLocation: location,
+            dialogue: dialogue
           }, () => { this.renderDuel()}
         )
         })
@@ -2384,6 +2384,34 @@ export default class Home extends React.Component {
   //   })
   // }
 
+  resetCampaign = (event) => {
+    fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(
+          {
+            defeated_id: 0,
+            dialogue: 0,
+            completed: true,
+          }
+      )
+    })
+    .then(res => {
+      let currentPlayer = this.state.currentPlayer
+      currentPlayer.dialogue = 0
+      currentPlayer.defeated_id = 0
+      currentPlayer.completed = true
+      this.setState({
+      currentPlayer: currentPlayer,
+      dialogue: 0,
+      defeated: 0
+    }, () => this.renderHome())
+    })
+  }
+
   resetUser = () => {
    // // console.log(localStorage.getItem('jwt'))
    if (localStorage.getItem('jwt')) {
@@ -2462,7 +2490,8 @@ export default class Home extends React.Component {
             gold={this.state.gold}
             getDuelist={this.getDuelist}
             increaseDialogue={this.increaseDialogue}
-          />
+            resetCampaign={this.resetCampaign}
+            />
         </div>
       )
     } else if (this.state.render === 'decksList') {
@@ -2558,6 +2587,7 @@ export default class Home extends React.Component {
             gold={this.state.gold}
             location={this.state.duelLocation}
             collection={this.state.collection}
+            dialogue={this.state.dialogue}
           />
         </div>
       )

@@ -45,6 +45,7 @@ export default class DuelistsList extends React.Component {
 
 
   render() {
+    console.log(this.props)
     return(
       <div>
       <img id="ionia" src="image/ionia.jpeg"/>

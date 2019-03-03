@@ -762,7 +762,22 @@ export default class DuelField extends React.Component {
             target: newCard.target
           }
       )})
-      .then(fetch(`http://localhost:3000/api/v1/players/${this.state.player1.id}`, {
+      .then( res => {
+        if (this.props.dialogue !== 0) {
+          fetch(`http://localhost:3000/api/v1/players/${this.state.player1.id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify(
+              {
+                gold: this.props.gold + 30,
+                dialogue: this.props.dialogue + 1
+              }
+        )})
+        }
+        fetch(`http://localhost:3000/api/v1/players/${this.state.player1.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -770,9 +785,10 @@ export default class DuelField extends React.Component {
         },
         body: JSON.stringify(
             {
-              gold: this.props.gold + 30
+              gold: this.props.gold + 30,
+              dialogue: this.props.dialogue + 1
             }
-      )})
+      )})}
     )
     .then(res => {
       if (this.state.player1.defeated_id <= this.state.player2.id) {

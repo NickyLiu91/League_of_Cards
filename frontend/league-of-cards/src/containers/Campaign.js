@@ -160,7 +160,7 @@ export default class Campaign extends React.Component {
       "Who dares step foot into my domain?",
       "You are the ones trying to put together a dangerous artifact.",
       "All who dare endanger my people will be annihilated by my spear.",
-      "I am Pantheon, the Artisan of War!",
+      "I AM PANTHEON!",
       "THE END HAS COME!",
       "DUEL",
       "Is that all you've got?",
@@ -255,7 +255,7 @@ export default class Campaign extends React.Component {
       {ezreal: "So I'm going to head back; you should do the same."},
       {sivir: "Ezreal handed me the artifact and turned back on his own."},
       {sivir: "It's true that a mercenary never abandons her job."},
-      {sivir: "But more than that, I found myself drawn back to Shurima."},
+      {sivir: "But more than that, I found myself being strongly drawn to Shurima."},
       {sivir: "Was it because of the artifact?"},
       {sivir: "Or was it something else?"},
       "I WILL SHRED ALL WHO CROSS MY PATH!",
@@ -342,7 +342,7 @@ export default class Campaign extends React.Component {
       {azir: "Now that I have returned, that power serves its rightful owner."},
       {azir: "Arise my descendent!"},
       {sivir: "...!"},
-      {azir: "Now, I will end your ambitions!"},
+      {azir: "Now, I will put an end your ambitions!"},
       "AZIIIIIIIIR!!!!",
       "I WILL SLAUGHTER YOU AND ALL OF YOUR DESCENDENTS!",
       {azir: "You are but my shadow."},
@@ -360,7 +360,7 @@ export default class Campaign extends React.Component {
       {azir: "As a reward for your efforts, once I ressurect Shurima, I will ensure you are celebrated as heroes."},
       {azir: "And Ezreal, Demacia can count Shurima as an ally from this day forward."},
       {azir: "Let us bring forth a new era!"},
-      {azir: "The era of prosperity that Xerath stole from me shall begin!"},
+      {azir: "The era of prosperity that Xerath stole from this world shall begin!"},
       "END"
     ]
   }
@@ -391,32 +391,35 @@ export default class Campaign extends React.Component {
     })
   }
 
-  resetCampaign = (event) => {
-    console.log(this.state)
-    console.log("????")
-    fetch(`http://localhost:3000/api/v1/players/${this.state.player1.id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify(
-          {
-            defeated_id: 0,
-            dialogue: 0,
-            completed: true,
-          }
-      )
-    })
-    .then(res => this.props.renderHome())
-  }
+  // resetCampaign = (event) => {
+  //   console.log(this.state)
+  //   console.log("????")
+  //   fetch(`http://localhost:3000/api/v1/players/${this.state.player1.id}`, {
+  //     method: 'PATCH',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Accept': 'application/json',
+  //     },
+  //     body: JSON.stringify(
+  //         {
+  //           defeated_id: 0,
+  //           dialogue: 0,
+  //           completed: true,
+  //         }
+  //     )
+  //   })
+  //   .then(res => {
+  //
+  //   })
+  //   .then(res => this.props.renderHome())
+  // }
 
   render() {
     return(
       <div id="campaign-screen" >
         <CampaignScreen player1={this.state.player1} computers={this.state.computers}
         dialogue={this.state.dialogue} defeated={this.state.defeated} storyText={this.state.storyText} increaseDialogue={this.increaseDialogue}
-        getDuelist={this.props.getDuelist} resetCampaign={this.resetCampaign}/>
+        getDuelist={this.props.getDuelist} resetCampaign={this.resetCampaign} resetCampaign={this.props.resetCampaign}/>
       </div>
     )
   }
