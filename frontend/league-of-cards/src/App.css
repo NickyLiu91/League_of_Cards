@@ -236,6 +236,38 @@ img {
   background-color: black;
 }
 
+.duel-card-Bronze {
+  color: gold;
+  border-color: gold;
+  background-color: brown;
+  /*box-shadow: 3px 3px 5px gold;*/
+}
+
+.duel-card-Silver {
+  color: darkcyan;
+  border-color: darkcyan;
+  background-color: silver;
+  /*box-shadow: 3px 3px 5px darkcyan;*/
+}
+
+.duel-card-Gold {
+  color: red;
+  border-color: red;
+  background-color: gold;
+  /*box-shadow: 3px 3px 5px red;*/
+}
+
+.duel-card-Platinum {
+  background-color: darkcyan;
+}
+
+.duel-card-Diamond {
+  background-image: linear-gradient(darkturquoise, mediumpurple, white);
+  color: blue;
+  border-color: blue;
+  /*box-shadow: 3px 3px 5px blue;*/
+}
+
 .duel-card-image {
   height: 50px;
   width: 50px;

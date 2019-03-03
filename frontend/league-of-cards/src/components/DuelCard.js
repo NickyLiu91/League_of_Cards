@@ -14,7 +14,7 @@ const DuelCard = (props) => {
     )
   } else if (props.duelCard.position != ''){
     return(
-      <div className={`duel-card ${props.duelCard.position}`} onClick={event => props.clickAction(props.duelCard)}>
+      <div className={`duel-card ${props.duelCard.position} duel-card-${props.duelCard.rarity}`} onClick={event => props.clickAction(props.duelCard)}>
         <div>Name: {props.duelCard.name}, {props.duelCard.title}</div>
         <img className="duel-card-image" src={'image/' + props.duelCard.image}/>
         <br/>
@@ -26,7 +26,7 @@ const DuelCard = (props) => {
     )
   } else if (props.duelCard.cardtype === 'Champion'){
     return(
-      <div className="duel-card" onClick={event => props.clickAction(props.duelCard)}>
+      <div className={`duel-card duel-card-${props.duelCard.rarity}`} onClick={event => props.clickAction(props.duelCard)}>
         <div>Name: {props.duelCard.name}, {props.duelCard.title}</div>
         <img className="duel-card-image" src={'image/' + props.duelCard.image}/>
         <br/>
@@ -38,16 +38,18 @@ const DuelCard = (props) => {
     )
   } else if (props.location === 'SpellField'){
     return(
-      <div className="duel-card" >
+      <div className={`duel-card duel-card-${props.duelCard.rarity}`} >
         <div>Name: {props.duelCard.name}</div>
         <img className="duel-card-image" src={'image/' + props.duelCard.image}/>
         <br/>
         <div>Effect: {props.duelCard.description}</div>
+
       </div>
     )
   } else {
+    console.log(props.duelCard.rarity)
     return(
-      <div className="duel-card" onClick={event => props.clickAction(props.duelCard)}>
+      <div className={`duel-card duel-card-${props.duelCard.rarity}`} onClick={event => props.clickAction(props.duelCard)}>
         <div>Name: {props.duelCard.name}</div>
         <img className="duel-card-image" src={'image/' + props.duelCard.image}/>
         <br/>
