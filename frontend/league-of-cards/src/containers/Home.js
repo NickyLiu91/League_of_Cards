@@ -2259,8 +2259,8 @@ export default class Home extends React.Component {
                 computer: false,
                 level: "1-1",
                 gold: 100,
-                dialogue: 317,
-                defeated_id: 23,
+                dialogue: 0,
+                defeated_id: 0,
                 completed: false
               }
         )}).then(res => {
