@@ -7,7 +7,7 @@ export default class CampaignScreen extends React.Component {
   }
 
   manageMusic = function(){
-    if (audio.currentTime === 0) {
+    if (this.props.storyText[this.props.dialogue].azir === "Is that so?") {
       audio.play()
     } else {
       audio.pause()
