@@ -16,10 +16,11 @@ export default class CampaignScreen extends React.Component {
 
   startDuel = (computer) => {
     this.manageMusic()
-    this.props.getDuelist(computer, "campaign")
+    this.props.getDuelist(computer, "campaign", this.props.dialogue)
   }
 
   render() {
+    console.log(this.props)
     if (this.props.dialogue < 6 || (this.props.dialogue >= 223  && this.props.dialogue <= 248)) {
       if (this.props.storyText[this.props.dialogue].ezreal !== undefined) {
         return(
@@ -84,6 +85,7 @@ export default class CampaignScreen extends React.Component {
     } else if (this.props.dialogue === 282) {
       return(
         <div id="campaign-screen" >
+        <audio src='files/LongThunderSoundEffects.mp4' autoPlay/>
           <img id="campaign-background" src={"image/XerathSummon.gif"}/>
             <div id="text-box" onClick={event => {this.props.increaseDialogue()}}>
               <div id="speaker-picture">
@@ -264,7 +266,7 @@ export default class CampaignScreen extends React.Component {
       return(
         <div id="campaign-screen" >
           <img id="campaign-preduel" src={this.props.computers[this.props.defeated].preduel}/>
-            <div id="text-box" onClick={event => {this.props.getDuelist(this.props.computers[this.props.defeated], "campaign")}}>
+            <div id="text-box" onClick={event => {this.props.getDuelist(this.props.computers[this.props.defeated], "campaign", this.props.dialogue)}}>
               <div id="speaker-picture">
                 <img id="speaker-picture-2" src={this.props.computers[this.props.defeated].image} />
               </div>
@@ -327,11 +329,24 @@ export default class CampaignScreen extends React.Component {
           </div>
         )
       }
-    } else if (this.props.storyText[this.props.dialogue - 1] === "DUEL" || this.props.storyText[this.props.dialogue - 2] === "DUEL" ||
-  this.props.storyText[this.props.dialogue - 1] === "THIS TIME I WONT LEAVE EVEN A PARTICLE FOR YOU TO RESURRECT FROM!!!" || this.props.storyText[this.props.dialogue - 2] === "THIS TIME I WONT LEAVE EVEN A PARTICLE FOR YOU TO RESURRECT FROM!!!") {
+    } else if (this.props.storyText[this.props.dialogue - 1] === "DUEL" || this.props.storyText[this.props.dialogue - 2] === "DUEL") {
       return(
         <div id="campaign-screen" >
           <img id="campaign-background" src={this.props.computers[this.props.defeated - 1].background}/>
+            <div id="text-box" onClick={event => {this.props.increaseDialogue()}}>
+              <div id="speaker-picture">
+                <img id="speaker-picture-2" src={this.props.computers[this.props.player1.defeated_id - 1].image} />
+              </div>
+            <div id="story-text">
+              <p>{this.props.storyText[this.props.dialogue]}</p>
+            </div>
+          </div>
+        </div>
+      )
+    } else if (this.props.storyText[this.props.dialogue - 1] === "THIS TIME I WONT LEAVE EVEN A PARTICLE FOR YOU TO RESURRECT FROM!!!" || this.props.storyText[this.props.dialogue - 2] === "THIS TIME I WONT LEAVE EVEN A PARTICLE FOR YOU TO RESURRECT FROM!!!") {
+      return(
+        <div id="campaign-screen" >
+          <img id="campaign-background" src={this.props.computers[this.props.defeated - 1].preduel}/>
             <div id="text-box" onClick={event => {this.props.increaseDialogue()}}>
               <div id="speaker-picture">
                 <img id="speaker-picture-2" src={this.props.computers[this.props.player1.defeated_id - 1].image} />
