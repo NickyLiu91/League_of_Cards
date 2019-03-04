@@ -25,8 +25,14 @@ React.js
 
 ```
 Run Postgres
+cd into backend
+cd into leagueofcards
 rails db: create
 rails db: migrate
+rails db:seed
 rails s
+
+cd into frontend
+cd into leagueofcards
 npm start then enter 'y' after to start on new port
 ```
