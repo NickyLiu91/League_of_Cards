@@ -27,8 +27,8 @@ React.js
 Run Postgres
 cd into backend
 cd into leagueofcards
-rails db: create
-rails db: migrate
+rails db:create
+rails db:migrate
 rails db:seed
 rails s
 
