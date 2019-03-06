@@ -1,7 +1,5 @@
 # README: League of Cards
 
-https://league-of-cards-app.herokuapp.com/
-
 Online card game that is a fusion of
 Yugioh and League of Legends. A user can create an account, use gold to buy packs from the store and add cards to your collection, use cards from your collection to build a deck, and use that deck to fight enemies in both story and free duel. Enemies will unlock in free duel upon being defeated in story mode.
 
