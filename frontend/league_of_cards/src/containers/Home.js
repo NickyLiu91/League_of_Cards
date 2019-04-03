@@ -79,6 +79,8 @@ export default class Home extends React.Component {
   }
 
   generateCard = (playerObj, nameVar, titleVar, roleVar, rarityVar, attackVar, magicVar, defenseVar, descriptionVar, imageVar, deck) => {
+    let object = {}
+    console.log(deck)
 
     fetch("http://localhost:3000/api/v1/cards", {
       method: 'POST',
@@ -105,10 +107,11 @@ export default class Home extends React.Component {
     .then(response => {
       fetch(`http://localhost:3000/api/v1/players/${playerObj.id}`)
       .then(res => res.json())
+      .then(json => {deck = json.decks[0]})
       .then(response => {
         fetch(`http://localhost:3000/api/v1/players/${playerObj.id}`)
         .then(response => response.json())
-        // .then(json => {Object.assign(object, {newCard: json.cards[deckNumber++], allCards: json.cards})})
+        .then(json => {Object.assign(object, {newCard: json.cards[deckNumber++], allCards: json.cards})})
         .then(response => {
           fetch(`http://localhost:3000/api/v1/deckcards`, {
             method: 'POST',
@@ -119,7 +122,7 @@ export default class Home extends React.Component {
             body: JSON.stringify(
                 {
                   deck_id: deck.id,
-                  card_id: deckNumber++
+                  card_id: object.newCard.id
                 }
           )})
         })
@@ -129,7 +132,7 @@ export default class Home extends React.Component {
 
   generateDeck = (playerObj) => {
     // let allCards =
-    // let object = {}
+    let object = {}
     let deck
     // let card
     // let allCards
@@ -162,7 +165,7 @@ export default class Home extends React.Component {
       .then(response => {
         fetch(`http://localhost:3000/api/v1/players/${playerObj.id}`)
         .then(response => response.json())
-        // .then(json => {Object.assign(object, {newCard: json.cards[deckNumber++], allCards: json.cards})})
+        .then(json => {Object.assign(object, {newCard: json.cards[deckNumber++], allCards: json.cards})})
         .then(response => {
           fetch(`http://localhost:3000/api/v1/deckcards`, {
             method: 'POST',
@@ -173,7 +176,7 @@ export default class Home extends React.Component {
             body: JSON.stringify(
                 {
                   deck_id: deck.id,
-                  card_id: deckNumber++
+                  card_id: object.newCard.id
                 }
           )})
         })
