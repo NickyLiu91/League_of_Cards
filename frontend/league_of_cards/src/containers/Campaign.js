@@ -394,7 +394,7 @@ export default class Campaign extends React.Component {
   // resetCampaign = (event) => {
   //   console.log(this.state)
   //   console.log("????")
-  //   fetch(`http://localhost:3000/api/v1/players/${this.state.player1.id}`, {
+  //   fetch(`https://league-of-cards-app-api.herokuapp.com/api/v1/players/${this.state.player1.id}`, {
   //     method: 'PATCH',
   //     headers: {
   //       'Content-Type': 'application/json',

@@ -79,6 +79,7 @@ export default class Home extends React.Component {
   }
 
   generateCard = (playerObj, nameVar, titleVar, roleVar, rarityVar, attackVar, magicVar, defenseVar, descriptionVar, imageVar, deck) => {
+    let object = {}
     console.log(deck)
 
     fetch("http://localhost:3000/api/v1/cards", {
@@ -106,10 +107,11 @@ export default class Home extends React.Component {
     .then(response => {
       fetch(`http://localhost:3000/api/v1/players/${playerObj.id}`)
       .then(res => res.json())
+      .then(json => {deck = json.decks[0]})
       .then(response => {
         fetch(`http://localhost:3000/api/v1/players/${playerObj.id}`)
         .then(response => response.json())
-        // .then(json => {Object.assign(object, {newCard: json.cards[deckNumber++], allCards: json.cards})})
+        .then(json => {Object.assign(object, {newCard: json.cards[deckNumber++], allCards: json.cards})})
         .then(response => {
           fetch(`http://localhost:3000/api/v1/deckcards`, {
             method: 'POST',
@@ -120,7 +122,7 @@ export default class Home extends React.Component {
             body: JSON.stringify(
                 {
                   deck_id: deck.id,
-                  card_id: deckNumber++
+                  card_id: object.newCard.id
                 }
           )})
         })
@@ -130,7 +132,7 @@ export default class Home extends React.Component {
 
   generateDeck = (playerObj) => {
     // let allCards =
-    // let object = {}
+    let object = {}
     let deck
     // let card
     // let allCards
@@ -180,52 +182,8 @@ export default class Home extends React.Component {
         })
       })
     })
-    .then(res => {
-      fetch("http://localhost:3000/api/v1/cards", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(
-          {
-            player_id: playerObj.id,
-            name: "Taric",
-            title: "the Shield of Valoran",
-            role: "Support",
-            rarity: "Bronze",
-            attack: 400,
-            magic: 500,
-            defense: 800,
-            description: "''The best weapons are beautiful.''<br><br>Taric is the Aspect of the Protector, wielding incredible power as Runeterra's guardian of life, love, and beauty. Shamed by a dereliction of duty and exiled from his homeland Demacia, Taric ascended Mount ...",
-            image: "Taric.png",
-            cardtype: "Champion"
-          }
-        )
-      })
-      .then(response => {
-        fetch(`http://localhost:3000/api/v1/players/${playerObj.id}`)
-        .then(response => response.json())
-        // .then(json => {Object.assign(object, {newCard: json.cards[deckNumber++], allCards: json.cards})})
-        .then(response => {
-          fetch(`http://localhost:3000/api/v1/deckcards`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-            },
-            body: JSON.stringify(
-                {
-                  deck_id: deck.id,
-                  card_id: object.newCard.id
-                }
-          )})
-        })
-      })
-    })
     .then(res => this.generateCard(playerObj, "Taric", "the Shield of Valoran", "Support", "Bronze", 400, 500, 800, "''The best weapons are beautiful.''<br><br>Taric is the Aspect of the Protector, wielding incredible power as Runeterra's guardian of life, love, and beauty. Shamed by a dereliction of duty and exiled from his homeland Demacia, Taric ascended Mount ...", "Taric.png", "Champion", deck))
     .then(res => this.generateCard(playerObj, "Taric", "the Shield of Valoran", "Support", "Bronze", 400, 500, 800, "''The best weapons are beautiful.''<br><br>Taric is the Aspect of the Protector, wielding incredible power as Runeterra's guardian of life, love, and beauty. Shamed by a dereliction of duty and exiled from his homeland Demacia, Taric ascended Mount ...", "Taric.png", "Champion", deck))
-
     .then(res => {
       // console.log("WHAT")
       this.setState({

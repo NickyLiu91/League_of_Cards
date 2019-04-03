@@ -739,7 +739,7 @@ export default class DuelField extends React.Component {
       display: 'Win'
     })
 
-    fetch("http://localhost:3000/api/v1/cards", {
+    fetch("https://league-of-cards-app-api.herokuapp.com/api/v1/cards", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -764,7 +764,7 @@ export default class DuelField extends React.Component {
       )})
       .then( res => {
         if (this.props.location === "campaign") {
-          fetch(`http://localhost:3000/api/v1/players/${this.state.player1.id}`, {
+          fetch(`https://league-of-cards-app-api.herokuapp.com/api/v1/players/${this.state.player1.id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -777,7 +777,7 @@ export default class DuelField extends React.Component {
               }
         )})
       } else {
-        fetch(`http://localhost:3000/api/v1/players/${this.state.player1.id}`, {
+        fetch(`https://league-of-cards-app-api.herokuapp.com/api/v1/players/${this.state.player1.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -794,7 +794,7 @@ export default class DuelField extends React.Component {
     .then(res => {
       if (this.props.location === "campaign" && this.state.player1.defeated_id <= this.state.player2.id) {
         console.log("hi")
-        fetch(`http://localhost:3000/api/v1/players/${this.state.player1.id}`, {
+        fetch(`https://league-of-cards-app-api.herokuapp.com/api/v1/players/${this.state.player1.id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -2212,7 +2212,6 @@ directAttack = (monster) => {
               <div id="middle-bar">
               <div className="life-points">{this.state.player1Life}</div>
               <button onClick={this.computerTurn}>End Turn</button>
-              <button onClick={this.win}>Win</button>
               <div className="life-points">{this.state.player2Life}</div>
               </div>
               <br/>
@@ -2335,7 +2334,6 @@ directAttack = (monster) => {
               <div id="middle-bar">
               <div className="life-points">{this.state.player1Life}</div>
               <button onClick={this.computerTurn}>End Turn</button>
-              <button onClick={this.win}>Win</button>
               <div className="life-points">{this.state.player2Life}</div>
               </div>
               <br/>
