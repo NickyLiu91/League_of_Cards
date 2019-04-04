@@ -130,7 +130,7 @@ export default class Home extends React.Component {
     })
   }
 
-  generateNonChampion = (playerObj, nameVar rarityVar, descriptionVar, effectVar, imageVar, typeVar, deck) => {
+  generateNonChampion = (playerObj, nameVar, rarityVar, descriptionVar, effectVar, imageVar, typeVar, deck) => {
     let object = {}
     console.log(deck)
 
