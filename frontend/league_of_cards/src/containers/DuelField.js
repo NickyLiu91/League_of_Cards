@@ -50,13 +50,14 @@ export default class DuelField extends React.Component {
 }
 
   swapCurrentPlayer = () => {
-    if (this.state.currentPlayer === "player1") {
-      this.setState({
-        currentPlayer: "player2",
-        currentOpponent: "player1",
-        summoned: false
-      }, () => {this.drawCard()})
-    } else if (this.state.currentPlayer === "player2") {
+    // if (this.state.currentPlayer === "player1") {
+    //   this.setState({
+    //     currentPlayer: "player2",
+    //     currentOpponent: "player1",
+    //     summoned: false
+    //   }, () => {this.drawCard()})
+    // }
+    if (this.state.currentPlayer === "player2") {
       this.setState({
         currentPlayer: "player1",
         currentOpponent: "player2",
@@ -599,63 +600,107 @@ export default class DuelField extends React.Component {
     }, () => {console.log(this.state)})
   }
 
-  // computerPlayMonster = (monster) => {
-  //   let newMonsterField = this.state.player2Monsters
-  //   let newHand = this.state.player2Hand.filter(
-  //     cardObj => cardObj.id !== monster.id
-  //   )
-  //
-  //   let emptySlot = this.state.player2Monsters.findIndex(
-  //     obj => Object.keys(obj).length === 0
-  //   )
-  //
-  //   newMonsterField.splice(emptySlot, 1, monster)
-  //
-  //   this.setState({
-  //     player2Monsters: newMonsterField,
-  //     player2Hand: newHand
-  //   })
+  computerPlayMonster = (monster) => {
+    let newMonsterField = this.state.player2Monsters
+    let newHand = this.state.player2Hand.filter(
+      cardObj => cardObj.id !== monster.id
+    )
+
+    let emptySlot = this.state.player2Monsters.findIndex(
+      obj => Object.keys(obj).length === 0
+    )
+
+    newMonsterField.splice(emptySlot, 1, monster)
+
+    this.setState({
+      player2Monsters: newMonsterField,
+      player2Hand: newHand
+    })
+  }
+
+  // drawCard = () => {
+  //   if (this.state.currentPlayer === 'player1') {
+  //     if (this.state.player1Hand.length < 7) {
+  //       const newDeck = this.state.player1Deck
+  //       let newCard
+  //       if (this.state.player1Deck.length > 0) {
+  //         newCard = newDeck.pop()
+  //         this.setState({
+  //           player1Deck: newDeck,
+  //           player1Hand: [...this.state.player1Hand, newCard]
+  //         })
+  //       } else {
+  //         this.lose()
+  //       }
+  //     } else {
+  //       const newDeck = this.state.player1Deck
+  //       let newCard
+  //       if (this.state.player1Deck.length > 0) {
+  //         newCard = newDeck.pop()
+  //         this.setState({
+  //           player1Deck: newDeck,
+  //           player1Graveyard: [...this.state.player1Graveyard, newCard]
+  //         })
+  //       } else {
+  //         this.lose()
+  //       }
+  //     }
+  //   } else {
+  //     const newDeck = this.state.player2Deck
+  //     let newCard
+  //     if (this.state.player2Deck.length > 0) {
+  //       newCard = newDeck.pop()
+  //       this.setState({
+  //         player2Deck: newDeck,
+  //         player2Hand: [...this.state.player2Hand, newCard]
+  //       })
+  //     } else {
+  //       this.win()
+  //     }
+  //   }
   // }
 
   drawCard = () => {
     if (this.state.currentPlayer === 'player1') {
-      if (this.state.player1Hand.length < 7) {
-        console.log(this.state.player1Hand.length)
-        const newDeck = this.state.player1Deck
+      let newDeck = this.state.player1Deck
+      if (this.state.player1Deck.length === 0) {
+        this.lose()
+      } else if (this.state.player1Hand.length < 7) {
         let newCard
-        if (this.state.player1Deck.length > 0) {
-          newCard = newDeck.pop()
-          this.setState({
-            player1Deck: newDeck,
-            player1Hand: [...this.state.player1Hand, newCard]
-          })
-        } else {
-          this.lose()
-        }
+        newCard = newDeck.pop()
+        this.setState({
+          player1Deck: newDeck,
+          player1Hand: [...this.state.player1Hand, newCard]
+        })
       } else {
-        const newDeck = this.state.player1Deck
+        let newDeck = this.state.player1Deck
         let newCard
-        if (this.state.player1Deck.length > 0) {
-          newCard = newDeck.pop()
-          this.setState({
-            player1Deck: newDeck,
-            player1Graveyard: [...this.state.player1Graveyard, newCard]
-          })
-        } else {
-          this.lose()
-        }
+        newCard = newDeck.pop()
+        this.setState({
+          player1Deck: newDeck,
+          player1Graveyard: [...this.state.player1Graveyard, newCard]
+        })
       }
-    } else {
-      const newDeck = this.state.player2Deck
-      let newCard
-      if (this.state.player2Deck.length > 0) {
+    }
+    else {
+      let newDeck = this.state.player2Deck
+      if (this.state.player2Deck.length === 0) {
+        this.win()
+      } else if (this.state.player2Hand.length < 7) {
+        let newCard
         newCard = newDeck.pop()
         this.setState({
           player2Deck: newDeck,
           player2Hand: [...this.state.player2Hand, newCard]
         })
       } else {
-        this.win()
+        let newDeck = this.state.player2Deck
+        let newCard
+        newCard = newDeck.pop()
+        this.setState({
+          player2Deck: newDeck,
+          player2Graveyard: [...this.state.player2Graveyard, newCard]
+        })
       }
     }
   }
@@ -1048,16 +1093,25 @@ export default class DuelField extends React.Component {
       currentOpponent: "player1"
     },
      () => {
-      if (this.state.player2Deck.length > 0) {
-        const newDeck = this.state.player2Deck
-        const newCard = newDeck.pop()
-        this.setState({
-          player2Deck: newDeck,
-          player2Hand: [...this.state.player2Hand, newCard]
-        }, () => this.performTurn()
-      )} else {
-        this.win()
-      }
+       let newDeck = this.state.player2Deck
+       if (this.state.player2Deck.length === 0) {
+         this.win()
+       } else if (this.state.player2Hand.length < 7) {
+         let newCard
+         newCard = newDeck.pop()
+         this.setState({
+           player2Deck: newDeck,
+           player2Hand: [...this.state.player2Hand, newCard]
+         }, () => {this.performTurn()})
+       } else {
+         let newDeck = this.state.player2Deck
+         let newCard
+         newCard = newDeck.pop()
+         this.setState({
+           player2Deck: newDeck,
+           player2Graveyard: [...this.state.player2Graveyard, newCard]
+         }, () => {this.performTurn()})
+       }
     })
   }
 
