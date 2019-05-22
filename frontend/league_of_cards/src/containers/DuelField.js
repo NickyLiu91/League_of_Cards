@@ -784,7 +784,7 @@ export default class DuelField extends React.Component {
       display: 'Win'
     })
 
-    fetch("https://league-of-cards-app-api.herokuapp.com/api/v1/cards", {
+    fetch("http://localhost:3000/api/v1/cards", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -809,7 +809,7 @@ export default class DuelField extends React.Component {
       )})
       .then( res => {
         if (this.props.location === "campaign") {
-          fetch(`https://league-of-cards-app-api.herokuapp.com/api/v1/players/${this.state.player1.id}`, {
+          fetch(`http://localhost:3000/api/v1/players/${this.state.player1.id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -822,7 +822,7 @@ export default class DuelField extends React.Component {
               }
         )})
       } else {
-        fetch(`https://league-of-cards-app-api.herokuapp.com/api/v1/players/${this.state.player1.id}`, {
+        fetch(`http://localhost:3000/api/v1/players/${this.state.player1.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -839,7 +839,7 @@ export default class DuelField extends React.Component {
     .then(res => {
       if (this.props.location === "campaign" && this.state.player1.defeated_id <= this.state.player2.id) {
         console.log("hi")
-        fetch(`https://league-of-cards-app-api.herokuapp.com/api/v1/players/${this.state.player1.id}`, {
+        fetch(`http://localhost:3000/api/v1/players/${this.state.player1.id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
