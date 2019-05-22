@@ -1014,6 +1014,7 @@ export default class Home extends React.Component {
     } else if (this.state.render === 'duel') {
       return(
         <div>
+          <Header renderStuff={this.renderStuff}/>
           <DuelField
             player1={this.state.currentPlayer}
             player1Deck={this.state.currentDeckCards}
