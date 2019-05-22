@@ -583,53 +583,52 @@ export default class Home extends React.Component {
     var sounds = document.getElementsByTagName('audio')
     console.log(sounds)
     for (let i = 0; i < sounds.length; i++) {sounds[i].pause()}
-    if (event.target.className === 'collection') {
-      fetch(`http://localhost:3000/api/v1/decks/${this.state.currentDeck.id}`)
-      .then(res => res.json())
-      .then(json => {this.setState({
-          currentDeckCards: json.cards,
-        })
-      })
-      .then(res => {
-        fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/cards`)
-        .then(response => response.json())
-        .then(json => this.setState({
-          currentPlayerCollection: json
-        }, () => {
-          let newCollection = this.state.collection.map(card => {
-              card.quantity = this.state.currentPlayerCollection.filter(cardObj => cardObj.name === card.name).length;
-              return card
-            }
-          )
-
-          this.setState({
-            noDupesCurrentPlayerCollection: newCollection
-          }, () => {
-            this.setState({
-              render: 'collection'
-            })
+    if (this.state.render !== event.target.className) {
+      if (event.target.className === 'collection') {
+        fetch(`http://localhost:3000/api/v1/decks/${this.state.currentDeck.id}`)
+        .then(res => res.json())
+        .then(json => {this.setState({
+            currentDeckCards: json.cards,
           })
-        }))
-      })
-    } else if (event.target.className === 'store'){
-      fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`)
-      .then(res => res.json())
-      .then(json => {this.setState({
-          gold: json.gold,
-          render: 'store'
         })
-      })
-    } else if ((event.target.className === 'duelistsList' || event.target.className === 'campaign')
-      && this.state.currentDeckCards.length !== 40) {
-      console.log(this.state.currentDeckCards.length)
-      console.log(this.state.currentDeckCards.length === 40)
-        alert('Your deck must contain 40 cards!')
+        .then(res => {
+          fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/cards`)
+          .then(response => response.json())
+          .then(json => this.setState({
+            currentPlayerCollection: json
+          }, () => {
+            let newCollection = this.state.collection.map(card => {
+                card.quantity = this.state.currentPlayerCollection.filter(cardObj => cardObj.name === card.name).length;
+                return card
+              }
+            )
+
+            this.setState({
+              noDupesCurrentPlayerCollection: newCollection
+            }, () => {
+              this.setState({
+                render: 'collection'
+              })
+            })
+          }))
+        })
+      } else if (event.target.className === 'store'){
+        fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`)
+        .then(res => res.json())
+        .then(json => {this.setState({
+            gold: json.gold,
+            render: 'store'
+          })
+        })
+      } else if ((event.target.className === 'duelistsList' || event.target.className === 'campaign')
+        && this.state.currentDeckCards.length !== 40) {
+          alert('Your deck must contain 40 cards!')
       } else {
         this.setState({
           render: event.target.className
         })
       }
-    // }
+    }
   }
 
   getCardInfo = (card) =>{
