@@ -24,6 +24,7 @@ class Api::V1::CardsController < ApplicationController
 
   def create
     @card = Card.create(card_params)
+    render json: @card
   end
 
   def edit
@@ -33,6 +34,7 @@ class Api::V1::CardsController < ApplicationController
   def update
     @card = Card.find_by(id: params[:id])
     @card.update(card_params)
+    render json: @card
   end
 
   # def player_cards

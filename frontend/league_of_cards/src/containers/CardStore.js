@@ -16,7 +16,7 @@ export default class CardStore extends React.Component {
   }
 
   getFullPack = () => {
-    if (this.props.gold >= 100) {
+    if (this.props.gold ) {
       this.clearResults()
       for (var i = 0; i < 9; i++) {
         this.addCardToCollection()
@@ -51,7 +51,7 @@ export default class CardStore extends React.Component {
       newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
     }
 
-    console.log(newCard)
+    // console.log(newCard)
 
     cardResults = [...cardResults, newCard]
 
@@ -79,7 +79,9 @@ export default class CardStore extends React.Component {
             target: newCard.target
           }
       )})
-      .then(response => this.props.updateCurrentPlayerCollection())
+      // .then(response => this.props.updateCurrentPlayerCollection())
+      .then(response => {return response.json()})
+      .then(jsonResponse => {console.log(jsonResponse)})
       // .then((json) => {
       //   console.log(json)
       // })
