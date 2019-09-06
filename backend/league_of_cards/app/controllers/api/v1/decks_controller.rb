@@ -22,6 +22,7 @@ class Api::V1::DecksController < ApplicationController
 
   def create
     @deck = Deck.create(deck_params)
+    render json: @deck
   end
 
   def edit
@@ -31,6 +32,7 @@ class Api::V1::DecksController < ApplicationController
   def update
     @deck = Deck.find_by(id: params[:id])
     @deck.update(deck_params)
+    render json: @deck
   end
 
   # def player_decks

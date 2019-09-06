@@ -22,6 +22,7 @@ class Api::V1::PlayersController < ApplicationController
     # else
     #   render json: { error: 'failed to create user' }, status: :not_acceptable
     # end
+    render json: @player
   end
 
   def edit
