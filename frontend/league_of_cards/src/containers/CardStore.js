@@ -1,26 +1,28 @@
 import React from "react";
 import Card from "../components/Card.js"
 let packKey = 0
-let cardResults = []
+// let cardResults = []
 
 export default class CardStore extends React.Component {
   state = {
     results: []
   }
 
-  clearResults = () => {
-    cardResults = []
-    this.setState({
-      results: cardResults
-    })
-  }
+  // clearResults = () => {
+  //   cardResults = []
+  //   this.setState({
+  //     results: cardResults
+  //   })
+  // }
 
   getFullPack = () => {
     if (this.props.gold ) {
-      this.clearResults()
+      let cardResults = []
       for (var i = 0; i < 9; i++) {
-        this.addCardToCollection()
+        console.log(this.addCardToCollection())
+        cardResults = [...cardResults, this.addCardToCollection()]
       }
+      console.log(cardResults)
       this.setState({
         results: cardResults
       }, () => {this.props.buyPack()})
@@ -53,7 +55,7 @@ export default class CardStore extends React.Component {
 
     // console.log(newCard)
 
-    cardResults = [...cardResults, newCard]
+    // cardResults = [...cardResults, newCard]
 
     fetch("http://localhost:3000/api/v1/cards", {
       method: 'POST',
@@ -80,8 +82,9 @@ export default class CardStore extends React.Component {
           }
       )})
       // .then(response => this.props.updateCurrentPlayerCollection())
-      .then(response => {return response.json()})
-      .then(jsonResponse => {console.log(jsonResponse)})
+      .then(response => {response.json()})
+      .then(jsonResponse => {newCard = jsonResponse})
+      .then(jsonResponse => {return newCard})
       // .then((json) => {
       //   console.log(json)
       // })
