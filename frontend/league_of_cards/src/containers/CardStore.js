@@ -83,6 +83,7 @@ export default class CardStore extends React.Component {
       )})
       // .then(response => this.props.updateCurrentPlayerCollection())
       .then(response => {response.json()})
+      .then(response => {console.log(response)})
       .then(jsonResponse => {this.props.updateCurrentPlayerCollection(jsonResponse)})
       // .then(jsonResponse => {return newCard})
       // .then((json) => {

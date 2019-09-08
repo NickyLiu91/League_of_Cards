@@ -701,31 +701,52 @@ export default class Home extends React.Component {
                 defeated_id: 0,
                 completed: false
               }
-        )}).then(res => {
-            // allPlayers: [...this.state.allPlayers, {id: this.state.allPlayers.length + 1, name: this.state.name, decks: [], cards: [], collection: [], image: 'image/TwistedFatePortrait.png', computer: false, password_digest: this.state.password, defeated: 0}]
-            fetch(`http://localhost:3000/api/v1/players`)
-            .then(res => res.json())
-            .then(json => {
-              let player = json.find(obj => obj.name === this.state.name && obj.password_digest === this.state.password)
-              this.setState({
-                currentPlayer: player
-              }, () => {
-                fetch(`http://localhost:3000/api/v1/decks`, {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                  },
-                  body: JSON.stringify(
-                      {
-                        name: "Deck 1",
-                        player_id: this.state.currentPlayer.id
-                      }
-                )})
-                .then(res => {this.generateDeck(this.state.currentPlayer)})
-              })
-            })
+        )})
+        .then(res => res.json())
+        .then(json => {
+          this.setState({
+            currentPlayer: json
+          }, () => {
+            fetch(`http://localhost:3000/api/v1/decks`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+              },
+              body: JSON.stringify(
+                  {
+                    name: "Deck 1",
+                    player_id: this.state.currentPlayer.id
+                  }
+            )})
+            .then(res => {this.generateDeck(this.state.currentPlayer)})
+          })
         })
+
+        // .then(res => {
+        //     fetch(`http://localhost:3000/api/v1/players`)
+        //     .then(res => res.json())
+        //     .then(json => {
+        //       let player = json.find(obj => obj.name === this.state.name && obj.password_digest === this.state.password)
+        //       this.setState({
+        //         currentPlayer: player
+        //       }, () => {
+        //         fetch(`http://localhost:3000/api/v1/decks`, {
+        //           method: 'POST',
+        //           headers: {
+        //             'Content-Type': 'application/json',
+        //             'Accept': 'application/json',
+        //           },
+        //           body: JSON.stringify(
+        //               {
+        //                 name: "Deck 1",
+        //                 player_id: this.state.currentPlayer.id
+        //               }
+        //         )})
+        //         .then(res => {this.generateDeck(this.state.currentPlayer)})
+        //       })
+        //     })
+        // })
       }
     })
 
