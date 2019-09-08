@@ -940,7 +940,7 @@ export default class Home extends React.Component {
             renderCollection={this.renderCollection}
             packCard={this.state.packCard}
             updateCurrentPlayerCollection={this.updateCurrentPlayerCollection}
-            currentDeckCards={this.state.currentDeckCards}
+            noDupesCurrentPlayerCollection={this.state.noDupesCurrentPlayerCollection}
             gold={this.state.gold}
             buyPack={this.buyPack}
           />

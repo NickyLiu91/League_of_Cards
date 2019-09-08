@@ -93,7 +93,7 @@ export default class CardStore extends React.Component {
 
   generateCards = () => {
     return this.state.results.map(
-      cardObj => <Card key={packKey++} location={"store"} card={cardObj} currentDeckCards={this.props.currentDeckCards}/>
+      cardObj => <Card key={packKey++} location={"store"} card={cardObj} noDupesCurrentPlayerCollection={this.props.noDupesCurrentPlayerCollection}/>
     )
   }
 
