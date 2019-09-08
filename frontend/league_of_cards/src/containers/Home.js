@@ -676,6 +676,8 @@ export default class Home extends React.Component {
   }
 
   createPlayer = (event) => {
+    let player
+    let deck
     event.preventDefault()
     fetch(`http://localhost:3000/api/v1/players`)
     .then(res => res.json())
@@ -704,8 +706,9 @@ export default class Home extends React.Component {
         )})
         .then(res => res.json())
         .then(json => {
+          player = json
           this.setState({
-            currentPlayer: json
+            currentPlayer: player
           }, () => {
             fetch(`http://localhost:3000/api/v1/decks`, {
               method: 'POST',
@@ -719,77 +722,34 @@ export default class Home extends React.Component {
                     player_id: this.state.currentPlayer.id
                   }
             )})
-            .then(res => {this.generateDeck(this.state.currentPlayer)})
+            .then(res => res.json())
+            .then(json => {
+              deck = json
+              this.generateDeck(this.state.currentPlayer)
+            })
+            .then(res => {
+              console.log(this.state.currentPlayer.decks)
+              this.setState({
+                currentPlayer: player,
+                currentPlayerCollection: player.cards,
+                currentDeck: deck,
+                loggedIn: true,
+                gold: player.gold,
+                defeated: player.defeated_id,
+                dialogue: player.dialogue
+              }, () => {
+                fetch(`http://localhost:3000/api/v1/players/${player.id}/decks/${deck.id}`)
+                .then(res => res.json())
+                .then(res => this.setState({
+                  currentDeckCards: res.cards
+                }))
+                this.generateNoDupesCurrentPlayerCollection()
+              })
+            })
           })
         })
-
-        // .then(res => {
-        //     fetch(`http://localhost:3000/api/v1/players`)
-        //     .then(res => res.json())
-        //     .then(json => {
-        //       let player = json.find(obj => obj.name === this.state.name && obj.password_digest === this.state.password)
-        //       this.setState({
-        //         currentPlayer: player
-        //       }, () => {
-        //         fetch(`http://localhost:3000/api/v1/decks`, {
-        //           method: 'POST',
-        //           headers: {
-        //             'Content-Type': 'application/json',
-        //             'Accept': 'application/json',
-        //           },
-        //           body: JSON.stringify(
-        //               {
-        //                 name: "Deck 1",
-        //                 player_id: this.state.currentPlayer.id
-        //               }
-        //         )})
-        //         .then(res => {this.generateDeck(this.state.currentPlayer)})
-        //       })
-        //     })
-        // })
       }
     })
-
-    // if (this.state.allPlayers.find(playerObj => playerObj.name === this.state.name)) {
-    //     alert('That name is already used!')
-    //   } else {
-    //     event.preventDefault()
-    //     fetch(`http://localhost:3000/api/v1/players`, {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json',
-    //         'Accept': 'application/json',
-    //       },
-    //       body: JSON.stringify(
-    //           {
-    //             name: this.state.name,
-    //             password_digest: this.state.password,
-    //             image: 'image/SivirPortrait.png',
-    //             computer: false,
-    //             level: "1-1",
-    //             gold: 100,
-    //             dialogue: 0,
-    //             defeated_id: 0
-    //           }
-    //     )}).then(res => this.setState({
-    //         allPlayers: [...this.state.allPlayers, {id: this.state.allPlayers.length + 1, name: this.state.name, decks: [], cards: [], collection: [], image: 'image/TwistedFatePortrait.png', computer: false, password_digest: this.state.password, defeated: 0}]
-    //     }, () => {
-    //       fetch(`http://localhost:3000/api/v1/decks`, {
-    //         method: 'POST',
-    //         headers: {
-    //           'Content-Type': 'application/json',
-    //           'Accept': 'application/json',
-    //         },
-    //         body: JSON.stringify(
-    //             {
-    //               name: "Deck 1",
-    //               player_id: this.state.allPlayers[this.state.allPlayers.length - 1].id
-    //             }
-    //       )})
-    //       .then(res => {this.generateDeck(this.state.allPlayers[this.state.allPlayers.length - 1])})
-    //     }
-    //   ))
-    // }
   }
 
   updateCurrentPlayerCollection = (card) => {
