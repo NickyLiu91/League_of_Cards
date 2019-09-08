@@ -23,7 +23,7 @@ export default class CardStore extends React.Component {
       }
       this.setState({
         results: cardResults
-      }, () => {this.props.buyPack()})
+      }, () => {this.props.buyPack(cardResults)})
     // } else {
     //   alert("You do not have enough gold!")
     // }

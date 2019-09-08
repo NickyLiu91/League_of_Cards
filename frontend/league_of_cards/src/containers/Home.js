@@ -753,17 +753,26 @@ export default class Home extends React.Component {
   }
 
   updateCurrentPlayerCollection = (array) => {
-    fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/cards`)
-    .then(response => response.json())
-    .then(json => this.setState({
-      currentPlayerCollection: json
-    }, () => this.generateNoDupesCurrentPlayerCollection()))
-    // this.setState({
-    //   currentPlayerCollection: this.state.currentPlayerCollection.concat(array)
-    // }, () => {this.generateNoDupesCurrentPlayerCollection()})
+    // fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/cards`)
+    // .then(response => response.json())
+    // .then(json => this.setState({
+    //   currentPlayerCollection: json
+    // }, () => this.generateNoDupesCurrentPlayerCollection()))
+    let newCollection = this.state.noDupesCurrentPlayerCollection
+
+    array.forEach(card => {
+      let updateCard = newCollection.find(card2 =>
+        card.name == card2.name
+      )
+      updateCard.quantity ++
+    })
+
+    this.setState({
+      noDupesCurrentPlayerCollection: newCollection
+    })
   }
 
-  buyPack = (cardResults) => {
+  buyPack = (array) => {
     fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`, {
       method: 'PATCH',
       headers: {
@@ -778,6 +787,8 @@ export default class Home extends React.Component {
     .then(res => {
       this.setState({
         gold: this.state.gold - 100
+      }, () => {
+        this.updateCurrentPlayerCollection(array)
       })
     })
   }
