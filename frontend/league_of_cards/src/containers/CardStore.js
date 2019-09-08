@@ -1,34 +1,32 @@
 import React from "react";
 import Card from "../components/Card.js"
 let packKey = 0
-// let cardResults = []
+let cardResults = []
 
 export default class CardStore extends React.Component {
   state = {
     results: []
   }
 
-  // clearResults = () => {
-  //   cardResults = []
-  //   this.setState({
-  //     results: cardResults
-  //   })
-  // }
+  clearResults = () => {
+    cardResults = []
+    this.setState({
+      results: cardResults
+    })
+  }
 
   getFullPack = () => {
-    if (this.props.gold ) {
-      let cardResults = []
+    // if (this.props.gold >= 100) {
+      this.clearResults()
       for (var i = 0; i < 9; i++) {
-        console.log(this.addCardToCollection())
-        cardResults = [...cardResults, this.addCardToCollection()]
+        this.addCardToCollection()
       }
-      console.log(cardResults)
       this.setState({
         results: cardResults
       }, () => {this.props.buyPack()})
-    } else {
-      alert("You do not have enough gold!")
-    }
+    // } else {
+    //   alert("You do not have enough gold!")
+    // }
   }
 
   addCardToCollection = () => {
@@ -53,9 +51,9 @@ export default class CardStore extends React.Component {
       newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
     }
 
-    // console.log(newCard)
+    console.log(newCard)
 
-    // cardResults = [...cardResults, newCard]
+    cardResults = [...cardResults, newCard]
 
     fetch("http://localhost:3000/api/v1/cards", {
       method: 'POST',
@@ -82,10 +80,6 @@ export default class CardStore extends React.Component {
           }
       )})
       // .then(response => this.props.updateCurrentPlayerCollection())
-      .then(response => {response.json()})
-      .then(response => {console.log(response)})
-      .then(jsonResponse => {this.props.updateCurrentPlayerCollection(jsonResponse)})
-      // .then(jsonResponse => {return newCard})
       // .then((json) => {
       //   console.log(json)
       // })
@@ -93,7 +87,7 @@ export default class CardStore extends React.Component {
 
   generateCards = () => {
     return this.state.results.map(
-      cardObj => <Card key={packKey++} location={"store"} card={cardObj} noDupesCurrentPlayerCollection={this.props.noDupesCurrentPlayerCollection}/>
+      cardObj => <Card key={packKey++} location={"store"} card={cardObj} copies={this.props.noDupesCurrentPlayerCollection}/>
     )
   }
 

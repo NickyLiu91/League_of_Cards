@@ -752,18 +752,18 @@ export default class Home extends React.Component {
     })
   }
 
-  updateCurrentPlayerCollection = (card) => {
-    // fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/cards`)
-    // .then(response => response.json())
-    // .then(json => this.setState({
-    //   currentPlayerCollection: json
-    // }, () => this.generateNoDupesCurrentPlayerCollection()))
-    this.setState({
-      currentPlayerCollection: this.state.currentPlayerCollection.push(card)
-    }, () => {this.generateNoDupesCurrentPlayerCollection()})
+  updateCurrentPlayerCollection = (array) => {
+    fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/cards`)
+    .then(response => response.json())
+    .then(json => this.setState({
+      currentPlayerCollection: json
+    }, () => this.generateNoDupesCurrentPlayerCollection()))
+    // this.setState({
+    //   currentPlayerCollection: this.state.currentPlayerCollection.concat(array)
+    // }, () => {this.generateNoDupesCurrentPlayerCollection()})
   }
 
-  buyPack = () => {
+  buyPack = (cardResults) => {
     fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`, {
       method: 'PATCH',
       headers: {

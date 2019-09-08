@@ -24,7 +24,7 @@ const Card = (props) => {
 
             <button id='add-to-deck' onClick={event => props.addToDeck(props.card)}>Add</button>
 
-            <div id='copies'>Copies: {props.card.quantity - props.noDupesCurrentPlayerCollection.filter(cardObj => cardObj.name === props.card.name).length}</div>
+            <div id='copies'>Copies: {props.card.quantity - props.currentDeckCards.filter(cardObj => cardObj.name === props.card.name).length}</div>
           </div>
         )
       } else {
@@ -43,7 +43,7 @@ const Card = (props) => {
 
             <button id='add-to-deck' onClick={event => props.addToDeck(props.card)}>Add</button>
 
-            <div id='copies'>Copies: {props.card.quantity - props.noDupesCurrentPlayerCollection.filter(cardObj => cardObj.name === props.card.name).length}</div>
+            <div id='copies'>Copies: {props.card.quantity - props.currentDeckCards.filter(cardObj => cardObj.name === props.card.name).length}</div>
           </div>
         )
       }
@@ -69,7 +69,7 @@ const Card = (props) => {
 
             <button id='add-to-deck' onClick={event => props.addToDeck(props.card)}>Add</button>
 
-            <div id='copies'>Copies: {props.card.quantity - props.noDupesCurrentPlayerCollection.filter(cardObj => cardObj.name === props.card.name).length}</div>
+            <div id='copies'>Copies: {props.card.quantity - props.currentDeckCards.filter(cardObj => cardObj.name === props.card.name).length}</div>
           </div>
         )
       } else {
@@ -88,7 +88,7 @@ const Card = (props) => {
 
             <button id='add-to-deck' onClick={event => props.addToDeck(props.card)}>Add</button>
 
-            <div id='copies'>Copies: {props.card.quantity - props.noDupesCurrentPlayerCollection.filter(cardObj => cardObj.name === props.card.name).length}</div>
+            <div id='copies'>Copies: {props.card.quantity - props.currentDeckCards.filter(cardObj => cardObj.name === props.card.name).length}</div>
           </div>
         )
       }
@@ -113,7 +113,7 @@ const Card = (props) => {
 
           <div>Defense: {props.card.defense}</div>
 
-          <div id='copies'>Copies: {props.card.quantity - props.noDupesCurrentPlayerCollection.filter(cardObj => cardObj.name === props.card.name).length}</div>
+          <div id='copies'>Copies: {props.copies.find(cardObj => cardObj.name === props.card.name).quantity}</div>
         </div>
       )
     } else {
@@ -130,7 +130,7 @@ const Card = (props) => {
 
           <div>Effect: {props.card.description}</div>
 
-          <div id='copies'>Copies: {props.card.quantity - props.noDupesCurrentPlayerCollection.filter(cardObj => cardObj.name === props.card.name).length}</div>
+          <div id='copies'>Copies: {props.copies.find(cardObj => cardObj.name === props.card.name).quantity}</div>
         </div>
       )
     }
