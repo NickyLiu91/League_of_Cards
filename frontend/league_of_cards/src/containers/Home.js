@@ -1009,12 +1009,16 @@ class Home extends React.Component {
 const mapStateToProps = state => {
   return {
     account: state.accountChanger.account,
+    characters: state.charactersChanger.characters,
+    enemy: state.enemyChanger.enemy,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     changeAccount: (event) => dispatch({type: 'CHANGE_ACCOUNT', newAccount: event}),
+    changeCharacters: (event) => dispatch({type: 'CHANGE_CHARACTERS', newCharacters: event}),
+    changeEnemy: (event) => dispatch({type: 'CHANGE_ENEMY', newEnemy: event}),
   }
 }
 

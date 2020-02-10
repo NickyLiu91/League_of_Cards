@@ -10,11 +10,11 @@ function accountChanger(state = {account: {}}, action) {
   }
 }
 
-function allCharactersChanger(state = {allCharacters: [], action) {
+function charactersChanger(state = {characters: [], action) {
   switch (action.type) {
-    case 'CHANGE_ALLCHARACTERS':
+    case 'CHANGE_CHARACTERS':
       console.log(state);
-      return {allCharacters: action.newAllCharacters}
+      return {characters: action.newCharacters}
     default:
       return state;
   }
@@ -123,7 +123,7 @@ function enemyChanger(state = {enemy: {}, action) {
 // }
 
 export default combineReducers({
-  allCharactersChanger,
   accountChanger,
+  allCharactersChanger,
   enemyChanger
 });
