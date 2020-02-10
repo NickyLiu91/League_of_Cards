@@ -1,15 +1,5 @@
 import {combineReducers} from 'redux'
 
-function allCharactersChanger(state = {allCharacters: [], action) {
-  switch (action.type) {
-    case 'CHANGE_ALLCHARACTERS':
-      console.log(state);
-      return {allCharacters: action.allCharacters}
-    default:
-      return state;
-  }
-}
-
 function accountChanger(state = {account: {}}, action) {
   switch (action.type) {
     case 'CHANGE_ACCOUNT':
@@ -20,11 +10,22 @@ function accountChanger(state = {account: {}}, action) {
   }
 }
 
+function allCharactersChanger(state = {allCharacters: [], action) {
+  switch (action.type) {
+    case 'CHANGE_ALLCHARACTERS':
+      console.log(state);
+      return {allCharacters: action.newAllCharacters}
+    default:
+      return state;
+  }
+}
+
+
 function enemyChanger(state = {enemy: {}, action) {
   switch (action.type) {
     case 'CHANGE_ENEMY':
       console.log(state);
-      return {enemy: action.enemy}
+      return {enemy: action.newEnemy}
     default:
       return state;
   }
@@ -125,4 +126,4 @@ export default combineReducers({
   allCharactersChanger,
   accountChanger,
   enemyChanger
-})
+});

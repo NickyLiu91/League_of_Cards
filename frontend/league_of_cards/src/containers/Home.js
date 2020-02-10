@@ -14,7 +14,7 @@ import {connect} from 'react-redux';
 
 let deckNumber = 0
 
-export default class Home extends React.Component {
+class Home extends React.Component {
   state = {
     render: 'home',
     loggedIn: false,
@@ -48,32 +48,6 @@ export default class Home extends React.Component {
       password: event.target.value
     })
   }
-
-  // generateDeckCard = (player, number) => {
-  //
-  //   let randomCard = this.state.collection[Math.floor(Math.random() * this.state.collection.length)]
-  //
-  //   randomCard.enemydeckCardId = number
-  //
-  //   if (this.state.currentDeckCards.filter(
-  //     cardObj => cardObj.name === randomCard.name
-  //   ).length < 1) {
-  //     // player.decks[0].cards = [...player.decks[0].cards, randomCard]
-  //
-  //     fetch(`http://localhost:3000/api/v1/deckcards`, {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Accept': 'application/json',
-  //       },
-  //       body: JSON.stringify(
-  //           {
-  //             deck_id: player.id,
-  //             card_id: randomCard.key
-  //           }
-  //     )})
-  //   }
-  // }
 
   findNewElement = (array1, array2) => {
     return array1.filter()
@@ -1031,3 +1005,20 @@ export default class Home extends React.Component {
     }
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    account: state.accountChanger.account,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    changeAccount: (event) => dispatch({type: 'CHANGE_ACCOUNT', newAccount: event}),
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);
