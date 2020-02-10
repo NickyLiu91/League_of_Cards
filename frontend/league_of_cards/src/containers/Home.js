@@ -310,6 +310,8 @@ class Home extends React.Component {
           // console.log(window.localStorage.length)
           // console.log(res)
           player = res.find(obj => obj.name === this.state.name && obj.password_digest === this.state.password)
+          this.props.changeAccount(player)
+          console.log(this.props.account)
           // console.log(player)
         })
         .then(res => {
