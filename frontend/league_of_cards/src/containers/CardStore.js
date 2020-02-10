@@ -1,9 +1,10 @@
 import React from "react";
 import Card from "../components/Card.js"
+import {connect} from 'react-redux';
 let packKey = 0
 let cardResults = []
 
-export default class CardStore extends React.Component {
+class CardStore extends React.Component {
   state = {
     results: []
   }
@@ -113,3 +114,20 @@ export default class CardStore extends React.Component {
   }
 
 }
+
+const mapStateToProps = state => {
+  return {
+    account: state.accountChanger.account
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    changeAccount: (event) => dispatch({type: 'CHANGE_ACCOUNT', newAccount: event})
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CardStore);
