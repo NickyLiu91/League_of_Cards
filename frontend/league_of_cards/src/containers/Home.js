@@ -10,6 +10,7 @@ import Header from "../components/Header.js"
 import HomeScreen from "../components/HomeScreen.js"
 import Rules from "../components/Rules.js"
 import Campaign from "./Campaign.js"
+import {connect} from 'react-redux';
 
 let deckNumber = 0
 
@@ -759,6 +760,7 @@ export default class Home extends React.Component {
     //   currentPlayerCollection: json
     // }, () => this.generateNoDupesCurrentPlayerCollection()))
     let newCollection = this.state.noDupesCurrentPlayerCollection
+    console.log(array)
 
     array.forEach(card => {
       let updateCard = newCollection.find(card2 =>
