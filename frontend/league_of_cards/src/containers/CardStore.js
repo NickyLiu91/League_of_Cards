@@ -24,7 +24,7 @@ class CardStore extends React.Component {
       }
       this.setState({
         results: cardResults
-      }, () => {this.props.buyPack(cardResults)})
+      }, () => {this.buyPack(cardResults)})
     // } else {
     //   alert("You do not have enough gold!")
     // }
@@ -93,19 +93,15 @@ class CardStore extends React.Component {
   }
 
   updateCurrentPlayerCollection = (array) => {
-    let newCollection = this.props.noDupesCurrentPlayerCollection
-    console.log(array)
+    let newCards = this.props.noDupesCurrentPlayerCards
 
-    array.forEach(card => {
-      let updateCard = newCollection.find(card2 =>
+    let updatedCards = array.map(card => {
+      let updateCard = newCards.find(card2 =>
         card.name == card2.name
       )
       updateCard.quantity ++
     })
 
-    this.setState({
-      noDupesCurrentPlayerCollection: newCollection
-    })
   }
 
   buyPack = (array) => {
@@ -121,9 +117,8 @@ class CardStore extends React.Component {
           }
     )})
     .then(res => {
-      this.props.changeEventType(this.props.gold - 100)
+      this.props.changeGold(this.props.gold - 100)
       this.updateCurrentPlayerCollection(array)
-
     })
   }
 

@@ -321,7 +321,7 @@ class Home extends React.Component {
   }
 
   generateNoDupesCurrentPlayerCollection = () => {
-    let newCollection = this.state.collection.map(card => {
+    let newCollection = this.props.cards.map(card => {
         card.quantity = this.state.currentPlayerCollection.filter(cardObj => cardObj.name === card.name).length;
         return card
       }
