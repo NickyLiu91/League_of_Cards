@@ -286,7 +286,15 @@ class Home extends React.Component {
           player = res.find(obj => obj.name === this.state.name && obj.password_digest === this.state.password)
           this.props.changeAccount(player)
           this.props.changeName(player.name)
-          this.props.changeCards(player.cards)
+          this.props.changeCurrentPlayerCards(player.cards)
+          this.props.changeNoDupesCurrentPlayerCards(this.generateNoDupesCurrentPlayerCollection2)
+          this.props.changeDeck(player.deckList[0])
+          this.props.changeDeckList(player.deckList)
+          this.props.changeDeckCards(player.deckCards)
+          this.props.changeGold(player.gold)
+          this.props.changeDefeated(player.defeated)
+          this.props.changeDialogue(player.dialogue)
+          this.props.changeLocation(player.location)
         })
         .then(res => {
           this.setState({
@@ -316,11 +324,23 @@ class Home extends React.Component {
       }
     )
 
+    return newCollection
+
     this.setState({
       noDupesCurrentPlayerCollection: newCollection
     })
+  }
 
-    this.props.changeCards(newCollection)
+  generateNoDupesCurrentPlayerCollection2 = () => {
+    let newCollection = this.props.account.map(card => {
+        card.quantity = this.props.currentPlayerCollection.filter(cardObj => cardObj.name === card.name).length;
+        return card
+      }
+    )
+
+    this.setState({
+      noDupesCurrentPlayerCollection: newCollection
+    })
   }
 
   fetchCards = () => {
@@ -658,6 +678,7 @@ class Home extends React.Component {
     }
   }
 
+
   resetCampaign = (event) => {
     fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`, {
       method: 'PATCH',
@@ -876,6 +897,7 @@ const mapStateToProps = state => {
     name: state.nameChanger.name,
     cards: state.cardsChanger.cards,
     currentPlayerCards: state.currentPlayerCardsChanger.currentPlayerCards,
+    noDupesCurrentPlayerCards: state.noDupesCurrentPlayerCardsChanger.noDupesCurrentPlayerCards,
     deck: state.deckChanger.deck,
     deckCards: state.deckCardsChanger.deckCards,
     characters: state.charactersChanger.characters,
@@ -895,6 +917,7 @@ const mapDispatchToProps = dispatch => {
     changeName: (event) => dispatch({type: 'CHANGE_NAME', newName: event}),
     changeCards: (event) => dispatch({type: 'CHANGE_CARDS', newCards: event}),
     changeCurrentPlayerCards: (event) => dispatch({type: 'CHANGE_CURRENTPLAYERCARDS', newCurrentPlayerCards: event}),
+    changeNoDupesCurrentPlayerCards: (event) => dispatch({type: 'CHANGE_NODUPESCURRENTPLAYERCARDS', newNoDupesCurrentPlayerCards: event}),
     changeDeck: (event) => dispatch({type: 'CHANGE_DECK', newDeck: event}),
     changeDeckCards: (event) => dispatch({type: 'CHANGE_DECKCARDS', newDeckCards: event}),
     changeCharacters: (event) => dispatch({type: 'CHANGE_CHARACTERS', newCharacters: event}),

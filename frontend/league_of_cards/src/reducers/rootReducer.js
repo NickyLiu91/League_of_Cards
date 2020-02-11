@@ -40,15 +40,15 @@ function currentPlayerCardsChanger(state = {currentPlayerCards: []}, action) {
   }
 }
 
-// function noDupesCurrentPlayerCardsChanger(state = {noDupesCurrentPlayerCards: []}, action) {
-//   switch (action.type) {
-//     case 'CHANGE_NODUPESCURRENTPLAYERCARDS':
-//     console.log(state);
-//     return {noDupesCurrentPlayerCards: action.newNoDupesCurrentPlayerCards}
-//     default:
-//     return state;
-//   }
-// }
+function noDupesCurrentPlayerCardsChanger(state = {noDupesCurrentPlayerCards: []}, action) {
+  switch (action.type) {
+    case 'CHANGE_NODUPESCURRENTPLAYERCARDS':
+    console.log(state);
+    return {noDupesCurrentPlayerCards: action.newNoDupesCurrentPlayerCards}
+    default:
+    return state;
+  }
+}
 
 function deckChanger(state = {deck: {}}, action) {
   switch (action.type) {
@@ -156,7 +156,7 @@ export default combineReducers({
   nameChanger,
   cardsChanger,
   currentPlayerCardsChanger,
-  // noDupesCurrentPlayerCardsChanger,
+  noDupesCurrentPlayerCardsChanger,
   deckChanger,
   deckCardsChanger,
   charactersChanger,
