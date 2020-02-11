@@ -10,7 +10,7 @@ function accountChanger(state = {account: {}}, action) {
   }
 }
 
-function nameChanger(state = {name: '', action) {
+function nameChanger(state = {name: ''}, action) {
   switch (action.type) {
     case 'CHANGE_NAME':
       console.log(state);
@@ -111,7 +111,7 @@ function decksListChanger(state = {decksList: []}, action) {
   }
 }
 
-function goldChanger(state = {gold: 0, action) {
+function goldChanger(state = {gold: 0}, action) {
   switch (action.type) {
     case 'CHANGE_GOLD':
       console.log(state);
@@ -121,7 +121,7 @@ function goldChanger(state = {gold: 0, action) {
   }
 }
 
-function defeatedChanger(state = {defeated: {}}, action) {
+function defeatedChanger(state = {defeated: 0}, action) {
   switch (action.type) {
     case 'CHANGE_DEFEATED':
       console.log(state);
@@ -131,7 +131,7 @@ function defeatedChanger(state = {defeated: {}}, action) {
   }
 }
 
-function dialogueChanger(state = {dialogue: {}}, action) {
+function dialogueChanger(state = {dialogue: 0}, action) {
   switch (action.type) {
     case 'CHANGE_DIALOGUE':
       console.log(state);
@@ -141,7 +141,7 @@ function dialogueChanger(state = {dialogue: {}}, action) {
   }
 }
 
-function locationChanger(state = {location: {}}, action) {
+function locationChanger(state = {location: 0}, action) {
   switch (action.type) {
     case 'CHANGE_LOCATION':
       console.log(state);
