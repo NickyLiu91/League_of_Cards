@@ -349,22 +349,6 @@ class Home extends React.Component {
     console.log(this.state)
   }
 
-  getDeck = (deck) => {
-    let desiredDeck
-    console.log(deck)
-    fetch("http://localhost:3000/api/v1/decks")
-    .then(res => res.json())
-    .then(res => desiredDeck = res.find(
-      deckObj => deck.name === deckObj.name
-    ))
-    .then(res => this.setState(
-      {
-        currentDeck: desiredDeck,
-        currentDeckCards: deck.cards
-      }, () => this.renderHome())
-    )
-  }
-
   renderHome = () => {
     this.setState({
       render: 'home'
@@ -788,11 +772,11 @@ class Home extends React.Component {
         <div>
           <Header renderStuff={this.renderStuff}/>
           <DecksList
-            currentPlayer={this.state.currentPlayer}
+            // currentPlayer={this.state.currentPlayer}
             renderCollection={this.renderCollection}
             renderHome={this.renderHome}
-            getDeck={this.getDeck}
-            currentDeck={this.state.currentDeck}
+            // getDeck={this.getDeck}
+            // currentDeck={this.state.currentDeck}
           />
         </div>
       )

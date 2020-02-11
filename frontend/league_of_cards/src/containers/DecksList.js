@@ -27,7 +27,7 @@ class DecksList extends React.Component {
 
   generateDecks = () => {
     return this.props.decksList.map(
-      deckObj => <Deck key={deckKey++} deck={deckObj} getDeck={this.props.getDeck} deleteDeck={this.deleteDeck}/>
+      deckObj => <Deck key={deckKey++} deck={deckObj} getDeck={this.getDeck} deleteDeck={this.deleteDeck}/>
     )
   }
 
@@ -41,7 +41,7 @@ class DecksList extends React.Component {
       },
       body: JSON.stringify(
           {
-            player_id: this.props.currentPlayer.id,
+            player_id: this.props.account.id,
             name: this.state.deckName
           }
       )})
@@ -54,7 +54,7 @@ class DecksList extends React.Component {
   }
 
   deleteDeck = (deck) => {
-    if (this.props.currentDeck.id !== deck.id) {
+    if (this.props.deck.id !== deck.id) {
       fetch(`http://localhost:3000/api/v1/decks/${deck.id}`, {
         method: 'DELETE'}
       ).then(res => {
@@ -62,6 +62,19 @@ class DecksList extends React.Component {
         this.props.changeDecksList(newArray)
       })
     }
+  }
+
+  getDeck = (deck) => {
+    let desiredDeck
+    fetch("http://localhost:3000/api/v1/decks")
+    .then(res => res.json())
+    .then(res => desiredDeck = res.find(
+      deckObj => deck.name === deckObj.name
+    ))
+    .then(res => {
+      this.props.changeDeck(desiredDeck)
+      this.props.renderHome()
+    })
   }
 
   render() {
