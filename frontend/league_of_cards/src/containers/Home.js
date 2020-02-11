@@ -742,27 +742,6 @@ class Home extends React.Component {
     })
   }
 
-  buyPack = (array) => {
-    fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify(
-          {
-            gold: this.state.gold - 100
-          }
-    )})
-    .then(res => {
-      this.setState({
-        gold: this.state.gold - 100
-      }, () => {
-        this.updateCurrentPlayerCollection(array)
-      })
-    })
-  }
-
   reward = (location) => {
     let player = this.state.currentPlayer
     console.log(location)
@@ -916,14 +895,13 @@ class Home extends React.Component {
         <div>
           <Header renderStuff={this.renderStuff} />
           <CardStore
-            collection={this.state.collection}
-            currentPlayer={this.state.currentPlayer}
+            // collection={this.state.collection}
+            // currentPlayer={this.state.currentPlayer}
             renderCollection={this.renderCollection}
-            packCard={this.state.packCard}
             // updateCurrentPlayerCollection={this.updateCurrentPlayerCollection}
             // noDupesCurrentPlayerCollection={this.state.noDupesCurrentPlayerCollection}
-            gold={this.state.gold}
-            buyPack={this.buyPack}
+            // gold={this.state.gold}
+            // buyPack={this.buyPack}
           />
         </div>
       )
