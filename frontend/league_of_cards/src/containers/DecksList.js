@@ -5,19 +5,8 @@ let deckKey = 0
 
 class DecksList extends React.Component {
   state = {
-    // decks: this.props.decksList,
     deckName: ''
   }
-
-  // componentDidMount() {
-  //   this.getAllDecks()
-  // }
-
-  // getAllDecks = () => {
-  //   fetch(`http://localhost:3000/api/v1/players/${this.props.currentPlayer.id}/decks`)
-  //   .then(response => response.json())
-  //   .then(json => this.props.changeDecks(json))
-  // }
 
   handleDeckName = (event) => {
     this.setState({
