@@ -1,7 +1,7 @@
 import React from "react";
 
 const Deck = (props) => {
-  console.log(props.deck)
+  console.log(props.deck.name)
     return(
       <div className="card deck">
         <div>Name: {props.deck.name}</div>

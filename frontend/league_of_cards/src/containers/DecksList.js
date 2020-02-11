@@ -45,7 +45,9 @@ class DecksList extends React.Component {
             name: this.state.deckName
           }
       )})
+      .then(res => res.json())
       .then(response => {
+        console.log(response)
         this.props.changeDecksList([...this.props.decksList, response])
         // this.getAllDecks()
       })
