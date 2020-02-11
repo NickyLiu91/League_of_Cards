@@ -312,6 +312,8 @@ class Home extends React.Component {
           player = res.find(obj => obj.name === this.state.name && obj.password_digest === this.state.password)
           this.props.changeAccount(player)
           console.log(this.props.account)
+          this.props.changeCards(player.cards)
+          console.log(this.props.cards)
           // console.log(player)
         })
         .then(res => {
@@ -393,11 +395,6 @@ class Home extends React.Component {
   }
 
   generateNoDupesCurrentPlayerCollection = () => {
-    // let newCollection = this.state.collection
-    // this.state.currentPlayerCollection.forEach((card) => {
-    //     newCollection.filter(collectionCard => collectionCard.name === card.name)[0].quantity ++
-    // })
-
     let newCollection = this.state.collection.map(card => {
         card.quantity = this.state.currentPlayerCollection.filter(cardObj => cardObj.name === card.name).length;
         return card
@@ -730,11 +727,6 @@ class Home extends React.Component {
   }
 
   updateCurrentPlayerCollection = (array) => {
-    // fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/cards`)
-    // .then(response => response.json())
-    // .then(json => this.setState({
-    //   currentPlayerCollection: json
-    // }, () => this.generateNoDupesCurrentPlayerCollection()))
     let newCollection = this.state.noDupesCurrentPlayerCollection
     console.log(array)
 
@@ -928,8 +920,8 @@ class Home extends React.Component {
             currentPlayer={this.state.currentPlayer}
             renderCollection={this.renderCollection}
             packCard={this.state.packCard}
-            updateCurrentPlayerCollection={this.updateCurrentPlayerCollection}
-            noDupesCurrentPlayerCollection={this.state.noDupesCurrentPlayerCollection}
+            // updateCurrentPlayerCollection={this.updateCurrentPlayerCollection}
+            // noDupesCurrentPlayerCollection={this.state.noDupesCurrentPlayerCollection}
             gold={this.state.gold}
             buyPack={this.buyPack}
           />
@@ -1011,6 +1003,7 @@ class Home extends React.Component {
 const mapStateToProps = state => {
   return {
     account: state.accountChanger.account,
+    cards: state.cardsChanger.cards,
     characters: state.charactersChanger.characters,
     enemy: state.enemyChanger.enemy,
   }
@@ -1019,6 +1012,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     changeAccount: (event) => dispatch({type: 'CHANGE_ACCOUNT', newAccount: event}),
+    changeCards: (event) => dispatch({type: 'CHANGE_CARDS', newCards: event}),
     changeCharacters: (event) => dispatch({type: 'CHANGE_CHARACTERS', newCharacters: event}),
     changeEnemy: (event) => dispatch({type: 'CHANGE_ENEMY', newEnemy: event}),
   }

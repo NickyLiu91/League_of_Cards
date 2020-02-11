@@ -10,6 +10,16 @@ function accountChanger(state = {account: {}}, action) {
   }
 }
 
+function cardsChanger(state = {cards: []}, action) {
+  switch (action.type) {
+    case 'CHANGE_CARDS':
+      console.log(state);
+      return {cards: action.newCards}
+    default:
+      return state;
+  }
+}
+
 function charactersChanger(state = {characters: []}, action) {
   switch (action.type) {
     case 'CHANGE_CHARACTERS':
@@ -19,7 +29,6 @@ function charactersChanger(state = {characters: []}, action) {
       return state;
   }
 }
-
 
 function enemyChanger(state = {enemy: {}}, action) {
   switch (action.type) {
@@ -33,6 +42,7 @@ function enemyChanger(state = {enemy: {}}, action) {
 
 export default combineReducers({
   accountChanger,
+  cardsChanger,
   charactersChanger,
   enemyChanger
 })

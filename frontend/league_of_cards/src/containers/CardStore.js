@@ -92,7 +92,36 @@ class CardStore extends React.Component {
     )
   }
 
+  updateCurrentPlayerCollection = (array) => {
+    let newCollection = this.state.noDupesCurrentPlayerCollection
+    console.log(array)
+
+    array.forEach(card => {
+      let updateCard = newCollection.find(card2 =>
+        card.name == card2.name
+      )
+      updateCard.quantity ++
+    })
+
+    this.setState({
+      noDupesCurrentPlayerCollection: newCollection
+    })
+  }
+
+  generateNoDupesCurrentPlayerCollection = () => {
+    let newCollection = this.state.collection.map(card => {
+        card.quantity = this.state.currentPlayerCollection.filter(cardObj => cardObj.name === card.name).length;
+        return card
+      }
+    )
+
+    this.setState({
+      noDupesCurrentPlayerCollection: newCollection
+    })
+  }
+
   render() {
+    console.log(this.props.account)
     return(
       <div>
         <img id="noxus-shurima" src="image/noxus-shurima.jpeg"/>
