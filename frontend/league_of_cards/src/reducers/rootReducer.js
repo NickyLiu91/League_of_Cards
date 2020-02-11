@@ -91,17 +91,17 @@ function enemyChanger(state = {enemy: {}}, action) {
   }
 }
 
-function selectedCardChanger(state = {selectedCard: {}}, action) {
+function cardChanger(state = {card: {}}, action) {
   switch (action.type) {
-    case 'CHANGE_SELECTEDCARD':
+    case 'CHANGE_CARD':
       console.log(state);
-      return {selectedCard: action.newSelectedCard}
+      return {card: action.newCard}
     default:
       return state;
   }
 }
 
-function decksListChanger(state = {decksList: [], action) {
+function decksListChanger(state = {decksList: []}, action) {
   switch (action.type) {
     case 'CHANGE_DECKSLIST':
       console.log(state);
@@ -155,13 +155,13 @@ export default combineReducers({
   accountChanger,
   nameChanger,
   cardsChanger,
-  currentPlayerCards,
-  noDupesCurrentPlayerCards,
+  currentPlayerCardsChanger,
+  noDupesCurrentPlayerCardsChanger,
   deckChanger,
   deckCardsChanger,
   charactersChanger,
   enemyChanger,
-  selectedCard,
+  cardChanger,
   decksListChanger,
   goldChanger,
   defeatedChanger,
