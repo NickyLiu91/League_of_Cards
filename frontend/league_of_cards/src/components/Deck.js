@@ -1,6 +1,7 @@
 import React from "react";
 
 const Deck = (props) => {
+  console.log(props.deck)
     return(
       <div className="card deck">
         <div>Name: {props.deck.name}</div>

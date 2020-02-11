@@ -293,6 +293,7 @@ class Home extends React.Component {
           this.props.changeNoDupesCurrentPlayerCards(this.generateNoDupesCurrentPlayerCollection())
           this.props.changeDeck(player.decks[0])
           this.props.changeDecksList(player.decks)
+          console.log(this.props)
           this.props.changeDeckCards(player.deckCards)
           this.props.changeGold(player.gold)
           this.props.changeDefeated(player.defeated)
