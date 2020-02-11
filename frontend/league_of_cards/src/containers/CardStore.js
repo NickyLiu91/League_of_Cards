@@ -133,16 +133,14 @@ class CardStore extends React.Component {
           }
     )})
     .then(res => {
-      this.setState({
-        gold: this.props.gold - 100
-      }, () => {
-        this.updateCurrentPlayerCollection(array)
-      })
+      this.props.changeEventType(this.props.gold - 100)
+      this.updateCurrentPlayerCollection(array)
+
     })
   }
 
   render() {
-    console.log(this.props.account)
+    console.log(this.props)
     return(
       <div>
         <img id="noxus-shurima" src="image/noxus-shurima.jpeg"/>
@@ -153,7 +151,7 @@ class CardStore extends React.Component {
           <div id="store">
             <div id="pack">
               <div id="gold-box">
-                <h1>{this.props.gold}</h1>
+                <h1>this.props.gold</h1>
               </div>
               <img id="pack-image" onClick={this.getFullPack} src="image/LeaguePack.jpg"/>
             </div>

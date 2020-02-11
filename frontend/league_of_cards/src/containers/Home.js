@@ -258,31 +258,6 @@ class Home extends React.Component {
     .then(json => this.setState({
       allPlayers: json.slice(0, 24)
     }))
-    // .then(json => {
-    //   json.map(playerObj => {
-    //     let newPlayerObj = playerObj
-    //     newPlayerObj.decks[0].cards = []
-    //       newPlayersArray = [...newPlayersArray, newPlayerObj]
-    //     }
-    //   )
-    // })
-    // .then(res => this.setState({
-    //   allPlayers: newPlayersArray
-    // }, () => newPlayersArray.map(
-    //   playerObj => {
-    //     if (playerObj.computer === true) {
-    //       playerObj.decks[0].cards = []
-    //       this.generateDeck(playerObj)
-    //     }
-    //   }
-    // )))
-    // .then(res => {
-    //   fetch("http://localhost:3000/api/v1/decks")
-    //   .then(res => res.json())
-    //   .then(json => this.setState({
-    //     decksList: json
-    //   }))
-    // })
   }
 
   updateDecksList = () => {
@@ -294,7 +269,6 @@ class Home extends React.Component {
   }
 
   getPlayer = (event) => {
-    console.log("???")
     let player
     fetch(`http://localhost:3000/api/v1/players`)
     .then(res => res.json())
@@ -311,10 +285,8 @@ class Home extends React.Component {
           // console.log(res)
           player = res.find(obj => obj.name === this.state.name && obj.password_digest === this.state.password)
           this.props.changeAccount(player)
-          console.log(this.props.account)
+          this.props.changeName(player.name)
           this.props.changeCards(player.cards)
-          console.log(this.props.cards)
-          // console.log(player)
         })
         .then(res => {
           this.setState({
@@ -335,63 +307,6 @@ class Home extends React.Component {
           })
         })
       }})
-
-
-    // if (!this.state.allPlayers.find(playerObj => playerObj.name === this.state.name
-    //   && playerObj.password_digest === this.state.password)) {
-    //     alert('No account with that name nad password has been found!')
-    //   } else {
-    //     this.setState({
-    //       currentPlayer: this.state.allPlayers.find(playerObj => playerObj.name === this.state.name
-    //         && playerObj.password_digest === this.state.password
-    //       )
-    //     }, () => {
-    //       fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`)
-    //       .then(res => res.json())
-    //       .then(res => {
-    //         window.localStorage.setItem('jwt', res.jwt)
-    //         console.log(window.localStorage)
-    //         console.log(window.localStorage.length)
-    //         this.setState({
-    //           currentPlayer: res,
-    //           currentPlayerCollection: res.cards,
-    //           currentDeck: res.decks[0],
-    //           loggedIn: true,
-    //           gold: res.gold,
-    //           defeated: res.defeated_id,
-    //           dialogue: res.dialogue
-    //         }, () => {
-    //           fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/decks/${this.state.currentDeck.id}`)
-    //           .then(res => res.json())
-    //           .then(res => this.setState({
-    //             currentDeckCards: res.cards
-    //           }))
-    //           this.generateNoDupesCurrentPlayerCollection()
-    //         }
-    //       )})
-    //       // fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`, {
-    //       //   method: 'POST',
-    //       //   body: JSON.stringify({
-    //       //     player: {
-    //       //       name: this.state.name,
-    //       //       password_digest: this.state.password_digest
-    //       //     }
-    //       //   }),
-    //       //   headers:{
-    //       //     'Content-Type': 'application/json'
-    //       //   }
-    //       // })
-    //       // .then(response => {
-    //       //   console.log(response)
-    //       //   if (response.ok) {
-    //       //     return response.json()
-    //       //    } else {
-    //       //        window.alert('Invalid username or password')
-    //       //       // throw response
-    //       //    }
-    //       //  })
-    //     })
-      // }
   }
 
   generateNoDupesCurrentPlayerCollection = () => {
@@ -404,6 +319,8 @@ class Home extends React.Component {
     this.setState({
       noDupesCurrentPlayerCollection: newCollection
     })
+
+    this.props.changeCards(newCollection)
   }
 
   fetchCards = () => {
@@ -441,10 +358,6 @@ class Home extends React.Component {
     })
   }
 
-  numberNotInDeck = () => {
-
-  }
-
   addToDeck = (card) => {
 
     if (this.state.currentDeckCards.filter(
@@ -477,17 +390,7 @@ class Home extends React.Component {
   }
 
   removeFromDeck = (card) => {
-    // let newDeckCards = this.state.currentDeckCards
     let deckCardToDelete
-    console.log(this.state.currentDeck.id)
-    console.log(card.id)
-    console.log(this.state.currentDeckCards)
-    console.log(this.state.currentDeckCards.filter(cardObj => cardObj.id !== card.id))
-    // let removeIndex = newDeckCards.findIndex(
-    //   cardObj => cardObj === card.name
-    // )
-    //
-    // newDeckCards.splice(removeIndex, 1)
 
     fetch(`http://localhost:3000/api/v1/deckcards`)
     .then(res => res.json())
@@ -587,7 +490,7 @@ class Home extends React.Component {
           }))
         })
       } else if (event.target.className === 'store'){
-        fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`)
+        fetch(`http://localhost:3000/api/v1/players/${this.props.account.id}`)
         .then(res => res.json())
         .then(json => {this.setState({
             gold: json.gold,
@@ -754,17 +657,6 @@ class Home extends React.Component {
       })
     }
   }
-
-  // campaignReward = () => {
-  //   let player = this.state.currentPlayer
-  //   player.defeated_id = this.state.player2.id
-  //   player.dialogue = player.dialogue + 1
-  //   this.setState({
-  //     gold: this.state.gold + 30,
-  //     defeated: this.state.player2.id,
-  //     currentPlayer: player
-  //   })
-  // }
 
   resetCampaign = (event) => {
     fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`, {
@@ -984,7 +876,6 @@ const mapStateToProps = state => {
     name: state.nameChanger.name,
     cards: state.cardsChanger.cards,
     currentPlayerCards: state.currentPlayerCardsChanger.currentPlayerCards,
-    noDupesCurrentPlayerCards: state.noDupesCurrentPlayerCardsChanger.noDupesCurrentPlayerCards,
     deck: state.deckChanger.deck,
     deckCards: state.deckCardsChanger.deckCards,
     characters: state.charactersChanger.characters,
@@ -1004,7 +895,6 @@ const mapDispatchToProps = dispatch => {
     changeName: (event) => dispatch({type: 'CHANGE_NAME', newName: event}),
     changeCards: (event) => dispatch({type: 'CHANGE_CARDS', newCards: event}),
     changeCurrentPlayerCards: (event) => dispatch({type: 'CHANGE_CURRENTPLAYERCARDS', newCurrentPlayerCards: event}),
-    changeNoDupesCurrentPlayerCards: (event) => dispatch({type: 'CHANGE_NODUPESCURRENTPLAYERCARDS', newNoDupesCurrentPlayerCards: event}),
     changeDeck: (event) => dispatch({type: 'CHANGE_DECK', newDeck: event}),
     changeDeckCards: (event) => dispatch({type: 'CHANGE_DECKCARDS', newDeckCards: event}),
     changeCharacters: (event) => dispatch({type: 'CHANGE_CHARACTERS', newCharacters: event}),
