@@ -255,9 +255,12 @@ class Home extends React.Component {
     let newPlayersArray = []
     fetch("http://localhost:3000/api/v1/players")
     .then(response => response.json())
-    .then(json => this.setState({
-      allPlayers: json.slice(0, 24)
-    }))
+    .then(json => {
+      this.props.changeCharacters(json)
+    })
+    // .then(json => this.setState({
+    //   allPlayers: json.slice(0, 24)
+    // }))
   }
 
   updateDecksList = () => {
@@ -287,7 +290,7 @@ class Home extends React.Component {
           this.props.changeAccount(player)
           this.props.changeName(player.name)
           this.props.changeCurrentPlayerCards(player.cards)
-          this.props.changeNoDupesCurrentPlayerCards(this.generateNoDupesCurrentPlayerCollection2)
+          this.props.changeNoDupesCurrentPlayerCards(this.generateNoDupesCurrentPlayerCollection())
           this.props.changeDeck(player.decks[0])
           this.props.changeDecksList(player.decks)
           this.props.changeDeckCards(player.deckCards)
@@ -331,24 +334,13 @@ class Home extends React.Component {
     })
   }
 
-  generateNoDupesCurrentPlayerCollection2 = () => {
-    let newCollection = this.props.account.map(card => {
-        card.quantity = this.props.currentPlayerCollection.filter(cardObj => cardObj.name === card.name).length;
-        return card
-      }
-    )
-
-    this.setState({
-      noDupesCurrentPlayerCollection: newCollection
-    })
-  }
-
   fetchCards = () => {
     fetch("http://localhost:3000/api/v1/allcards")
     .then(response => response.json())
-    .then(json => this.setState({
-      collection: json
-    }))
+    .then(json => {this.props.changeCards(json)})
+    // .then(json => this.setState({
+    //   collection: json
+    // }))
   }
 
   printState = (event) => {

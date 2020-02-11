@@ -34,11 +34,11 @@ class CardStore extends React.Component {
     let number = Math.floor(Math.random() * 100) + 1
     let newCard
 
-    const diamonds = this.props.collection.filter(obj => obj.rarity === "Diamond")
-    const platinums = this.props.collection.filter(obj => obj.rarity === "Platinum")
-    const golds = this.props.collection.filter(obj => obj.rarity === "Gold")
-    const silvers = this.props.collection.filter(obj => obj.rarity === "Silver")
-    const bronzes = this.props.collection.filter(obj => obj.rarity === "Bronze")
+    const diamonds = this.props.cards.filter(obj => obj.rarity === "Diamond")
+    const platinums = this.props.cards.filter(obj => obj.rarity === "Platinum")
+    const golds = this.props.cards.filter(obj => obj.rarity === "Gold")
+    const silvers = this.props.cards.filter(obj => obj.rarity === "Silver")
+    const bronzes = this.props.cards.filter(obj => obj.rarity === "Bronze")
 
     if (number > 98) {
       newCard = diamonds[Math.floor(Math.random() * diamonds.length)]
@@ -88,7 +88,7 @@ class CardStore extends React.Component {
 
   generateCards = () => {
     return this.state.results.map(
-      cardObj => <Card key={packKey++} location={"store"} card={cardObj} copies={this.props.noDupesCurrentPlayerCollection}/>
+      cardObj => <Card key={packKey++} location={"store"} card={cardObj} copies={this.props.noDupesCurrentPlayerCards}/>
     )
   }
 
@@ -102,18 +102,6 @@ class CardStore extends React.Component {
       )
       updateCard.quantity ++
     })
-
-    this.setState({
-      noDupesCurrentPlayerCollection: newCollection
-    })
-  }
-
-  generateNoDupesCurrentPlayerCollection = () => {
-    let newCollection = this.state.collection.map(card => {
-        card.quantity = this.props.accountCollection.filter(cardObj => cardObj.name === card.name).length;
-        return card
-      }
-    )
 
     this.setState({
       noDupesCurrentPlayerCollection: newCollection
@@ -151,7 +139,7 @@ class CardStore extends React.Component {
           <div id="store">
             <div id="pack">
               <div id="gold-box">
-                <h1>this.props.gold</h1>
+                <h1>{this.props.gold}</h1>
               </div>
               <img id="pack-image" onClick={this.getFullPack} src="image/LeaguePack.jpg"/>
             </div>
@@ -162,6 +150,7 @@ class CardStore extends React.Component {
   }
 
 }
+
 
 const mapStateToProps = state => {
   return {
