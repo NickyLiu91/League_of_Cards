@@ -800,13 +800,7 @@ class Home extends React.Component {
         <div>
           <Header renderStuff={this.renderStuff} />
           <CardStore
-            // collection={this.state.collection}
-            // currentPlayer={this.state.currentPlayer}
             renderCollection={this.renderCollection}
-            // updateCurrentPlayerCollection={this.updateCurrentPlayerCollection}
-            // noDupesCurrentPlayerCollection={this.state.noDupesCurrentPlayerCollection}
-            // gold={this.state.gold}
-            // buyPack={this.buyPack}
           />
         </div>
       )
