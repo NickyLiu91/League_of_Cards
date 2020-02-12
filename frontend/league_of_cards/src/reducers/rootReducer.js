@@ -60,7 +60,7 @@ function deckChanger(state = {deck: {}}, action) {
   }
 }
 
-function deckCardsChanger(state = {deckCards: {}}, action) {
+function deckCardsChanger(state = {deckCards: []}, action) {
   switch (action.type) {
     case 'CHANGE_DECKCARDS':
       // console.log(state);
@@ -86,6 +86,16 @@ function enemyChanger(state = {enemy: {}}, action) {
     case 'CHANGE_ENEMY':
       // console.log(state);
       return {enemy: action.newEnemy}
+    default:
+      return state;
+  }
+}
+
+function enemyDeckChanger(state = {enemyDeck: [], action) {
+  switch (action.type) {
+    case 'CHANGE_ENEMYDECK':
+      // console.log(state);
+      return {enemyDeck: action.newEnemyDeck}
     default:
       return state;
   }

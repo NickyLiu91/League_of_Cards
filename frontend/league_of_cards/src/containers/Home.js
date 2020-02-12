@@ -296,8 +296,6 @@ class Home extends React.Component {
           this.props.changeNoDupesCurrentPlayerCards(this.generateNoDupesCurrentPlayerCollection())
           this.props.changeDeck(player.decks[0])
           this.props.changeDecksList(player.decks)
-          console.log(this.props)
-          // this.props.changeDeckCards(player.deckCards)
           this.props.changeGold(player.gold)
           this.props.changeDefeated(player.defeated)
           this.props.changeDialogue(player.dialogue)
@@ -687,6 +685,31 @@ class Home extends React.Component {
     }
   }
 
+  getDuelist = (player, location, dialogue=0) => {
+    console.log(this.props.enemy.deck)
+    // console.log(player)
+    // let desiredDeck
+    // fetch(`http://localhost:3000/api/v1/decks/${this.state.currentDeck.id}`)
+    // .then(res => res.json())
+    // .then(res => this.setState(
+    //   {
+    //     currentDeckCards: res.cards
+    //   }, () => {
+        fetch(`http://localhost:3000/api/v1/players/${player.id}`)
+        .then(response => response.json())
+        .then(json => {
+          this.setState({
+            player2: player,
+            player2Deck: this.props.enemy.cards,
+            duelLocation: location,
+            dialogue: dialogue
+          }, () => { this.renderDuel()}
+        )
+        })
+    //   }
+    // ))
+  }
+
   render() {
     if (this.state.render === 'home' || this.state.render === 'create') {
       return(
@@ -817,6 +840,7 @@ const mapStateToProps = state => {
     deckCards: state.deckCardsChanger.deckCards,
     characters: state.charactersChanger.characters,
     enemy: state.enemyChanger.enemy,
+    enemyDeck: state.enemyDeckChanger.enemyDeck,
     card: state.cardChanger.card,
     decksList: state.decksListChanger.decksList,
     gold: state.goldChanger.gold,
@@ -837,6 +861,7 @@ const mapDispatchToProps = dispatch => {
     changeDeckCards: (event) => dispatch({type: 'CHANGE_DECKCARDS', newDeckCards: event}),
     changeCharacters: (event) => dispatch({type: 'CHANGE_CHARACTERS', newCharacters: event}),
     changeEnemy: (event) => dispatch({type: 'CHANGE_ENEMY', newEnemy: event}),
+    changeEnemyDeck: (event) => dispatch({type: 'CHANGE_ENEMYDECK', newEnemyDeck: event}),
     changeCard: (event) => dispatch({type: 'CHANGE_CARD', newCard: event}),
     changeDecksList: (event) => dispatch({type: 'CHANGE_DECKSLIST', newDecksList: event}),
     changeGold: (event) => dispatch({type: 'CHANGE_GOLD', newGold: event}),

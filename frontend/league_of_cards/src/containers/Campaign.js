@@ -396,13 +396,12 @@ class Campaign extends React.Component {
   render() {
     return(
       <div id="campaign-screen" >
-        <CampaignScreen player1={this.state.player1} computers={this.state.computers}
-        dialogue={this.state.dialogue} defeated={this.state.defeated} storyText={this.state.storyText} increaseDialogue={this.increaseDialogue}
-        getDuelist={this.props.getDuelist} resetCampaign={this.resetCampaign} resetCampaign={this.props.resetCampaign}/>
+        <CampaignScreen player1={this.props.account} computers={this.props.characters}
+        dialogue={this.props.dialogue} defeated={this.props.defeated} storyText={this.state.storyText} increaseDialogue={this.increaseDialogue}
+        getDuelist={this.props.getDuelist} resetCampaign={this.props.resetCampaign}/>
       </div>
     )
   }
-
 }
 
 const mapStateToProps = state => {

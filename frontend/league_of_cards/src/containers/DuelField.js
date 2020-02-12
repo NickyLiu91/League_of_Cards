@@ -22,7 +22,7 @@ class DuelField extends React.Component {
     player1Monsters: [{}, {}, {}, {}, {}],
     player1Spells: [{}, {}, {}, {}, {}],
     player1Hand: [],
-    player1Deck: [...this.props.deck],
+    player1Deck: this.props.deckCards,
     player1Graveyard: [],
     player2: this.props.enemy,
     player2Life: 8000,
