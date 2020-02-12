@@ -686,29 +686,29 @@ class Home extends React.Component {
   }
 
   getDuelist = (player, location, dialogue=0) => {
-    console.log(this.props.enemy.deck)
-    // console.log(player)
-    // let desiredDeck
-    // fetch(`http://localhost:3000/api/v1/decks/${this.state.currentDeck.id}`)
-    // .then(res => res.json())
-    // .then(res => this.setState(
-    //   {
-    //     currentDeckCards: res.cards
-    //   }, () => {
-        fetch(`http://localhost:3000/api/v1/players/${player.id}`)
-        .then(response => response.json())
-        .then(json => {
-          this.setState({
-            player2: player,
-            player2Deck: this.props.enemy.cards,
-            duelLocation: location,
-            dialogue: dialogue
-          }, () => { this.renderDuel()}
-        )
-        })
-    //   }
-    // ))
-  }
+  // fetch(`http://localhost:3000/api/v1/decks/${this.state.currentDeck.id}`)
+  // .then(res => res.json())
+  // .then(res => this.setState(
+  //   {
+  //     currentDeckCards: res.cards
+  //   }, () => {
+      fetch(`http://localhost:3000/api/v1/players/${player.id}`)
+      .then(response => response.json())
+      .then(json => {
+        this.props.changeEnemyDeck(json.cards)
+        this.setState({
+          player2: player,
+          player2Deck: json.cards,
+          duelLocation: location,
+          dialogue: dialogue
+        }, () => { this.renderDuel()}
+      )
+      })
+  //   }
+  // ))
+
+}
+
 
   render() {
     if (this.state.render === 'home' || this.state.render === 'create') {

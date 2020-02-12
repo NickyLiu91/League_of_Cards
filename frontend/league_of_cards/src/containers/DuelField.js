@@ -721,7 +721,7 @@ class DuelField extends React.Component {
     const platinums = listOfCards.filter(obj => obj.rarity === "Platinum")
     const golds = listOfCards.filter(obj => obj.rarity === "Gold")
     const silvers = listOfCards.filter(obj => obj.rarity === "Silver")
-    const bronzes = this.props.collection.filter(obj => obj.rarity === "Bronze")
+    const bronzes = this.props.cards.filter(obj => obj.rarity === "Bronze")
     //
     if (number > 98) {
       if (diamonds.length === 0 && platinums.length === 0 && golds.length === 0 && silvers.length === 0) {
@@ -854,7 +854,7 @@ class DuelField extends React.Component {
       }
     })
     .then(res => {
-      this.props.reward(this.props.location)
+      this.reward(this.props.location)
     })
   }
 
@@ -2223,6 +2223,7 @@ class DuelField extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     if (this.state.display === 'Lose' || this.state.display === 'Win') {
       audio.pause()
       audio.currentTime = 0
@@ -2487,6 +2488,7 @@ class DuelField extends React.Component {
 const mapStateToProps = state => {
   return {
     account: state.accountChanger.account,
+    cards: state.cardsChanger.cards,
     currentPlayerCards: state.currentPlayerCardsChanger.currentPlayerCards,
     deck: state.deckChanger.deck,
     deckCards: state.deckCardsChanger.deckCards,
@@ -2502,6 +2504,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     changeAccount: (event) => dispatch({type: 'CHANGE_ACCOUNT', newAccount: event}),
+    changeCards: (event) => dispatch({type: 'CHANGE_CARDS', newCards: event}),
     changeCurrentPlayerCards: (event) => dispatch({type: 'CHANGE_CURRENTPLAYERCARDS', newCurrentPlayerCards: event}),
     changeDeck: (event) => dispatch({type: 'CHANGE_DECK', newDeck: event}),
     changeDeckCards: (event) => dispatch({type: 'CHANGE_DECKCARDS', newDeckCards: event}),
