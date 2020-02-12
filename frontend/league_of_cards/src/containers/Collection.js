@@ -13,7 +13,7 @@ class Collection extends React.Component {
   generateCards = () => {
     return this.props.noDupesCurrentPlayerCards.map(
       cardObj => <Card key={cardObj.id} location={"collection"} card={cardObj}
-      getCardInfo={this.getCardInfo} copies={this.props.deckCards} addToDeck={this.addToDeck}/>
+      getCardInfo={this.props.getCardInfo} copies={this.props.deckCards} addToDeck={this.addToDeck}/>
     )
   }
 
@@ -145,7 +145,7 @@ const mapStateToProps = state => {
     noDupesCurrentPlayerCards: state.noDupesCurrentPlayerCardsChanger.noDupesCurrentPlayerCards,
     deck: state.deckChanger.deck,
     deckCards: state.deckCardsChanger.deckCards,
-    card: state.cardChanger.card,
+    card: state.cardChanger.card
   }
 }
 
@@ -156,7 +156,7 @@ const mapDispatchToProps = dispatch => {
     changeNoDupesCurrentPlayerCards: (event) => dispatch({type: 'CHANGE_NODUPESCURRENTPLAYERCARDS', newNoDupesCurrentPlayerCards: event}),
     changeDeck: (event) => dispatch({type: 'CHANGE_DECK', newDeck: event}),
     changeDeckCards: (event) => dispatch({type: 'CHANGE_DECKCARDS', newDeckCards: event}),
-    changeCard: (event) => dispatch({type: 'CHANGE_CARD', newCard: event}),
+    changeCard: (event) => dispatch({type: 'CHANGE_CARD', newCard: event})
   }
 }
 

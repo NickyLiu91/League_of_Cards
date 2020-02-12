@@ -1,60 +1,68 @@
 import React from "react";
+import {connect} from 'react-redux';
 
 const CardInfo = (props) => {
-  if (props.selectedCard.cardtype === "Champion") {
+  if (props.card.cardtype === "Champion") {
     return(
-      <div className={'card-info' + ' ' + 'card-info' + '-' + props.selectedCard.rarity} >
-        <div>Name: {props.selectedCard.name}, {props.selectedCard.title}</div>
+      <div className={'card-info' + ' ' + 'card-info' + '-' + props.card.rarity} >
+        <div>Name: {props.card.name}, {props.card.title}</div>
         <br/>
         <br/>
-        <img src={'image/' + props.selectedCard.image}/>
+        <img src={'image/' + props.card.image}/>
         <br/>
         <br/>
-        <div>Type: {props.selectedCard.cardtype}</div>
+        <div>Type: {props.card.cardtype}</div>
         <br/>
         <br/>
-        <div>Rarity: {props.selectedCard.rarity}</div>
+        <div>Rarity: {props.card.rarity}</div>
         <br/>
         <br/>
-        <div>Role: {props.selectedCard.role}</div>
+        <div>Role: {props.card.role}</div>
         <br/>
         <br/>
-        <div>Attack: {props.selectedCard.attack}</div>
+        <div>Attack: {props.card.attack}</div>
         <br/>
         <br/>
-        <div>Magic: {props.selectedCard.magic}</div>
+        <div>Magic: {props.card.magic}</div>
         <br/>
         <br/>
-        <div>Defense: {props.selectedCard.defense}</div>
+        <div>Defense: {props.card.defense}</div>
         <br/>
         <br/>
-        <div className="description">Description: {props.selectedCard.description}</div>
+        <div className="description">Description: {props.card.description}</div>
         <br/>
-        <button className="add-button" onClick={event => props.addToDeck(props.selectedCard)}>Add To Deck</button>
+        <button className="add-button" onClick={event => props.addToDeck(props.card)}>Add To Deck</button>
       </div>
     )
   } else {
     return(
-      <div className={'card-info' + ' ' + 'card-info' + '-' + props.selectedCard.rarity} >
-        <div>Name: {props.selectedCard.name}</div>
+      <div className={'card-info' + ' ' + 'card-info' + '-' + props.card.rarity} >
+        <div>Name: {props.card.name}</div>
         <br/>
         <br/>
-        <img src={'image/' + props.selectedCard.image}/>
+        <img src={'image/' + props.card.image}/>
         <br/>
         <br/>
-        <div>Type: {props.selectedCard.cardtype}</div>
+        <div>Type: {props.card.cardtype}</div>
         <br/>
         <br/>
-        <div>Rarity: {props.selectedCard.rarity}</div>
+        <div>Rarity: {props.card.rarity}</div>
         <br/>
         <br/>
-        <div>Effect: {props.selectedCard.description}</div>
+        <div>Effect: {props.card.description}</div>
         <br/>
-        <button className="add-button" onClick={event => props.addToDeck(props.selectedCard)}>Add To Deck</button>
+        <button className="add-button" onClick={event => props.addToDeck(props.card)}>Add To Deck</button>
       </div>
     )
   }
-
 }
 
-export default CardInfo;
+const mapStateToProps = state => {
+  return {
+    card: state.cardChanger.card
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(CardInfo);

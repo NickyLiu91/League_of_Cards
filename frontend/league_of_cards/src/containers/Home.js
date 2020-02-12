@@ -652,6 +652,15 @@ class Home extends React.Component {
     })
   }
 
+  getCardInfo = (card) => {
+    // this.setState({
+    //   selectedCard: card
+    // }, () => {
+    //   this.renderCard()
+    // })
+    this.props.changeCard(card)
+    this.renderCard()
+  }
 
   render() {
     if (this.state.render === 'home' || this.state.render === 'create') {
@@ -720,7 +729,7 @@ class Home extends React.Component {
         <div>
           <Header renderStuff={this.renderStuff} />
           <div className="container-with-decklist">
-            <Collection renderHome={this.renderHome} />
+            <Collection renderHome={this.renderHome} getCardInfo={this.getCardInfo}/>
             <SideBar />
           </div>
         </div>
@@ -746,9 +755,7 @@ class Home extends React.Component {
         <div>
           <Header renderStuff={this.renderStuff} deck={this.state.currentDeckCards}/>
           <div className="duelist-list-container">
-            <DuelistsList
-              renderDuel={this.renderDuel}
-            />
+            <DuelistsList renderDuel={this.renderDuel} />
           </div>
         </div>
       )
