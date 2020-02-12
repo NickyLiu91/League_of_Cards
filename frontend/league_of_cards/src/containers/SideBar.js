@@ -13,11 +13,9 @@ class SideBar extends React.Component {
       obj => obj.card.id === card.id && obj.deck.id === this.props.deck.id
     )[0])
     .then(response => {
-      this.setState({
-        currentDeckCards: this.props.deckCards.filter(cardObj => cardObj.id !== card.id)
-      }, () => {fetch(`http://localhost:3000/api/v1/deckcards/${deckCardToDelete.id}`, {
+      fetch(`http://localhost:3000/api/v1/deckcards/${deckCardToDelete.id}`, {
         method: 'DELETE'
-      })})
+      })
     })
     this.props.changeDeckCards(this.props.deckCards.filter(cardObj => cardObj.id !== card.id))
   }
