@@ -17,22 +17,25 @@ class DuelistsList extends React.Component {
       return list.map(
         duelistObj => <Duelist key={duelistKey++} duelist={duelistObj} getDuelist={this.getDuelist}/>
       )
-    } else if (this.props.account.defeated_id === 0 ) {
-      return(list.map(
-        duelistObj => <Duelist key={duelistKey++} duelist={duelistObj} getDuelist={this.getDuelist}/>
-      ))
-    } else {
-      this.props.characters.slice(0, this.props.account.defeated_id).forEach(duelist => {
-        let index = list.findIndex(obj => Object.keys(obj).length === 0)
-        list[index] = duelist
-      })
-      return list.map(
+    }
+    // else if (this.props.account.defeated_id === 0 ) {
+    //   return(list.map(
+    //     duelistObj => <Duelist key={duelistKey++} duelist={duelistObj} getDuelist={this.getDuelist}/>
+    //   ))
+    // }
+    else {
+      // this.props.characters.slice(0, this.props.account.defeated_id).forEach(duelist => {
+      //   let index = list.findIndex(obj => Object.keys(obj).length === 0)
+      //   list[index] = duelist
+      // })
+      return list.slice(0, this.props.account.defeated_id).map(
         duelistObj => <Duelist key={duelistKey++} duelist={duelistObj} getDuelist={this.getDuelist}/>
       )
     }
   }
 
   getDuelist = (player, location, dialogue=0) => {
+    console.log(this.props)
     console.log(player)
     this.props.changeEnemy(player)
     console.log(this.props.enemy)
@@ -77,7 +80,8 @@ const mapStateToProps = state => {
     account: state.accountChanger.account,
     deck: state.deckChanger.deck,
     characters: state.charactersChanger.characters,
-    enemy: state.enemyChanger.enemy
+    enemy: state.enemyChanger.enemy,
+    defeated: state.defeatedChanger.defeated
   }
 }
 
@@ -85,7 +89,8 @@ const mapDispatchToProps = dispatch => {
   return {
     changeAccount: (event) => dispatch({type: 'CHANGE_ACCOUNT', newAccount: event}),
     changeDeck: (event) => dispatch({type: 'CHANGE_DECK', newDeck: event}),
-    changeEnemy: (event) => dispatch({type: 'CHANGE_ENEMY', newEnemy: event})
+    changeEnemy: (event) => dispatch({type: 'CHANGE_ENEMY', newEnemy: event}),
+    changeDefeated: (event) => dispatch({type: 'CHANGE_DEFEEATED', newDefeated: event})
   }
 }
 
