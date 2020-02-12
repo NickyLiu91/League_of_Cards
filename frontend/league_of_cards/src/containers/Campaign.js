@@ -394,6 +394,7 @@ class Campaign extends React.Component {
   }
 
   render() {
+    console.log(this.props.defeated)
     return(
       <div id="campaign-screen" >
         <CampaignScreen player1={this.props.account} computers={this.props.characters}
@@ -419,7 +420,7 @@ const mapDispatchToProps = dispatch => {
   return {
     changeAccount: (event) => dispatch({type: 'CHANGE_ACCOUNT', newAccount: event}),
     changeEnemy: (event) => dispatch({type: 'CHANGE_ENEMY', newEnemy: event}),
-    changeDefeated: (event) => dispatch({type: 'CHANGE_DEFEEATED', newDefeated: event}),
+    changeDefeated: (event) => dispatch({type: 'CHANGE_DEFEATED', newDefeated: event}),
     changeDialogue: (event) => dispatch({type: 'CHANGE_DIALOGUE', newDialogue: event}),
     changeLocation: (event) => dispatch({type: 'CHANGE_LOCATION', newLocation: event})
   }

@@ -25,7 +25,7 @@ class DuelField extends React.Component {
     player1Deck: this.props.deckCards,
     player1Graveyard: [],
     player2: this.props.enemy,
-    player2Life: 8000,
+    player2Life: 500,
     player2Monsters: [{}, {}, {}, {}, {}],
     player2Spells: [{}, {}, {}, {}, {}],
     player2Deck: this.props.enemyDeck,
@@ -850,14 +850,15 @@ class DuelField extends React.Component {
             'Accept': 'application/json',
           },
           body: JSON.stringify(
-              {
-                defeated_id: this.state.player2.id
-              }
+            {
+              defeated_id: this.state.player2.id
+            }
           )
         })
       }
     })
     .then(res => {
+      this.props.changeDefeated(this.props.defeated + 1)
       this.reward(this.props.location)
     })
   }
@@ -2239,6 +2240,7 @@ class DuelField extends React.Component {
           renderPostDuel={this.props.renderPostDuel}
           location={this.props.location}
           rewardCard={this.state.rewardCard}
+          defeated={this.props.defeated}
           />
         </div>
       )
@@ -2515,7 +2517,7 @@ const mapDispatchToProps = dispatch => {
     changeEnemy: (event) => dispatch({type: 'CHANGE_ENEMY', newEnemy: event}),
     changeEnemyDeck: (event) => dispatch({type: 'CHANGE_ENEMYDECK', newEnemyDeck: event}),
     changeGold: (event) => dispatch({type: 'CHANGE_GOLD', newGold: event}),
-    changeDefeated: (event) => dispatch({type: 'CHANGE_DEFEEATED', newDefeated: event}),
+    changeDefeated: (event) => dispatch({type: 'CHANGE_DEFEATED', newDefeated: event}),
     changeDialogue: (event) => dispatch({type: 'CHANGE_DIALOGUE', newDialogue: event}),
     changeLocation: (event) => dispatch({type: 'CHANGE_LOCATION', newLocation: event})
   }
