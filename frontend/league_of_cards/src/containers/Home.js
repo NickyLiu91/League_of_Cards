@@ -355,37 +355,6 @@ class Home extends React.Component {
     })
   }
 
-  addToDeck = (card) => {
-
-    if (this.state.currentDeckCards.filter(
-      cardObj => cardObj.name === card.name
-    ).length < 3 &&
-    this.state.currentDeckCards.length < 40 &&
-    card.quantity - this.state.currentDeckCards.filter(cardObj => cardObj.name === card.name).length > 0) {
-
-      let cardToAdd = this.state.currentPlayerCollection.filter(cardObj =>
-        cardObj.name === card.name && this.state.currentDeckCards.filter(cardObj2 => cardObj2.id === cardObj.id ).length === 0
-      )[0]
-      console.log(cardToAdd)
-
-        fetch(`http://localhost:3000/api/v1/deckcards`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          body: JSON.stringify(
-              {
-                deck_id: this.state.currentDeck.id,
-                card_id: cardToAdd.id
-              }
-        )})
-        .then(response => this.setState({
-          currentDeckCards: [...this.state.currentDeckCards, cardToAdd]
-        }))
-    }
-  }
-
   removeFromDeck = (card) => {
     let deckCardToDelete
 
@@ -767,11 +736,11 @@ class Home extends React.Component {
           <Header renderStuff={this.renderStuff} />
           <div className="container-with-decklist">
             <Collection
-              noDupesCurrentPlayerCollection={this.state.noDupesCurrentPlayerCollection}
-              getCardInfo={this.getCardInfo}
+              // noDupesCurrentPlayerCollection={this.state.noDupesCurrentPlayerCollection}
+              // getCardInfo={this.getCardInfo}
               renderHome={this.renderHome}
-              currentDeckCards={this.state.currentDeckCards}
-              addToDeck={this.addToDeck}
+              // currentDeckCards={this.state.currentDeckCards}
+              // addToDeck={this.addToDeck}
             />
             <SideBar
             currentDeckCards={this.state.currentDeckCards}
