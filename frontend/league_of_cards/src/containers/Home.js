@@ -705,19 +705,14 @@ class Home extends React.Component {
       return(
         <div>
           <Header renderStuff={this.renderStuff}/>
-          <DecksList
-            renderCollection={this.renderCollection}
-            renderHome={this.renderHome}
-          />
+          <DecksList renderCollection={this.renderCollection} renderHome={this.renderHome} />
         </div>
       )
     } else if (this.state.render === 'store') {
       return(
         <div>
           <Header renderStuff={this.renderStuff} />
-          <CardStore
-            renderCollection={this.renderCollection}
-          />
+          <CardStore renderCollection={this.renderCollection} />
         </div>
       )
     } else if (this.state.render === 'collection') {
@@ -725,17 +720,8 @@ class Home extends React.Component {
         <div>
           <Header renderStuff={this.renderStuff} />
           <div className="container-with-decklist">
-            <Collection
-              // noDupesCurrentPlayerCollection={this.state.noDupesCurrentPlayerCollection}
-              // getCardInfo={this.getCardInfo}
-              renderHome={this.renderHome}
-              // currentDeckCards={this.state.currentDeckCards}
-              // addToDeck={this.addToDeck}
-            />
-            <SideBar
-            // currentDeckCards={this.state.currentDeckCards}
-            // removeFromDeck={this.removeFromDeck}
-            />
+            <Collection renderHome={this.renderHome} />
+            <SideBar />
           </div>
         </div>
 
