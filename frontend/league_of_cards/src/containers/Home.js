@@ -362,23 +362,6 @@ class Home extends React.Component {
     })
   }
 
-  removeFromDeck = (card) => {
-    let deckCardToDelete
-
-    fetch(`http://localhost:3000/api/v1/deckcards`)
-    .then(res => res.json())
-    .then(json => deckCardToDelete = json.filter(
-      obj => obj.card.id === card.id && obj.deck.id === this.state.currentDeck.id
-    )[0])
-    .then(response => {
-      this.setState({
-        currentDeckCards: this.state.currentDeckCards.filter(cardObj => cardObj.id !== card.id)
-      }, () => {fetch(`http://localhost:3000/api/v1/deckcards/${deckCardToDelete.id}`, {
-        method: 'DELETE'
-      })})
-    })
-  }
-
   componentDidMount() {
     this.fetchCards()
     this.getAllComputers()
@@ -750,8 +733,8 @@ class Home extends React.Component {
               // addToDeck={this.addToDeck}
             />
             <SideBar
-            currentDeckCards={this.state.currentDeckCards}
-            removeFromDeck={this.removeFromDeck}
+            // currentDeckCards={this.state.currentDeckCards}
+            // removeFromDeck={this.removeFromDeck}
             />
           </div>
         </div>
