@@ -32,7 +32,7 @@ class Home extends React.Component {
     password: '',
     decksList: [],
     gold: '',
-    defeated: '',
+    defeated: 0,
     duelLocation: '',
     dialogue: ''
   }
@@ -737,6 +737,7 @@ class Home extends React.Component {
       fetch(`http://localhost:3000/api/v1/players/${player.id}`)
       .then(response => response.json())
       .then(json => {
+        this.props.changeEnemy(player)
         this.props.changeEnemyDeck(json.cards)
         this.setState({
           player2: player,

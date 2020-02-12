@@ -2,9 +2,7 @@ import React from "react";
 var audio = new Audio('files/ExcitedDuelists.mp3')
 
 export default class CampaignScreen extends React.Component {
-  componentDidMount() {
-    console.log(this.props)
-  }
+
 
   manageMusic = function(){
     if (this.props.storyText[this.props.dialogue].azir === "Is that so?") {
