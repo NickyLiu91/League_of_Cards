@@ -23,10 +23,10 @@ class Collection extends React.Component {
       cardObj => cardObj.name === card.name
     ).length < 3 &&
     this.props.deckCards.length < 40 &&
-    card.quantity - this.props.deck.filter(cardObj => cardObj.name === card.name).length > 0) {
+    card.quantity - this.props.deckCards.filter(cardObj => cardObj.name === card.name).length > 0) {
 
-      let cardToAdd = this.state.currentPlayerCollection.filter(cardObj =>
-        cardObj.name === card.name && this.props.deck.filter(cardObj2 => cardObj2.id === cardObj.id ).length === 0
+      let cardToAdd = this.props.currentPlayerCards.filter(cardObj =>
+        cardObj.name === card.name && this.props.deckCards.filter(cardObj2 => cardObj2.id === cardObj.id ).length === 0
       )[0]
       console.log(cardToAdd)
 
@@ -46,7 +46,7 @@ class Collection extends React.Component {
         //   currentDeckCards: [...this.props.deck, cardToAdd]
         // })
         .then(res => {
-          this.props.changeDeckCards([...this.props.deck, cardToAdd])
+          this.props.changeDeckCards([...this.props.deckCards, cardToAdd])
         })
     }
   }

@@ -1,7 +1,6 @@
 import React from "react";
 
 const Card = (props) => {
-  console.log(props)
   if (props.location === "collection") {
     if (props.card.quantity === 0) {
       if (props.card.cardtype === "Champion") {
