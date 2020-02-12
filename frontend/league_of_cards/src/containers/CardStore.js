@@ -96,9 +96,11 @@ class CardStore extends React.Component {
 
     let oldNonDupeCards = this.props.noDupesCurrentPlayerCards
 
-    oldNonDupeCards.forEach(card => {
-      if (array.find(card2 => card.name == card2.name)) {
+    array.forEach(card => {
+      if (oldNonDupeCards.find(card2 => card.name == card2.name)) {
+        console.log(card.quantity)
         card.quantity ++
+        console.log(card.quantity)
       }
     })
 
