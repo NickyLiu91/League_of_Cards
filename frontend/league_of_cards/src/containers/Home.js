@@ -259,7 +259,7 @@ class Home extends React.Component {
     fetch("http://localhost:3000/api/v1/players")
     .then(response => response.json())
     .then(json => {
-      this.props.changeCharacters(json)
+      this.props.changeCharacters(json.slice(0, 24))
     })
     // .then(json => this.setState({
     //   allPlayers: json.slice(0, 24)

@@ -1,13 +1,14 @@
 import React from "react";
+import {connect} from 'react-redux';
 import CampaignScreen from "../components/CampaignScreen.js"
 let dialogueCounter = 0
 
-export default class Campaign extends React.Component {
+class Campaign extends React.Component {
   state = {
-    player1: this.props.player1,
-    computers: this.props.allPlayers,
-    dialogue: this.props.player1.dialogue,
-    defeated: this.props.player1.defeated_id,
+    player1: this.props.account,
+    computers: this.props.characters,
+    dialogue: this.props.dialogue,
+    defeated: this.props.defeated,
     storyText: [
       {sivir: "Having accepted a job to rob a passing Demacian caravan of its jewels, my crew of bandits were easily dispatched by the three riding inside the caravan: Garen, Lux, and Ezreal."},
       {sivir: "They were looking for worthy mercenaries to hire for an expedition, and only I was deemed worthy."},
@@ -366,9 +367,9 @@ export default class Campaign extends React.Component {
   }
 
   increaseDialogue = () => {
-    let dialogue = this.state.dialogue
+    let dialogue = this.props.dialogue
 
-    fetch(`http://localhost:3000/api/v1/players/${this.state.player1.id}`, {
+    fetch(`http://localhost:3000/api/v1/players/${this.props.account.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -381,38 +382,16 @@ export default class Campaign extends React.Component {
       )
     })
     .then(res => {
-      let player = this.state.player1
-      player.dialogue = player.dialogue + 1
-
-      this.setState({
-        player1: player,
-        dialogue: this.state.dialogue + 1
-      })
+      // let player = this.state.player1
+      // player.dialogue = player.dialogue + 1
+      //
+      // this.setState({
+      //   player1: player,
+      //   dialogue: this.state.dialogue + 1
+      // })
+      this.props.changeDialogue(this.props.dialogue + 1)
     })
   }
-
-  // resetCampaign = (event) => {
-  //   console.log(this.state)
-  //   console.log("????")
-  //   fetch(`https://league-of-cards-app-api.herokuapp.com/api/v1/players/${this.state.player1.id}`, {
-  //     method: 'PATCH',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Accept': 'application/json',
-  //     },
-  //     body: JSON.stringify(
-  //         {
-  //           defeated_id: 0,
-  //           dialogue: 0,
-  //           completed: true,
-  //         }
-  //     )
-  //   })
-  //   .then(res => {
-  //
-  //   })
-  //   .then(res => this.props.renderHome())
-  // }
 
   render() {
     return(
@@ -425,3 +404,29 @@ export default class Campaign extends React.Component {
   }
 
 }
+
+const mapStateToProps = state => {
+  return {
+    account: state.accountChanger.account,
+    characters: state.charactersChanger.characters,
+    enemy: state.enemyChanger.enemy,
+    defeated: state.defeatedChanger.defeated,
+    dialogue: state.dialogueChanger.dialogue,
+    location: state.locationChanger.location
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    changeAccount: (event) => dispatch({type: 'CHANGE_ACCOUNT', newAccount: event}),
+    changeEnemy: (event) => dispatch({type: 'CHANGE_ENEMY', newEnemy: event}),
+    changeDefeated: (event) => dispatch({type: 'CHANGE_DEFEEATED', newDefeated: event}),
+    changeDialogue: (event) => dispatch({type: 'CHANGE_DIALOGUE', newDialogue: event}),
+    changeLocation: (event) => dispatch({type: 'CHANGE_LOCATION', newLocation: event})
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Campaign);
