@@ -42,9 +42,6 @@ class Collection extends React.Component {
                 card_id: cardToAdd.id
               }
         )})
-        // .then(response => {this.setState({
-        //   currentDeckCards: [...this.props.deck, cardToAdd]
-        // })
         .then(res => {
           this.props.changeDeckCards([...this.props.deckCards, cardToAdd])
         })

@@ -653,13 +653,39 @@ class Home extends React.Component {
   }
 
   getCardInfo = (card) => {
-    // this.setState({
-    //   selectedCard: card
-    // }, () => {
-    //   this.renderCard()
-    // })
     this.props.changeCard(card)
     this.renderCard()
+  }
+
+  addToDeck = (card) => {
+
+    if (this.props.deckCards.filter(
+      cardObj => cardObj.name === card.name
+    ).length < 3 &&
+    this.props.deckCards.length < 40 &&
+    card.quantity - this.props.deckCards.filter(cardObj => cardObj.name === card.name).length > 0) {
+
+      let cardToAdd = this.props.currentPlayerCards.filter(cardObj =>
+        cardObj.name === card.name && this.props.deckCards.filter(cardObj2 => cardObj2.id === cardObj.id ).length === 0
+      )[0]
+      console.log(cardToAdd)
+
+        fetch(`http://localhost:3000/api/v1/deckcards`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: JSON.stringify(
+              {
+                deck_id: this.props.deck.id,
+                card_id: cardToAdd.id
+              }
+        )})
+        .then(res => {
+          this.props.changeDeckCards([...this.props.deckCards, cardToAdd])
+        })
+    }
   }
 
   render() {
@@ -733,20 +759,18 @@ class Home extends React.Component {
             <SideBar />
           </div>
         </div>
-
       )
     } else if (this.state.render === 'cardinfo') {
       return(
         <div>
           <Header renderStuff={this.renderStuff} />
             <div className="container-with-decklist">
-              <CardInfo selectedCard={this.state.selectedCard}
+              <CardInfo
                 addToDeck={this.addToDeck}
                 renderCollection={this.renderCollection}
                 renderHome={this.renderHome}
               />
-              <SideBar currentDeckCards={this.state.currentDeckCards}
-              removeFromDeck={this.removeFromDeck}/>
+              <SideBar />
             </div>
         </div>
       )

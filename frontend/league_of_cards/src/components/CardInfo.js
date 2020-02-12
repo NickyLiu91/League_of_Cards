@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from 'react-redux';
 
 const CardInfo = (props) => {
+  console.log(props)
   if (props.card.cardtype === "Champion") {
     return(
       <div className={'card-info' + ' ' + 'card-info' + '-' + props.card.rarity} >
@@ -59,10 +60,20 @@ const CardInfo = (props) => {
 
 const mapStateToProps = state => {
   return {
+    currentPlayerCards: state.currentPlayerCardsChanger.currentPlayerCards,
+    deckCards: state.deckCardsChanger.deckCards,
     card: state.cardChanger.card
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    changeCurrentPlayerCards: (event) => dispatch({type: 'CHANGE_CURRENTPLAYERCARDS', newCurrentPlayerCards: event}),
+    changeDeckCards: (event) => dispatch({type: 'CHANGE_DECKCARDS', newDeckCards: event}),
+  }
+}
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps,
 )(CardInfo);
