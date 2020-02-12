@@ -1,5 +1,5 @@
 import React from "react";
-
+import {connect} from 'react-redux';
 import Hand from "./Hand.js"
 import SpellField from "./SpellField.js"
 import MonsterField from "./MonsterField.js"
@@ -10,26 +10,26 @@ import PostDuel from "../components/PostDuel.js"
 let totalDamage = 8000
 var audio = new Audio('files/SummonersCall.mp3')
 
-export default class DuelField extends React.Component {
+class DuelField extends React.Component {
 
   state = {
     turn: 1,
     currentPlayer: "player1",
     currentOpponent: "player2",
     summoned: false,
-    player1: this.props.player1,
+    player1: this.props.account,
     player1Life: 8000,
     player1Monsters: [{}, {}, {}, {}, {}],
     player1Spells: [{}, {}, {}, {}, {}],
     player1Hand: [],
-    player1Deck: [...this.props.player1Deck],
+    player1Deck: [...this.props.deck],
     player1Graveyard: [],
-    player2: this.props.player2,
+    player2: this.props.enemy,
     player2Life: 8000,
     player2Monsters: [{}, {}, {}, {}, {}],
     player2Spells: [{}, {}, {}, {}, {}],
+    player2Deck: [...this.props.enemy.decks[0]],
     player2Hand: [],
-    player2Deck: [...this.props.player2Deck],
     player2Graveyard: [],
     actionType: '',
     selectedCard: '',
@@ -2195,18 +2195,32 @@ export default class DuelField extends React.Component {
     }
   }
 
-directAttack = (monster) => {
-  monster.attacked = true
-  this.setState({
-    player2Life: this.state.player2Life - this.highestAttack(monster),
-    selectedCard: '',
-    actionType: ''
-  }, () => {
-    if (this.state.player2Life <= 0) {
-      this.win()
+  directAttack = (monster) => {
+    monster.attacked = true
+    this.setState({
+      player2Life: this.state.player2Life - this.highestAttack(monster),
+      selectedCard: '',
+      actionType: ''
+    }, () => {
+      if (this.state.player2Life <= 0) {
+        this.win()
+      }
+    })
+  }
+
+  reward = () => {
+    let player = this.state.account
+    if (this.props.location === 'campaign') {
+      player.defeated_id = this.state.player2.id
+      // this.setState({
+      //   gold: this.state.gold + 30,
+      //   defeated: this.props.enemy.id,
+      //   currentPlayer: player
+      // })
     }
-  })
-}
+    this.props.changeGold(this.props.gold + 30)
+    this.props.changeDefeated(this.props.enemy.id)
+  }
 
   render() {
     if (this.state.display === 'Lose' || this.state.display === 'Win') {
@@ -2468,5 +2482,35 @@ directAttack = (monster) => {
       )
     }
   }
-
 }
+
+const mapStateToProps = state => {
+  return {
+    account: state.accountChanger.account,
+    currentPlayerCards: state.currentPlayerCardsChanger.currentPlayerCards,
+    deck: state.deckChanger.deck,
+    enemy: state.enemyChanger.enemy,
+    gold: state.goldChanger.gold,
+    defeated: state.defeatedChanger.defeated,
+    dialogue: state.dialogueChanger.dialogue,
+    location: state.locationChanger.location
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    changeAccount: (event) => dispatch({type: 'CHANGE_ACCOUNT', newAccount: event}),
+    changeCurrentPlayerCards: (event) => dispatch({type: 'CHANGE_CURRENTPLAYERCARDS', newCurrentPlayerCards: event}),
+    changeDeck: (event) => dispatch({type: 'CHANGE_DECK', newDeck: event}),
+    changeEnemy: (event) => dispatch({type: 'CHANGE_ENEMY', newEnemy: event}),
+    changeGold: (event) => dispatch({type: 'CHANGE_GOLD', newGold: event}),
+    changeDefeated: (event) => dispatch({type: 'CHANGE_DEFEEATED', newDefeated: event}),
+    changeDialogue: (event) => dispatch({type: 'CHANGE_DIALOGUE', newDialogue: event}),
+    changeLocation: (event) => dispatch({type: 'CHANGE_LOCATION', newLocation: event})
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DuelField);
