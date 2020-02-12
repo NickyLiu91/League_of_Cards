@@ -1,6 +1,6 @@
 import React from "react";
-import Deck from "../components/Deck.js"
 import {connect} from 'react-redux';
+import Deck from "../components/Deck.js"
 let deckKey = 0
 
 class DecksList extends React.Component {

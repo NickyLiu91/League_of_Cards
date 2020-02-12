@@ -518,31 +518,6 @@ class Home extends React.Component {
     })
   }
 
-  getDuelist = (player, location, dialogue=0) => {
-    console.log(player)
-    let desiredDeck
-    fetch(`http://localhost:3000/api/v1/decks/${this.state.currentDeck.id}`)
-    .then(res => res.json())
-    .then(res => this.setState(
-      {
-        currentDeckCards: res.cards
-      }, () => {
-        fetch(`http://localhost:3000/api/v1/players/${player.id}`)
-        .then(response => response.json())
-        .then(json => {
-          this.setState({
-            player2: player,
-            player2Deck: json.cards,
-            duelLocation: location,
-            dialogue: dialogue
-          }, () => { this.renderDuel()}
-        )
-        })
-      }
-    ))
-
-  }
-
   renderDuel = () => {
     this.setState({
       render: 'duel'
@@ -772,11 +747,8 @@ class Home extends React.Component {
         <div>
           <Header renderStuff={this.renderStuff}/>
           <DecksList
-            // currentPlayer={this.state.currentPlayer}
             renderCollection={this.renderCollection}
             renderHome={this.renderHome}
-            // getDeck={this.getDeck}
-            // currentDeck={this.state.currentDeck}
           />
         </div>
       )
@@ -830,9 +802,6 @@ class Home extends React.Component {
           <Header renderStuff={this.renderStuff} deck={this.state.currentDeckCards}/>
           <div className="duelist-list-container">
             <DuelistsList
-              currentPlayer={this.state.currentPlayer}
-              allPlayers={this.state.allPlayers}
-              getDuelist={this.getDuelist}
               renderDuel={this.renderDuel}
             />
           </div>
