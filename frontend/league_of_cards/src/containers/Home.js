@@ -100,6 +100,9 @@ class Home extends React.Component {
                   card_id: object.newCard.id
                 }
           )})
+          .then(res => res.json())
+          .then(json => {this.props.changeDeckCards([...this.props.deckCards, json])
+          console.log(json)})
         })
       })
     })
@@ -294,7 +297,7 @@ class Home extends React.Component {
           this.props.changeDeck(player.decks[0])
           this.props.changeDecksList(player.decks)
           console.log(this.props)
-          this.props.changeDeckCards(player.deckCards)
+          // this.props.changeDeckCards(player.deckCards)
           this.props.changeGold(player.gold)
           this.props.changeDefeated(player.defeated)
           this.props.changeDialogue(player.dialogue)
@@ -310,11 +313,15 @@ class Home extends React.Component {
             defeated: player.defeated_id,
             dialogue: player.dialogue
           }, () => {
-            fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/decks/${this.state.currentDeck.id}`)
+            fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/decks/${this.props.deck.id}`)
             .then(res => res.json())
-            .then(res => this.setState({
-              currentDeckCards: res.cards
-            }))
+            .then(json => {this.props.changeDeckCards(json.cards)})
+          //   .then(res => {
+          //     this.setState({
+          //     currentDeckCards: res.cards
+          //   })
+          // )
+
             this.generateNoDupesCurrentPlayerCollection()
           })
         })
