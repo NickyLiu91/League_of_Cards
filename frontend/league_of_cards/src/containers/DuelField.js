@@ -784,6 +784,10 @@ class DuelField extends React.Component {
       display: 'Win'
     })
 
+    let oldCards = this.props.currentPlayerCards
+    oldCards.push(newCard)
+    this.props.changeCurrentPlayerCards(oldCards)
+
     fetch("http://localhost:3000/api/v1/cards", {
       method: 'POST',
       headers: {

@@ -405,6 +405,8 @@ class Home extends React.Component {
           })
         })
       }))
+      
+      this.props.changeDialogue(this.props.dialogue + 1)
 
     }
   }
