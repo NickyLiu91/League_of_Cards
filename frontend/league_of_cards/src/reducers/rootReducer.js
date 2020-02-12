@@ -91,7 +91,7 @@ function enemyChanger(state = {enemy: {}}, action) {
   }
 }
 
-function enemyDeckChanger(state = {enemyDeck: [], action) {
+function enemyDeckChanger(state = {enemyDeck: []}, action) {
   switch (action.type) {
     case 'CHANGE_ENEMYDECK':
       // console.log(state);
@@ -171,6 +171,7 @@ export default combineReducers({
   deckCardsChanger,
   charactersChanger,
   enemyChanger,
+  enemyDeckChanger,
   cardChanger,
   decksListChanger,
   goldChanger,

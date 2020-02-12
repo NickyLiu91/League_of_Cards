@@ -28,7 +28,7 @@ class DuelField extends React.Component {
     player2Life: 8000,
     player2Monsters: [{}, {}, {}, {}, {}],
     player2Spells: [{}, {}, {}, {}, {}],
-    player2Deck: [...this.props.enemy.decks[0]],
+    player2Deck: this.props.enemyDeck,
     player2Hand: [],
     player2Graveyard: [],
     actionType: '',
@@ -138,7 +138,7 @@ class DuelField extends React.Component {
     let player1Deck = []
     let player2Deck = []
 
-    this.props.player1Deck.map(
+    this.props.deckCards.map(
       cardObj => {
         let newCardObj = cardObj
         newCardObj.position = ''
@@ -153,7 +153,7 @@ class DuelField extends React.Component {
 
     // player1Deck = this.shuffle(player1Deck)
 
-    this.props.player2Deck.map(
+    this.props.enemyDeck.map(
       cardObj => {
         let newCardObj = cardObj
         newCardObj.position = ''
@@ -712,7 +712,7 @@ class DuelField extends React.Component {
   }
 
   win = () => {
-    let listOfCards = this.props.player2Deck
+    let listOfCards = this.props.enemyDeck
     let number = Math.floor(Math.random() * 100) + 1
     console.log(number)
     let newCard
@@ -2237,15 +2237,15 @@ class DuelField extends React.Component {
           />
         </div>
       )
-    } else if (this.props.player2.name === "Xerath"){
+    } else if (this.props.enemy.name === "Xerath"){
       audio.play()
       return(
         <div>
           <div id="duel-field-container">
             <div id="duel-field">
 
-              <div>{this.props.player2.name}</div>
-              <img src={this.props.player2.image}/>
+              <div>{this.props.enemy.name}</div>
+              <img src={this.props.enemy.image}/>
               <div>
                 <img id="summoners-rift" src="image/summoners-rift.jpg"/>
                 <div id="enemy-field">
@@ -2366,8 +2366,8 @@ class DuelField extends React.Component {
           <div id="duel-field-container">
             <div id="duel-field">
 
-              <div>{this.props.player2.name}</div>
-              <img src={this.props.player2.image}/>
+              <div>{this.props.enemy.name}</div>
+              <img src={this.props.enemy.image}/>
               <div>
                 <img id="summoners-rift" src="image/summoners-rift.jpg"/>
                 <div id="enemy-field">
@@ -2444,7 +2444,7 @@ class DuelField extends React.Component {
                   />
                 </div>
               </div>
-              <img src={this.props.player1.image}/>
+              <img src={this.props.account.image}/>
               <div>Sivir</div>
             </div>
             <div id="action-box">
@@ -2489,7 +2489,9 @@ const mapStateToProps = state => {
     account: state.accountChanger.account,
     currentPlayerCards: state.currentPlayerCardsChanger.currentPlayerCards,
     deck: state.deckChanger.deck,
+    deckCards: state.deckCardsChanger.deckCards,
     enemy: state.enemyChanger.enemy,
+    enemyDeck: state.enemyDeckChanger.enemyDeck,
     gold: state.goldChanger.gold,
     defeated: state.defeatedChanger.defeated,
     dialogue: state.dialogueChanger.dialogue,
@@ -2502,7 +2504,9 @@ const mapDispatchToProps = dispatch => {
     changeAccount: (event) => dispatch({type: 'CHANGE_ACCOUNT', newAccount: event}),
     changeCurrentPlayerCards: (event) => dispatch({type: 'CHANGE_CURRENTPLAYERCARDS', newCurrentPlayerCards: event}),
     changeDeck: (event) => dispatch({type: 'CHANGE_DECK', newDeck: event}),
+    changeDeckCards: (event) => dispatch({type: 'CHANGE_DECKCARDS', newDeckCards: event}),
     changeEnemy: (event) => dispatch({type: 'CHANGE_ENEMY', newEnemy: event}),
+    changeEnemyDeck: (event) => dispatch({type: 'CHANGE_ENEMYDECK', newEnemyDeck: event}),
     changeGold: (event) => dispatch({type: 'CHANGE_GOLD', newGold: event}),
     changeDefeated: (event) => dispatch({type: 'CHANGE_DEFEEATED', newDefeated: event}),
     changeDialogue: (event) => dispatch({type: 'CHANGE_DIALOGUE', newDialogue: event}),
