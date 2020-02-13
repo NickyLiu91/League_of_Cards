@@ -85,7 +85,6 @@ class Home extends React.Component {
       fetch(`http://localhost:3000/api/v1/players/${playerObj.id}`)
       .then(res => res.json())
       .then(json => {deckNumber = json.decks[0].id})
-      .then(res => {console.log(object); console.log(deckNumber)})
       .then(res => {
         fetch(`http://localhost:3000/api/v1/deckcards`, {
           method: 'POST',
@@ -104,34 +103,12 @@ class Home extends React.Component {
         this.props.changeCurrentPlayerCards([...this.props.currentPlayerCards, object])
         this.props.changeDeckCards([...this.props.deckCards, object])
       })
-      // .then(response => {
-      //   fetch(`http://localhost:3000/api/v1/players/${playerObj.id}`)
-      //   .then(response => response.json())
-      //   .then(json => {Object.assign(object, {newCard: json.cards[deckNumber++], allCards: json.cards})})
-      //   .then(response => {
-      //     fetch(`http://localhost:3000/api/v1/deckcards`, {
-      //       method: 'POST',
-      //       headers: {
-      //         'Content-Type': 'application/json',
-      //         'Accept': 'application/json',
-      //       },
-      //       body: JSON.stringify(
-      //           {
-      //             deck_id: deck.id,
-      //             card_id: object.newCard.id
-      //           }
-      //     )})
-      //     .then(res => {
-      //       console.log(object.newCard);
-      //       this.props.changeDeckCards([...this.props.deckCards, object.newCard])})
-      //   })
-      // })
     })
   }
 
   generateNonChampion = (playerObj, nameVar, rarityVar, descriptionVar, effectVar, imageVar, typeVar, deck) => {
-    let object = {}
-    console.log(deck)
+    let object
+    let deckNumber
 
     fetch("http://localhost:3000/api/v1/cards", {
       method: 'POST',
@@ -176,29 +153,6 @@ class Home extends React.Component {
         this.props.changeCurrentPlayerCards([...this.props.currentPlayerCards, object])
         this.props.changeDeckCards([...this.props.deckCards, object])
       })
-    // .then(response => {
-    //   fetch(`http://localhost:3000/api/v1/players/${playerObj.id}`)
-    //   .then(res => res.json())
-    //   .then(json => {deck = json.decks[0]})
-    //   .then(response => {
-    //     fetch(`http://localhost:3000/api/v1/players/${playerObj.id}`)
-    //     .then(response => response.json())
-    //     .then(json => {Object.assign(object, {newCard: json.cards[deckNumber++], allCards: json.cards})})
-    //     .then(response => {
-    //       fetch(`http://localhost:3000/api/v1/deckcards`, {
-    //         method: 'POST',
-    //         headers: {
-    //           'Content-Type': 'application/json',
-    //           'Accept': 'application/json',
-    //         },
-    //         body: JSON.stringify(
-    //             {
-    //               deck_id: deck.id,
-    //               card_id: object.newCard.id
-    //             }
-    //       )})
-    //     })
-    //   })
     })
   }
 
@@ -322,8 +276,20 @@ class Home extends React.Component {
     }, () => this.generateNoDupesCurrentPlayerCollection()))
   }
 
+  setPlayerStates = (player, deck) => {
+    this.props.changeAccount(player)
+    this.props.changeCurrentPlayerCards(player.cards)
+    this.props.changeNoDupesCurrentPlayerCards(this.generateNoDupesCurrentPlayerCollection())
+    this.props.changeDeck(deck)
+    this.props.changeDecksList(player.decks)
+    this.props.changeGold(player.gold)
+    this.props.changeDefeated(player.defeated_id)
+    this.props.changeDialogue(player.dialogue)
+  }
+
   getPlayer = (event) => {
     let player
+    let deck
     fetch(`http://localhost:3000/api/v1/players`)
     .then(res => res.json())
     .then(json => {
@@ -338,15 +304,7 @@ class Home extends React.Component {
           // console.log(window.localStorage.length)
           // console.log(res)
           player = res.find(obj => obj.name === this.state.name && obj.password_digest === this.state.password)
-          this.props.changeAccount(player)
-          this.props.changeCurrentPlayerCards(player.cards)
-          this.props.changeNoDupesCurrentPlayerCards(this.generateNoDupesCurrentPlayerCollection())
-          this.props.changeDeck(player.decks[0])
-          this.props.changeDecksList(player.decks)
-          this.props.changeGold(player.gold)
-          this.props.changeDefeated(player.defeated_id)
-          this.props.changeDialogue(player.dialogue)
-          // this.props.changeLocation(player.location)
+          this.setPlayerStates(player)
         })
         .then(res => {
           this.setState({
@@ -361,13 +319,15 @@ class Home extends React.Component {
             fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/decks/${this.props.deck.id}`)
             .then(res => res.json())
             .then(json => {this.props.changeDeckCards(json.cards)})
-          //   .then(res => {
-          //     this.setState({
-          //     currentDeckCards: res.cards
-          //   })
-          // )
-
-            this.generateNoDupesCurrentPlayerCollection()
+            .then(res => {
+              fetch(`http://localhost:3000/api/v1/players/${player.id}/decks/${deck.id}`)
+              .then(res => res.json())
+              .then(res => this.setState({
+                currentDeckCards: res.cards
+              }))
+              this.generateNoDupesCurrentPlayerCollection()
+              this.setPlayerStates(player, deck)
+            })
           })
         })
       }})
@@ -575,7 +535,6 @@ class Home extends React.Component {
               this.generateDeck(this.state.currentPlayer)
             })
             .then(res => {
-              console.log(this.state.currentPlayer.decks)
               this.setState({
                 currentPlayer: player,
                 currentPlayerCollection: player.cards,
@@ -591,6 +550,7 @@ class Home extends React.Component {
                   currentDeckCards: res.cards
                 }))
                 this.generateNoDupesCurrentPlayerCollection()
+                this.setPlayerStates(player, deck)
               })
             })
           })
@@ -727,12 +687,6 @@ class Home extends React.Component {
   }
 
   getDuelist = (player, location, dialogue=0) => {
-  // fetch(`http://localhost:3000/api/v1/decks/${this.state.currentDeck.id}`)
-  // .then(res => res.json())
-  // .then(res => this.setState(
-  //   {
-  //     currentDeckCards: res.cards
-  //   }, () => {
       fetch(`http://localhost:3000/api/v1/players/${player.id}`)
       .then(response => response.json())
       .then(json => {
@@ -743,18 +697,13 @@ class Home extends React.Component {
           player2Deck: json.cards,
           duelLocation: location,
           dialogue: dialogue
-        }, () => { this.renderDuel()}
-      )
+        }, () => { this.renderDuel()})
       })
-  //   }
-  // ))
-
 }
 
 
   render() {
-    console.log(this.props.deckCards)
-    console.log(this.props.defeated)
+    console.log(this.props)
     if (this.state.render === 'home' || this.state.render === 'create') {
       return(
         <div>
