@@ -788,6 +788,15 @@ class DuelField extends React.Component {
     oldCards.push(newCard)
     this.props.changeCurrentPlayerCards(oldCards)
 
+    let newCollection = oldCards.map(card => {
+        card.quantity = this.props.currentPlayerCollection.filter(cardObj => cardObj.name === card.name).length;
+        return card
+      }
+    )
+
+    this.props.changeNoDupesCurrentPlayerCards(newCollection)
+
+
     fetch("http://localhost:3000/api/v1/cards", {
       method: 'POST',
       headers: {
@@ -851,7 +860,7 @@ class DuelField extends React.Component {
           },
           body: JSON.stringify(
             {
-              defeated_id: this.state.player2.id
+              defeated_id: this.props.player1.defeated_id + 1
             }
           )
         })
@@ -2496,6 +2505,7 @@ const mapStateToProps = state => {
     account: state.accountChanger.account,
     cards: state.cardsChanger.cards,
     currentPlayerCards: state.currentPlayerCardsChanger.currentPlayerCards,
+    noDupesCurrentPlayerCards: state.noDupesCurrentPlayerCardsChanger.noDupesCurrentPlayerCards,
     deck: state.deckChanger.deck,
     deckCards: state.deckCardsChanger.deckCards,
     enemy: state.enemyChanger.enemy,
@@ -2511,6 +2521,7 @@ const mapDispatchToProps = dispatch => {
   return {
     changeAccount: (event) => dispatch({type: 'CHANGE_ACCOUNT', newAccount: event}),
     changeCurrentPlayerCards: (event) => dispatch({type: 'CHANGE_CURRENTPLAYERCARDS', newCurrentPlayerCards: event}),
+    changeNoDupesCurrentPlayerCards: (event) => dispatch({type: 'CHANGE_NODUPESCURRENTPLAYERCARDS', newNoDupesCurrentPlayerCards: event}),
     changeGold: (event) => dispatch({type: 'CHANGE_GOLD', newGold: event}),
     changeDefeated: (event) => dispatch({type: 'CHANGE_DEFEATED', newDefeated: event}),
     changeDialogue: (event) => dispatch({type: 'CHANGE_DIALOGUE', newDialogue: event}),

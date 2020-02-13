@@ -119,6 +119,7 @@ class Collection extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return(
       <div>
         <img id="bilgewater" src="image/bilgewater.jpeg"/>
