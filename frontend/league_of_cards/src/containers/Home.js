@@ -102,7 +102,7 @@ class Home extends React.Component {
       .then(res => {
         this.props.changeCurrentPlayerCards([...this.props.currentPlayerCards, object])
         this.props.changeDeckCards([...this.props.deckCards, object])
-        this.generateNoDupesCurrentPlayerCollection()
+        // this.generateNoDupesCurrentPlayerCollection()
       })
     })
   }
@@ -153,7 +153,9 @@ class Home extends React.Component {
       .then(res => {
         this.props.changeCurrentPlayerCards([...this.props.currentPlayerCards, object])
         this.props.changeDeckCards([...this.props.deckCards, object])
-        this.generateNoDupesCurrentPlayerCollection()
+        if (nameVar == "Void Staff") {
+          this.generateNoDupesCurrentPlayerCollection()
+        }
       })
     })
   }
@@ -207,9 +209,7 @@ class Home extends React.Component {
         )})
       })
       .then(res => {
-        console.log(this.props.currentPlayerCards)
         this.props.changeCurrentPlayerCards([...this.props.currentPlayerCards, object])
-        console.log(this.props.currentPlayerCards)
         this.props.changeDeckCards([...this.props.deckCards, object])
       })
     })
@@ -707,7 +707,6 @@ class Home extends React.Component {
     if (this.state.render === 'home' || this.state.render === 'create') {
       return(
         <div>
-          <button onClick={() =>{  console.log(this.props)}}>PRINT</button>
           <HomeScreen
             render={this.state.render}
             name={this.state.name}
