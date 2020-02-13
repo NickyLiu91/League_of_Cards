@@ -328,12 +328,13 @@ class CampaignScreen extends React.Component {
         )
       }
     } else if (this.props.storyText[this.props.dialogue - 1] === "DUEL" || this.props.storyText[this.props.dialogue - 2] === "DUEL") {
+      console.log(this.props)
       return(
         <div id="campaign-screen" >
           <img id="campaign-background" src={this.props.characters[this.props.defeated - 1].background}/>
             <div id="text-box" onClick={event => {this.props.increaseDialogue()}}>
               <div id="speaker-picture">
-                <img id="speaker-picture-2" src={this.props.characters[this.props.account.defeated_id - 1].image} />
+                <img id="speaker-picture-2" src={this.props.characters[this.props.defeated - 1].image} />
               </div>
             <div id="story-text">
               <p>{this.props.storyText[this.props.dialogue]}</p>
@@ -347,7 +348,7 @@ class CampaignScreen extends React.Component {
           <img id="campaign-background" src={this.props.characters[this.props.defeated - 1].preduel}/>
             <div id="text-box" onClick={event => {this.props.increaseDialogue()}}>
               <div id="speaker-picture">
-                <img id="speaker-picture-2" src={this.props.characters[this.props.account.defeated_id - 1].image} />
+                <img id="speaker-picture-2" src={this.props.characters[this.props.defeated - 1].image} />
               </div>
             <div id="story-text">
               <p>{this.props.storyText[this.props.dialogue]}</p>
@@ -390,7 +391,7 @@ class CampaignScreen extends React.Component {
           <img id="campaign-background" src={this.props.characters[this.props.defeated].background}/>
             <div id="text-box" onClick={event => {this.props.increaseDialogue()}}>
               <div id="speaker-picture">
-                <img id="speaker-picture-2" src={this.props.characters[this.props.account.defeated_id].image} />
+                <img id="speaker-picture-2" src={this.props.characters[this.props.defeated].image} />
               </div>
             <div id="story-text">
               <p>{this.props.storyText[this.props.dialogue]}</p>

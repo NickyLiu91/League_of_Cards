@@ -5,10 +5,6 @@ let dialogueCounter = 0
 
 class Campaign extends React.Component {
   state = {
-    player1: this.props.account,
-    computers: this.props.characters,
-    dialogue: this.props.dialogue,
-    defeated: this.props.defeated,
     storyText: [
       {sivir: "Having accepted a job to rob a passing Demacian caravan of its jewels, my crew of bandits were easily dispatched by the three riding inside the caravan: Garen, Lux, and Ezreal."},
       {sivir: "They were looking for worthy mercenaries to hire for an expedition, and only I was deemed worthy."},
@@ -397,8 +393,7 @@ class Campaign extends React.Component {
     console.log(this.props.defeated)
     return(
       <div id="campaign-screen" >
-        <CampaignScreen player1={this.props.account} computers={this.props.characters}
-        dialogue={this.props.dialogue} defeated={this.props.defeated} storyText={this.state.storyText} increaseDialogue={this.increaseDialogue}
+        <CampaignScreen storyText={this.state.storyText} increaseDialogue={this.increaseDialogue}
         getDuelist={this.props.getDuelist} resetCampaign={this.props.resetCampaign}/>
       </div>
     )
