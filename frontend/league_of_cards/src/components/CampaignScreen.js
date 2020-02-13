@@ -1,8 +1,8 @@
 import React from "react";
+import {connect} from 'react-redux';
 var audio = new Audio('files/ExcitedDuelists.mp3')
 
-export default class CampaignScreen extends React.Component {
-
+class CampaignScreen extends React.Component {
 
   manageMusic = function(){
     if (this.props.storyText[this.props.dialogue].azir === "Is that so?") {
@@ -40,7 +40,7 @@ export default class CampaignScreen extends React.Component {
             <img id="campaign-background"/>
               <div id="text-box" onClick={event => {this.props.increaseDialogue()}}>
                 <div id="speaker-picture">
-                  <img id="speaker-picture-2" src={this.props.player1.image} />
+                  <img id="speaker-picture-2" src={this.props.account.image} />
                 </div>
               <div id="story-text">
                 <p>{this.props.storyText[this.props.dialogue].sivir}</p>
@@ -56,7 +56,7 @@ export default class CampaignScreen extends React.Component {
             <img id="campaign-background" />
               <div id="text-box" onClick={event => {this.props.increaseDialogue()}}>
                 <div id="speaker-picture">
-                  <img id="speaker-picture-2" src={this.props.player1.image} />
+                  <img id="speaker-picture-2" src={this.props.account.image} />
                 </div>
               <div id="story-text">
                 <p>{this.props.storyText[this.props.dialogue].sivir}</p>
@@ -72,7 +72,7 @@ export default class CampaignScreen extends React.Component {
           <img id="campaign-background" src={"image/XerathSummon.gif"}/>
             <div id="text-box" onClick={event => {this.props.increaseDialogue()}}>
               <div id="speaker-picture">
-                <img id="speaker-picture-2" src={this.props.player1.image} />
+                <img id="speaker-picture-2" src={this.props.account.image} />
               </div>
             <div id="story-text">
               <p>{this.props.storyText[this.props.dialogue].sivir}</p>
@@ -99,10 +99,10 @@ export default class CampaignScreen extends React.Component {
       if (this.props.storyText[this.props.dialogue] === "THIS TIME I WONT LEAVE EVEN A PARTICLE FOR YOU TO RESURRECT FROM!!!") {
         return(
           <div id="campaign-screen" >
-            <img id="campaign-preduel" src={this.props.computers[this.props.defeated].preduel}/>
-              <div id="text-box" onClick={event => {this.startDuel(this.props.computers[this.props.defeated])}}>
+            <img id="campaign-preduel" src={this.props.characters[this.props.defeated].preduel}/>
+              <div id="text-box" onClick={event => {this.startDuel(this.props.characters[this.props.defeated])}}>
                 <div id="speaker-picture">
-                  <img id="speaker-picture-2" src={this.props.computers[this.props.defeated].image} />
+                  <img id="speaker-picture-2" src={this.props.characters[this.props.defeated].image} />
                 </div>
               <div id="story-text">
                 <p>{this.props.storyText[this.props.dialogue]}</p>
@@ -117,7 +117,7 @@ export default class CampaignScreen extends React.Component {
               <img id="campaign-background" src={"image/AscendedXerath.jpg"}/>
                 <div id="text-box" onClick={event => {this.props.increaseDialogue()}}>
                   <div id="speaker-picture">
-                    <img id="speaker-picture-2" src={this.props.player1.image} />
+                    <img id="speaker-picture-2" src={this.props.account.image} />
                   </div>
                 <div id="story-text">
                   <p>{this.props.storyText[this.props.dialogue].sivir}</p>
@@ -191,7 +191,7 @@ export default class CampaignScreen extends React.Component {
               <img id="campaign-background" src="image/Xerath.png"/>
                 <div id="text-box" onClick={event => {this.props.increaseDialogue()}}>
                   <div id="speaker-picture">
-                    <img id="speaker-picture-2" src={this.props.player1.image} />
+                    <img id="speaker-picture-2" src={this.props.account.image} />
                   </div>
                 <div id="story-text">
                   <p>{this.props.storyText[this.props.dialogue].sivir}</p>
@@ -263,10 +263,10 @@ export default class CampaignScreen extends React.Component {
       console.log(this.props)
       return(
         <div id="campaign-screen" >
-          <img id="campaign-preduel" src={this.props.computers[this.props.defeated].preduel}/>
-            <div id="text-box" onClick={event => {this.props.getDuelist(this.props.computers[this.props.defeated], "campaign", this.props.dialogue)}}>
+          <img id="campaign-preduel" src={this.props.characters[this.props.defeated].preduel}/>
+            <div id="text-box" onClick={event => {this.props.getDuelist(this.props.characters[this.props.defeated], "campaign", this.props.dialogue)}}>
               <div id="speaker-picture">
-                <img id="speaker-picture-2" src={this.props.computers[this.props.defeated].image} />
+                <img id="speaker-picture-2" src={this.props.characters[this.props.defeated].image} />
               </div>
             <div id="story-text">
               <p>{this.props.storyText[this.props.dialogue - 1]}</p>
@@ -290,7 +290,7 @@ export default class CampaignScreen extends React.Component {
             <img id="campaign-background" src="image/XerathBG.png"/>
               <div id="text-box" onClick={event => {this.props.increaseDialogue()}}>
                 <div id="speaker-picture">
-                  <img id="speaker-picture-2" src={this.props.player1.image} />
+                  <img id="speaker-picture-2" src={this.props.account.image} />
                 </div>
               <div id="story-text">
                 <p>{this.props.storyText[this.props.dialogue].sivir}</p>
@@ -330,10 +330,10 @@ export default class CampaignScreen extends React.Component {
     } else if (this.props.storyText[this.props.dialogue - 1] === "DUEL" || this.props.storyText[this.props.dialogue - 2] === "DUEL") {
       return(
         <div id="campaign-screen" >
-          <img id="campaign-background" src={this.props.computers[this.props.defeated - 1].background}/>
+          <img id="campaign-background" src={this.props.characters[this.props.defeated - 1].background}/>
             <div id="text-box" onClick={event => {this.props.increaseDialogue()}}>
               <div id="speaker-picture">
-                <img id="speaker-picture-2" src={this.props.computers[this.props.player1.defeated_id - 1].image} />
+                <img id="speaker-picture-2" src={this.props.characters[this.props.account.defeated_id - 1].image} />
               </div>
             <div id="story-text">
               <p>{this.props.storyText[this.props.dialogue]}</p>
@@ -344,10 +344,10 @@ export default class CampaignScreen extends React.Component {
     } else if (this.props.storyText[this.props.dialogue - 1] === "THIS TIME I WONT LEAVE EVEN A PARTICLE FOR YOU TO RESURRECT FROM!!!" || this.props.storyText[this.props.dialogue - 2] === "THIS TIME I WONT LEAVE EVEN A PARTICLE FOR YOU TO RESURRECT FROM!!!") {
       return(
         <div id="campaign-screen" >
-          <img id="campaign-background" src={this.props.computers[this.props.defeated - 1].preduel}/>
+          <img id="campaign-background" src={this.props.characters[this.props.defeated - 1].preduel}/>
             <div id="text-box" onClick={event => {this.props.increaseDialogue()}}>
               <div id="speaker-picture">
-                <img id="speaker-picture-2" src={this.props.computers[this.props.player1.defeated_id - 1].image} />
+                <img id="speaker-picture-2" src={this.props.characters[this.props.account.defeated_id - 1].image} />
               </div>
             <div id="story-text">
               <p>{this.props.storyText[this.props.dialogue]}</p>
@@ -358,7 +358,7 @@ export default class CampaignScreen extends React.Component {
     } else if (this.props.storyText[this.props.dialogue].ezreal !== undefined) {
       return(
         <div id="campaign-screen" >
-          <img id="campaign-background" src={this.props.computers[this.props.defeated - 1].background}/>
+          <img id="campaign-background" src={this.props.characters[this.props.defeated - 1].background}/>
             <div id="text-box" onClick={event => {this.props.increaseDialogue()}}>
               <div id="speaker-picture">
                 <img id="speaker-picture-2" src="image/EzrealPortrait.png" />
@@ -372,10 +372,10 @@ export default class CampaignScreen extends React.Component {
     } else if (this.props.storyText[this.props.dialogue].sivir !== undefined) {
       return(
         <div id="campaign-screen" >
-          <img id="campaign-background" src={this.props.computers[this.props.defeated - 1].background}/>
+          <img id="campaign-background" src={this.props.characters[this.props.defeated - 1].background}/>
             <div id="text-box" onClick={event => {this.props.increaseDialogue()}}>
               <div id="speaker-picture">
-                <img id="speaker-picture-2" src={this.props.player1.image} />
+                <img id="speaker-picture-2" src={this.props.account.image} />
               </div>
             <div id="story-text">
               <p>{this.props.storyText[this.props.dialogue].sivir}</p>
@@ -387,10 +387,10 @@ export default class CampaignScreen extends React.Component {
       console.log(this.props.dialogue)
       return(
         <div id="campaign-screen" >
-          <img id="campaign-background" src={this.props.computers[this.props.defeated].background}/>
+          <img id="campaign-background" src={this.props.characters[this.props.defeated].background}/>
             <div id="text-box" onClick={event => {this.props.increaseDialogue()}}>
               <div id="speaker-picture">
-                <img id="speaker-picture-2" src={this.props.computers[this.props.player1.defeated_id].image} />
+                <img id="speaker-picture-2" src={this.props.characters[this.props.account.defeated_id].image} />
               </div>
             <div id="story-text">
               <p>{this.props.storyText[this.props.dialogue]}</p>
@@ -402,4 +402,28 @@ export default class CampaignScreen extends React.Component {
   }
 }
 
-// export default CampaignScreen;
+const mapStateToProps = state => {
+  return {
+    account: state.accountChanger.account,
+    characters: state.charactersChanger.characters,
+    // enemy: state.enemyChanger.enemy,
+    defeated: state.defeatedChanger.defeated,
+    dialogue: state.dialogueChanger.dialogue,
+    // location: state.locationChanger.location
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    changeAccount: (event) => dispatch({type: 'CHANGE_ACCOUNT', newAccount: event}),
+    // changeEnemy: (event) => dispatch({type: 'CHANGE_ENEMY', newEnemy: event}),
+    changeDefeated: (event) => dispatch({type: 'CHANGE_DEFEATED', newDefeated: event}),
+    changeDialogue: (event) => dispatch({type: 'CHANGE_DIALOGUE', newDialogue: event})
+    // changeLocation: (event) => dispatch({type: 'CHANGE_LOCATION', newLocation: event})
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CampaignScreen);
