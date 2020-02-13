@@ -23,7 +23,7 @@ const HomeScreen = (props) => {
             </div>
           </div>
         )
-    } else if (props.loggedIn === true) {
+    } else if (props.loggedIn) {
       return(
         <div>
           <img id="demacia" src="image/demacia.jpeg" />
