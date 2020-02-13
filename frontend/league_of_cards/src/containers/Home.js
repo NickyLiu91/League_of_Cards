@@ -339,7 +339,6 @@ class Home extends React.Component {
           // console.log(res)
           player = res.find(obj => obj.name === this.state.name && obj.password_digest === this.state.password)
           this.props.changeAccount(player)
-          this.props.changeName(player.name)
           this.props.changeCurrentPlayerCards(player.cards)
           this.props.changeNoDupesCurrentPlayerCards(this.generateNoDupesCurrentPlayerCollection())
           this.props.changeDeck(player.decks[0])
@@ -877,7 +876,6 @@ class Home extends React.Component {
 const mapStateToProps = state => {
   return {
     account: state.accountChanger.account,
-    name: state.nameChanger.name,
     cards: state.cardsChanger.cards,
     currentPlayerCards: state.currentPlayerCardsChanger.currentPlayerCards,
     noDupesCurrentPlayerCards: state.noDupesCurrentPlayerCardsChanger.noDupesCurrentPlayerCards,
@@ -898,7 +896,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     changeAccount: (event) => dispatch({type: 'CHANGE_ACCOUNT', newAccount: event}),
-    changeName: (event) => dispatch({type: 'CHANGE_NAME', newName: event}),
     changeCards: (event) => dispatch({type: 'CHANGE_CARDS', newCards: event}),
     changeCurrentPlayerCards: (event) => dispatch({type: 'CHANGE_CURRENTPLAYERCARDS', newCurrentPlayerCards: event}),
     changeNoDupesCurrentPlayerCards: (event) => dispatch({type: 'CHANGE_NODUPESCURRENTPLAYERCARDS', newNoDupesCurrentPlayerCards: event}),

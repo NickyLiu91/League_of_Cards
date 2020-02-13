@@ -10,16 +10,6 @@ function accountChanger(state = {account: {}}, action) {
   }
 }
 
-function nameChanger(state = {name: ''}, action) {
-  switch (action.type) {
-    case 'CHANGE_NAME':
-      // console.log(state);
-      return {name: action.newName}
-    default:
-      return state;
-  }
-}
-
 function cardsChanger(state = {cards: []}, action) {
   switch (action.type) {
     case 'CHANGE_CARDS':
@@ -163,7 +153,6 @@ function locationChanger(state = {location: 0}, action) {
 
 export default combineReducers({
   accountChanger,
-  nameChanger,
   cardsChanger,
   currentPlayerCardsChanger,
   noDupesCurrentPlayerCardsChanger,
