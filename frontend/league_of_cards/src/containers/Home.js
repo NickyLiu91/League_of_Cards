@@ -311,14 +311,53 @@ class Home extends React.Component {
           console.log(player.id)
           fetch(`http://localhost:3000/api/v1/players/${player.id}/decks/${deckId}`)
           .then(res => res.json())
+          .then(res => {
+            deck = res
+            this.setState({
+              currentPlayer: player,
+              currentPlayerCollection: player.cards,
+              currentDeck: deck,
+              loggedIn: true,
+              gold: player.gold,
+              defeated: player.defeated_id,
+              dialogue: player.dialogue
+            }, () => {
+              fetch(`http://localhost:3000/api/v1/players/${player.id}/decks/${deck.id}`)
+              .then(res => res.json())
+              .then(res => this.setState({
+                currentDeckCards: res
+              }))
+              this.generateNoDupesCurrentPlayerCollection()
+              this.setPlayerStates(player, deck)
+            })
+          })
           // .then(res => this.setState({
           //   currentDeckCards: res
           // }))
-          .then(res => {
-            deck = res
-            this.setPlayerStates(player, deck)
-            this.generateNoDupesCurrentPlayerCollection()
-          })
+          // .then(res => {
+          //   this.setState({
+          //     currentPlayer: player,
+          //     currentPlayerCollection: player.cards,
+          //     currentDeck: deck,
+          //     loggedIn: true,
+          //     gold: player.gold,
+          //     defeated: player.defeated_id,
+          //     dialogue: player.dialogue
+          //   }, () => {
+          //     fetch(`http://localhost:3000/api/v1/players/${player.id}/decks/${deck.id}`)
+          //     .then(res => res.json())
+          //     .then(res => this.setState({
+          //       currentDeckCards: res
+          //     }))
+          //     this.generateNoDupesCurrentPlayerCollection()
+          //     this.setPlayerStates(player, deck)
+          //   })
+          // })
+          // .then(res => {
+          //   deck = res
+          //   this.setPlayerStates(player, deck)
+          //   this.generateNoDupesCurrentPlayerCollection()
+          // })
         })
         // .then(res => {
           // this.setState({
@@ -540,28 +579,26 @@ class Home extends React.Component {
             .then(json => {
               deck = json
               this.generateDeck(this.state.currentPlayer)
-              this.generateNoDupesCurrentPlayerCollection()
-              this.setPlayerStates(player, deck)
             })
-            // .then(res => {
-            //   this.setState({
-            //     currentPlayer: player,
-            //     currentPlayerCollection: player.cards,
-            //     currentDeck: deck,
-            //     loggedIn: true,
-            //     gold: player.gold,
-            //     defeated: player.defeated_id,
-            //     dialogue: player.dialogue
-            //   }, () => {
-            //     fetch(`http://localhost:3000/api/v1/players/${player.id}/decks/${deck.id}`)
-            //     .then(res => res.json())
-            //     .then(res => this.setState({
-            //       currentDeckCards: res
-            //     }))
-                // this.generateNoDupesCurrentPlayerCollection()
-                // this.setPlayerStates(player, deck)
-            //   })
-            // })
+            .then(res => {
+              this.setState({
+                currentPlayer: player,
+                currentPlayerCollection: player.cards,
+                currentDeck: deck,
+                loggedIn: true,
+                gold: player.gold,
+                defeated: player.defeated_id,
+                dialogue: player.dialogue
+              }, () => {
+                fetch(`http://localhost:3000/api/v1/players/${player.id}/decks/${deck.id}`)
+                .then(res => res.json())
+                .then(res => this.setState({
+                  currentDeckCards: res
+                }))
+                this.generateNoDupesCurrentPlayerCollection()
+                this.setPlayerStates(player, deck)
+              })
+            })
           })
         })
       }
