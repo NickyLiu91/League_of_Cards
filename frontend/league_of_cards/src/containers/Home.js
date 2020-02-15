@@ -287,7 +287,7 @@ class Home extends React.Component {
         this.props.changeGold(player.gold)
         this.props.changeDefeated(player.defeated_id)
         this.props.changeDialogue(player.dialogue)
-        this.generateNoDupesCurrentPlayerCollection()
+        this.generateNoDupesCurrentPlayerCollection(player)
       // })
 
 
@@ -330,6 +330,7 @@ class Home extends React.Component {
               .then(res => this.setState({
                 currentDeckCards: res
               }))
+              console.log(player)
               this.setPlayerStates(player, deck)
             })
           })
@@ -337,16 +338,29 @@ class Home extends React.Component {
       }})
   }
 
-  generateNoDupesCurrentPlayerCollection = () => {
-    let newCollection = this.props.cards.map(card => {
-        card.quantity = this.props.currentPlayerCards.filter(cardObj => cardObj.name === card.name).length;
-        return card
-      }
-    )
+  generateNoDupesCurrentPlayerCollection = (player) => {
+    if (player) {
+      let newCollection = this.props.cards.map(card => {
+          card.quantity = player.cards.filter(cardObj => cardObj.name === card.name).length;
+          return card
+        }
+      )
 
-    this.props.changeNoDupesCurrentPlayerCards(newCollection)
-    return newCollection
+      this.props.changeNoDupesCurrentPlayerCards(newCollection)
+      console.log(this.props.noDupesCurrentPlayerCards)
+      return newCollection
 
+    } else {
+      let newCollection = this.props.cards.map(card => {
+          card.quantity = this.props.currentPlayerCards.filter(cardObj => cardObj.name === card.name).length;
+          return card
+        }
+      )
+
+      this.props.changeNoDupesCurrentPlayerCards(newCollection)
+      console.log(this.props.noDupesCurrentPlayerCards)
+      return newCollection
+    }
   }
 
   fetchCards = () => {
