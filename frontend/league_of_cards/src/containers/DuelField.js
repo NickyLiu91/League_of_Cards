@@ -788,8 +788,8 @@ class DuelField extends React.Component {
     oldCards.push(newCard)
     this.props.changeCurrentPlayerCards(oldCards)
 
-    let newCollection = oldCards.map(card => {
-        card.quantity = this.props.currentPlayerCards.filter(cardObj => cardObj.name === card.name).length;
+    let newCollection = this.props.cards.map(card => {
+        card.quantity = oldCards.filter(cardObj => cardObj.name === card.name).length;
         return card
       }
     )
