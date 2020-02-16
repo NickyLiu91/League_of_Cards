@@ -750,17 +750,17 @@ class Home extends React.Component {
         <div>
           <Header renderStuff={this.renderStuff} deck={this.state.currentDeckCards}/>
           <Campaign
-            player1={this.state.currentPlayer}
-            player1Deck={this.state.currentDeckCards}
-            player2={this.state.player2}
-            player2Deck={this.state.player2Deck}
+            // player1={this.state.currentPlayer}
+            // player1Deck={this.state.currentDeckCards}
+            // player2={this.state.player2}
+            // player2Deck={this.state.player2Deck}
             renderHome={this.renderHome}
-            allPlayers={this.state.allPlayers}
-            updateCurrentPlayerCollection={this.updateCurrentPlayerCollection}
+            // allPlayers={this.state.allPlayers}
+            // updateCurrentPlayerCollection={this.updateCurrentPlayerCollection}
             reward={this.reward}
-            gold={this.state.gold}
+            // gold={this.state.gold}
             getDuelist={this.getDuelist}
-            increaseDialogue={this.increaseDialogue}
+            // increaseDialogue={this.increaseDialogue}
             resetCampaign={this.resetCampaign}
             />
         </div>
