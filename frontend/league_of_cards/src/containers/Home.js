@@ -530,44 +530,30 @@ class Home extends React.Component {
         .then(res => res.json())
         .then(json => {
           player = json
-          this.setState({
-            currentPlayer: player
-          }, () => {
-            fetch(`http://localhost:3000/api/v1/decks`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-              },
-              body: JSON.stringify(
-                  {
-                    name: "Deck 1",
-                    player_id: this.state.currentPlayer.id
-                  }
-            )})
+          fetch(`http://localhost:3000/api/v1/decks`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            body: JSON.stringify(
+                {
+                  name: "Deck 1",
+                  player_id: player.id
+                }
+          )})
+          .then(res => res.json())
+          .then(json => {
+            deck = json
+            this.generateDeck(player)
+          })
+          .then(res => {
+            fetch(`http://localhost:3000/api/v1/players/${player.id}/decks/${deck.id}`)
             .then(res => res.json())
-            .then(json => {
-              deck = json
-              this.generateDeck(this.state.currentPlayer)
-            })
-            .then(res => {
-              this.setState({
-                currentPlayer: player,
-                currentPlayerCollection: player.cards,
-                currentDeck: deck,
-                loggedIn: true,
-                gold: player.gold,
-                defeated: player.defeated_id,
-                dialogue: player.dialogue
-              }, () => {
-                fetch(`http://localhost:3000/api/v1/players/${player.id}/decks/${deck.id}`)
-                .then(res => res.json())
-                .then(res => this.setState({
-                  currentDeckCards: res
-                }))
-                this.setPlayerStates(player, deck)
-              })
-            })
+            .then(res => this.setState({
+              currentDeckCards: res
+            }))
+            this.setPlayerStates(player, deck)
           })
         })
       }
