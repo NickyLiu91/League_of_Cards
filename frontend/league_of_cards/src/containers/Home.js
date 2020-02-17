@@ -289,6 +289,10 @@ class Home extends React.Component {
         this.props.changeDialogue(player.dialogue)
         this.generateNoDupesCurrentPlayerCollection(player)
       // })
+      this.setState({
+        loggedIn: true,
+        render: 'home'
+      })
 
 
   }
@@ -316,23 +320,7 @@ class Home extends React.Component {
           .then(res => res.json())
           .then(res => {
             deck = res
-            this.setState({
-              currentPlayer: player,
-              currentPlayerCollection: player.cards,
-              currentDeck: deck,
-              loggedIn: true,
-              gold: player.gold,
-              defeated: player.defeated_id,
-              dialogue: player.dialogue
-            }, () => {
-              fetch(`http://localhost:3000/api/v1/players/${player.id}/decks/${deck.id}`)
-              .then(res => res.json())
-              .then(res => this.setState({
-                currentDeckCards: res
-              }))
-              console.log(player)
-              this.setPlayerStates(player, deck)
-            })
+            this.setPlayerStates(player, deck)
           })
         })
       }})
@@ -548,11 +536,6 @@ class Home extends React.Component {
             this.generateDeck(player)
           })
           .then(res => {
-            fetch(`http://localhost:3000/api/v1/players/${player.id}/decks/${deck.id}`)
-            .then(res => res.json())
-            .then(res => this.setState({
-              currentDeckCards: res
-            }))
             this.setPlayerStates(player, deck)
           })
         })
