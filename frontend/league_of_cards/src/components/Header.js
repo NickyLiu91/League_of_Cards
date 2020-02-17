@@ -7,12 +7,12 @@ const Header = (props) => {
     return(
       <nav>
           <ul>
-            <li className="home" onClick={event => {props.history.push("/")}}>Home</li>
-            <li className="campaign" onClick={event => {props.renderStuff(event)}}>Campaign</li>
-            <li className="duelistsList" onClick={event => {props.renderStuff(event)}}>Free Duel</li>
-            <li className="collection" onClick={event => {props.renderStuff(event)}}>Collection</li>
-            <li className="store" onClick={event => {props.renderStuff(event)}}>Store</li>
-            <li className="decksList" onClick={event => {props.renderStuff(event)}}>Decks</li>
+            <li className="home" onClick={() => {props.history.push("/")}}>Home</li>
+            <li className="campaign" onClick={() => {props.history.push("/campaign")}}>Campaign</li>
+            <li className="duelistsList" onClick={() => {props.history.push("/duelistsList")}}>Free Duel</li>
+            <li className="collection" onClick={() => {props.history.push("/collection")}}>Collection</li>
+            <li className="store" onClick={() => {props.history.push("/cardStore")}}>Store</li>
+            <li className="decksList" onClick={() => {props.history.push("/decksList")}}>Decks</li>
           </ul>
       </nav>
     )
