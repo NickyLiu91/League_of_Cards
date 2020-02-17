@@ -11,6 +11,8 @@ import HomeScreen from "../components/HomeScreen.js"
 import Rules from "../components/Rules.js"
 import Campaign from "./Campaign.js"
 import {connect} from 'react-redux';
+import {compose} from 'redux';
+import {Route, Link, withRouter} from 'react-router-dom';
 
 let deckNumber = 0
 
@@ -845,7 +847,8 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  withRouter,
+  connect(mapStateToProps,
+  mapDispatchToProps)
 )(Home);

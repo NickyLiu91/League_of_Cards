@@ -4,6 +4,17 @@ import './App.css';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux'
 import Home from './containers/Home'
+import Collection from "./containers/Collection.js"
+import CardInfo from "./components/CardInfo.js"
+// import SideBar from "./SideBar.js"
+import DuelField from "./containers/DuelField.js"
+import CardStore from "./containers/CardStore.js"
+import DecksList from "./containers/DecksList.js"
+import DuelistsList from "./containers/DuelistsList.js"
+import Header from "./components/Header.js"
+import HomeScreen from "./components/HomeScreen.js"
+import Rules from "./components/Rules.js"
+import Campaign from "./containers/Campaign.js"
 import {Route, Link, Switch} from 'react-router-dom';
 
 class App extends Component {
@@ -12,7 +23,14 @@ class App extends Component {
       <div className="App">
       <Switch>
         <Route exact path={`/`} component={Home} />
-
+        <Route path={`/rules`} component={Rules} />
+        <Route path={`/campaign`} component={Campaign} />
+        <Route path={`/duelistsList`} component={DuelistsList} />
+        <Route path={`/duelField`} component={DuelField} />
+        <Route path={`/collection`} component={Collection} />
+        <Route path={`/cardInfo`} component={CardInfo} />
+        <Route path={`/cardStore`} component={CardStore} />
+        <Route path={`/decksList`} component={DecksList} />
       </Switch>
       </div>
     )
