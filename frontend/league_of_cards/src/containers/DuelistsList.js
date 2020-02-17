@@ -1,5 +1,7 @@
 import React from "react";
 import {connect} from 'react-redux';
+import {compose} from 'redux';
+import {Route, Link, withRouter} from 'react-router-dom';
 import Duelist from "../components/Duelist.js"
 
 let duelistKey = 0
@@ -94,7 +96,8 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  withRouter,
+  connect(mapStateToProps,
+  mapDispatchToProps)
 )(DuelistsList);

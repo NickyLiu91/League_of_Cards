@@ -1,5 +1,7 @@
 import React from "react";
 import {connect} from 'react-redux';
+import {compose} from 'redux';
+import {Route, Link, withRouter} from 'react-router-dom';
 import CampaignScreen from "../components/CampaignScreen.js"
 let dialogueCounter = 0
 
@@ -421,7 +423,8 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  withRouter,
+  connect(mapStateToProps,
+  mapDispatchToProps)
 )(Campaign);

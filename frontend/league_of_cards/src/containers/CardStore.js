@@ -1,6 +1,8 @@
 import React from "react";
-import Card from "../components/Card.js"
 import {connect} from 'react-redux';
+import {compose} from 'redux';
+import {Route, Link, withRouter} from 'react-router-dom';
+import Card from "../components/Card.js"
 let packKey = 0
 let cardResults = []
 
@@ -166,7 +168,8 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  withRouter,
+  connect(mapStateToProps,
+  mapDispatchToProps)
 )(CardStore);

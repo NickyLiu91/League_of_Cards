@@ -1,5 +1,7 @@
 import React from "react";
 import {connect} from 'react-redux';
+import {compose} from 'redux';
+import {Route, Link, withRouter} from 'react-router-dom';
 import Deck from "../components/Deck.js"
 let deckKey = 0
 
@@ -102,7 +104,8 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  withRouter,
+  connect(mapStateToProps,
+  mapDispatchToProps)
 )(DecksList);
