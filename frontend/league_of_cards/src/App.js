@@ -12,7 +12,7 @@ import CardStore from "./containers/CardStore.js"
 import DecksList from "./containers/DecksList.js"
 import DuelistsList from "./containers/DuelistsList.js"
 import Header from "./components/Header.js"
-import HomeScreen from "./components/HomeScreen.js"
+// import HomeScreen from "./components/HomeScreen.js"
 import Rules from "./components/Rules.js"
 import Campaign from "./containers/Campaign.js"
 import {Route, Link, Switch} from 'react-router-dom';

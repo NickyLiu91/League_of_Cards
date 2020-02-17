@@ -1,5 +1,7 @@
 import React from "react";
 import {connect} from 'react-redux';
+import {compose} from 'redux';
+import {Route, Link, withRouter} from 'react-router-dom';
 import Card from "../components/Card.js"
 
 class Collection extends React.Component {
@@ -158,7 +160,8 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  withRouter,
+  connect(mapStateToProps,
+  mapDispatchToProps)
 )(Collection);

@@ -18,25 +18,25 @@ let deckNumber = 0
 
 class Home extends React.Component {
   state = {
-    render: 'home',
+    // render: 'home',
     loggedIn: false,
     name: '',
-    collection: [],
-    allPlayers: [],
-    currentDeck: '',
-    currentDeckCards: [],
-    currentPlayer: '',
-    currentPlayerCollection: [],
-    noDupesCurrentPlayerCollection: [],
-    selectedCard: '',
-    player2: '',
-    player2Deck: [],
+    // collection: [],
+    // allPlayers: [],
+    // currentDeck: '',
+    // currentDeckCards: [],
+    // currentPlayer: '',
+    // currentPlayerCollection: [],
+    // noDupesCurrentPlayerCollection: [],
+    // selectedCard: '',
+    // player2: '',
+    // player2Deck: [],
     password: '',
-    decksList: [],
-    gold: '',
-    defeated: 0,
-    duelLocation: '',
-    dialogue: ''
+    // decksList: [],
+    // gold: '',
+    // defeated: 0,
+    // duelLocation: '',
+    // dialogue: ''
   }
 
   handleName = (event) => {
@@ -689,6 +689,58 @@ class Home extends React.Component {
 
 
   render() {
+    if (this.state.loggedIn === false) {
+      return(
+          <div>
+          <img id="shurima" src="image/shurima_sun_01.jpg" />
+            <div id="home">
+            <h1>LEAGUE OF CARDS</h1>
+              <form>
+                <h1>Log-In</h1>
+                  Account: <input type="text" value={this.name} onChange={event => this.handleName(event)}/>
+                  <br/>
+                  <br/>
+                  Password: <input type="password" value={this.password} onChange={event => this.handlePassword(event)}/>
+                  <br/>
+                  <br/>
+                  <button type="button" onClick={event => this.getPlayer(event)}>Submit</button>
+              </form>
+                <br/>
+              <button className="create" onClick={event => {this.renderStuff(event)}}>Create Account</button>
+            </div>
+          </div>
+        )
+    } else if (this.state.loggedIn) {
+      return(
+        <div>
+          <img id="demacia" src="image/demacia.jpeg" />
+          <div id="logged-in">
+            <h1>LEAGUE OF CARDS</h1>
+              <h1>Welcome, {this.props.account.name}!</h1>
+              <br/>
+              <button className="rules" onClick={event => {this.renderStuff(event)}}>Rules</button>
+              <br/>
+              <br/>
+              <button className="campaign" onClick={event => {this.renderStuff(event)}}>Campaign</button>
+              <br/>
+              <br/>
+              <button className="duelistsList" onClick={event => {this.renderStuff(event)}}>Free Duel</button>
+              <br/>
+              <br/>
+              <button className="collection" onClick={() => {this.props.history.push('/collection')}}>Collection</button>
+              <br/>
+              <br/>
+              <button className="store" onClick={event => {this.renderStuff(event)}}>Card Store</button>
+              <br/>
+              <br/>
+              <button className="decksList" onClick={event => {this.renderStuff(event)}}>Decks</button>
+              <br/>
+              <br/>
+              <button onClick={this.logOut}>Log-Out</button>
+          </div>
+        </div>
+      )
+    }
     if (this.state.render === 'home' || this.state.render === 'create') {
       return(
         <div>
