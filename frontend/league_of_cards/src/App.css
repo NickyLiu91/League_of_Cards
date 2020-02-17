@@ -660,3 +660,8 @@ button {
   right: 279px;
   bottom: 20px;
 }*/
+
+.App {
+  display: flex;
+  flex-direction: column;
+}

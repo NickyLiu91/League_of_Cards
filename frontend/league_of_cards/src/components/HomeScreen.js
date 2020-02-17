@@ -29,7 +29,7 @@ const HomeScreen = (props) => {
           <img id="demacia" src="image/demacia.jpeg" />
           <div id="logged-in">
             <h1>LEAGUE OF CARDS</h1>
-              <h1>Welcome, {props.currentPlayer.name}!</h1>
+              <h1>Welcome, {props.name}!</h1>
               <br/>
               <button className="rules" onClick={event => {props.renderStuff(event)}}>Rules</button>
               <br/>
