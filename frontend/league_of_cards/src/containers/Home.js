@@ -680,28 +680,7 @@ class Home extends React.Component {
           </div>
         </div>
       )
-    } else if (this.state.loggedIn === false) {
-      return(
-          <div>
-          <img id="shurima" src="image/shurima_sun_01.jpg" />
-            <div id="home">
-            <h1>LEAGUE OF CARDS</h1>
-              <form>
-                <h1>Log-In</h1>
-                  Account: <input type="text" value={this.name} onChange={event => this.handleName(event)}/>
-                  <br/>
-                  <br/>
-                  Password: <input type="password" value={this.password} onChange={event => this.handlePassword(event)}/>
-                  <br/>
-                  <br/>
-                  <button type="button" onClick={event => this.getPlayer(event)}>Submit</button>
-              </form>
-                <br/>
-              <button className="create" onClick={event => {this.renderStuff(event)}}>Create Account</button>
-            </div>
-          </div>
-        )
-    } else if (this.props.account) {
+    }  else if (this.props.account.name) {
       return(
         <div>
           <img id="demacia" src="image/demacia.jpeg" />
@@ -731,7 +710,29 @@ class Home extends React.Component {
           </div>
         </div>
       )
+    } else {
+      return(
+          <div>
+          <img id="shurima" src="image/shurima_sun_01.jpg" />
+            <div id="home">
+            <h1>LEAGUE OF CARDS</h1>
+              <form>
+                <h1>Log-In</h1>
+                  Account: <input type="text" value={this.name} onChange={event => this.handleName(event)}/>
+                  <br/>
+                  <br/>
+                  Password: <input type="password" value={this.password} onChange={event => this.handlePassword(event)}/>
+                  <br/>
+                  <br/>
+                  <button type="button" onClick={event => this.getPlayer(event)}>Submit</button>
+              </form>
+                <br/>
+              <button className="create" onClick={event => {this.renderStuff(event)}}>Create Account</button>
+            </div>
+          </div>
+        )
     }
+
     if (this.state.render === 'home' || this.state.render === 'create') {
       return(
         <div>

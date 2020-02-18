@@ -57,14 +57,14 @@ class DecksList extends React.Component {
 
   getDeck = (deck) => {
     let desiredDeck
-    fetch("http://localhost:3000/api/v1/decks")
+    console.log(deck)
+    fetch(`http://localhost:3000/api/v1/decks/${deck.id}`)
     .then(res => res.json())
-    .then(res => desiredDeck = res.find(
-      deckObj => deck.name === deckObj.name
-    ))
+    .then(res => desiredDeck = res)
     .then(res => {
       this.props.changeDeck(desiredDeck)
-      this.props.renderHome()
+      this.props.changeDeckCards(desiredDeck.cards)
+      this.props.history.push('/')
     })
   }
 
@@ -92,6 +92,7 @@ const mapStateToProps = state => {
   return {
     account: state.accountChanger.account,
     deck: state.deckChanger.deck,
+    deckCards: state.deckCardsChanger.deckCards,
     decksList: state.decksListChanger.decksList
   }
 }
@@ -100,6 +101,7 @@ const mapDispatchToProps = dispatch => {
   return {
     changeAccount: (event) => dispatch({type: 'CHANGE_ACCOUNT', newAccount: event}),
     changeDeck: (event) => dispatch({type: 'CHANGE_DECK', newDeck: event}),
+    changeDeckCards: (event) => dispatch({type: 'CHANGE_DECKCARDS', newDeckCards: event}),
     changeDecksList: (event) => dispatch({type: 'CHANGE_DECKSLIST', newDecksList: event})
   }
 }
