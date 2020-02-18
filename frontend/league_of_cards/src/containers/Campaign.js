@@ -380,23 +380,50 @@ class Campaign extends React.Component {
       )
     })
     .then(res => {
-      // let player = this.state.player1
-      // player.dialogue = player.dialogue + 1
-      //
-      // this.setState({
-      //   player1: player,
-      //   dialogue: this.state.dialogue + 1
-      // })
       this.props.changeDialogue(this.props.dialogue + 1)
     })
   }
 
+  resetCampaign = (event) => {
+    fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(
+          {
+            defeated_id: 0,
+            dialogue: 0,
+            completed: true,
+          }
+      )
+    })
+    .then(res => {
+      this.props.changeDialogue(0)
+      this.props.changeDefeated(0)
+      this.props.changeCompleted(true)
+      this.props.history.push('/')
+    })
+  }
+
+  getDuelist = (player, location, dialogue=0) => {
+    fetch(`http://localhost:3000/api/v1/players/${player.id}`)
+    .then(response => response.json())
+    .then(json => {
+      this.props.changeEnemy(player)
+      this.props.changeEnemyDeck(json.cards)
+      this.props.changeLocation(location)
+      this.props.changeDialogue(dialogue)
+      this.props.history.push('/DuelField')
+    })
+}
+
   render() {
-    console.log(this.props.defeated)
     return(
       <div id="campaign-screen" >
         <CampaignScreen storyText={this.state.storyText} increaseDialogue={this.increaseDialogue}
-        getDuelist={this.props.getDuelist} resetCampaign={this.props.resetCampaign}/>
+        getDuelist={this.getDuelist} resetCampaign={this.resetCampaign}/>
       </div>
     )
   }
