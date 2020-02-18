@@ -158,6 +158,7 @@ img {
   display: inline-block;
   overflow: scroll;
   /*overflow-y: overlay;*/
+  background-color: black
 }
 
 .sidebar-card {

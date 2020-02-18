@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {Route, Link, withRouter} from 'react-router-dom';
 import Card from "../components/Card.js"
+import SideBar from "../containers/SideBar.js"
 
 class Collection extends React.Component {
 
@@ -132,6 +133,7 @@ class Collection extends React.Component {
             {this.generateCards()}
           </div>
         </div>
+        <SideBar />
       </div>
     )
   }

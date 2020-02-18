@@ -642,37 +642,6 @@ class Home extends React.Component {
     this.renderCard()
   }
 
-  addToDeck = (card) => {
-
-    if (this.props.deckCards.filter(
-      cardObj => cardObj.name === card.name
-    ).length < 3 &&
-    this.props.deckCards.length < 40 &&
-    card.quantity - this.props.deckCards.filter(cardObj => cardObj.name === card.name).length > 0) {
-
-      let cardToAdd = this.props.currentPlayerCards.filter(cardObj =>
-        cardObj.name === card.name && this.props.deckCards.filter(cardObj2 => cardObj2.id === cardObj.id ).length === 0
-      )[0]
-      console.log(cardToAdd)
-
-        fetch(`http://localhost:3000/api/v1/deckcards`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          body: JSON.stringify(
-              {
-                deck_id: this.props.deck.id,
-                card_id: cardToAdd.id
-              }
-        )})
-        .then(res => {
-          this.props.changeDeckCards([...this.props.deckCards, cardToAdd])
-        })
-    }
-  }
-
   getDuelist = (player, location, dialogue=0) => {
       fetch(`http://localhost:3000/api/v1/players/${player.id}`)
       .then(response => response.json())
@@ -808,20 +777,6 @@ class Home extends React.Component {
             // increaseDialogue={this.increaseDialogue}
             resetCampaign={this.resetCampaign}
             />
-        </div>
-      )
-    } else if (this.state.render === 'decksList') {
-      return(
-        <div>
-          <Header renderStuff={this.renderStuff}/>
-          <DecksList renderCollection={this.renderCollection} renderHome={this.renderHome} />
-        </div>
-      )
-    } else if (this.state.render === 'store') {
-      return(
-        <div>
-          <Header renderStuff={this.renderStuff} />
-          <CardStore renderCollection={this.renderCollection} />
         </div>
       )
     } else if (this.state.render === 'collection') {
