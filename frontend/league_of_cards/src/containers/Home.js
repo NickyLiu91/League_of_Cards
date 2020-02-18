@@ -18,7 +18,7 @@ let deckNumber = 0
 
 class Home extends React.Component {
   state = {
-    // render: 'home',
+    render: 'home',
     loggedIn: false,
     name: '',
     // collection: [],
@@ -419,6 +419,7 @@ class Home extends React.Component {
   }
 
   renderStuff = (event) => {
+    console.log(event.target.className)
     var sounds = document.getElementsByTagName('audio')
     for (let i = 0; i < sounds.length; i++) {sounds[i].pause()}
     if (this.state.render !== event.target.className) {
@@ -689,7 +690,28 @@ class Home extends React.Component {
 
 
   render() {
-    if (this.state.loggedIn === false) {
+    if (this.state.render === 'create') {
+      return(
+        <div>
+        <img id="shurima" src="image/shurima_sun_01.jpg" />
+          <div id="home">
+            <h1>LEAGUE OF CARDS</h1>
+              <form>
+                Account Name: <input type="text" value={this.state.name} onChange={event => this.handleName(event)}/>
+                <br/>
+                <br/>
+                Password: <input type="password" value={this.state.password} onChange={event => this.handlePassword(event)}/>
+                <br/>
+                <br/>
+                <button type="button" onClick={event => this.createPlayer(event)}>Submit</button>
+                <br/>
+                <br/>
+                <button className="home" onClick={event => {this.renderStuff(event)}}>Home</button>
+              </form>
+          </div>
+        </div>
+      )
+    } else if (this.state.loggedIn === false) {
       return(
           <div>
           <img id="shurima" src="image/shurima_sun_01.jpg" />
@@ -710,7 +732,7 @@ class Home extends React.Component {
             </div>
           </div>
         )
-    } else if (this.state.loggedIn) {
+    } else if (this.props.account) {
       return(
         <div>
           <img id="demacia" src="image/demacia.jpeg" />
