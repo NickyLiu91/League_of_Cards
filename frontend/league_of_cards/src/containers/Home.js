@@ -289,6 +289,7 @@ class Home extends React.Component {
         this.props.changeGold(player.gold)
         this.props.changeDefeated(player.defeated_id)
         this.props.changeDialogue(player.dialogue)
+        this.props.changeCompleted(player.dialogue.completed)
         this.generateNoDupesCurrentPlayerCollection(player)
       // })
       this.setState({
@@ -575,35 +576,6 @@ class Home extends React.Component {
   //   }
   // }
 
-  resetCampaign = (event) => {
-    fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify(
-          {
-            defeated_id: 0,
-            dialogue: 0,
-            completed: true,
-          }
-      )
-    })
-    .then(res => {
-      let currentPlayer = this.state.currentPlayer
-      currentPlayer.dialogue = 0
-      currentPlayer.defeated_id = 0
-      currentPlayer.completed = true
-      this.setState({
-      currentPlayer: currentPlayer,
-      dialogue: 0,
-      defeated: 0
-    }, () => this.renderHome())
-    })
-    .then(console.log(this.state.currentPlayer))
-  }
-
   resetUser = () => {
    // // console.log(localStorage.getItem('jwt'))
    if (localStorage.getItem('jwt')) {
@@ -733,34 +705,8 @@ class Home extends React.Component {
         )
     }
 
-    if (this.state.render === 'home' || this.state.render === 'create') {
-      return(
-        <div>
-          <HomeScreen
-            render={this.state.render}
-            name={this.state.name}
-            password={this.state.password}
-            currentPlayer={this.state.currentPlayer}
-            loggedIn={this.state.loggedIn}
-            handleName={this.handleName}
-            handlePassword={this.handlePassword}
-            renderStuff={this.renderStuff}
-            createPlayer={this.createPlayer}
-            getPlayer={this.getPlayer}
-            logOut={this.props.account}
-            printState={this.printState}
-            rules={this.renderStuff}
-          />
-        </div>
-      )
-    } else if (this.state.render === 'rules') {
-      return(
-        <div>
-          <Header renderStuff={this.renderStuff} />
-          <Rules/>
-        </div>
-      )
-    } else if (this.state.render === 'campaign' ){
+
+    if (this.state.render === 'campaign' ){
       return(
         <div>
           <Header renderStuff={this.renderStuff} deck={this.state.currentDeckCards}/>
@@ -778,30 +724,6 @@ class Home extends React.Component {
             // increaseDialogue={this.increaseDialogue}
             resetCampaign={this.resetCampaign}
             />
-        </div>
-      )
-    } else if (this.state.render === 'collection') {
-      return(
-        <div>
-          <Header renderStuff={this.renderStuff} />
-          <div className="container-with-decklist">
-            <Collection renderHome={this.renderHome} getCardInfo={this.getCardInfo}/>
-            <SideBar />
-          </div>
-        </div>
-      )
-    } else if (this.state.render === 'cardinfo') {
-      return(
-        <div>
-          <Header renderStuff={this.renderStuff} />
-            <div className="container-with-decklist">
-              <CardInfo
-                addToDeck={this.addToDeck}
-                renderCollection={this.renderCollection}
-                renderHome={this.renderHome}
-              />
-              <SideBar />
-            </div>
         </div>
       )
     } else if (this.state.render === 'duelistsList') {
@@ -854,6 +776,7 @@ const mapStateToProps = state => {
     defeated: state.defeatedChanger.defeated,
     dialogue: state.dialogueChanger.dialogue,
     location: state.locationChanger.location,
+    completed: state.completedChanger.completed
   }
 }
 
@@ -874,6 +797,7 @@ const mapDispatchToProps = dispatch => {
     changeDefeated: (event) => dispatch({type: 'CHANGE_DEFEATED', newDefeated: event}),
     changeDialogue: (event) => dispatch({type: 'CHANGE_DIALOGUE', newDialogue: event}),
     changeLocation: (event) => dispatch({type: 'CHANGE_LOCATION', newLocation: event}),
+    changeCompleted: (event) => dispatch({type: 'CHANGE_COMPLETED', newCompleted: event})
   }
 }
 

@@ -145,7 +145,17 @@ function locationChanger(state = {location: 0}, action) {
   switch (action.type) {
     case 'CHANGE_LOCATION':
       // console.log(state);
-      return {location: action.newDialogue}
+      return {location: action.newLocation}
+    default:
+      return state;
+  }
+}
+
+function completedChanger(state = {completed: false}, action) {
+  switch (action.type) {
+    case 'CHANGE_COMPLETED':
+      // console.log(state);
+      return {completed: action.newCompleted}
     default:
       return state;
   }
@@ -166,5 +176,6 @@ export default combineReducers({
   goldChanger,
   defeatedChanger,
   dialogueChanger,
-  locationChanger
+  locationChanger,
+  completedChanger
 })
