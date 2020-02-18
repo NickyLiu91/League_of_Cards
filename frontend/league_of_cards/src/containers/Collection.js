@@ -4,6 +4,7 @@ import {compose} from 'redux';
 import {Route, Link, withRouter} from 'react-router-dom';
 import Card from "../components/Card.js"
 import SideBar from "../containers/SideBar.js"
+import Header from "../components/Header.js"
 
 class Collection extends React.Component {
 
@@ -130,6 +131,7 @@ class Collection extends React.Component {
     console.log(this.props)
     return(
       <div>
+        <Header />
         <img id="bilgewater" src="image/bilgewater.jpeg"/>
         <div>
         <h1>Card List</h1>

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {Route, Link, withRouter} from 'react-router-dom';
 import Card from "../components/Card.js"
+import Header from "../components/Header.js"
 let packKey = 0
 let cardResults = []
 
@@ -127,6 +128,7 @@ class CardStore extends React.Component {
     console.log(this.props)
     return(
       <div>
+        <Header />
         <img id="noxus-shurima" src="image/noxus-shurima.jpeg"/>
         <div id="store-container">
           <div id="pack-results">

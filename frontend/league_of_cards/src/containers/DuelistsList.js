@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {Route, Link, withRouter} from 'react-router-dom';
 import Duelist from "../components/Duelist.js"
+import Header from "../components/Header.js"
 
 let duelistKey = 0
 
@@ -37,10 +38,7 @@ class DuelistsList extends React.Component {
   }
 
   getDuelist = (player, location, dialogue=0) => {
-    console.log(this.props)
-    console.log(player)
     this.props.changeEnemy(player)
-    console.log(this.props.enemy)
     // let desiredDeck
     // fetch(`http://localhost:3000/api/v1/decks/${this.state.currentDeck.id}`)
     // .then(res => res.json())
@@ -67,6 +65,7 @@ class DuelistsList extends React.Component {
   render() {
     return(
       <div>
+      <Header />
       <img id="ionia" src="image/ionia.jpeg"/>
         <div id="duelist-list">
           {this.generateDuelists()}

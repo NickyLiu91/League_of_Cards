@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {Route, Link, withRouter} from 'react-router-dom';
 import Deck from "../components/Deck.js"
+import Header from "../components/Header.js"
 let deckKey = 0
 
 class DecksList extends React.Component {
@@ -71,6 +72,7 @@ class DecksList extends React.Component {
   render() {
     return(
       <div>
+      <Header />
         <img id="ionia" src="image/ionia.jpeg"/>
         <div id='decks-container'>
           <div id="create-deck">

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {Route, Link, withRouter} from 'react-router-dom';
 import CampaignScreen from "../components/CampaignScreen.js"
+import Header from "../components/Header.js"
 let dialogueCounter = 0
 
 class Campaign extends React.Component {
@@ -410,6 +411,7 @@ class Campaign extends React.Component {
   render() {
     return(
       <div id="campaign-screen" >
+        <Header />
         <CampaignScreen storyText={this.state.storyText} increaseDialogue={this.increaseDialogue}
         getDuelist={this.getDuelist} resetCampaign={this.resetCampaign}/>
       </div>

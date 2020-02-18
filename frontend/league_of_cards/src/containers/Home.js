@@ -595,58 +595,6 @@ class Home extends React.Component {
           </div>
         )
     }
-
-
-    if (this.state.render === 'campaign' ){
-      return(
-        <div>
-          <Header renderStuff={this.renderStuff} deck={this.state.currentDeckCards}/>
-          <Campaign
-            // player1={this.state.currentPlayer}
-            // player1Deck={this.state.currentDeckCards}
-            // player2={this.state.player2}
-            // player2Deck={this.state.player2Deck}
-            // renderHome={this.renderHome}
-            // allPlayers={this.state.allPlayers}
-            // updateCurrentPlayerCollection={this.updateCurrentPlayerCollection}
-            // reward={this.reward}
-            // gold={this.state.gold}
-            // getDuelist={this.getDuelist}
-            // increaseDialogue={this.increaseDialogue}
-            // resetCampaign={this.resetCampaign}
-            />
-        </div>
-      )
-    } else if (this.state.render === 'duelistsList') {
-      return(
-        <div>
-          <Header renderStuff={this.renderStuff} deck={this.state.currentDeckCards}/>
-          <div className="duelist-list-container">
-            <DuelistsList renderDuel={this.renderDuel} />
-          </div>
-        </div>
-      )
-    } else if (this.state.render === 'duel') {
-      return(
-        <div>
-          <Header renderStuff={this.renderStuff}/>
-          <DuelField
-            // player1={this.state.currentPlayer}
-            // player1Deck={this.state.currentDeckCards}
-            // player2={this.state.player2}
-            // player2Deck={this.state.player2Deck}
-            renderHome={this.renderHome}
-            renderPostDuel={this.renderPostDuel}
-            updateCurrentPlayerCollection={this.updateCurrentPlayerCollection}
-            reward={this.reward}
-            // gold={this.state.gold}
-            // location={this.state.duelLocation}
-            // collection={this.state.collection}
-            // dialogue={this.state.dialogue}
-          />
-        </div>
-      )
-    }
   }
 }
 

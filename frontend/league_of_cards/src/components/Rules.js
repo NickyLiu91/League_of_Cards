@@ -1,8 +1,10 @@
 import React from "react";
+import Header from "./Header.js"
 
 const Rules = (props) => {
   return(
     <div>
+      <Header />
       <img id="rules-background" src="image/rules.jpeg" />
       <ol id="rules-list">
         <oh id="rules-title">Rules</oh>
