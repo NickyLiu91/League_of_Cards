@@ -379,46 +379,6 @@ class Home extends React.Component {
     this.getAllComputers()
   }
 
-  renderPostDuel = (location) => {
-    console.log(this.props)
-    if (this.state.duelLocation === 'freeDuel') {
-
-      this.setState({
-        render: 'duelistsList'
-      })
-    } else if (this.state.duelLocation === 'campaign') {
-      let dialogue = this.state.dialogue
-      console.log("campaign")
-
-        fetch(`http://localhost:3000/api/v1/players/${this.props.account.id}`, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          body: JSON.stringify(
-              {
-                dialogue: this.props.dialogue + 1
-              }
-          )
-        })
-        .then(res => {
-          this.props.changeDialogue(this.props.dialogue + 1)
-          // let player = this.state.currentPlayer
-          // player.dialogue = player.dialogue + 1
-          //
-          // this.setState({
-          //   currentPlayer: player,
-          // }, () => {
-            this.setState({
-              render: 'campaign'
-            })
-          // })
-        })
-
-    }
-  }
-
   renderStuff = (event) => {
     console.log(event.target.className)
     var sounds = document.getElementsByTagName('audio')
@@ -469,25 +429,6 @@ class Home extends React.Component {
         })
       }
     }
-  }
-
-  getCardInfo = (card) =>{
-    this.setState({
-      selectedCard: card
-    })
-    this.renderCard()
-  }
-
-  renderCard = () => {
-    this.setState({
-      render: 'cardinfo'
-    })
-  }
-
-  renderDuel = () => {
-    this.setState({
-      render: 'duel'
-    })
   }
 
   createPlayer = (event) => {
@@ -547,35 +488,6 @@ class Home extends React.Component {
     })
   }
 
-  updateCurrentPlayerCollection = (array) => {
-    let newCollection = this.state.noDupesCurrentPlayerCollection
-    console.log(array)
-
-    array.forEach(card => {
-      let updateCard = newCollection.find(card2 =>
-        card.name == card2.name
-      )
-      updateCard.quantity ++
-    })
-
-    this.setState({
-      noDupesCurrentPlayerCollection: newCollection
-    })
-  }
-
-  // reward = (location) => {
-  //   let player = this.state.currentPlayer
-  //   console.log(location)
-  //   if (location === 'campaign') {
-  //     player.defeated_id = this.state.player2.id
-  //     this.setState({
-  //       gold: this.state.gold + 30,
-  //       defeated: this.state.player2.id,
-  //       currentPlayer: player
-  //     })
-  //   }
-  // }
-
   resetUser = () => {
    // // console.log(localStorage.getItem('jwt'))
    if (localStorage.getItem('jwt')) {
@@ -608,12 +520,6 @@ class Home extends React.Component {
       // console.log(window.localStorage)
     })
   }
-
-  getCardInfo = (card) => {
-    this.props.changeCard(card)
-    this.renderCard()
-  }
-
 
   render() {
     if (this.state.render === 'create') {
@@ -700,14 +606,14 @@ class Home extends React.Component {
             // player1Deck={this.state.currentDeckCards}
             // player2={this.state.player2}
             // player2Deck={this.state.player2Deck}
-            renderHome={this.renderHome}
+            // renderHome={this.renderHome}
             // allPlayers={this.state.allPlayers}
             // updateCurrentPlayerCollection={this.updateCurrentPlayerCollection}
-            reward={this.reward}
+            // reward={this.reward}
             // gold={this.state.gold}
-            getDuelist={this.getDuelist}
+            // getDuelist={this.getDuelist}
             // increaseDialogue={this.increaseDialogue}
-            resetCampaign={this.resetCampaign}
+            // resetCampaign={this.resetCampaign}
             />
         </div>
       )

@@ -1,5 +1,7 @@
 import React from "react";
 import {connect} from 'react-redux';
+import {compose} from 'redux';
+import {Route, Link, withRouter} from 'react-router-dom';
 var audio = new Audio('files/ExcitedDuelists.mp3')
 
 class CampaignScreen extends React.Component {
@@ -14,7 +16,19 @@ class CampaignScreen extends React.Component {
 
   startDuel = (computer) => {
     this.manageMusic()
-    this.props.getDuelist(computer, "campaign", this.props.dialogue)
+    this.getDuelist(computer, "campaign", this.props.dialogue)
+  }
+
+  getDuelist = (player, location, dialogue=0) => {
+    fetch(`http://localhost:3000/api/v1/players/${player.id}`)
+    .then(response => response.json())
+    .then(json => {
+      this.props.changeEnemy(player)
+      this.props.changeEnemyDeck(json.cards)
+      this.props.changeLocation(location)
+      this.props.changeDialogue(dialogue)
+      this.props.history.push('/DuelField')
+    })
   }
 
   render() {
@@ -264,7 +278,7 @@ class CampaignScreen extends React.Component {
       return(
         <div id="campaign-screen" >
           <img id="campaign-preduel" src={this.props.characters[this.props.defeated].preduel}/>
-            <div id="text-box" onClick={event => {this.props.getDuelist(this.props.characters[this.props.defeated], "campaign", this.props.dialogue)}}>
+            <div id="text-box" onClick={event => {this.getDuelist(this.props.characters[this.props.defeated], "campaign", this.props.dialogue)}}>
               <div id="speaker-picture">
                 <img id="speaker-picture-2" src={this.props.characters[this.props.defeated].image} />
               </div>
@@ -407,24 +421,27 @@ const mapStateToProps = state => {
   return {
     account: state.accountChanger.account,
     characters: state.charactersChanger.characters,
-    // enemy: state.enemyChanger.enemy,
+    enemy: state.enemyChanger.enemy,
+    enemyDeck: state.enemyDeckChanger.enemyDeck,
     defeated: state.defeatedChanger.defeated,
     dialogue: state.dialogueChanger.dialogue,
-    // location: state.locationChanger.location
+    location: state.locationChanger.location
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     changeAccount: (event) => dispatch({type: 'CHANGE_ACCOUNT', newAccount: event}),
-    // changeEnemy: (event) => dispatch({type: 'CHANGE_ENEMY', newEnemy: event}),
+    changeEnemy: (event) => dispatch({type: 'CHANGE_ENEMY', newEnemy: event}),
+    changeEnemyDeck: (event) => dispatch({type: 'CHANGE_ENEMYDECK', newEnemyDeck: event}),
     changeDefeated: (event) => dispatch({type: 'CHANGE_DEFEATED', newDefeated: event}),
-    changeDialogue: (event) => dispatch({type: 'CHANGE_DIALOGUE', newDialogue: event})
-    // changeLocation: (event) => dispatch({type: 'CHANGE_LOCATION', newLocation: event})
+    changeDialogue: (event) => dispatch({type: 'CHANGE_DIALOGUE', newDialogue: event}),
+    changeLocation: (event) => dispatch({type: 'CHANGE_LOCATION', newLocation: event})
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  withRouter,
+  connect(mapStateToProps,
+  mapDispatchToProps)
 )(CampaignScreen);

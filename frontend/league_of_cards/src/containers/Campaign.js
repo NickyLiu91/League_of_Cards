@@ -407,18 +407,6 @@ class Campaign extends React.Component {
     })
   }
 
-  getDuelist = (player, location, dialogue=0) => {
-    fetch(`http://localhost:3000/api/v1/players/${player.id}`)
-    .then(response => response.json())
-    .then(json => {
-      this.props.changeEnemy(player)
-      this.props.changeEnemyDeck(json.cards)
-      this.props.changeLocation(location)
-      this.props.changeDialogue(dialogue)
-      this.props.history.push('/DuelField')
-    })
-}
-
   render() {
     return(
       <div id="campaign-screen" >
@@ -434,6 +422,7 @@ const mapStateToProps = state => {
     account: state.accountChanger.account,
     characters: state.charactersChanger.characters,
     enemy: state.enemyChanger.enemy,
+    enemyDeck: state.enemyDeckChanger.enemyDeck,
     defeated: state.defeatedChanger.defeated,
     dialogue: state.dialogueChanger.dialogue,
     location: state.locationChanger.location
@@ -444,6 +433,7 @@ const mapDispatchToProps = dispatch => {
   return {
     changeAccount: (event) => dispatch({type: 'CHANGE_ACCOUNT', newAccount: event}),
     changeEnemy: (event) => dispatch({type: 'CHANGE_ENEMY', newEnemy: event}),
+    changeEnemyDeck: (event) => dispatch({type: 'CHANGE_ENEMYDECK', newEnemyDeck: event}),
     changeDefeated: (event) => dispatch({type: 'CHANGE_DEFEATED', newDefeated: event}),
     changeDialogue: (event) => dispatch({type: 'CHANGE_DIALOGUE', newDialogue: event}),
     changeLocation: (event) => dispatch({type: 'CHANGE_LOCATION', newLocation: event})

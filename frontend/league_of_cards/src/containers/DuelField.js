@@ -1,5 +1,7 @@
 import React from "react";
 import {connect} from 'react-redux';
+import {compose} from 'redux';
+import {Route, Link, withRouter} from 'react-router-dom';
 import Hand from "./Hand.js"
 import SpellField from "./SpellField.js"
 import MonsterField from "./MonsterField.js"
@@ -50,13 +52,6 @@ class DuelField extends React.Component {
 }
 
   swapCurrentPlayer = () => {
-    // if (this.state.currentPlayer === "player1") {
-    //   this.setState({
-    //     currentPlayer: "player2",
-    //     currentOpponent: "player1",
-    //     summoned: false
-    //   }, () => {this.drawCard()})
-    // }
     if (this.state.currentPlayer === "player2") {
       this.setState({
         currentPlayer: "player1",
@@ -714,7 +709,6 @@ class DuelField extends React.Component {
   win = () => {
     let listOfCards = this.props.enemyDeck
     let number = Math.floor(Math.random() * 100) + 1
-    console.log(number)
     let newCard
     //
     const diamonds = listOfCards.filter(obj => obj.rarity === "Diamond")
@@ -796,7 +790,6 @@ class DuelField extends React.Component {
 
     this.props.changeNoDupesCurrentPlayerCards(newCollection)
 
-
     fetch("http://localhost:3000/api/v1/cards", {
       method: 'POST',
       headers: {
@@ -820,7 +813,7 @@ class DuelField extends React.Component {
             target: newCard.target
           }
       )})
-      .then( res => {
+      .then(res => {
         if (this.props.location === "campaign") {
           fetch(`http://localhost:3000/api/v1/players/${this.state.player1.id}`, {
           method: 'PATCH',
@@ -834,6 +827,10 @@ class DuelField extends React.Component {
                 dialogue: this.props.dialogue + 1
               }
         )})
+        .then(res => {
+          this.props.changeGold(this.props.gold + 30)
+          this.props.changeDialogue(this.props.dialogue + 1)
+        })
       } else {
         fetch(`http://localhost:3000/api/v1/players/${this.state.player1.id}`, {
         method: 'PATCH',
@@ -846,9 +843,11 @@ class DuelField extends React.Component {
               gold: this.props.gold + 30,
             }
       )})
+      .then(res => {
+        this.props.changeGold(this.props.gold + 30)
+      })
       }
-      }
-    )
+    })
     .then(res => {
       if (this.props.location === "campaign" && this.state.player1.defeated_id <= this.state.player2.id) {
         console.log("hi")
@@ -860,141 +859,55 @@ class DuelField extends React.Component {
           },
           body: JSON.stringify(
             {
-              defeated_id: this.props.player1.defeated_id + 1
+              defeated_id: this.props.account.defeated_id + 1
             }
           )
         })
+        .then(res => {this.props.changeDefeated(this.props.defeated + 1)})
       }
     })
-    .then(res => {
+    .then(res => { this.setState({
+      display: 'Win'
+    })})
+  }
+
+  reward = () => {
+    if (this.props.location === 'campaign') {
       this.props.changeDefeated(this.props.defeated + 1)
-      this.reward(this.props.location)
-    })
+      fetch(`http://localhost:3000/api/v1/players/${this.props.account.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(
+            {
+              dialogue: this.props.dialogue + 1,
+              gold: this.props.gold + 30
+            }
+        )
+      })
+    } else {
+      fetch(`http://localhost:3000/api/v1/players/${this.props.account.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify(
+            {
+              gold: this.props.gold + 30
+            }
+        )
+      })
+    }
+    this.props.changeGold(this.props.gold + 30)
+    this.props.history.push('/postDuel')
   }
 
   showState = () => {
     console.log(this.state)
   }
-
-  // getStrongestMonsterInOwnHand = () => {
-  //
-  //   return this.state.player2Hand.filter(obj => obj.cardtype === 'Champion').sort( (a, b) => {
-  //   	if(this.highestAttack(a) > this.highestAttack(b)) {
-  //   		return -1
-  //     } else {
-  //     	return 1
-  //     }
-  //     return 0
-  //   })[0]
-  // }
-  //
-  // getWeakestMonsterInOwnHand = () => {
-  //   return this.state.player2Hand.filter(obj => obj.cardtype === 'Champion').sort( (a, b) => {
-  //   	if(this.highestAttack(a) > this.highestAttack(b)) {
-  //   		return 1
-  //     } else {
-  //     	return -1
-  //     }
-  //   })[0]
-  // }
-  //
-  // checkForKillableEnemyMonster = (monster, monster2) => {
-  //   return ( Object.keys(monster).length !== 0 && monster.position === 'attack' && this.highestAttack(monster) <= this.highestAttack(monster2)) ||
-  //   ( Object.keys(monster).length !== 0 && monster.position === 'defense' && monster.defense <= this.highestAttack(monster2))
-  // }
-
-  // playAppropriateMonster = () => {
-  //   let strongestHandMonster = this.getStrongestMonsterInOwnHand()
-  //   let weakestHandMonster = this.getWeakestMonsterInOwnHand()
-  //   let killableEnemyMonster = this.state.player1Monsters.some(
-  //     monster =>
-  //       this.checkForKillableEnemyMonster(monster, strongestHandMonster)
-  //   )
-  //
-  //   if (this.state.player1Monsters.every(
-  //     enemyObject => Object.keys(enemyObject).length === 0
-  //   )) {
-  //     strongestHandMonster.position = 'attack'
-  //     this.computerPlayMonster(strongestHandMonster)
-  //   } else if (killableEnemyMonster === false) {
-  //     // if (this.state.player2Hand.filter(obj => obj.name === "Requiem").length > 0) {
-  //     //   let cardToUse = this.state.player2Hand.find(obj => obj.name === "Requiem")
-  //     //   this.requiem(cardToUse)
-  //     // }
-  //
-  //     weakestHandMonster.position = 'defense'
-  //     // let cardToUse = this.state.player2Hand.find(obj => obj.name === "Requiem")
-  //     // this.setState({
-  //     //   player2Hand: this.state.player2Hand.filter(card => card.id !== cardToUse.id)
-  //     // }, () => {  this.computerPlayMonster(weakestHandMonster)})
-  //     this.computerPlayMonster(weakestHandMonster)
-  //
-  //   } else if (killableEnemyMonster === true ) {
-  //     strongestHandMonster.position = 'attack'
-  //
-  //     this.computerPlayMonster(strongestHandMonster)
-  //   }
-  //
-  //   this.computerFieldMoves()
-  // }
-
-  // computerFieldMoves = () => {
-  //
-  //   let sortedField = this.state.player2Monsters.sort( (a, b) => {
-  //     	if(this.highestAttack(a) > this.highestAttack(b)) {
-  //     		return -1
-  //       } else {
-  //       	return 1
-  //       }
-  //       return 0
-  //     }
-  //   )
-  //
-  //   let sortedPlayerField = this.state.player1Monsters.sort( (a, b) => {
-  //     	if(this.highestAttack(a) > this.highestAttack(b)) {
-  //     		return -1
-  //       } else {
-  //       	return 1
-  //       }
-  //       return 0
-  //     }
-  //   )
-  //
-  //   sortedField.map(
-  //     monster => {
-  //       // console.log(monster)
-  //       // console.log(Object.keys(monster).length)
-  //       if (Object.keys(monster).length !== 0) {
-  //         if (this.emptyField(sortedPlayerField)) {
-  //             totalDamage = totalDamage - this.highestAttack(monster)
-  //         } else if (monster.position === 'attack' && this.findStrongestKillablePlayerMonster(monster) == undefined) {
-  //           console.log(monster)
-  //           console.log(this.findStrongestKillablePlayerMonster(monster))
-  //           let newMonsterField = this.state.player2Monsters
-  //           let monsterIndex = newMonsterField.findIndex(
-  //             obj => obj.id === monster.id
-  //           )
-  //
-  //           let newMonster = monster
-  //           newMonster.position = 'defense'
-  //
-  //           newMonsterField.splice(monsterIndex, 1, newMonster)
-  //
-  //           this.setState({
-  //             player2Monsters: newMonsterField
-  //           })
-  //         } else if (this.findStrongestKillablePlayerMonster(monster)) {
-  //           let attackTarget = this.findStrongestKillablePlayerMonster(monster)
-  //           monster.position = 'attack'
-  //           this.fight(monster, attackTarget, this.state.player2Monsters)
-  //         }
-  //       }
-  //     }
-  //   )
-  //   this.setState({
-  //     player1Life: totalDamage
-  //   })
-  // }
 
   findStrongestKillablePlayerMonster = (monster) => {
     let sortedPlayerField = this.state.player1Monsters.sort( (a, b) => {
@@ -1035,70 +948,6 @@ class DuelField extends React.Component {
       this.swapCurrentPlayer()
 
   }
-
-  // renewAllFields = () => {
-  //   let newMonsterField1 = this.state.player1Monsters
-  //   let newerMonsterField1 = []
-  //   let newMonsterField2 = this.state.player2Monsters
-  //   let newerMonsterField2 = []
-  //
-  //   newMonsterField1.map(monster => {
-  //     if (Object.keys(monster).length !== 0){
-  //       let newMonster = monster
-  //       newMonster.attacked = false
-  //       newerMonsterField1 = [...newerMonsterField1, newMonster]
-  //     } else {
-  //       // console.log(monster)
-  //       // console.log(newerMonsterField1)
-  //       // console.log(Object.keys(monster).length)
-  //       newerMonsterField1 = [...newerMonsterField1, {}]
-  //       // console.log(newerMonsterField1)
-  //     }
-  //   })
-  //
-  //   newMonsterField2.map(monster => {
-  //     if (Object.keys(monster).length !== 0){
-  //       let newMonster = monster
-  //       newMonster.attacked = false
-  //       newerMonsterField2 = [...newerMonsterField2, newMonster]
-  //     } else {
-  //       newerMonsterField2 = [...newerMonsterField2, {}]
-  //     }
-  //   })
-  //
-  //   this.setState({
-  //     player1Monsters: newerMonsterField1,
-  //     player2Monsters: newerMonsterField2,
-  //   })
-  //
-  // }
-
-  // sendTargetedCardFromFieldToGraveyard = () => {
-  //   let newGraveyard = this.state.player1Graveyard
-  //   let newMonsterField = this.state.player2Monsters
-  //
-  //   let emptySlot = this.state.player2Monsters.findIndex(
-  //     obj => obj.id === this.state.selectedTarget.id
-  //   )
-  //
-  //   newMonsterField.splice(emptySlot, 1, {})
-  //
-  //   this.setState({
-  //     player2Monsters: newMonsterField,
-  //     player2Graveyard: newGraveyard,
-  //     actionType: ''
-  //   })
-  // }
-
-  // getStrongestMonsterInEnemyField = () => {
-  //   return this.state.player1Monsters.sort( function(a, b) {
-  //   	if(a.attack > b.attack) {
-  //   		return -1
-  //     } else {
-  //     	return 1
-  //     }
-  //   })[0]
-  // }
 
   computerTurn = () => {
     this.setState({
@@ -2222,18 +2071,12 @@ class DuelField extends React.Component {
     })
   }
 
-  reward = () => {
-    let player = this.state.account
-    if (this.props.location === 'campaign') {
-      player.defeated_id = this.state.player2.id
-      // this.setState({
-      //   gold: this.state.gold + 30,
-      //   defeated: this.props.enemy.id,
-      //   currentPlayer: player
-      // })
+  renderPostDuel = (location) => {
+    if (this.props.location === 'freeDuel') {
+      this.props.history.push('/duelistsList')
+    } else if (this.props.location === 'campaign') {
+      this.props.history.push('/campaign')
     }
-    this.props.changeGold(this.props.gold + 30)
-    this.props.changeDefeated(this.props.enemy.id)
   }
 
   render() {
@@ -2246,7 +2089,7 @@ class DuelField extends React.Component {
           <PostDuel
           display={this.state.display}
           renderHome={this.props.renderHome}
-          renderPostDuel={this.props.renderPostDuel}
+          renderPostDuel={this.renderPostDuel}
           location={this.props.location}
           rewardCard={this.state.rewardCard}
           defeated={this.props.defeated}
@@ -2529,7 +2372,8 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  withRouter,
+  connect(mapStateToProps,
+  mapDispatchToProps)
 )(DuelField);

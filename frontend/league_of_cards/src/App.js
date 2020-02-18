@@ -6,14 +6,13 @@ import {Provider} from 'react-redux'
 import Home from './containers/Home'
 import Collection from "./containers/Collection.js"
 import CardInfo from "./components/CardInfo.js"
-// import SideBar from "./SideBar.js"
 import DuelField from "./containers/DuelField.js"
 import CardStore from "./containers/CardStore.js"
 import DecksList from "./containers/DecksList.js"
 import DuelistsList from "./containers/DuelistsList.js"
 import Header from "./components/Header.js"
-// import HomeScreen from "./components/HomeScreen.js"
 import Rules from "./components/Rules.js"
+import PostDuel from "./components/PostDuel.js"
 import Campaign from "./containers/Campaign.js"
 import {Route, Link, Switch} from 'react-router-dom';
 
@@ -32,7 +31,8 @@ class App extends Component {
         <Route path={`/cardInfo`} component={CardInfo} />
         <Route path={`/cardStore`} component={CardStore} />
         <Route path={`/decksList`} component={DecksList} />
-        <Route path={`/cardInfo`} component={DecksList} />
+        <Route path={`/cardInfo`} component={CardInfo} />
+        <Route path={`/postDuel`} component={PostDuel} />
       </Switch>
       </div>
     )
