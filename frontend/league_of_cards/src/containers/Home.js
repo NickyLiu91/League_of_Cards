@@ -688,22 +688,22 @@ class Home extends React.Component {
             <h1>LEAGUE OF CARDS</h1>
               <h1>Welcome, {this.props.account.name}!</h1>
               <br/>
-              <button className="rules" onClick={event => {this.renderStuff(event)}}>Rules</button>
+              <button className="rules" onClick={() => {this.props.history.push('/rules')}}>Rules</button>
               <br/>
               <br/>
-              <button className="campaign" onClick={event => {this.renderStuff(event)}}>Campaign</button>
+              <button className="campaign" onClick={() => {this.props.history.push('/campaign')}}>Campaign</button>
               <br/>
               <br/>
-              <button className="duelistsList" onClick={event => {this.renderStuff(event)}}>Free Duel</button>
+              <button className="duelistsList" onClick={() => {this.props.history.push('/duelistsList')}}>Free Duel</button>
               <br/>
               <br/>
               <button className="collection" onClick={() => {this.props.history.push('/collection')}}>Collection</button>
               <br/>
               <br/>
-              <button className="store" onClick={event => {this.renderStuff(event)}}>Card Store</button>
+              <button className="store" onClick={() => {this.props.history.push('/cardStore')}}>Card Store</button>
               <br/>
               <br/>
-              <button className="decksList" onClick={event => {this.renderStuff(event)}}>Decks</button>
+              <button className="decksList" onClick={() => {this.props.history.push('/decksList')}}>Decks</button>
               <br/>
               <br/>
               <button onClick={this.logOut}>Log-Out</button>
