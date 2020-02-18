@@ -16,8 +16,13 @@ class Collection extends React.Component {
   generateCards = () => {
     return this.props.noDupesCurrentPlayerCards.map(
       cardObj => <Card key={cardObj.id} location={"collection"} card={cardObj}
-      getCardInfo={this.props.getCardInfo} copies={this.props.deckCards} addToDeck={this.addToDeck}/>
+      getCardInfo={this.getCardInfo} copies={this.props.deckCards} addToDeck={this.addToDeck}/>
     )
+  }
+
+  getCardInfo = (card) => {
+    this.props.changeCard(card)
+    this.props.history.push('/cardInfo')
   }
 
   addToDeck = (card) => {

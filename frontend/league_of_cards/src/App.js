@@ -32,6 +32,7 @@ class App extends Component {
         <Route path={`/cardInfo`} component={CardInfo} />
         <Route path={`/cardStore`} component={CardStore} />
         <Route path={`/decksList`} component={DecksList} />
+        <Route path={`/cardInfo`} component={DecksList} />
       </Switch>
       </div>
     )
