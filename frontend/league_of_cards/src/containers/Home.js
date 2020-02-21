@@ -272,30 +272,38 @@ class Home extends React.Component {
 
   setPlayerStates = (player, deck) => {
 
-    // let player2 = player
-    //
-      // fetch(`http://localhost:3000/api/v1/players/${player.id}`)
-      // .then(res => res.json())
-      // .then(json => {
-      //   player2 = json;
-      //   console.log(json)})
-    //   .then(res => {
-        this.props.changeAccount(player)
-        this.props.changeCurrentPlayerCards(player.cards)
-        // this.props.changeNoDupesCurrentPlayerCards(this.generateNoDupesCurrentPlayerCollection())
-        this.props.changeDeck(deck)
-        this.props.changeDeckCards(deck.cards)
-        this.props.changeDecksList(player.decks)
-        this.props.changeGold(player.gold)
-        this.props.changeDefeated(player.defeated_id)
-        this.props.changeDialogue(player.dialogue)
-        this.props.changeCompleted(player.dialogue.completed)
-        this.generateNoDupesCurrentPlayerCollection(player)
-      // })
+      this.props.changeAccount(player)
+      this.props.changeCurrentPlayerCards(player.cards)
+      this.props.changeDeck(deck)
+      this.props.changeDeckCards(deck.cards)
+      this.props.changeDecksList(player.decks)
+      this.props.changeGold(player.gold)
+      this.props.changeDefeated(player.defeated_id)
+      this.props.changeDialogue(player.dialogue)
+      this.props.changeCompleted(player.dialogue.completed)
+      this.generateNoDupesCurrentPlayerCollection(player)
+
       this.setState({
         loggedIn: true,
         render: 'home'
       })
+  }
+
+  logOut = () => {
+    this.setState({
+      loggedIn: false
+    }, () => {
+      this.props.changeAccount({})
+      this.props.changeCurrentPlayerCards([])
+      this.props.changeNoDupesCurrentPlayerCards([])
+      this.props.changeDeck({})
+      this.props.changeDeckCards([])
+      this.props.changeDecksList([])
+      this.props.changeGold(0)
+      this.props.changeDefeated(0)
+      this.props.changeDialogue(0)
+      this.props.changeCompleted(false)
+    })
   }
 
   getPlayer = (event) => {
