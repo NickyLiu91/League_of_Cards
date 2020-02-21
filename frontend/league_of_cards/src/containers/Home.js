@@ -296,8 +296,6 @@ class Home extends React.Component {
         loggedIn: true,
         render: 'home'
       })
-
-
   }
 
   getPlayer = (event) => {
@@ -521,6 +519,14 @@ class Home extends React.Component {
     })
   }
 
+  checkDeckSize = (string) => {
+    if (this.props.deckCards.length < 40) {
+      alert ('Your deck has less than 40 cards!')
+    } else {
+      this.props.history.push(string)
+    }
+  }
+
   render() {
     if (this.state.render === 'create') {
       return(
@@ -554,10 +560,10 @@ class Home extends React.Component {
               <button className="rules" onClick={() => {this.props.history.push('/rules')}}>Rules</button>
               <br/>
               <br/>
-              <button className="campaign" onClick={() => {this.props.history.push('/campaign')}}>Campaign</button>
+              <button className="campaign" onClick={() => {this.checkDeckSize('/campaign')}}>Campaign</button>
               <br/>
               <br/>
-              <button className="duelistsList" onClick={() => {this.props.history.push('/duelistsList')}}>Free Duel</button>
+              <button className="duelistsList" onClick={() => {this.checkDeckSize('/duelistsList')}}>Free Duel</button>
               <br/>
               <br/>
               <button className="collection" onClick={() => {this.props.history.push('/collection')}}>Collection</button>
