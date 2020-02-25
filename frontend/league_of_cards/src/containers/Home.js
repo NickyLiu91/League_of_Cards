@@ -385,57 +385,6 @@ class Home extends React.Component {
     this.getAllComputers()
   }
 
-  renderStuff = (event) => {
-    console.log(event.target.className)
-    var sounds = document.getElementsByTagName('audio')
-    for (let i = 0; i < sounds.length; i++) {sounds[i].pause()}
-    if (this.state.render !== event.target.className) {
-      if (event.target.className === 'collection') {
-        fetch(`http://localhost:3000/api/v1/decks/${this.state.currentDeck.id}`)
-        .then(res => res.json())
-        .then(json => {this.setState({
-            currentDeckCards: json.cards,
-          })
-        })
-        .then(res => {
-          fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}/cards`)
-          .then(response => response.json())
-          .then(json => this.setState({
-            currentPlayerCollection: json
-          }, () => {
-            let newCollection = this.state.collection.map(card => {
-                card.quantity = this.state.currentPlayerCollection.filter(cardObj => cardObj.name === card.name).length;
-                return card
-              }
-            )
-
-            this.setState({
-              noDupesCurrentPlayerCollection: newCollection
-            }, () => {
-              this.setState({
-                render: 'collection'
-              })
-            })
-          }))
-        })
-      } else if (event.target.className === 'store'){
-        fetch(`http://localhost:3000/api/v1/players/${this.props.account.id}`)
-        .then(res => res.json())
-        .then(json => {this.setState({
-            gold: json.gold,
-            render: 'store'
-          })
-        })
-      } else if ((event.target.className === 'duelistsList' || event.target.className === 'campaign')
-        && this.props.deckCards.length !== 40) {
-          alert('Your deck must contain 40 cards!')
-      } else {
-        this.setState({
-          render: event.target.className
-        })
-      }
-    }
-  }
 
   createPlayer = (event) => {
     let player
@@ -552,7 +501,7 @@ class Home extends React.Component {
                 <button type="button" onClick={event => this.createPlayer(event)}>Submit</button>
                 <br/>
                 <br/>
-                <button className="home" onClick={event => {this.renderStuff(event)}}>Home</button>
+                <button className="home" onClick={() => {this.props.history.push('/')}}>Home</button>
               </form>
           </div>
         </div>
@@ -604,7 +553,7 @@ class Home extends React.Component {
                   <button type="button" onClick={event => this.getPlayer(event)}>Submit</button>
               </form>
                 <br/>
-              <button className="create" onClick={event => {this.renderStuff(event)}}>Create Account</button>
+              <button className="create" onClick={event => {this.setState({render: 'create'})}}>Create Account</button>
             </div>
           </div>
         )
