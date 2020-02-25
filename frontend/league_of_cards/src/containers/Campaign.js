@@ -427,7 +427,8 @@ const mapStateToProps = state => {
     enemyDeck: state.enemyDeckChanger.enemyDeck,
     defeated: state.defeatedChanger.defeated,
     dialogue: state.dialogueChanger.dialogue,
-    location: state.locationChanger.location
+    location: state.locationChanger.location,
+    completed: state.completedChanger.completed
   }
 }
 
