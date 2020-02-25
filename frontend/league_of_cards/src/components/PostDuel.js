@@ -18,7 +18,7 @@ const PostDuel = (props) => {
     )
   } else if (props.display === "Lose") {
     return(
-      <div id="post-match" onClick={event => props.renderHome()}>
+      <div id="post-match" onClick={event => props.renderPostDuel(props.display)}>
       <img id="shadow-isles" src="image/shadow-isles.jpeg" />
         <div id="post-match-message">
           <h1>YOU HAVE RUN OUT OF STAMINA</h1>

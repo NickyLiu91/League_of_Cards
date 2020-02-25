@@ -2006,10 +2006,12 @@ class DuelField extends React.Component {
   }
 
   renderPostDuel = (location) => {
-    if (this.props.location === 'freeDuel') {
+    if (location === 'freeDuel') {
       this.props.history.push('/duelistsList')
-    } else if (this.props.location === 'campaign') {
+    } else if (location === 'campaign') {
       this.props.history.push('/campaign')
+    } else if (location == 'Lose') {
+      this.props.history.push('/')
     }
   }
 
