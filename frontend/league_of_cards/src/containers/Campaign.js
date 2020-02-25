@@ -386,7 +386,7 @@ class Campaign extends React.Component {
   }
 
   resetCampaign = (event) => {
-    fetch(`http://localhost:3000/api/v1/players/${this.state.currentPlayer.id}`, {
+    fetch(`http://localhost:3000/api/v1/players/${this.props.account.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

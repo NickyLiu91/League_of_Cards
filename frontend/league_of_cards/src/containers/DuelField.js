@@ -1526,24 +1526,8 @@ class DuelField extends React.Component {
   getStrongerEnemyMonsters = (monster, field) => {
     let strongerEnemyMonsters = field.filter(monsterObj => {
       if (monsterObj.position === "attack") {
-        console.log(monster)
-        console.log(monster.attack)
-        console.log(monster.magic)
-        console.log(monsterObj)
-        console.log(this.highestAttack(monster))
-        console.log(this.highestAttack(monsterObj))
-        console.log(this.highestAttack(monsterObj) > this.highestAttack(monster))
-        console.log(this.highestAttack(monsterObj) < this.highestAttack(monster))
         return this.highestAttack(monsterObj) > this.highestAttack(monster)
       } else if (monsterObj.position === "defense"){
-        console.log(monster)
-        console.log(monster.attack)
-        console.log(monster.magic)
-        console.log(monsterObj)
-        console.log(this.highestAttack(monster))
-        console.log(this.highestAttack(monsterObj))
-        console.log(this.highestAttack(monsterObj) > this.highestAttack(monster))
-        console.log(this.highestAttack(monsterObj) < this.highestAttack(monster))
         return monsterObj.defense > this.highestAttack(monster)
       }
     })
