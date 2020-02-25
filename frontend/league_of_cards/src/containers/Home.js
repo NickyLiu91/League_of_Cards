@@ -344,7 +344,6 @@ class Home extends React.Component {
       )
 
       this.props.changeNoDupesCurrentPlayerCards(newCollection)
-      console.log(this.props.noDupesCurrentPlayerCards)
       return newCollection
 
     } else {
@@ -355,7 +354,6 @@ class Home extends React.Component {
       )
 
       this.props.changeNoDupesCurrentPlayerCards(newCollection)
-      console.log(this.props.noDupesCurrentPlayerCards)
       return newCollection
     }
   }
@@ -364,9 +362,6 @@ class Home extends React.Component {
     fetch("http://localhost:3000/api/v1/allcards")
     .then(response => response.json())
     .then(json => {this.props.changeCards(json)})
-    // .then(json => this.setState({
-    //   collection: json
-    // }))
   }
 
   printState = (event) => {
@@ -481,6 +476,7 @@ class Home extends React.Component {
       alert ('Your deck has less than 40 cards!')
     } else {
       this.props.history.push(string)
+      this.props.changeLocation('campaign')
     }
   }
 
