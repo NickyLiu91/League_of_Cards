@@ -719,59 +719,43 @@ class DuelField extends React.Component {
     //
     if (number > 98) {
       if (diamonds.length === 0 && platinums.length === 0 && golds.length === 0 && silvers.length === 0) {
-        console.log("a")
         newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
       } else if (diamonds.length === 0 && platinums.length === 0 && golds.length === 0) {
-        console.log("b")
         newCard = silvers[Math.floor(Math.random() * silvers.length)]
       } else if (diamonds.length === 0 && platinums.length === 0) {
-        console.log("c")
         newCard = golds[Math.floor(Math.random() * golds.length)]
       } else if (diamonds.length === 0) {
-        console.log("d")
         newCard = platinums[Math.floor(Math.random() * platinums.length)]
       } else {
-        console.log("e")
         newCard = diamonds[Math.floor(Math.random() * diamonds.length)]
       }
     } else if ( number > 93) {
       if (platinums.length === 0 && golds.length === 0 && silvers.length === 0) {
-        console.log("f")
         newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
       } else if (platinums.length === 0 && golds.length === 0 ) {
         newCard = silvers[Math.floor(Math.random() * silvers.length)]
-        console.log("g")
       } else if (platinums.length === 0) {
-        console.log("h")
         newCard = golds[Math.floor(Math.random() * golds.length)]
       } else {
-        console.log("i")
         newCard = platinums[Math.floor(Math.random() * platinums.length)]
       }
     } else if ( number > 85) {
       if (golds.length === 0 && silvers.length === 0) {
-        console.log("j")
         newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
       } else if (golds.length === 0 ) {
-        console.log("k")
         newCard = silvers[Math.floor(Math.random() * silvers.length)]
       } else {
-        console.log("l")
         newCard = golds[Math.floor(Math.random() * golds.length)]
       }
     } else if ( number > 50) {
       if (silvers.length === 0) {
-        console.log("m")
         newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
       } else {
-        console.log("n")
         newCard = silvers[Math.floor(Math.random() * silvers.length)]
       }
     } else {
-      console.log("o")
       newCard = bronzes[Math.floor(Math.random() * bronzes.length)]
     }
-    console.log(newCard)
 
     this.setState({
       rewardCard: newCard,
@@ -859,7 +843,7 @@ class DuelField extends React.Component {
           },
           body: JSON.stringify(
             {
-              defeated_id: this.props.account.defeated_id + 1
+              defeated_id: this.props.defeated + 1
             }
           )
         })
@@ -869,41 +853,6 @@ class DuelField extends React.Component {
     .then(res => { this.setState({
       display: 'Win'
     })})
-  }
-
-  reward = () => {
-    console.log(this.props.history)
-    if (this.props.location === 'campaign') {
-      this.props.changeDefeated(this.props.defeated + 1)
-      fetch(`http://localhost:3000/api/v1/players/${this.props.account.id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify(
-            {
-              dialogue: this.props.dialogue + 1,
-              gold: this.props.gold + 30
-            }
-        )
-      })
-    } else {
-      fetch(`http://localhost:3000/api/v1/players/${this.props.account.id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify(
-            {
-              gold: this.props.gold + 30
-            }
-        )
-      })
-    }
-    this.props.changeGold(this.props.gold + 30)
-    this.props.history.push('/postDuel')
   }
 
   showState = () => {
@@ -2072,12 +2021,12 @@ class DuelField extends React.Component {
       return(
         <div>
           <PostDuel
-          display={this.state.display}
-          renderHome={this.props.renderHome}
-          renderPostDuel={this.renderPostDuel}
-          location={this.props.location}
-          rewardCard={this.state.rewardCard}
-          defeated={this.props.defeated}
+            display={this.state.display}
+            renderHome={this.props.renderHome}
+            renderPostDuel={this.renderPostDuel}
+            location={this.props.location}
+            rewardCard={this.state.rewardCard}
+            defeated={this.props.defeated}
           />
         </div>
       )
