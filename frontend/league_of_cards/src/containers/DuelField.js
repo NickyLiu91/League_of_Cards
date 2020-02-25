@@ -2195,6 +2195,7 @@ class DuelField extends React.Component {
               <div id="middle-bar">
               <div className="life-points">{this.state.player1Life}</div>
               <button onClick={this.computerTurn}>End Turn</button>
+              <button onClick={this.win}>WIN</button>
               <div className="life-points">{this.state.player2Life}</div>
               </div>
               <br/>

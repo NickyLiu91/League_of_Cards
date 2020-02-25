@@ -21,17 +21,9 @@ class DuelistsList extends React.Component {
         duelistObj => <Duelist key={duelistKey++} duelist={duelistObj} getDuelist={this.getDuelist}/>
       )
     }
-    // else if (this.props.account.defeated_id === 0 ) {
-    //   return(list.map(
-    //     duelistObj => <Duelist key={duelistKey++} duelist={duelistObj} getDuelist={this.getDuelist}/>
-    //   ))
-    // }
     else {
-      // this.props.characters.slice(0, this.props.account.defeated_id).forEach(duelist => {
-      //   let index = list.findIndex(obj => Object.keys(obj).length === 0)
-      //   list[index] = duelist
-      // })
-      return list.slice(0, this.props.account.defeated_id).map(
+
+      return list.slice(0, this.props.defeated).map(
         duelistObj => <Duelist key={duelistKey++} duelist={duelistObj} getDuelist={this.getDuelist}/>
       )
     }
