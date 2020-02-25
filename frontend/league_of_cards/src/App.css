@@ -408,13 +408,13 @@ li{
 #duelist-list {
   display: flex;
   flex-wrap: wrap;
-  width: 900px;
+  /*width: 900px;*/
+  width: 55vw;
   /*flex-direction: row;*/
   margin: 0 auto;
   /*justify-content: space-around;*/
   padding: 30px 30px 30px 30px;
-
-
+  /*background-color: red*/
 }
 
 .deck-button-div {
@@ -487,7 +487,8 @@ li{
 
 #home, #logged-in {
   position: relative;
-  top: 200px;
+  /*top: 200px;*/
+  top: 23vh;
 }
 
 #create-deck {
@@ -496,6 +497,7 @@ li{
 
 #post-match-message {
   position: relative;
+  /*top: 200px;*/
   top: 35vh;
 }
 
