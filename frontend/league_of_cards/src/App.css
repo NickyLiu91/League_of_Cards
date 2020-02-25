@@ -415,7 +415,8 @@ li{
 
 .deck-button-div {
   position: relative;
-  top: 250px;
+  /*top: 250px;*/
+  top: 30vh;
 }
 
 .deck{
@@ -427,12 +428,16 @@ li{
 .circle{
 	background-color: black;
 	border-radius: 50%;
-	height: 200px;
-	width: 90px;
+	/*height: 200px;*/
+	height: 25vh;
+	/*width: 90px;*/
+	width: 5.5vw;
 	display: flex;
 	position: absolute;
-	top: 70px;
-	left: 77px;
+	/*top: 70px;*/
+	top: 8vh;
+	/*left: 77px;*/
+	left: 4.5vw;
 }
 
 #shurima, #demacia, #ionia, #shadow-isles, #targon, #noxus-arena, #rules-background {
