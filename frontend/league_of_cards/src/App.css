@@ -157,13 +157,13 @@ img {
 #sidebar {
   list-style-type:none;
   /*width: 200px;*/
-  width: 15vw;
+  width: 350vw;
   border-style: solid;
   border-color: gold;
   margin: 0;
   padding: 0;
-  position: absolute;
-  right: 0;
+  /*position: absolute;*/
+  /*right: 0;*/
   /*top: 0;*/
   /*top: 53px;*/
   /*height: 100%;*/
