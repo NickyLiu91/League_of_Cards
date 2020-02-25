@@ -132,15 +132,16 @@ class Collection extends React.Component {
     return(
       <div>
         <Header />
-        <img id="bilgewater" src="image/bilgewater.jpeg"/>
-        <div>
-        <h1>Card List</h1>
-        <button onClick={this.sort}>{this.state.sortTypes[this.state.sortNumber]}</button>
-          <div id="card-list">
-            {this.generateCards()}
+        <div id="collection" >
+          <div>
+          <h1>Card List</h1>
+          <button onClick={this.sort}>{this.state.sortTypes[this.state.sortNumber]}</button>
+            <div id="card-list">
+              {this.generateCards()}
+            </div>
           </div>
+          <SideBar />
         </div>
-        <SideBar />
       </div>
     )
   }

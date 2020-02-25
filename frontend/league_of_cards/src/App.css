@@ -117,15 +117,19 @@ body {
 }
 
 img {
-  height: 160px;
-  width: 160px;
+  /*height: 160px;*/
+  height: 20vh;
+  /*width: 160px;*/
+  width: 10vw;
   border-style: solid;
   border-color: gold;
 }
 
 .greyed-img {
-  height: 160px;
-  width: 160px;
+  /*height: 160px;
+  width: 160px;*/
+  height: 20vh;
+  width: 10vw;
   border-style: solid;
   border-color: white;
 }
@@ -145,18 +149,24 @@ img {
   justify-content: space-between;
 }
 
+#collection {
+  position: relative;
+  display: flex
+}
+
 #sidebar {
   list-style-type:none;
-  width: 200px;
+  /*width: 200px;*/
+  width: 15vw;
   border-style: solid;
   border-color: gold;
   margin: 0;
   padding: 0;
   position: absolute;
   right: 0;
-  top: 54px;
+  /*top: 0;*/
   /*top: 53px;*/
-  height: 100%;
+  /*height: 100%;*/
   display: inline-block;
   overflow: scroll;
   /*overflow-y: overlay;*/
@@ -216,7 +226,7 @@ img {
 }
 
 #sidebar-title {
-  width: 200px;
+  width: 15vw;
 }
 
 #duel-field {
