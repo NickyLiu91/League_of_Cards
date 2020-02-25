@@ -12,7 +12,7 @@ class DuelistsList extends React.Component {
   generateDuelists = () => {
     let list = this.props.characters
 
-    if (this.props.account.completed === true) {
+    if (this.props.completed === true) {
       this.props.characters.slice(0, 24).forEach(duelist => {
         let index = list.findIndex(obj => Object.keys(obj).length === 0)
         list[index] = duelist
@@ -56,7 +56,8 @@ const mapStateToProps = state => {
     characters: state.charactersChanger.characters,
     enemy: state.enemyChanger.enemy,
     defeated: state.defeatedChanger.defeated,
-    location: state.locationChanger.location
+    location: state.locationChanger.location,
+    completed: state.completedChanger.completed
   }
 }
 

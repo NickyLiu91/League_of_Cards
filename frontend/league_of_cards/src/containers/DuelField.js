@@ -27,7 +27,7 @@ class DuelField extends React.Component {
     player1Deck: this.props.deckCards.slice(0),
     player1Graveyard: [],
     player2: this.props.enemy,
-    player2Life: 500,
+    player2Life: 8000,
     player2Monsters: [{}, {}, {}, {}, {}],
     player2Spells: [{}, {}, {}, {}, {}],
     player2Deck: this.props.enemyDeck.slice(0),
@@ -2013,11 +2013,7 @@ class DuelField extends React.Component {
     // } else if (location == 'Lose') {
     //   this.props.history.push('/')
     // }
-    if (location === 'd') {
-      this.props.history.push('/duelistsList')
-    } else if (location === 'campaign') {
-      this.props.history.push('/campaign')
-    } else if (location == 'Lose') {
+    if (location == 'Lose') {
       this.props.history.push('/')
     } else {
       this.props.history.push(`/${location}`)
@@ -2206,7 +2202,6 @@ class DuelField extends React.Component {
               <div id="middle-bar">
               <div className="life-points">{this.state.player1Life}</div>
               <button onClick={this.computerTurn}>End Turn</button>
-              <button onClick={this.win}>WIN</button>
               <div className="life-points">{this.state.player2Life}</div>
               </div>
               <br/>

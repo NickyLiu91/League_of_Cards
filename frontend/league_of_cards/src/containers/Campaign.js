@@ -131,7 +131,7 @@ class Campaign extends React.Component {
       "You must leave at once!",
       "DUEL",
       "Even if you are powerful, no good will come of your being here.",
-      "I tell you this for your own good; turn back.",
+      "I tell you this for your own good: turn back.",
       {ezreal: "Sorry, but we can't do that."},
       {ezreal: "But don't worry."},
       {ezreal: "Once we finish assembling that artifact, we'll save your island as well."},
