@@ -14,13 +14,27 @@ import Header from "./components/Header.js"
 import Rules from "./components/Rules.js"
 import PostDuel from "./components/PostDuel.js"
 import Campaign from "./containers/Campaign.js"
-import {Route, Link, Switch} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {compose} from 'redux';
+import {Route, Link, Switch, withRouter} from 'react-router-dom';
 
 class App extends Component {
+
+  state= {account: {}}
+
   render() {
-    return (
-      <div className="App">
-      <Switch>
+    if (this.props.deckCards.length != 40) {
+      return (
+        <div className="App">
+        <Switch>
+        <Route path={`/`} component={Home} />
+        </Switch>
+        </div>
+      )
+    } else {
+      return (
+        <div className="App">
+        <Switch>
         <Route exact path={`/`} component={Home} />
         <Route path={`/rules`} component={Rules} />
         <Route path={`/campaign`} component={Campaign} />
@@ -32,47 +46,22 @@ class App extends Component {
         <Route path={`/decksList`} component={DecksList} />
         <Route path={`/cardInfo`} component={CardInfo} />
         <Route path={`/postDuel`} component={PostDuel} />
-      </Switch>
-      </div>
-    )
+        </Switch>
+        </div>
+      )
+    }
   }
 }
-//
-// class App extends Component {
-//
-//   render() {
-//     return (
-//       <div className="App">
-//         <Home />
-//       </div>
-//     );
-//   }
-// }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    deckCards: state.deckCardsChanger.deckCards
+  }
+}
 
-// import React, { Component } from 'react';
-// import { Route, Switch, Redirect, withRouter } from 'react-router-dom'
-// import logo from './logo.svg';
-// import './App.css';
-// import Home from './containers/Home'
-//
-//
-//   const App = props => {
-//     return (
-//       <Fragment>
-//       <Switch>
-//       // <Route exact path="/" render={() => {<Redirect to="/" />}}
-//       // <Route exact path="/login" component={home}}
-//       <Route exact path="/home" component={Home}} />
-//       <Route exact path="/collection" component={Collection}} />
-//       <Route exact path="/store" component={CardStore}} />
-//       <Route exact path="/campaign" component={Campaign}} />
-//       <Route exact path="/freeduel" component={DuelistsList}} />
-//       <Route exact path="/decks" component={DecksList}} />
-//       </Switch>
-//       </Fragment>
-//     )
-//   }
-//
-// export default withRouter(App);
+export default compose(
+  withRouter,
+  connect(mapStateToProps)
+)(App);
+
+// export default App;

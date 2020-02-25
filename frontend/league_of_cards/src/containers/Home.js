@@ -330,6 +330,7 @@ class Home extends React.Component {
           .then(res => {
             deck = res
             this.setPlayerStates(player, deck)
+            this.props.history.push('/')
           })
         })
       }})
@@ -432,6 +433,7 @@ class Home extends React.Component {
           })
           .then(res => {
             this.setPlayerStates(player, deck)
+            this.props.history.push('/')
           })
         })
       }
