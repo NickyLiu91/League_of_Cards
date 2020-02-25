@@ -476,7 +476,6 @@ class Home extends React.Component {
       alert ('Your deck has less than 40 cards!')
     } else {
       this.props.history.push(string)
-      this.props.changeLocation('campaign')
     }
   }
 
