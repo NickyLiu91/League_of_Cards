@@ -1,7 +1,6 @@
 import React from "react";
 
 const PostDuel = (props) => {
-  console.log(props.defeated)
   if (props.display === "Win") {
     return(
       <div id="post-match" onClick={event => props.renderPostDuel(props.location)}>

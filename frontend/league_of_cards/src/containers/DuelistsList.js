@@ -31,27 +31,8 @@ class DuelistsList extends React.Component {
 
   getDuelist = (player, location, dialogue=0) => {
     this.props.changeEnemy(player)
-    // let desiredDeck
-    // fetch(`http://localhost:3000/api/v1/decks/${this.state.currentDeck.id}`)
-    // .then(res => res.json())
-    // .then(res => this.setState(
-    //   {
-    //     currentDeckCards: res.cards
-    //   }, () => {
-    //     fetch(`http://localhost:3000/api/v1/players/${player.id}`)
-    //     .then(response => response.json())
-    //     .then(json => {
-    //       this.setState({
-    //         player2: player,
-    //         player2Deck: json.cards,
-    //         duelLocation: location,
-    //         dialogue: dialogue
-    //       }, () => { this.renderDuel()}
-    //     )
-    //     })
-    //   }
-    // ))
-
+    this.props.changeLocation('duelistsList')
+    this.props.history.push('/duelField')
   }
 
   render() {
@@ -74,7 +55,8 @@ const mapStateToProps = state => {
     deck: state.deckChanger.deck,
     characters: state.charactersChanger.characters,
     enemy: state.enemyChanger.enemy,
-    defeated: state.defeatedChanger.defeated
+    defeated: state.defeatedChanger.defeated,
+    location: state.locationChanger.location
   }
 }
 
@@ -83,7 +65,8 @@ const mapDispatchToProps = dispatch => {
     changeAccount: (event) => dispatch({type: 'CHANGE_ACCOUNT', newAccount: event}),
     changeDeck: (event) => dispatch({type: 'CHANGE_DECK', newDeck: event}),
     changeEnemy: (event) => dispatch({type: 'CHANGE_ENEMY', newEnemy: event}),
-    changeDefeated: (event) => dispatch({type: 'CHANGE_DEFEEATED', newDefeated: event})
+    changeDefeated: (event) => dispatch({type: 'CHANGE_DEFEEATED', newDefeated: event}),
+    changeLocation: (event) => dispatch({type: 'CHANGE_LOCATION', newLocation: event})
   }
 }
 
