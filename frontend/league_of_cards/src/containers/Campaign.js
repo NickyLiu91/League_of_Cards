@@ -438,7 +438,8 @@ const mapDispatchToProps = dispatch => {
     changeEnemyDeck: (event) => dispatch({type: 'CHANGE_ENEMYDECK', newEnemyDeck: event}),
     changeDefeated: (event) => dispatch({type: 'CHANGE_DEFEATED', newDefeated: event}),
     changeDialogue: (event) => dispatch({type: 'CHANGE_DIALOGUE', newDialogue: event}),
-    changeLocation: (event) => dispatch({type: 'CHANGE_LOCATION', newLocation: event})
+    changeLocation: (event) => dispatch({type: 'CHANGE_LOCATION', newLocation: event}),
+    changeCompleted: (event) => dispatch({type: 'CHANGE_COMPLETED', newCompleted: event})
   }
 }
 

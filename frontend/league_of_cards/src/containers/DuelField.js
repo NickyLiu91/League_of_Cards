@@ -872,6 +872,7 @@ class DuelField extends React.Component {
   }
 
   reward = () => {
+    console.log(this.props.history)
     if (this.props.location === 'campaign') {
       this.props.changeDefeated(this.props.defeated + 1)
       fetch(`http://localhost:3000/api/v1/players/${this.props.account.id}`, {
