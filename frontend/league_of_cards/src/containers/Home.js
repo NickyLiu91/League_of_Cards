@@ -337,7 +337,7 @@ class Home extends React.Component {
   }
 
   generateNoDupesCurrentPlayerCollection = (player) => {
-    if (player) {
+    // if (player) {
       let newCollection = this.props.cards.map(card => {
           card.quantity = player.cards.filter(cardObj => cardObj.name === card.name).length;
           return card
@@ -346,17 +346,7 @@ class Home extends React.Component {
 
       this.props.changeNoDupesCurrentPlayerCards(newCollection)
       return newCollection
-
-    } else {
-      let newCollection = this.props.cards.map(card => {
-          card.quantity = this.props.currentPlayerCards.filter(cardObj => cardObj.name === card.name).length;
-          return card
-        }
-      )
-
-      this.props.changeNoDupesCurrentPlayerCards(newCollection)
-      return newCollection
-    }
+    // } 
   }
 
   fetchCards = () => {

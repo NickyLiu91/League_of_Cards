@@ -68,13 +68,18 @@ class Collection extends React.Component {
   sort = () => {
     let newNumber = this.state.sortNumber + 1
     let newSortType = this.state.sortTypes[newNumber]
-    let newList
+    let newList = this.props.noDupesCurrentPlayerCards
 
     if (newNumber === this.state.sortTypes.length) {
-      newList = this.props.noDupesCurrentPlayerCards
+      let newCollection = this.props.cards.map(card => {
+          card.quantity = this.props.currentPlayerCards.filter(cardObj => cardObj.name === card.name).length;
+          return card
+        }
+      )
+
+      newList = newCollection
       newNumber = 0
     } else {
-      newList = this.props.noDupesCurrentPlayerCards
       if (newSortType === 'power') {
         newList.sort( (a, b) => {
           if(this.highestAttack(a) > this.highestAttack(b)) {
@@ -153,6 +158,7 @@ class Collection extends React.Component {
 const mapStateToProps = state => {
   return {
     account: state.accountChanger.account,
+    cards: state.cardsChanger.cards,
     currentPlayerCards: state.currentPlayerCardsChanger.currentPlayerCards,
     noDupesCurrentPlayerCards: state.noDupesCurrentPlayerCardsChanger.noDupesCurrentPlayerCards,
     deck: state.deckChanger.deck,
