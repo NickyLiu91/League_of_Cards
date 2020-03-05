@@ -68,12 +68,13 @@ class Collection extends React.Component {
   sort = () => {
     let newNumber = this.state.sortNumber + 1
     let newSortType = this.state.sortTypes[newNumber]
-    let newList = this.state.list
+    let newList
 
     if (newNumber === this.state.sortTypes.length) {
       newList = this.props.noDupesCurrentPlayerCards
       newNumber = 0
     } else {
+      newList = this.props.noDupesCurrentPlayerCards
       if (newSortType === 'power') {
         newList.sort( (a, b) => {
           if(this.highestAttack(a) > this.highestAttack(b)) {
@@ -122,13 +123,14 @@ class Collection extends React.Component {
       }
     }
     this.setState({
-      sortNumber: newNumber,
-      list: newList
+      sortNumber: newNumber
+      // list: newList
+    }, () => {
+      this.props.changeNoDupesCurrentPlayerCards(newList)
     })
   }
 
   render() {
-    console.log(this.props)
     return(
       <div>
         <Header />
