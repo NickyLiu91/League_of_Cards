@@ -23,7 +23,7 @@ class App extends Component {
   state= {account: {}}
 
   render() {
-    if (this.props.deckCards.length != 40) {
+    if (this.props.currentPlayerCards.length < 40) {
       return (
         <div className="App">
         <Switch>
@@ -55,7 +55,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    deckCards: state.deckCardsChanger.deckCards
+    currentPlayerCards: state.currentPlayerCardsChanger.currentPlayerCards,
   }
 }
 
